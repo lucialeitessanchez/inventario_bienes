@@ -1,0 +1,24 @@
+proveedor_index:
+    path:     /
+    defaults: { _controller: "BienesBundle:Proveedor:index" }
+    methods:  GET
+
+proveedor_show:
+    path:     /{id}/show
+    defaults: { _controller: "BienesBundle:Proveedor:show" }
+    methods:  GET
+
+proveedor_new:
+    path:     /new
+    defaults: { _controller: "BienesBundle:Proveedor:new" }
+    methods:  [GET, POST]
+
+proveedor_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BienesBundle:Proveedor:edit" }
+    methods:  [GET, POST]
+
+proveedor_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BienesBundle:Proveedor:delete" }
+    methods:  DELETE
