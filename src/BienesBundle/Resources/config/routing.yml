@@ -1,0 +1,3 @@
+bienes_homepage:
+    path:     /
+    defaults: { _controller: BienesBundle:Default:index }
