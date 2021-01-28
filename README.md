@@ -1,4 +1,4 @@
-Symfony Standard Edition
+Sistema de inventario para bienes de la SEIyG Prov.Santa Fe
 ========================
 
 Welcome to the Symfony Standard Edition - a fully-functional Symfony
