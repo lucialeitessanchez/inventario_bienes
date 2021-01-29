@@ -1,3 +1,9 @@
+bienes_bien:
+    resource: "@BienesBundle/Resources/config/routing/bien.yml"
+    prefix:   /bien
+
+
+
 bienes_factura:
     resource: "@BienesBundle/Resources/config/routing/factura.yml"
     prefix:   /factura

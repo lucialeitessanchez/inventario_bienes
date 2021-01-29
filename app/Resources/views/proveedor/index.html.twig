@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Proveedors list</h1>
+    <h1>Lista de Proveedores</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Cuil</th>
+                <th>Cuil/Cuit</th>
                 <th>Nombre</th>
                 <th>Direccion</th>
                 <th>Localidad</th>
                 <th>Provincia</th>
                 <th>Email</th>
-                <th>Actions</th>
+                <th>Accioness</th>
             </tr>
         </thead>
         <tbody>
@@ -29,10 +29,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('proveedor_show', { 'id': proveedor.id }) }}">show</a>
+                            <a href="{{ path('proveedor_show', { 'id': proveedor.id }) }}">ver</a>
                         </li>
                         <li>
-                            <a href="{{ path('proveedor_edit', { 'id': proveedor.id }) }}">edit</a>
+                            <a href="{{ path('proveedor_edit', { 'id': proveedor.id }) }}">editar</a>
                         </li>
                     </ul>
                 </td>
@@ -42,8 +42,8 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('proveedor_new') }}">Create a new proveedor</a>
-        </li>
+
+            <a href="{{ path('proveedor_new') }}">Crear un nuevo proveedor</a>
+
     </ul>
 {% endblock %}

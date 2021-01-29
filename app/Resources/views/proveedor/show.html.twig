@@ -10,7 +10,7 @@
                 <td>{{ proveedor.id }}</td>
             </tr>
             <tr>
-                <th>Cuil</th>
+                <th>Cuil/Cuit</th>
                 <td>{{ proveedor.cuil }}</td>
             </tr>
             <tr>
@@ -37,16 +37,14 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('proveedor_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('proveedor_edit', { 'id': proveedor.id }) }}">Edit</a>
-        </li>
-        <li>
+
+            <a href="{{ path('proveedor_index') }}">Volver a los proveedores</a>
+
+            <a href="{{ path('proveedor_edit', { 'id': proveedor.id }) }}">Editar</a>
+
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Borrar">
             {{ form_end(delete_form) }}
-        </li>
+
     </ul>
 {% endblock %}

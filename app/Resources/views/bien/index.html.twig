@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Listado de los bienes</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Codigo</th>
+                <th>Fechaalta</th>
+                <th>Descripcion</th>
+                <th>Estado</th>
+                <th>Actiones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bien in biens %}
+            <tr>
+                <td><a href="{{ path('bien_show', { 'id': bien.id }) }}">{{ bien.id }}</a></td>
+                <td>{{ bien.codigo }}</td>
+                <td>{% if bien.fechaAlta %}{{ bien.fechaAlta|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ bien.descripcion }}</td>
+                <td>{{ bien.estado }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('bien_show', { 'id': bien.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('bien_edit', { 'id': bien.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('bien_new') }}">Alta nuevo bien</a>
+        </li>
+    </ul>
+{% endblock %}
