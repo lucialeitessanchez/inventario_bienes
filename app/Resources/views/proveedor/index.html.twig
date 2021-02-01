@@ -9,11 +9,11 @@
                 <th>Id</th>
                 <th>Cuil/Cuit</th>
                 <th>Nombre</th>
-                <th>Direccion</th>
+                <th>Dirección</th>
                 <th>Localidad</th>
                 <th>Provincia</th>
                 <th>Email</th>
-                <th>Accioness</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -42,8 +42,12 @@
     </table>
 
     <ul>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
 
-            <a href="{{ path('proveedor_new') }}">Crear un nuevo proveedor</a>
+            <a href="{{ path('proveedor_new') }}" class="btn btn-outline-primary"> Alta nuevo proveedor</a>
+            <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary"> Volver al menú principal </a>
+        </div>
+
 
     </ul>
 {% endblock %}

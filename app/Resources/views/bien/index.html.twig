@@ -38,8 +38,10 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('bien_new') }}">Alta nuevo bien</a>
-        </li>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+
+            <a href="{{ path('bien_new') }}" class="btn btn-outline-primary"> Alta nuevo bien </a>
+            <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary"> Volver al menú principal </a>
+        </div>
     </ul>
 {% endblock %}

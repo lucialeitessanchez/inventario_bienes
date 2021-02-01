@@ -1,18 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Facturas list</h1>
+
+<ul>
+    <h1>Facturas</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Numerofactura</th>
+                <th>Numero de factura</th>
                 <th>Fecha</th>
                 <th>Monto</th>
                 <th>Descripcion</th>
-                <th>Tipoadquisicion</th>
-                <th>Actions</th>
+                <th>Tipo de adquisicion</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -40,8 +42,11 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('factura_new') }}">Create a new factura</a>
-        </li>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+
+            <a href="{{ path('factura_new') }}" class="btn btn-outline-primary"> Alta nueva factura</a>
+            <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary"> Volver al menú principal </a>
+        </div>
     </ul>
+</ul>
 {% endblock %}

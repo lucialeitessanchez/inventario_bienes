@@ -9,12 +9,16 @@
     {{ form_end(edit_form) }}
 
     <ul>
-
-            <a href="{{ path('proveedor_index') }}">Volver a los proveedores</a>
-
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <input type="submit" value="Editar" class="btn btn-outline-primary"></a>
+            {{ form_end(edit_form) }}
+            <a href="{{ path('proveedor_index') }}" class="btn btn-outline-primary"> Volver al listado de proveedores </a>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Borrar">
+            <input type="submit" value="Eliminar" class="btn btn-outline-primary"> </a>
             {{ form_end(delete_form) }}
+        </div>
+
+
 
     </ul>
 {% endblock %}

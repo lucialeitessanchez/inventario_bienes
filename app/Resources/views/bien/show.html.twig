@@ -29,16 +29,12 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('bien_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('bien_edit', { 'id': bien.id }) }}">Edit</a>
-        </li>
-        <li>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input type="submit" class="btn btn-outline-primary" value="Borrar"></a>
             {{ form_end(delete_form) }}
-        </li>
+            <a href="{{ path('bien_index') }}" class="btn btn-outline-primary"> Volver al listado de bienes </a>
+            <a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-outline-primary"> Editar </a>
+        </div>
     </ul>
 {% endblock %}
