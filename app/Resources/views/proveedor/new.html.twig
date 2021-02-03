@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <ul><br>
     <h1>Alta Proveedor</h1>
-
+    <h3>
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Crear" />
-    {{ form_end(form) }}
 
-    <ul>
-
-            <a href="{{ path('proveedor_index') }}">Volver a la lista</a>
-
-    </ul>
+       <br> <ul>  <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <input type="submit" class="btn btn-outline-primary" value="Alta proveedor"></a>
+                {{ form_end(form) }}
+                <a href="{{ path('proveedor_index') }}" class="btn btn-outline-primary"> Volver al listado de proveedores </a>
+                <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary"> Volver al menú principal </a>
+            </div>
+        </ul>
+    </h3> </ul>
 {% endblock %}
