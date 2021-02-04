@@ -2,8 +2,6 @@ bienes_bien:
     resource: "@BienesBundle/Resources/config/routing/bien.yml"
     prefix:   /bien
 
-
-
 bienes_factura:
     resource: "@BienesBundle/Resources/config/routing/factura.yml"
     prefix:   /factura
@@ -16,3 +14,12 @@ bienes_proveedor:
 bienes_homepage:
     path:     /
     defaults: { _controller: BienesBundle:Default:index }
+
+
+user_registration:
+    path:     /register
+    defaults: { _controller: BienesBundle:Registro:register }
+
+login_route:
+    path:     /login
+    defaults: { _controller: BienesBundle:Login:login }
