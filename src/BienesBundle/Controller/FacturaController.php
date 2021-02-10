@@ -3,6 +3,7 @@
 namespace BienesBundle\Controller;
 
 use BienesBundle\Entity\Factura;
+use BienesBundle\Entity\Proveedor;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -120,5 +121,21 @@ class FacturaController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    public function imprimirAction(Factura $factura){
+        $deleteForm = $this->createDeleteForm($factura);
+
+        //le pido a la base de datos los objetos servicio
+        $repository = $this->getDoctrine()->getRepository(Proveedor::class);
+        $proveedor = $repository->find(($factura->getProveedor())); //le pido mediante el id que tengo en expediente de servicio que busque esa instancia de servicio
+
+        return $this->render('factura/imprir.html.twig', array(
+                'factura' => $factura,
+                'proveedor'=>$proveedor,
+                'delete_form' => $deleteForm->createView()
+            )
+
+        );
     }
 }

@@ -22,3 +22,8 @@ factura_delete:
     path:     /{id}/delete
     defaults: { _controller: "BienesBundle:Factura:delete" }
     methods:  DELETE
+
+factura_imprimir:
+    path:     /{id}/imprimir
+    defaults: { _controller: "BienesBundle:Factura:imprimir" }
+    methods:  [GET, POST]

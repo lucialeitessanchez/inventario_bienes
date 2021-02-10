@@ -302,4 +302,7 @@ class Proveedor
     {
         return $this->bienes;
     }
+
+    public function __toString() {
+        return strval($this->getNombre()); }
 }

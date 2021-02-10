@@ -34,6 +34,8 @@
                         <li>
                             <a href="{{ path('factura_edit', { 'id': factura.id }) }}">edit</a>
                         </li>
+
+                        <a href="{{ path('factura_imprimir', { 'id': factura.id }) }}" class="btn btn-light"> imprimir </a>
                     </ul>
                 </td>
             </tr>
