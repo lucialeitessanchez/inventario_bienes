@@ -12,12 +12,15 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class BienController extends Controller
 {
+
     /**
      * Lists all bien entities.
      *
      */
     public function indexAction()
     {
+
+
         $em = $this->getDoctrine()->getManager();
 
         $biens = $em->getRepository('BienesBundle:Bien')->findAll();

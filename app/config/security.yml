@@ -18,6 +18,14 @@ security:
             form_login:
                 login_path: /login
                 check_path: /login_check
+            remember_me:
+                secret: '%secret%'
+                lifetime: 604800 # 1 week in seconds
+                path: /
+                # por defecto, esta funcionalidad está disponible en una
+                # checkbox en el formulario de login, descomenta la
+                # siguiente línea para activarlo siempre.
+                #always_remember_me: true
             logout:
                 path: /logout
                 target: /

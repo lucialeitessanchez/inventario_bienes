@@ -5,6 +5,7 @@
 <ul>
     <h1>Facturas</h1>
 
+    <h3>
     <table>
         <thead>
             <tr>
@@ -28,14 +29,15 @@
                 <td>{{ factura.tipoAdquisicion }}</td>
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('factura_show', { 'id': factura.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('factura_edit', { 'id': factura.id }) }}">edit</a>
-                        </li>
+                        <div class="btn-group" role="group" aria-label="Basic outlined example">
 
-                        <a href="{{ path('factura_imprimir', { 'id': factura.id }) }}" class="btn btn-light"> imprimir </a>
+                            <a href="{{ path('factura_show', { 'id': factura.id }) }}" class="btn btn-outline-primary"> ver</a>
+
+                            <a href="{{ path('factura_edit', { 'id': factura.id }) }}" class="btn btn-outline-primary">editar</a>
+
+
+                        <a href="{{ path('factura_imprimir', { 'id': factura.id }) }}" class="btn btn-outline-primary"> imprimir </a>
+                        </div>
                     </ul>
                 </td>
             </tr>
@@ -50,5 +52,6 @@
             <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary"> Volver al menú principal </a>
         </div>
     </ul>
+    </h3>
 </ul>
 {% endblock %}

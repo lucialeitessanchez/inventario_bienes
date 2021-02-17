@@ -20,6 +20,3 @@ user_registration:
     path:     /register
     defaults: { _controller: BienesBundle:Registro:register }
 
-login_route:
-    path:     /login
-    defaults: { _controller: BienesBundle:Login:login }

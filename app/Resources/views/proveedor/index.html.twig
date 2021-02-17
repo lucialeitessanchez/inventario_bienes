@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>Lista de Proveedores</h1>
-
+    <h3>
     <table>
         <thead>
             <tr>
@@ -27,14 +27,13 @@
                 <td>{{ proveedor.provincia }}</td>
                 <td>{{ proveedor.email }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('proveedor_show', { 'id': proveedor.id }) }}">ver</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('proveedor_edit', { 'id': proveedor.id }) }}">editar</a>
-                        </li>
-                    </ul>
+
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            <a href="{{ path('proveedor_show', { 'id': proveedor.id }) }}" class="btn btn-outline-primary">ver</a>
+                            <a href="{{ path('proveedor_edit', { 'id': proveedor.id }) }}" class="btn btn-outline-primary" >editar</a>
+                    </div>
+
+
                 </td>
             </tr>
         {% endfor %}
@@ -50,4 +49,5 @@
 
 
     </ul>
+    </h3>
 {% endblock %}

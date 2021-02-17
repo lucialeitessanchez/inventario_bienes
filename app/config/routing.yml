@@ -9,4 +9,8 @@ app:
 logout:
     path: /logout
 
+login:
+    path:     /login
+    defaults: { _controller: BienesBundle:Login:login }
+
 
