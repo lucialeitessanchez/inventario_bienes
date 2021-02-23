@@ -3,61 +3,80 @@
 
 
 
+         <h3>
 
-        <p class="text-end" ><b>Ref.: Expte. Nro 0</b></p>
-        </tr>
-        <tr>
-            <div align="right"> <th>Santa Fe, 4 de Febrero de 2021 </th></div>
 
 
         </tr>
-        <tr>
+             <p></p><p<p></p><p></p>
             <ul><ul>
                     <br><br>
                     <p class="text-center"><th>
                             <br><br><br>
-                   <b>CARGO DE BIENES DE CAPITAL</b>
-                        <BR>
-                        Responsable de la tenencia, guarda y conservación:
-                        <ul>Oficina:
-                            Agente:
-                            </ul>
+                        <b>CARGO DE BIENES DE CAPITAL</b></p><br><br><br><br>
+                        <br>Responsable de la tenencia, guarda y conservación:
+                        <br><ul>Oficina:
+                        <br>Agente:
+                           </ul>
                         Datos de adquisicion:
                     <ul>Fecha adquisicion:
-                        Proveedor:
-                        N° de Factura:
-                        Importe unitario:
-                        Importe total:</ul>
+                        <br>Proveedor: {{ factura.proveedor }}
+                        </br>N° de Factura: {{ factura.numeroFactura }}
+                        <br>Importe unitario: ${{ factura.monto }}
+                        <br>Importe total:</ul>
                     Bien Adquirido:
                     <ul>Detalle:
-                        Marca:
-                        Color:
-                        Dimensiones/caracteristicas
-                        Modelos:
-                        N° de Serie:
-                        Observaciones:
+                        <br>Marca:
+                        <br>Color:
+                        <br>Dimensiones/caracteristicas:
+                        <br>Modelos:
+                        <br>N° de Serie:
+                        <br>Observaciones:
                     </ul>
+
                     </th>
 
+                    <br><br><br><br><br>
+                    <p align="left">............................................
+                    <br><br>Firma Agente Responsable</p>
+                    <p align="center">............................................
+                        <br><br>Firma responsable del sector</p>
+
+                    ............................................
+                    <br>Firma responsable de compras
 
 
-
-
-        <br><br>    Pase a la Dir. Gral de Comunicaciones para su intervención de acuerdo a lo establecido en el decreto 28/00.</p>
-        {#  <br><br>  Pase a la Subsecretaría de Coordinación Administrativa, Legal y Técnica para la prosecución del trámite.</p>#}
 
         </ul></ul>
+         </h3>
+    <div class="clearfix"><br></div>
 
-        <footer  style="width:100%; margin-left: 0px;"  >
+    <footer class="footer text-muted">
+        <div class="container container-footer">
+            <div class="row">
+
+                <div class="col-sm-12 col-md-4">
+
+                    <div class="stg-logos" style="text-align:center">
+                        <img src="//www.santafe.gob.ar/assets/standard/images/marca-footer.png" alt="Santa Fe" style="margin-bottom:10px;">
+                    </div>
 
 
-            <div class="Informatica-SEIyG" style="background-color: #0d47a1;">
-                <div class="container-fluid" style="background-color: #0d47a1; color: #bbdefb;">
-                    <ul><img src="/imagenes/marca-footer.png" height="20"></ul> <div align="center" <i><b>Sectorial de Informática - Secretaría de Estado de Igualdad y Género</b>
-                        <br>Corrientes 2879 . (3000) Santa Fe - Tel: (0342) 4572888 / 4589468 </i>
                 </div>
+
+                <div class="col-sm-12 col-md-4 contact-data-footer" align="center">
+                    <p>Sectorial de Informática
+                    <br>Secretaría de Estado de Igualdad y Género
+                    </p>
+                    <p>
+                        Corrientes 2879 - (3000) Santa Fe - Tel: (0342) 4572888 / 4589468</p>
+
+                </div>
+
             </div>
-            </div></footer>
+
+        </div>
+    </footer>
         </html>
 
 {% endblock %}
