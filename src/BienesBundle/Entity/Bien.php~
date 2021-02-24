@@ -250,4 +250,28 @@ class Bien
     {
         return $this->ubicacion;
     }
+
+    /**
+     * Set tipo
+     *
+     * @param \BienesBundle\Entity\Tipo $tipo
+     *
+     * @return Bien
+     */
+    public function setTipo(\BienesBundle\Entity\Tipo $tipo = null)
+    {
+        $this->tipo = $tipo;
+
+        return $this;
+    }
+
+    /**
+     * Get tipo
+     *
+     * @return \BienesBundle\Entity\Tipo
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
 }

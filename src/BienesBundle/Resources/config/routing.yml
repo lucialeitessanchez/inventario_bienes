@@ -11,6 +11,10 @@ bienes_proveedor:
     resource: "@BienesBundle/Resources/config/routing/proveedor.yml"
     prefix:   /proveedor
 
+bienes_tipo:
+    resource: "@BienesBundle/Resources/config/routing/tipo.yml"
+    prefix:   /tipo
+
 bienes_homepage:
     path:     /
     defaults: { _controller: BienesBundle:Default:index }

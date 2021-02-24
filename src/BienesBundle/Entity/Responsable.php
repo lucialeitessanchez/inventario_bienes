@@ -48,6 +48,14 @@ class Responsable
     private $bienes;
 
     /**
+     * @ORM\ManyToOne(targetEntity="ResponsableArea", inversedBy="responsables")
+     * @ORM\JoinColumn(name="id_responsableArea", referencedColumnName="id")
+     */
+    private $responsableArea;
+
+
+
+    /**
      * Get id
      *
      * @return int
@@ -168,5 +176,29 @@ class Responsable
     public function getBienes()
     {
         return $this->bienes;
+    }
+
+    /**
+     * Set responsableArea
+     *
+     * @param \BienesBundle\Entity\ResponsableArea $responsableArea
+     *
+     * @return Responsable
+     */
+    public function setResponsableArea(\BienesBundle\Entity\ResponsableArea $responsableArea = null)
+    {
+        $this->responsableArea = $responsableArea;
+
+        return $this;
+    }
+
+    /**
+     * Get responsableArea
+     *
+     * @return \BienesBundle\Entity\ResponsableArea
+     */
+    public function getResponsableArea()
+    {
+        return $this->responsableArea;
     }
 }

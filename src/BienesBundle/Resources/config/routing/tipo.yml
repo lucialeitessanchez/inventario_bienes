@@ -1,0 +1,24 @@
+tipo_index:
+    path:     /
+    defaults: { _controller: "BienesBundle:Tipo:index" }
+    methods:  GET
+
+tipo_show:
+    path:     /{id}/show
+    defaults: { _controller: "BienesBundle:Tipo:show" }
+    methods:  GET
+
+tipo_new:
+    path:     /new
+    defaults: { _controller: "BienesBundle:Tipo:new" }
+    methods:  [GET, POST]
+
+tipo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BienesBundle:Tipo:edit" }
+    methods:  [GET, POST]
+
+tipo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BienesBundle:Tipo:delete" }
+    methods:  DELETE
