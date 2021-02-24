@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Responsableareas list</h1>
+<h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Cargo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for responsableArea in responsableAreas %}
+            <tr>
+                <td><a href="{{ path('responsablearea_show', { 'id': responsableArea.id }) }}">{{ responsableArea.id }}</a></td>
+                <td>{{ responsableArea.nombre }}</td>
+                <td>{{ responsableArea.cargo }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('responsablearea_show', { 'id': responsableArea.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('responsablearea_edit', { 'id': responsableArea.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('responsablearea_new') }}">Create a new responsableArea</a>
+        </li>
+    </ul>
+</h3>
+{% endblock %}

@@ -201,4 +201,7 @@ class Responsable
     {
         return $this->responsableArea;
     }
+
+    public function __toString() {
+        return strval($this->getNombre()); }
 }

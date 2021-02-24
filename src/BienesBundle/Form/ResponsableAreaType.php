@@ -6,21 +6,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ResponsableType extends AbstractType
+class ResponsableAreaType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombre')->add('dni')->add('responsableArea')->add('funcionario');
+        $builder->add('nombre')->add('cargo');
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BienesBundle\Entity\Responsable'
+            'data_class' => 'BienesBundle\Entity\ResponsableArea'
         ));
     }
 
@@ -29,7 +29,7 @@ class ResponsableType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'bienesbundle_responsable';
+        return 'bienesbundle_responsablearea';
     }
 
 

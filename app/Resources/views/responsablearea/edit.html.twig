@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Responsable edit</h1>
-    <h3>
+    <h1>Responsablearea edit</h1>
+<h3>
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
         <input type="submit" value="Edit" />
@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('responsable_index') }}">Back to the list</a>
+            <a href="{{ path('responsablearea_index') }}">Back to the list</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
@@ -18,5 +18,5 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
-    </h3>
+</h3>
 {% endblock %}

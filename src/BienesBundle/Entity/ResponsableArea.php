@@ -139,4 +139,8 @@ class ResponsableArea
     {
         return $this->responsables;
     }
+
+    public function __toString() {
+        return strval($this->getNombre()); }
+
 }

@@ -1,35 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Responsable</h1>
+    <h1>Responsablearea</h1>
 <h3>
     <table>
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ responsable.id }}</td>
+                <td>{{ responsableArea.id }}</td>
             </tr>
             <tr>
                 <th>Nombre</th>
-                <td>{{ responsable.nombre }}</td>
+                <td>{{ responsableArea.nombre }}</td>
             </tr>
             <tr>
-                <th>Dni</th>
-                <td>{{ responsable.dni }}</td>
-            </tr>
-            <tr>
-                <th>Funcionario</th>
-                <td>{% if responsable.funcionario %}Yes{% else %}No{% endif %}</td>
+                <th>Cargo</th>
+                <td>{{ responsableArea.cargo }}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('responsable_index') }}">Back to the list</a>
+            <a href="{{ path('responsablearea_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('responsable_edit', { 'id': responsable.id }) }}">Edit</a>
+            <a href="{{ path('responsablearea_edit', { 'id': responsableArea.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
