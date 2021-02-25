@@ -15,6 +15,10 @@ bienes_tipo:
     resource: "@BienesBundle/Resources/config/routing/tipo.yml"
     prefix:   /tipo
 
+bienes_tipoRama:
+    resource: "@BienesBundle/Resources/config/routing/rama.yml"
+    prefix:   /rama
+
 bienes_responsable:
     resource: "@BienesBundle/Resources/config/routing/responsable.yml"
     prefix:   /responsable
@@ -22,6 +26,10 @@ bienes_responsable:
 bienes_responsableA:
     resource: "@BienesBundle/Resources/config/routing/responsableArea.yml"
     prefix:   /responsableA
+
+bienes_ubicacion:
+    resource: "@BienesBundle/Resources/config/routing/ubicacion.yml"
+    prefix:   /ubicacion
 
 bienes_homepage:
     path:     /

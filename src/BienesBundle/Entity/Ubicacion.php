@@ -232,4 +232,11 @@ class Ubicacion
     {
         return $this->bienes;
     }
+
+    public function getCalleNum(){
+        return ($this->calle)." ".($this->numero);
+    }
+
+    public function __toString() {
+        return strval($this->getCalleNum()); }
 }

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ubicacions list</h1>
+<h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Calle</th>
+                <th>Numero</th>
+                <th>Localidad</th>
+                <th>Oficina</th>
+                <th>Observacion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ubicacion in ubicacions %}
+            <tr>
+                <td><a href="{{ path('ubicacion_show', { 'id': ubicacion.id }) }}">{{ ubicacion.id }}</a></td>
+                <td>{{ ubicacion.calle }}</td>
+                <td>{{ ubicacion.numero }}</td>
+                <td>{{ ubicacion.localidad }}</td>
+                <td>{{ ubicacion.oficina }}</td>
+                <td>{{ ubicacion.observacion }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ubicacion_show', { 'id': ubicacion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ubicacion_edit', { 'id': ubicacion.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ubicacion_new') }}">Create a new ubicacion</a>
+        </li>
+    </ul>
+</h3>
+{% endblock %}

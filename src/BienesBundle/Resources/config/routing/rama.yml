@@ -1,0 +1,24 @@
+rama_index:
+    path:     /
+    defaults: { _controller: "BienesBundle:Rama:index" }
+    methods:  GET
+
+rama_show:
+    path:     /{id}/show
+    defaults: { _controller: "BienesBundle:Rama:show" }
+    methods:  GET
+
+rama_new:
+    path:     /new
+    defaults: { _controller: "BienesBundle:Rama:new" }
+    methods:  [GET, POST]
+
+rama_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BienesBundle:Rama:edit" }
+    methods:  [GET, POST]
+
+rama_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BienesBundle:Rama:delete" }
+    methods:  DELETE

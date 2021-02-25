@@ -41,6 +41,11 @@ class Tipo
     private $bienes;
 
     /**
+     * @ORM\OneToMany(targetEntity="Rama", mappedBy="tipo")
+     */
+    private $ramas;
+
+    /**
      * Get id
      *
      * @return int
@@ -139,7 +144,45 @@ class Tipo
         return $this->bienes;
     }
 
+
+
+
+    /**
+     * Add rama
+     *
+     * @param \BienesBundle\Entity\Rama $rama
+     *
+     * @return Tipo
+     */
+    public function addRama(\BienesBundle\Entity\Rama $rama)
+    {
+        $this->ramas[] = $rama;
+
+        return $this;
+    }
+
+    /**
+     * Remove rama
+     *
+     * @param \BienesBundle\Entity\Rama $rama
+     */
+    public function removeRama(\BienesBundle\Entity\Rama $rama)
+    {
+        $this->ramas->removeElement($rama);
+    }
+
+    /**
+     * Get ramas
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRamas()
+    {
+        return $this->ramas;
+    }
+
     public function __toString() {
-        return strval($this->getNombreTipo()); }
+        return strval($this->getNombreTipo()."".(($this->tipo)->getRamas()));
+    }
 
 }

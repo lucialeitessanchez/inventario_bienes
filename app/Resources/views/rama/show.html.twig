@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Rama</h1>
+<h3>
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ rama.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombrerama</th>
+                <td>{{ rama.nombreRama }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('rama_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('rama_edit', { 'id': rama.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+</h3>
+{% endblock %}

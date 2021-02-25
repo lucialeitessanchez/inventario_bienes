@@ -274,4 +274,5 @@ class Bien
     {
         return $this->tipo;
     }
+
 }

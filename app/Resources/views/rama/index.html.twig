@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ramas list</h1>
+<h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombrerama</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rama in ramas %}
+            <tr>
+                <td><a href="{{ path('rama_show', { 'id': rama.id }) }}">{{ rama.id }}</a></td>
+                <td>{{ rama.nombreRama }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('rama_show', { 'id': rama.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('rama_edit', { 'id': rama.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('rama_new') }}">Create a new rama</a>
+        </li>
+    </ul>
+</h3>
+{% endblock %}
