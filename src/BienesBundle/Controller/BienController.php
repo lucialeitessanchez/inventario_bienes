@@ -3,6 +3,8 @@
 namespace BienesBundle\Controller;
 
 use BienesBundle\Entity\Bien;
+use BienesBundle\Entity\Rama;
+use BienesBundle\Entity\Tipo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -40,6 +42,12 @@ class BienController extends Controller
         $form = $this->createForm('BienesBundle\Form\BienType', $bien);
         $form->handleRequest($request);
 
+        $form->setWidget('pais', new sfWidgetFormChoice(array(
+            'choices'   => array('' => 'Selecciona un país', 'us' => 'EEUU', 'ca' => 'Canada', 'uk' => 'Reino Unido', 'otro'),
+            'default'   => 'uk'
+        )));
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($bien);
@@ -47,6 +55,7 @@ class BienController extends Controller
 
             return $this->redirectToRoute('bien_show', array('id' => $bien->getId()));
         }
+
 
         return $this->render('bien/new.html.twig', array(
             'bien' => $bien,

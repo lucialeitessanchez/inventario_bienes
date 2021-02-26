@@ -16,7 +16,7 @@ class BienType extends AbstractType
     {
 
         $builder->add('codigo')->add('fechaAlta')->add('descripcion')->add('estado')->add('proveedor')->add('responsable')->add('ubicacion')
-            ->add('tipo');
+        ->add('tipo')->add('rama');
     }/**
      * {@inheritdoc}
      */

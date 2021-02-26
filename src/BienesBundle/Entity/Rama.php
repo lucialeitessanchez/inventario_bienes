@@ -91,4 +91,8 @@ class Rama
     {
         return $this->tipo;
     }
+
+    public function __toString() {
+        return strval($this->getNombreRama());
+    }
 }

@@ -73,6 +73,8 @@ class Bien
      */
     private $tipo;
 
+    private $rama;
+
     /**
      * Get id
      *
@@ -261,7 +263,6 @@ class Bien
     public function setTipo(\BienesBundle\Entity\Tipo $tipo = null)
     {
         $this->tipo = $tipo;
-
         return $this;
     }
 
@@ -275,4 +276,12 @@ class Bien
         return $this->tipo;
     }
 
+    public function setRama($rama){
+        $this->rama = $rama;
+        return $this;
+    }
+
+    public function getRama(){
+        return $this->rama;
+    }
 }

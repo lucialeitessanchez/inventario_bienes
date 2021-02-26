@@ -181,8 +181,9 @@ class Tipo
         return $this->ramas;
     }
 
+
     public function __toString() {
-        return strval($this->getNombreTipo()."".(($this->tipo)->getRamas()));
+        return strval($this->getNombreTipo());
     }
 
 }
