@@ -5,6 +5,7 @@ namespace BienesBundle\Controller;
 use BienesBundle\Entity\Bien;
 use BienesBundle\Entity\Rama;
 use BienesBundle\Entity\Tipo;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -42,16 +43,47 @@ class BienController extends Controller
         $form = $this->createForm('BienesBundle\Form\BienType', $bien);
         $form->handleRequest($request);
 
-        $form->setWidget('pais', new sfWidgetFormChoice(array(
-            'choices'   => array('' => 'Selecciona un país', 'us' => 'EEUU', 'ca' => 'Canada', 'uk' => 'Reino Unido', 'otro'),
-            'default'   => 'uk'
-        )));
 
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($bien);
+
+            //le pido a la base de datos los objetos tipo
+            $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo
+            $query = $em->createQuery(
+             'SELECT T.id
+            FROM BienesBundle:Tipo T
+            WHERE T.nombreTipo = :nombre')->setParameter('nombre', $repository->findBynombreTipo($bien->getTipo()));
+
+            $tipo=$query->setMaxResults(1)->getOneOrNullResult();
+            $tipo=strval($tipo);
+
+
+            //le pido a la base de datos los objetos rama
+            $repository2 = $this->getDoctrine()->getRepository(Rama::class);
+            $query2 = $em->createQuery(
+                'SELECT R.id
+            FROM BienesBundle:Rama R
+            WHERE R.nombreRama = :nombre')->setParameter('nombre', $repository2->findBynombreRama($bien->getRama()));
+
+            $rama=$query->setMaxResults(1)->getOneOrNullResult();
+            $rama=strval($rama);
+            //busco por el nombre que tengo guardado en bien contra las ramas en la base de datos
+
+            $idbien = strval($bien->getId());
+            $codigo = $tipo."-".$rama."-".$idbien;
+            $bien->setCodigo($codigo);
+
+
             $em->flush();
+
+
+
+
+
+
+
 
             return $this->redirectToRoute('bien_show', array('id' => $bien->getId()));
         }
@@ -133,4 +165,6 @@ class BienController extends Controller
             ->getForm()
         ;
     }
+
+
 }

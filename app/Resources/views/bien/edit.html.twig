@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Bien edit</h1>
-
+    <h1>Editar Bien</h1>
+    <ul>
+<h3>
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
 
@@ -18,4 +19,6 @@
         </div>
 
     </ul>
-{% endblock %}
+</h3>
+    </ul>
+    {% endblock %}
