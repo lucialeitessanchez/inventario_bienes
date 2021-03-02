@@ -19,8 +19,8 @@
                 <td>{% if factura.fecha %}{{ factura.fecha|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Monto: $</th>
-                <td>{{ factura.monto }}</td>
+                <th>Monto: </th>
+                <td>${{ factura.montoUnitario }}</td>
             </tr>
             <tr>
                 <th>Descripcion</th>

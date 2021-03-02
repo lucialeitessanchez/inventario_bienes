@@ -1,21 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Factura edit</h1>
+  <br>
+   <ul>
+    <h1>Editar factura</h1>
 
+    <h3>
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+
 
     <ul>
-        <li>
-            <a href="{{ path('factura_index') }}">Back to the list</a>
-        </li>
-        <li>
+
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <input type="submit" value="Editar" class="btn btn-outline-primary"></a>
+            {{ form_end(edit_form) }}
+            <a href="{{ path('factura_index') }}" class="btn btn-outline-primary"> Volver al listado de facturas </a>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input type="submit" value="Eliminar" class="btn btn-outline-primary"> </a>
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+    </ul></h3></ul>
 {% endblock %}

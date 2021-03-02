@@ -14,33 +14,33 @@
                     <p class="text-center"><th>
                             <br><br><br>
                         <b>CARGO DE BIENES DE CAPITAL</b></p><br><br><br><br>
-                        <br>Responsable de la tenencia, guarda y conservación:
+                        <br>Responsable de la tenencia, guarda y conservación: {{ bien.responsable }}
                         <br><ul>Oficina:
-                        <br>Agente:
+                        <br>Agente: {{ responsable.nombre }}
                            </ul>
                         Datos de adquisicion:
                     <ul>Fecha adquisicion:
-                        <br>Proveedor: {{ factura.proveedor }}
-                        </br>N° de Factura: {{ factura.numeroFactura }}
-                        <br>Importe unitario: ${{ factura.monto }}
+                        <br>Proveedor: {{ proveedor.nombre }}
+                        </br>N° de Factura:
+                        <br>Importe unitario: $
                         <br>Importe total:</ul>
                     Bien Adquirido:
                     <ul>Detalle:
                         <br>Marca:
                         <br>Color:
-                        <br>Dimensiones/caracteristicas:
+                        <br>Dimensiones/caracteristicas: {{ bien.descripcion }}
                         <br>Modelos:
-                        <br>N° de Serie:
-                        <br>Observaciones:
+                        <br>N° de Serie: {{ bien.codigo }}
+                        <br>Observaciones: {{ bien.estado }}
                     </ul>
 
                     </th>
 
                     <br><br><br><br><br>
                     <p align="left">............................................
-                    <br><br>Firma Agente Responsable</p>
+                    <br><br>Firma Agente Responsable - {{ responsable.nombre }}</p>
                     <p align="center">............................................
-                        <br><br>Firma responsable del sector</p>
+                        <br><br>Firma responsable del sector - {{ responsable.responsableArea }}</p>
 
                     ............................................
                     <br>Firma responsable de compras

@@ -3,7 +3,9 @@
 namespace BienesBundle\Controller;
 
 use BienesBundle\Entity\Bien;
+use BienesBundle\Entity\Proveedor;
 use BienesBundle\Entity\Rama;
+use BienesBundle\Entity\Responsable;
 use BienesBundle\Entity\Tipo;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -47,42 +49,29 @@ class BienController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($bien);
+
 
             //le pido a la base de datos los objetos tipo
             $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo
-            $query = $em->createQuery(
-             'SELECT T.id
-            FROM BienesBundle:Tipo T
-            WHERE T.nombreTipo = :nombre')->setParameter('nombre', $repository->findBynombreTipo($bien->getTipo()));
-
-            $tipo=$query->setMaxResults(1)->getOneOrNullResult();
-            $tipo=strval($tipo);
+            $tipe=($repository->findById($bien->getTipo()));//esto no se que me devuelve
+            $tipo=intval($tipe,10);//entonces no se que guardo aca
 
 
             //le pido a la base de datos los objetos rama
             $repository2 = $this->getDoctrine()->getRepository(Rama::class);
-            $query2 = $em->createQuery(
-                'SELECT R.id
-            FROM BienesBundle:Rama R
-            WHERE R.nombreRama = :nombre')->setParameter('nombre', $repository2->findBynombreRama($bien->getRama()));
+            $rame=($repository2->findById($bien->getRama())); //esto no se que me devuelve
 
-            $rama=$query->setMaxResults(1)->getOneOrNullResult();
-            $rama=strval($rama);
+
+            $rama=intval($rame ,10);//entonces no se que guardo aca
             //busco por el nombre que tengo guardado en bien contra las ramas en la base de datos
 
-            $idbien = strval($bien->getId());
-            $codigo = $tipo."-".$rama."-".$idbien;
+            $idbien = intval($bien->getId(),10);
+
+            $codigo = ($tipo."-".$rama."-".$idbien);
             $bien->setCodigo($codigo);
 
-
+            $em->persist($bien);
             $em->flush();
-
-
-
-
-
-
 
 
             return $this->redirectToRoute('bien_show', array('id' => $bien->getId()));
@@ -166,5 +155,30 @@ class BienController extends Controller
         ;
     }
 
+    public function imprimirAction(Bien $bien){
+        $deleteForm = $this->createDeleteForm($bien);
+
+        //le pido a la base de datos los objetos proveedor
+        $repository = $this->getDoctrine()->getRepository(Proveedor::class);
+        $proveedor = $repository->find(($bien->getProveedor()));
+
+        //le pido a la base de datos los objetos responsable
+        $repository2 = $this->getDoctrine()->getRepository(Responsable::class);
+        $responsable = $repository2->find(($bien->getResponsable()));
+
+        //le pido a la base de datos los objetos responsable
+        $repository3 = $this->getDoctrine()->getRepository(Factura::class);
+        $factura = $repository3->find(($proveedor->getFacturas()));
+
+        return $this->render('factura/imprir.html.twig', array(
+                'bien' => $bien,
+                'proveedor'=>$proveedor,
+                'facturas'=>$factura,
+                'responsable'=>$responsable,
+                'delete_form' => $deleteForm->createView()
+            )
+
+        );
+    }
 
 }

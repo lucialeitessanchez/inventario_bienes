@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'basever.html.twig' %}
 
 {% block body %}
     <h1>Responsables list</h1>
@@ -10,6 +10,7 @@
                 <th>Nombre</th>
                 <th>Dni</th>
                 <th>Funcionario</th>
+                <th>Responsable de area</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,15 +20,15 @@
                 <td><a href="{{ path('responsable_show', { 'id': responsable.id }) }}">{{ responsable.id }}</a></td>
                 <td>{{ responsable.nombre }}</td>
                 <td>{{ responsable.dni }}</td>
-                <td>{% if responsable.funcionario %}Yes{% else %}No{% endif %}</td>
+                <td>{% if responsable.funcionario %}Si{% else %}No{% endif %}</td>
+                <td>{{ responsable.responsableArea }}</td>
                 <td>
                     <ul>
-                        <li>
+
                             <a href="{{ path('responsable_show', { 'id': responsable.id }) }}">show</a>
-                        </li>
-                        <li>
+
                             <a href="{{ path('responsable_edit', { 'id': responsable.id }) }}">edit</a>
-                        </li>
+
                     </ul>
                 </td>
             </tr>

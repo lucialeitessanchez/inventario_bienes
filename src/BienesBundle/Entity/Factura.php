@@ -39,9 +39,16 @@ class Factura
     /**
      * @var float
      *
-     * @ORM\Column(name="monto", type="float")
+     * @ORM\Column(name="montoUnitario", type="float")
      */
-    private $monto;
+    private $montoUnitario;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="montoTotal", type="float")
+     */
+    private $montoTotal;
 
     /**
      * @var string
@@ -122,30 +129,6 @@ class Factura
     }
 
     /**
-     * Set monto
-     *
-     * @param float $monto
-     *
-     * @return Factura
-     */
-    public function setMonto($monto)
-    {
-        $this->monto = $monto;
-
-        return $this;
-    }
-
-    /**
-     * Get monto
-     *
-     * @return float
-     */
-    public function getMonto()
-    {
-        return $this->monto;
-    }
-
-    /**
      * Set descripcion
      *
      * @param string $descripcion
@@ -215,5 +198,53 @@ class Factura
     public function getProveedor()
     {
         return $this->proveedor;
+    }
+
+    /**
+     * Set montoTotal
+     *
+     * @param float $montoTotal
+     *
+     * @return Factura
+     */
+    public function setMontoTotal($montoTotal)
+    {
+        $this->montoTotal = $montoTotal;
+
+        return $this;
+    }
+
+    /**
+     * Get montoTotal
+     *
+     * @return float
+     */
+    public function getMontoTotal()
+    {
+        return $this->montoTotal;
+    }
+
+    /**
+     * Set montoUnitario
+     *
+     * @param float $montoUnitario
+     *
+     * @return Factura
+     */
+    public function setMontoUnitario($montoUnitario)
+    {
+        $this->montoUnitario = $montoUnitario;
+
+        return $this;
+    }
+
+    /**
+     * Get montoUnitario
+     *
+     * @return float
+     */
+    public function getMontoUnitario()
+    {
+        return $this->montoUnitario;
     }
 }

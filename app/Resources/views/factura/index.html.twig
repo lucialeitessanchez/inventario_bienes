@@ -12,7 +12,8 @@
                 <th>Id</th>
                 <th>Numero de factura</th>
                 <th>Fecha</th>
-                <th>Monto</th>
+                <th>Monto unitario</th>
+                <th>Monto total:</th>
                 <th>Descripcion</th>
                 <th>Tipo de adquisicion</th>
                 <th>Acciones</th>
@@ -24,7 +25,8 @@
                 <td><a href="{{ path('factura_show', { 'id': factura.id }) }}">{{ factura.id }}</a></td>
                 <td>{{ factura.numeroFactura }}</td>
                 <td>{% if factura.fecha %}{{ factura.fecha|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ factura.monto }}</td>
+                <td>{{ factura.montoUnitario }}</td>
+                <td>{{ factura.montoTotal }}</td>
                 <td>{{ factura.descripcion }}</td>
                 <td>{{ factura.tipoAdquisicion }}</td>
                 <td>

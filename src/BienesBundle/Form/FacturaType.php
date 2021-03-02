@@ -13,7 +13,7 @@ class FacturaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('numeroFactura')->add('fecha')->add('monto')->add('descripcion')->add('tipoAdquisicion')->add('proveedor');
+        $builder->add('numeroFactura')->add('fecha')->add('montoUnitario')->add('montoTotal')->add('descripcion')->add('tipoAdquisicion')->add('proveedor');
     }/**
      * {@inheritdoc}
      */

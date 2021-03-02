@@ -39,11 +39,6 @@ class Rama
      */
     private $bienes;
 
-    public function __construct()
-    {
-        $this->facturas = new ArrayCollection();
-    }
-
 
 
     /**
