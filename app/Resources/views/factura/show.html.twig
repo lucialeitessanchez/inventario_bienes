@@ -1,8 +1,9 @@
-{% extends 'baseVer.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
+<ul>
     <h1>Factura</h1>
-
+<h3>
 
     <table>
         <tbody>
@@ -11,11 +12,11 @@
                 <td>{{ factura.id }}</td>
             </tr>
             <tr>
-                <th>Numerofactura</th>
+                <th>Numero de factura</th>
                 <td>{{ factura.numeroFactura }}</td>
             </tr>
             <tr>
-                <th>Fecha</th>
+                <th>Fecha de facturación</th>
                 <td>{% if factura.fecha %}{{ factura.fecha|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
@@ -23,27 +24,30 @@
                 <td>${{ factura.montoUnitario }}</td>
             </tr>
             <tr>
+                <th>Monto total: </th>
+                <td>${{ factura.montoTotal }}</td>
+            </tr>
+            <tr>
                 <th>Descripcion</th>
                 <td>{{ factura.descripcion }}</td>
             </tr>
             <tr>
-                <th>Tipoadquisicion</th>
+                <th>Tipo de adquisicion</th>
                 <td>{{ factura.tipoAdquisicion }}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('factura_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('factura_edit', { 'id': factura.id }) }}">Edit</a>
-        </li>
-        <li>
+
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input type="submit" class="btn btn-outline-primary" value="Borrar"></a>
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            <a href="{{ path('factura_index') }}" class="btn btn-outline-primary"> Volver al listado de facturass </a>
+            <a href="{{ path('factura_edit', { 'id': factura.id }) }}" class="btn btn-outline-primary"> Editar </a>
+        </div>
+
+
+    </ul></h3></ul>
 {% endblock %}

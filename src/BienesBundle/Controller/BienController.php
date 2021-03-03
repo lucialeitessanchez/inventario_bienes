@@ -2,10 +2,12 @@
 
 namespace BienesBundle\Controller;
 
+use BienesBundle\Entity\Factura;
 use BienesBundle\Entity\Bien;
 use BienesBundle\Entity\Proveedor;
 use BienesBundle\Entity\Rama;
 use BienesBundle\Entity\Responsable;
+use BienesBundle\Entity\ResponsableArea;
 use BienesBundle\Entity\Tipo;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -53,23 +55,26 @@ class BienController extends Controller
 
             //le pido a la base de datos los objetos tipo
             $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo
-            $tipe=($repository->findById($bien->getTipo()));//esto no se que me devuelve
-            $tipo=intval($tipe,10);//entonces no se que guardo aca
+            $tipe=($repository->find($bien->getTipo()));//esto no se que me devuelve
+            $tipo=intval($tipe->getId());//me devuelve el objeto que coincide con el nombre de la rama que es el que obtengo en el toString de tipo
 
+            $em->persist($bien);
+            $em->flush();
 
             //le pido a la base de datos los objetos rama
             $repository2 = $this->getDoctrine()->getRepository(Rama::class);
-            $rame=($repository2->findById($bien->getRama())); //esto no se que me devuelve
+            $rame=($repository2->find($bien->getRama())); //me devuelve el objeto que coincide con el nombre de la rama que es el que obtengo en el toString de rama
 
 
-            $rama=intval($rame ,10);//entonces no se que guardo aca
-            //busco por el nombre que tengo guardado en bien contra las ramas en la base de datos
+            $rama=intval($rame->getId());// transformo el id de la rama en un entero
 
-            $idbien = intval($bien->getId(),10);
 
-            $codigo = ($tipo."-".$rama."-".$idbien);
+           $bienId=intval($bien->getId());
+
+            $codigo = ($tipo."-".$rama."-".$bienId);
             $bien->setCodigo($codigo);
 
+            //por las dudas para actualizar el id de bien
             $em->persist($bien);
             $em->flush();
 
@@ -91,6 +96,36 @@ class BienController extends Controller
     public function showAction(Bien $bien)
     {
         $deleteForm = $this->createDeleteForm($bien);
+        $em = $this->getDoctrine()->getManager(); // de aca para abajo hago todo para que se actualice el codigo
+
+
+        //le pido a la base de datos los objetos tipo
+        $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo
+        $tipe=($repository->find($bien->getTipo()));//esto no se que me devuelve
+        $tipo=intval($tipe->getId());//entonces no se que guardo aca
+
+
+        //le pido a la base de datos los objetos rama
+        $repository2 = $this->getDoctrine()->getRepository(Rama::class);
+        $rame=($repository2->find($bien->getRama())); //esto no se que me devuelve
+
+
+        $rama=intval($rame->getId());//entonces no se que guardo aca
+        //busco por el nombre que tengo guardado en bien contra las ramas en la base de datos
+
+        $bienId=intval($bien->getId());
+
+        $codigo = ($tipo."-".$rama."-".$bienId);
+        $bien->setCodigo($codigo);
+
+        $bienId=intval($bien->getId());
+
+        $codigo = ($tipo."-".$rama."-".$bienId);
+        $bien->setCodigo($codigo);
+
+        $em->persist($bien);
+        $em->flush();
+
 
         return $this->render('bien/show.html.twig', array(
             'bien' => $bien,
@@ -164,17 +199,21 @@ class BienController extends Controller
 
         //le pido a la base de datos los objetos responsable
         $repository2 = $this->getDoctrine()->getRepository(Responsable::class);
-        $responsable = $repository2->find(($bien->getResponsable()));
+        $responsable = $repository2->find(($bien->getResponsable())); //guardo el responsable que me coincide con el que esta en la base de datos
 
-        //le pido a la base de datos los objetos responsable
+        $repository4 = $this->getDoctrine()->getRepository(ResponsableArea::class);
+        $responsableA= $repository4->find($responsable->getResponsableArea()); //ya guarde en el paso anterior el responsable, ahora lo hago coincidir con el de area porque necesito el cargo
+
+        //le pido a la base de datos los objetos factura
         $repository3 = $this->getDoctrine()->getRepository(Factura::class);
-        $factura = $repository3->find(($proveedor->getFacturas()));
+       // $factura = $repository3->find(($proveedor->getFacturas()));
 
         return $this->render('factura/imprir.html.twig', array(
                 'bien' => $bien,
                 'proveedor'=>$proveedor,
-                'facturas'=>$factura,
+                //'facturas'=>$factura,
                 'responsable'=>$responsable,
+                'responsableA'=>$responsableA,
                 'delete_form' => $deleteForm->createView()
             )
 

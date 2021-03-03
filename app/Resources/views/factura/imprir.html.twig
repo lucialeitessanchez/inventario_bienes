@@ -15,7 +15,7 @@
                             <br><br><br>
                         <b>CARGO DE BIENES DE CAPITAL</b></p><br><br><br><br>
                         <br>Responsable de la tenencia, guarda y conservación: {{ bien.responsable }}
-                        <br><ul>Oficina:
+                        <br><ul>Oficina: {{ responsableA.cargo }}
                         <br>Agente: {{ responsable.nombre }}
                            </ul>
                         Datos de adquisicion:
@@ -25,13 +25,24 @@
                         <br>Importe unitario: $
                         <br>Importe total:</ul>
                     Bien Adquirido:
-                    <ul>Detalle:
+                    <ul>Detalle: {{ bien.estado }}
                         <br>Marca:
-                        <br>Color:
+                        <br>Color:  <select name=color>
+                            <option value="0" selected>Colores..
+                            <option value="1">Negro
+                            <option value="2">Blanco
+                            <option value="3">Azul
+                            <option value="4">Naranja
+                            <option value="5">Rojo
+                            <option value="6">Amarillo
+                            <option value="7">Verde
+                            <option value="8">Marrón
+                        </select>
+
                         <br>Dimensiones/caracteristicas: {{ bien.descripcion }}
                         <br>Modelos:
                         <br>N° de Serie: {{ bien.codigo }}
-                        <br>Observaciones: {{ bien.estado }}
+                        <br>
                     </ul>
 
                     </th>

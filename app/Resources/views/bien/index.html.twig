@@ -1,27 +1,30 @@
 {% extends 'baseVer.html.twig' %}
 
 {% block body %}
-    <h1>Listado de los bienes</h1>
+    <h1>Listado de bienes SEIyG - Calle {{ biens[0].ubicacion }}</h1>
     <h3>
     <table>
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Id bien</th>
                 <th>Codigo</th>
-                <th>Fecha de alta</th>
-                <th>Descripcion</th>
+                <th>Usuario</th>
+                <th>Descripcion/codigo SARI</th>
                 <th>Estado</th>
+                <th>Fecha de alta</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for bien in biens %}
+
             <tr>
                 <td><a href="{{ path('bien_show', { 'id': bien.id }) }}">{{ bien.id }}</a></td>
                 <td>{{ bien.codigo }}</td>
-                <td>{% if bien.fechaAlta %}{{ bien.fechaAlta|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ bien.responsable }}</td>
                 <td>{{ bien.descripcion }}</td>
                 <td>{{ bien.estado }}</td>
+                <td>{% if bien.fechaAlta %}{{ bien.fechaAlta|date('Y-m-d') }}{% endif %}</td>
                 <td>
                     <ul>
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
