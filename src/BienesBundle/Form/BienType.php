@@ -2,6 +2,7 @@
 
 namespace BienesBundle\Form;
 
+use BienesBundle\BienesBundle;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,7 +17,7 @@ class BienType extends AbstractType
     {
 
         $builder->add('fechaAlta')->add('descripcion')->add('estado')->add('proveedor')->add('responsable')->add('ubicacion')
-        ->add('tipo')->add('rama');
+            ->add('factura')->add('tipo')->add('rama');
     }/**
      * {@inheritdoc}
      */

@@ -80,6 +80,13 @@ class Bien
     private $rama;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Factura", inversedBy="bienes")
+     * @ORM\JoinColumn(name="id_factura", referencedColumnName="id")
+     */
+    private $factura;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -287,5 +294,31 @@ class Bien
 
     public function getRama(){
         return $this->rama;
+    }
+    public function __toString() {
+        return strval($this->getCodigo()); }
+
+    /**
+     * Set factura
+     *
+     * @param \BienesBundle\Entity\Factura $factura
+     *
+     * @return Bien
+     */
+    public function setFactura(\BienesBundle\Entity\Factura $factura = null)
+    {
+        $this->factura = $factura;
+
+        return $this;
+    }
+
+    /**
+     * Get factura
+     *
+     * @return \BienesBundle\Entity\Factura
+     */
+    public function getFactura()
+    {
+        return $this->factura;
     }
 }

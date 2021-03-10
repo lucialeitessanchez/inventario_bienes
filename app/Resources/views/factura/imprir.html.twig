@@ -6,7 +6,7 @@
          <h3>
 
 
-
+             <p class="text-end">{{ fecha }}</p>
         </tr>
              <p></p><p<p></p><p></p>
             <ul><ul>
@@ -21,13 +21,14 @@
                         Datos de adquisicion:
                     <ul>Fecha adquisicion:
                         <br>Proveedor: {{ proveedor.nombre }}
-                        </br>N° de Factura:
-                        <br>Importe unitario: $
-                        <br>Importe total:</ul>
+                        </br>N° de Factura: {{ factura.numeroFactura }}
+                        <br>Importe unitario: $ {{ factura.montoUnitario }}
+                        <br>Importe total: $ {{ factura.montoTotal }}
+                    </ul>
                     Bien Adquirido:
                     <ul>Detalle: {{ bien.estado }}
                         <br>Marca:
-                        <br>Color:  <select name=color>
+                        <br>Color:  <select name=color id="selectColor">
                             <option value="0" selected>Colores..
                             <option value="1">Negro
                             <option value="2">Blanco

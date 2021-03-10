@@ -71,6 +71,11 @@ class Factura
     private $proveedor;
 
     /**
+     * @ORM\OneToMany(targetEntity="Bien", mappedBy="factura")
+     */
+    private $bienes;
+
+    /**
      * Get id
      *
      * @return int
@@ -246,5 +251,49 @@ class Factura
     public function getMontoUnitario()
     {
         return $this->montoUnitario;
+    }
+
+    public function __toString() {
+        return strval($this->getNumeroFactura()); }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->bienes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add biene
+     *
+     * @param \BienesBundle\Entity\Bien $biene
+     *
+     * @return Factura
+     */
+    public function addBiene(\BienesBundle\Entity\Bien $biene)
+    {
+        $this->bienes[] = $biene;
+
+        return $this;
+    }
+
+    /**
+     * Remove biene
+     *
+     * @param \BienesBundle\Entity\Bien $biene
+     */
+    public function removeBiene(\BienesBundle\Entity\Bien $biene)
+    {
+        $this->bienes->removeElement($biene);
+    }
+
+    /**
+     * Get bienes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBienes()
+    {
+        return $this->bienes;
     }
 }

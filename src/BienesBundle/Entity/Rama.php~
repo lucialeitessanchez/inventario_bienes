@@ -136,12 +136,4 @@ class Rama
     {
         return $this->bienes;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->bienes = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
 }

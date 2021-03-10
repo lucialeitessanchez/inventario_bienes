@@ -205,15 +205,20 @@ class BienController extends Controller
         $responsableA= $repository4->find($responsable->getResponsableArea()); //ya guarde en el paso anterior el responsable, ahora lo hago coincidir con el de area porque necesito el cargo
 
         //le pido a la base de datos los objetos factura
-        $repository3 = $this->getDoctrine()->getRepository(Factura::class);
-       // $factura = $repository3->find(($proveedor->getFacturas()));
+       $repository3 = $this->getDoctrine()->getRepository(Factura::class);
+       $factura = $repository3->find(($bien->getFactura()));
+
+        $fechaActual = date('d-m-Y H:i:s');
+
+        //$factura = $factura->getProveedor() == $proveedor;
 
         return $this->render('factura/imprir.html.twig', array(
                 'bien' => $bien,
                 'proveedor'=>$proveedor,
-                //'facturas'=>$factura,
+                'factura'=>$factura,
                 'responsable'=>$responsable,
                 'responsableA'=>$responsableA,
+                'fecha'=>$fechaActual,
                 'delete_form' => $deleteForm->createView()
             )
 
