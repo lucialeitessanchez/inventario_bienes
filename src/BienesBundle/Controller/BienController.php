@@ -46,7 +46,7 @@ class BienController extends Controller
         $bien = new Bien();
         $form = $this->createForm('BienesBundle\Form\BienType', $bien);
         $form->handleRequest($request);
-
+        $bien->setCodigo(0);
 
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -3,23 +3,23 @@
 
 
 
-         <h3>
 
 
-             <p class="text-end">{{ fecha }}</p>
+
+             <p class="text-end">{{ fecha|date("m/d/Y") }}</p>
         </tr>
              <p></p><p<p></p><p></p>
             <ul><ul>
                     <br><br>
                     <p class="text-center"><th>
                             <br><br><br>
-                        <b>CARGO DE BIENES DE CAPITAL</b></p><br><br><br><br>
-                        <br>Responsable de la tenencia, guarda y conservación: {{ bien.responsable }}
+                       <h1> <b>CARGO DE BIENES DE CAPITAL</b></p><br><br><br><br></h1>
+                       <h2> <br>Responsable de la tenencia, guarda y conservación: {{ bien.responsable }}
                         <br><ul>Oficina: {{ responsableA.cargo }}
                         <br>Agente: {{ responsable.nombre }}
                            </ul>
                         Datos de adquisicion:
-                    <ul>Fecha adquisicion:
+                    <ul>Fecha adquisicion: {{ factura.fecha|date("m/d/Y") }}
                         <br>Proveedor: {{ proveedor.nombre }}
                         </br>N° de Factura: {{ factura.numeroFactura }}
                         <br>Importe unitario: $ {{ factura.montoUnitario }}
@@ -45,7 +45,7 @@
                         <br>N° de Serie: {{ bien.codigo }}
                         <br>
                     </ul>
-
+                       </h2>
                     </th>
 
                     <br><br><br><br><br>
@@ -60,7 +60,7 @@
 
 
         </ul></ul>
-         </h3>
+
     <div class="clearfix"><br></div>
 
     <footer class="footer text-muted">
