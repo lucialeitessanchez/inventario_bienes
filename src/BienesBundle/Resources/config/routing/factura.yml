@@ -8,6 +8,7 @@ factura_show:
     defaults: { _controller: "BienesBundle:Factura:show" }
     methods:  GET
 
+
 factura_new:
     path:     /new
     defaults: { _controller: "BienesBundle:Factura:new" }
