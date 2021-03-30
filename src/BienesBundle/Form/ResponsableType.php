@@ -13,7 +13,7 @@ class ResponsableType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombre')->add('dni')->add('responsableArea')->add('funcionario');
+        $builder->add('nombre')->add('dni')->add('cargo')->add('responsableArea')->add('funcionario');
     }/**
      * {@inheritdoc}
      */

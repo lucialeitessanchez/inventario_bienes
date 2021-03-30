@@ -86,6 +86,7 @@ class Bien
     private $factura;
 
 
+
     /**
      * Get id
      *

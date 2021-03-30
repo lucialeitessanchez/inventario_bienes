@@ -36,6 +36,13 @@ class Responsable
     private $dni;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="cargo", type="string", length=255)
+     */
+    private $cargo;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="funcionario", type="boolean")
@@ -204,4 +211,28 @@ class Responsable
 
     public function __toString() {
         return strval($this->getNombre()); }
+
+    /**
+     * Set cargo
+     *
+     * @param string $cargo
+     *
+     * @return Responsable
+     */
+    public function setCargo($cargo)
+    {
+        $this->cargo = $cargo;
+
+        return $this;
+    }
+
+    /**
+     * Get cargo
+     *
+     * @return string
+     */
+    public function getCargo()
+    {
+        return $this->cargo;
+    }
 }
