@@ -50,6 +50,13 @@ class Bien
     private $estado;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="usuario", type="string", length=50)
+     */
+    private $usuario;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Proveedor", inversedBy="bienes")
      * @ORM\JoinColumn(name="id_proveedor", referencedColumnName="id")
      */
@@ -321,5 +328,29 @@ class Bien
     public function getFactura()
     {
         return $this->factura;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param string $usuario
+     *
+     * @return Bien
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return string
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
     }
 }

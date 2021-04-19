@@ -11,6 +11,7 @@
                 <th>Dni</th>
                 <th>Funcionario</th>
                 <th>Responsable de area</th>
+                <th>Oficina</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ responsable.dni }}</td>
                 <td>{% if responsable.funcionario %}Si{% else %}No{% endif %}</td>
                 <td>{{ responsable.responsableArea }}</td>
+                <td>{{ responsable.cargo }}</td>
                 <td>
                     <ul>
 

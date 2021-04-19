@@ -13,21 +13,21 @@
                     <br><br>
                     <p class="text-center"><th>
                             <br><br><br>
-                       <h1> <b>CARGO DE BIENES DE CAPITAL</b></p><br><br><br><br></h1>
-                       <h2> <br>Responsable de la tenencia, guarda y conservación: {{ bien.responsable }}
+                    <h1> <div align="center" <>CARGO DE BIENES DE CAPITAL</b></p><br><br><br><br></div></h1></ul>
+                       <h2> <br>Responsable de la tenencia, guarda y conservación
                         <br><ul>Oficina: {{ responsable.cargo }}
                         <br>Agente: {{ responsable.nombre }}
                            </ul>
-                        Datos de adquisicion:
+                        Datos de adquisicion
                     <ul>Fecha adquisicion: {{ factura.fecha|date("m/d/Y") }}
                         <br>Proveedor: {{ proveedor.nombre }}
                         </br>N° de Factura: {{ factura.numeroFactura }}
                         <br>Importe unitario: $ {{ factura.montoUnitario }}
                         <br>Importe total: $ {{ factura.montoTotal }}
                     </ul>
-                    Bien Adquirido:
+                    Bien Adquirido
                     <ul>Detalle: {{ bien.estado }}
-                        <br>Marca:
+                        <br>Descripcion/SARI/N° de Serie: {{ bien.descripcion }}
                         <br>Color:  <select name=color id="selectColor">
                             <option value="0" selected>Colores..
                             <option value="1">Negro
@@ -40,10 +40,8 @@
                             <option value="8">Marrón
                         </select>
 
-                        <br>Dimensiones/caracteristicas: {{ bien.descripcion }}
-                        <br>Modelos:
-                        <br>N° de Serie: {{ bien.codigo }}
-                        <br>
+                        <br>N° codigo sistema: {{ bien.codigo }}
+                        <br>Caracteristica: {{ bien.tipo }} {{ bien.rama }}
                     </ul>
                        </h2>
                     </th>

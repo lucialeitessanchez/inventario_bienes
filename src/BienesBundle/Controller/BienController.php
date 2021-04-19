@@ -37,6 +37,25 @@ class BienController extends Controller
         ));
     }
 
+    //Obtiene la IP del cliente
+    function get_ip() {
+
+        $localIP = getHostByName(php_uname('n'));
+        return $localIP;
+    }
+    // la transforma en el nombre del usuario
+    function convertirUsuarioIP($ipaddress){
+        $ipaddress=strval($ipaddress);
+        $ip_nombre = array("Carolina Tarre","Alejandra Robledo","Magali Rodriguez","Lucia Leites","Leonardo Lentini","Andres DeLamata","Recepcion","Tania Alvarez",
+            "Agustin","Sandra Lopez","Miriam Urgorri","Florencia Marinaro","Celia Arena","Lucias Maurice","Marisol Gutierrez","Gabriel Palud","Mariela Zen","Nancy Ortiz","Luciano  Borgogno",
+            "Daniela Leopold","Melisa Trabuchi");
+        $ip_fija = array("10.3.17.23","10.3.17.31","10.3.17.33","10.3.17.17","10.3.17.10","10.3.17.32","10.3.17.81","10.3.17.84",
+            "10.3.17.203","10.3.17.45","10.3.17.82","10.3.17.86","10.3.17.88","10.3.17.44","10.3.17.87","10.3.17.55","10.3.17.56","10.3.17.48","10.3.17.25","10.3.17..50",
+            "10.3.17.53","10.3.17.52");
+        $nombre = str_replace($ip_fija,$ip_nombre,$ipaddress);
+        return $nombre;
+    }
+
     /**
      * Creates a new bien entity.
      *
@@ -47,6 +66,7 @@ class BienController extends Controller
         $form = $this->createForm('BienesBundle\Form\BienType', $bien);
         $form->handleRequest($request);
         $bien->setCodigo(0);
+        $bien->setUsuario($this->get_ip()." ".$this->convertirUsuarioIP($this->get_ip())); //guarda el usuario que cargo la ip y el nombre si lo tiene guardado
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -98,6 +118,7 @@ class BienController extends Controller
         $deleteForm = $this->createDeleteForm($bien);
         $em = $this->getDoctrine()->getManager(); // de aca para abajo hago todo para que se actualice el codigo
 
+        $bien->setUsuario($this->get_ip()." ".$this->convertirUsuarioIP($this->get_ip())); // por las dudas actualiza el usuario que ingreso
 
         //le pido a la base de datos los objetos tipo
         $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo
