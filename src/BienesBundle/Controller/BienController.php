@@ -118,7 +118,7 @@ class BienController extends Controller
         $deleteForm = $this->createDeleteForm($bien);
         $em = $this->getDoctrine()->getManager(); // de aca para abajo hago todo para que se actualice el codigo
 
-        $bien->setUsuario($this->get_ip()." ".$this->convertirUsuarioIP($this->get_ip())); // por las dudas actualiza el usuario que ingreso
+
 
         //le pido a la base de datos los objetos tipo
         $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo

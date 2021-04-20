@@ -27,3 +27,5 @@ prestamo_imprimir:
     path:     /{id}/imprimir
     defaults: { _controller: "BienesBundle:Bien:imprimir" }
     methods:  [GET, POST]
+
+

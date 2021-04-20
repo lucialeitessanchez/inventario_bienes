@@ -16,7 +16,7 @@ class BienType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $builder->add('fechaAlta')->add('descripcion')->add('estado')->add('proveedor')->add('responsable')->add('ubicacion')
+        $builder->add('fechaAlta')->add('descripcion')->add('estado')->add('proveedor')->add(('responsable'))->add('ubicacion')
             ->add('factura')->add('tipo')->add('rama');
     }/**
      * {@inheritdoc}
