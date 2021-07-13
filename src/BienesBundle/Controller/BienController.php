@@ -70,9 +70,12 @@ class BienController extends Controller
         $bien->setUsuario($this->get_ip()." ".$this->convertirUsuarioIP($this->get_ip())); //guarda el usuario que cargo la ip y el nombre si lo tiene guardado
 
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
 
+            $bien->setCodigo(0);
 
             //le pido a la base de datos los objetos tipo
             $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo
