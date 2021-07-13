@@ -8,8 +8,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityManagerInterface;
+
+use BienesBundle\Entity\Tipo;
+
 class BienType extends AbstractType
 {
+    
+
+
     /**
      * {@inheritdoc}
      */
@@ -17,8 +28,17 @@ class BienType extends AbstractType
     {
 
         $builder->add('fechaAlta')->add('descripcion')->add('estado')->add('proveedor')->add(('responsable'))->add('ubicacion')
-            ->add('factura')->add('tipo')->add('rama');
-    }/**
+            ->add('factura');
+
+        //$builder->addEventListener(FormEvents::PRE_SET_DATA, array($this,'onPreSetData'));
+        //$builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
+        $builder->add('tipo');
+        $builder->add('rama');
+    }
+
+
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

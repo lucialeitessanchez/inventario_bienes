@@ -3,6 +3,7 @@
 namespace BienesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * Rama
@@ -28,7 +29,7 @@ class Rama
      */
     private $nombreRama;
 
-    /**
+    /**@var \BienesBundle\Entity\Tipo
      * @ORM\ManyToOne(targetEntity="Tipo", inversedBy="ramas")
      * @ORM\JoinColumn(name="id_tipo", referencedColumnName="id")
      */
@@ -144,4 +145,16 @@ class Rama
         $this->bienes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function getRamaByTipo($tipoId){
+       /* $qb = $this->createQueryBuilder('p')
+            ->innerJoin('p.categoria', 'c')
+            ->innerJoin('p.productoTipo', 'pt')
+            ->where('c.id = :categoriaId')
+            ->andWhere('pt.id = :productoTipoId')
+            ->setParameter('categoriaId', $categoriaId)
+            ->setParameter('productoTipoId', $productoTipoId)
+        ;
+
+        return $qb->getQuery()->getResult();*/
+    }
 }

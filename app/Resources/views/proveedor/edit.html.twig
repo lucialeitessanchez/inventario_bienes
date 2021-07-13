@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <ul>
     <h1>Editar un proveedor</h1>
     <h3>
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Editar" />
+
+
     {{ form_end(edit_form) }}
 
     <ul>
         <div class="btn-group" role="group" aria-label="Basic outlined example">
+
             <input type="submit" value="Editar" class="btn btn-outline-primary"></a>
             {{ form_end(edit_form) }}
             <a href="{{ path('proveedor_index') }}" class="btn btn-outline-primary"> Volver al listado de proveedores </a>
@@ -22,4 +23,5 @@
 
     </ul>
     </h3>
+    </ul>
 {% endblock %}

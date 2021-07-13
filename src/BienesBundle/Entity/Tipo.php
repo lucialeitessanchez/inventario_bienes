@@ -4,6 +4,7 @@ namespace BienesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Tipo
  *

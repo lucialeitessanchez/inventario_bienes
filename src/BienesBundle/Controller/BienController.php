@@ -11,6 +11,7 @@ use BienesBundle\Entity\ResponsableArea;
 use BienesBundle\Entity\Tipo;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -47,7 +48,7 @@ class BienController extends Controller
     function convertirUsuarioIP($ipaddress){
         $ipaddress=strval($ipaddress);
         $ip_nombre = array("Carolina Tarre","Alejandra Robledo","Magali Rodriguez","Lucia Leites","Leonardo Lentini","Andres DeLamata","Recepcion","Tania Alvarez",
-            "Agustin","Sandra Lopez","Miriam Urgorri","Florencia Marinaro","Celia Arena","Lucias Maurice","Marisol Gutierrez","Gabriel Palud","Mariela Zen","Nancy Ortiz","Luciano  Borgogno",
+            "Agustin","Sandra Lopez","Miriam Urgorri","Florencia Marinaro","Celia Arena","Lucas Maurice","Marisol Gutierrez","Gabriel Palud","Mariela Zen","Nancy Ortiz","Luciano  Borgogno",
             "Daniela Leopold","Melisa Trabuchi");
         $ip_fija = array("10.3.17.23","10.3.17.31","10.3.17.33","10.3.17.17","10.3.17.10","10.3.17.32","10.3.17.81","10.3.17.84",
             "10.3.17.203","10.3.17.45","10.3.17.82","10.3.17.86","10.3.17.88","10.3.17.44","10.3.17.87","10.3.17.55","10.3.17.56","10.3.17.48","10.3.17.25","10.3.17..50",
@@ -81,15 +82,21 @@ class BienController extends Controller
             $em->persist($bien);
             $em->flush();
 
+
             //le pido a la base de datos los objetos rama
             $repository2 = $this->getDoctrine()->getRepository(Rama::class);
             $rame=($repository2->find($bien->getRama())); //me devuelve el objeto que coincide con el nombre de la rama que es el que obtengo en el toString de rama
-
+            $entradas = filter_var_array($tipo, $rame);
 
             $rama=intval($rame->getId());// transformo el id de la rama en un entero
 
 
            $bienId=intval($bien->getId());
+
+            $codigo = ($tipo."-".$rama."-".$bienId);
+            $bien->setCodigo($codigo);
+
+            $bienId=intval($bien->getId());
 
             $codigo = ($tipo."-".$rama."-".$bienId);
             $bien->setCodigo($codigo);
@@ -105,6 +112,7 @@ class BienController extends Controller
 
         return $this->render('bien/new.html.twig', array(
             'bien' => $bien,
+
             'form' => $form->createView(),
         ));
     }
@@ -231,6 +239,7 @@ class BienController extends Controller
 
         $fechaActual = date('d-m-Y H:i:s');
 
+
         //$factura = $factura->getProveedor() == $proveedor;
 
         return $this->render('factura/imprir.html.twig', array(
@@ -244,6 +253,41 @@ class BienController extends Controller
             )
 
         );
+    }
+
+    /**
+     * Returns a JSON string with the neighborhoods of the City with the providen id.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+
+    public function listRamasOfTipoAction(Request $request){
+        //get entity manager and repository - obtiene administrador de entidades y repositorio
+        $em = $this->getDoctrine()->getManager();
+        $ramasRepository = $em->getRepository("BienBundle:Rama");
+
+        // busca las ramas que pertenecen al tipo con el id dado como parametro get"tipoid"
+        $ramas = $ramasRepository->createQueryBuilder("q")
+        ->where("q.tipo = :idtipo")
+        ->setParameter("idtipo", $request->query->get("idtipo"))
+        ->getQuery()
+        ->getResult();
+
+        //Serializo en una matriz los datos que se necesitan, en este caso solo el nombre y el id
+        $responseArray = array();
+        foreach ($ramas as $rama){
+            $responseArray[] = array(
+                "id"=> $rama->getId(),
+                "nombre" =>$rama->getNombreRama()
+            );
+        }
+        // devuelve una matriz con la estructura de las ramas de la id del tipo proporcionado
+        return new JsonResponse($responseArray);
+
+
+
+
     }
 
 }

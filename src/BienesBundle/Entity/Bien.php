@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Bien
  *
- * @ORM\Table(name="bien")
+ * @ORM\Table(name="bien", indexes={@ORM\Index(name="id_tipo", columns={"id_tipo"}), @ORM\Index(name="id_rama", columns={"id_rama"})}))
  * @ORM\Entity(repositoryClass="BienesBundle\Repository\BienRepository")
  */
 class Bien
