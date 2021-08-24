@@ -32,9 +32,10 @@ class BienController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $biens = $em->getRepository('BienesBundle:Bien')->findAll();
-
+        $ubicaciones = $em ->getRepository('BienesBundle:Ubicacion')->findAll();
         return $this->render('bien/index.html.twig', array(
             'biens' => $biens,
+            'ubicaciones' => $ubicaciones
         ));
     }
 
@@ -258,6 +259,41 @@ class BienController extends Controller
         );
     }
 
+    public function prestamoAction(Bien $bien){
+        $deleteForm = $this->createDeleteForm($bien);
+
+        //le pido a la base de datos los objetos proveedor
+        $repository = $this->getDoctrine()->getRepository(Proveedor::class);
+        $proveedor = $repository->find(($bien->getProveedor()));
+
+        //le pido a la base de datos los objetos responsable
+        $repository2 = $this->getDoctrine()->getRepository(Responsable::class);
+        $responsable = $repository2->find(($bien->getResponsable())); //guardo el responsable que me coincide con el que esta en la base de datos
+
+        $repository4 = $this->getDoctrine()->getRepository(ResponsableArea::class);
+        $responsableA= $repository4->find($responsable->getResponsableArea()); //ya guarde en el paso anterior el responsable, ahora lo hago coincidir con el de area porque necesito el cargo
+
+        //le pido a la base de datos los objetos factura
+        $repository3 = $this->getDoctrine()->getRepository(Factura::class);
+        $factura = $repository3->find(($bien->getFactura()));
+
+        $fechaActual = date('d-m-Y H:i:s');
+
+
+        //$factura = $factura->getProveedor() == $proveedor;
+
+        return $this->render('factura/imprir.html.twig', array(
+                'bien' => $bien,
+                'proveedor'=>$proveedor,
+                'factura'=>$factura,
+                'responsable'=>$responsable,
+                'responsableA'=>$responsableA,
+                'fecha'=>$fechaActual,
+                'delete_form' => $deleteForm->createView()
+            )
+
+        );
+    }
     /**
      * Returns a JSON string with the neighborhoods of the City with the providen id.
      *

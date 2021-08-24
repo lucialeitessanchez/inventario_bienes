@@ -1,7 +1,8 @@
 {% extends 'baseVer.html.twig' %}
 
 {% block body %}
-    <h1>Listado de bienes SEIyG - </h1>
+    <h1>Listado de bienes MIGyD - <select > {% for ubicacion in ubicaciones %}  <option> {{ ubicacion}} </option>   {% endfor %}</select> </h1>
+
     <h3>
     <table>
         <thead>
@@ -10,6 +11,7 @@
                 <th>Codigo</th>
                 <th>Usuario</th>
                 <th>Descripcion/codigo SARI</th>
+                <th>Lugar</th>
                 <th>Estado</th>
                 <th>Fecha de alta</th>
                 <th>Acciones</th>
@@ -23,6 +25,7 @@
                 <td>{{ bien.codigo }}</td>
                 <td>{{ bien.responsable }}</td>
                 <td>{{ bien.descripcion }}</td>
+                <td>{{ bien.ubicacion }}</td>
                 <td>{{ bien.estado }}</td>
                 <td>{% if bien.fechaAlta %}{{ bien.fechaAlta|date('Y-m-d') }}{% endif %}</td>
                 <td>
