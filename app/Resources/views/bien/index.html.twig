@@ -1,9 +1,40 @@
 {% extends 'baseVer.html.twig' %}
 
 {% block body %}
+
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+        <a class="navbar-brand" href="https://www.santafe.gob.ar"><img
+                    src="https://www.santafe.gob.ar/assets/standard/images/gob-santafe.png"/></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('bien_new') }}">Alta nuevo bien <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('factura_index') }}">Factura <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('proveedor_index') }}">Proveedor <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('bienes_homepage') }}">Menú Principal <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+
     <h1>Listado de bienes MIGyD - <select class="form-control" name="filtroUbicaicon" id="filtro1"> {% for ubicacion in ubicaciones %}  <option> {{ ubicacion}} </option>   {% endfor %}</select> </h1>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <h3>
+
     <table>
         <thead>
             <tr>
