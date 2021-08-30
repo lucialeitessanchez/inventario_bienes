@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+ 
+{%block categorias%}
+        {% for category in categories %}
+             <li><a href="#">{{ category.name }}</a></li>
+        {% endfor %}
+{%endblock%}
+ 
+{% block content %}
+<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+<h3>Registrate</h3>
+<hr/>
+{% for mensaje in app.session.flashbag().get('info') %}
+<p class="info">{{ mensaje }}</p>
+{% endfor %}
+<form action="" method="post" {{ form_enctype(registro_form) }}>
+    {{ form_widget(registro_form) }}
+    {{ form_errors(registro_form) }}
+</form>
+</div>
+{%endblock%}
