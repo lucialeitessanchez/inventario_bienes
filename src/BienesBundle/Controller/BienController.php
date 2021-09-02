@@ -282,7 +282,7 @@ class BienController extends Controller
 
         //$factura = $factura->getProveedor() == $proveedor;
 
-        return $this->render('factura/imprir.html.twig', array(
+        return $this->render('bien/imprimir.html.twig', array(
                 'bien' => $bien,
                 'proveedor'=>$proveedor,
                 'factura'=>$factura,

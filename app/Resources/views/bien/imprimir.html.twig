@@ -13,48 +13,24 @@
                     <br><br>
                     <p class="text-center"><th>
                             <br><br><br>
-                    <h1> <div align="center" <>CARGO DE BIENES DE CAPITAL - PRESTAMO</b></p><br><br><br><br></div></h1></ul>
-                       <h2> <br>Responsable de la tenencia, guarda y conservación
-                        <br><ul>Oficina: {{ responsable.cargo }}
-                        <br>Agente: {{ responsable.nombre }}
-                           </ul>
-                        Datos de adquisicion
-                    <ul>Fecha adquisicion: {{ factura.fecha|date("m/d/Y") }}
-                        <br>Proveedor: {{ proveedor.nombre }}
-                        </br>N° de Factura: {{ factura.numeroFactura }}
-                        <br>Importe unitario: $ {{ factura.montoUnitario }}
-                        <br>Importe total: $ {{ factura.montoTotal }}
-                    </ul>
-                    Bien Adquirido
-                    <ul>Detalle: {{ bien.estado }}
-                        <br>Descripcion/SARI/N° de Serie: {{ bien.descripcion }}
-                        <br>Color:  <select name=color id="selectColor">
-                            <option value="0" selected>Colores..
-                            <option value="1">Negro
-                            <option value="2">Blanco
-                            <option value="3">Azul
-                            <option value="4">Naranja
-                            <option value="5">Rojo
-                            <option value="6">Amarillo
-                            <option value="7">Verde
-                            <option value="8">Marrón
-                            <option value="9">Gris
-                        </select>
+                    <h1> <div align="center"> PRESTAMO PATRIMONIO INFOMÁTICO</b></p><br><br><br><br></div></h1></ul>
+                      <h2>
+                      Por medio de la presente la sectorial de informática del Ministerio de Igualdad, Género y Diversidad de la provincia de Santa Fe
+                deja constancia que {{ bien.tipo }} {{ bien.rama }} número de codigo sistema: {{ bien.codigo }} y SARI/serie: {{ bien.descripcion }} es cedido, y pasa a ser
+                responsable de la tenencia, guarda y conservación el agente {{ responsable.nombre }}, a partir del dia {{ fecha }}.
 
-                        <br>N° codigo sistema: {{ bien.codigo }}
-                        <br>Caracteristica: {{ bien.tipo }} {{ bien.rama }}
+
                     </ul>
                        </h2>
                     </th>
-
+                    <ul><ul><ul>
                     <br><br><br><br><br>
-                    <p align="left">............................................
+                    <p>.........................................................
                     <br><br>Firma Agente Responsable - {{ responsable.nombre }}</p>
-                    <p align="center">............................................
-                        <br><br>Firma responsable del sector - {{ responsable.responsableArea }}</p>
+                    <p align="center">.....................................................
+                        <br><br>Firma responsable de Informática </p>
 
-                    ............................................
-                    <br>Firma responsable de informatica
+                            </ul></ul></ul>
 
 
 

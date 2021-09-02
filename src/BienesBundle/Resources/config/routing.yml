@@ -35,6 +35,8 @@ bienes_homepage:
     path:     /
     defaults: { _controller: BienesBundle:Default:index }
 
+
+
 user_registration:
     path:     /register
     defaults: { _controller: BienesBundle:Registro:register }
