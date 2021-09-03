@@ -29,7 +29,7 @@ class Rama
      */
     private $nombreRama;
 
-    /**@var \BienesBundle\Entity\Tipo
+    /**
      * @ORM\ManyToOne(targetEntity="Tipo", inversedBy="ramas")
      * @ORM\JoinColumn(name="id_tipo", referencedColumnName="id")
      */
