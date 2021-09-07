@@ -90,7 +90,7 @@ class BienController extends Controller
             //le pido a la base de datos los objetos rama
             $repository2 = $this->getDoctrine()->getRepository(Rama::class);
             $rame=($repository2->find($bien->getRama())); //me devuelve el objeto que coincide con el nombre de la rama que es el que obtengo en el toString de rama
-            $entradas = filter_var_array($tipo, $rame);
+
 
             $rama=intval($rame->getId());// transformo el id de la rama en un entero
 
