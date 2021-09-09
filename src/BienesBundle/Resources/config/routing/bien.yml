@@ -32,6 +32,7 @@ prestamo_bien:
     path:     /{id}/prestamo
     defaults: { _controller: "BienesBundle:Bien:prestamo" }
     methods:  [GET, POST]
+
 bien_list_ramas:
     path:     /get-ramas-from-tipo
     defaults: { _controller: "BienesBundle:Bien:listRamasOfTipoAction" }
