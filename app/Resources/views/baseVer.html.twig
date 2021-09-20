@@ -30,6 +30,9 @@
     <script src="//www.santafe.gob.ar/assets/standard/js/respond.min.js"></script>
     <![endif]-->
 
+
+
+
     <title>{% block title %}Sistema de bienes patrimoniales{% endblock %}</title>
     {% block stylesheets %}
         <link href="{{ asset('css/estilos.css') }}" rel="stylesheet"/>
@@ -37,6 +40,10 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
+<div class="search">
+    <input type="text" id="busqueda" placeholder="Buscar ...">
+    <i class="fa fa-search"></i>
+</div>
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>

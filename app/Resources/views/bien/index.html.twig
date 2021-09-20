@@ -25,14 +25,44 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('bienes_homepage') }}">Menú Principal <span class="sr-only">(current)</span></a>
                 </li>
+                <li><input type="text" id="formulario" class="autocomplete">
+                    <button class="btn btn-secondary my-2 my-sm-0" id="boton" type="submit">Buscar</button></li>
             </ul>
+
+            {#
+            <div class="search">
+                <input type="text" id="busqueda" placeholder="Buscar ...">
+                <i class="fa fa-search"></i>
+            </div>
+            <script>
+                const lupita = document.getElementById("busqueda");
+                lupita.addEventListener("change", () =>{
+                    console.log("cambia");
+                })
+
+            $(document).ready(function(){
+            var busqueda = $('#busqueda'),
+            titulo = $('th td');
+            });
+            </script>#}
+
+
+            <script>
+                const formulario = document.querySelector('#formulario');
+                const boton = document.querySelector('#boton');
+
+                const filtrar = ()=>{
+                    console.log(formulario.value);
+                }
+
+                boton.addEventListener('click', filtrar)
+            </script>
 
         </div>
     </nav>
 
 <br><br><br><br><br>
-    <h1>Listado de bienes MIGyD - <select class="form-control" name="filtroUbicaicon" id="filtro1"> {% for ubicacion in ubicaciones %}  <option> {{ ubicacion}} </option>   {% endfor %}</select> </h1>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <h1>Listado de bienes MIGyD
     <h3>
 
     <table>
@@ -76,7 +106,6 @@
         {% endfor %}
         </tbody>
     </table>
-
     <ul>
         <div class="btn-group" role="group" aria-label="Basic outlined example">
 

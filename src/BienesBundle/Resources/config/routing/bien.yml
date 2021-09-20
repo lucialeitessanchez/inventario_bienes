@@ -39,3 +39,7 @@ bien_list_ramas:
     methods:  GET
 
 
+pdf_bien:
+    path:     /pdf_bien
+    defaults: { _controller: "BienesBundle:Bien:returnPDFResponseFromHTML" }
+    methods:  [GET, POST]
