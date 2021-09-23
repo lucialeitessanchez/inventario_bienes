@@ -350,4 +350,18 @@ class BienController extends Controller
         $pdf->Output($filename.".pdf",'I'); // Esto generará el PDF como respuesta directamente
     }
 
+    public function buscarPorDireccion($palabra){
+        //le pido a la base de datos los objetos proveedor
+        $repository = $this->getDoctrine()->getRepository(Bien::class);
+        $query = $repository->createQueryBuilder('b')
+            ->where('p.ubicacion LIKE :palabra')
+            ->setParameter('palabra', '%'.$palabra.'%')
+            ->getQuery();
+        $bienes = $query->getResult();
+        return $this->render('bien/buscarDireccion.html.twig', array(
+              'bienes' => $bienes
+            )
+
+        );
+    }
 }

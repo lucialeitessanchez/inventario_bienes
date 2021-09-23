@@ -38,6 +38,10 @@ bien_list_ramas:
     defaults: { _controller: "BienesBundle:Bien:listRamasOfTipoAction" }
     methods:  GET
 
+bien_buscarDireccion:
+    path:     /{palabra}/direccion
+    defaults: { _controller: "BienesBundle:Bien:buscarPorDireccion" }
+    methods:  POST
 
 pdf_bien:
     path:     /pdf_bien

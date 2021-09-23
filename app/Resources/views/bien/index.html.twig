@@ -27,36 +27,61 @@
                 </li>
                 <li><input type="text" id="formulario" class="autocomplete">
                     <button class="btn btn-secondary my-2 my-sm-0" id="boton" type="submit">Buscar</button></li>
+
             </ul>
 
+
             {#
-            <div class="search">
-                <input type="text" id="busqueda" placeholder="Buscar ...">
-                <i class="fa fa-search"></i>
-            </div>
-            <script>
-                const lupita = document.getElementById("busqueda");
-                lupita.addEventListener("change", () =>{
-                    console.log("cambia");
-                })
+            <li><input type="text" id="formulario" class="autocomplete">
+                <button class="btn btn-secondary my-2 my-sm-0" id="boton" type="submit">Buscar</button></li>
 
-            $(document).ready(function(){
-            var busqueda = $('#busqueda'),
-            titulo = $('th td');
-            });
-            </script>#}
+        <div class="search">
+            <input type="text" id="busqueda" placeholder="Buscar ...">
+            <i class="fa fa-search"></i>
+        </div>
+        <script>
+            const lupita = document.getElementById("busqueda");
+            lupita.addEventListener("change", () =>{
+                console.log("cambia");
+            })
+
+        $(document).ready(function(){
+        var busqueda = $('#busqueda'),
+        titulo = $('th td');
+        });
+        </script>   ------------- hasta aca lo que hable con fede
+            #}
+        <script>
+            const formulario = document.querySelector('#formulario');
+            const boton = document.querySelector('#boton');
+         //   const resultado = document.querySelector('resultado');
+
+            const filtrar = ()=>{
+              //  resultado.innetHTML = '';
+                console.log(formulario.value);
+                const texto = formulario.value;
+                // for(let direccion of  ){
+                  //  let ubicacion =  ;
+                   // if( ubicacion.indexOf(texto) !== -1){ //lo encontro, coincide el texto
+                     //   resultado.innerHTML += `
+                //<li>${direccion} </li>`
+                  //  }
+               // }
+                // if(resultado.innetHTML == ''){
+                   // resultado.innetHTML += `ubicacion no encontrada`
+                //}
+            }
+
+            boton.addEventListener('click', filtrar)
+
+        </script>
+            {# cuando se haga click en el boton se ejecutara la funcion filtrar
+        formulario.addEventListener('keyup', filtrar) {# cada vez que escriba una letra o se presione una tecla
+
+        filtrar();
+        #}
 
 
-            <script>
-                const formulario = document.querySelector('#formulario');
-                const boton = document.querySelector('#boton');
-
-                const filtrar = ()=>{
-                    console.log(formulario.value);
-                }
-
-                boton.addEventListener('click', filtrar)
-            </script>
 
         </div>
     </nav>
@@ -64,7 +89,7 @@
 <br><br><br><br><br>
     <h1>Listado de bienes MIGyD
     <h3>
-
+<ul id="resultado">
     <table>
         <thead>
             <tr>
@@ -103,9 +128,11 @@
                     </ul>
                 </td>
             </tr>
+
         {% endfor %}
         </tbody>
-    </table>
+    </table> </ul>
+
     <ul>
         <div class="btn-group" role="group" aria-label="Basic outlined example">
 
