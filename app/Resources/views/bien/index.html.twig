@@ -26,7 +26,7 @@
                     <a class="nav-link" href="{{ path('bienes_homepage') }}">Menú Principal <span class="sr-only">(current)</span></a>
                 </li>
                 <li><input type="text" id="formulario" class="autocomplete">
-                    <button class="btn btn-secondary my-2 my-sm-0" id="boton" type="submit">Buscar</button></li>
+                   
 
             </ul>
 
@@ -51,30 +51,7 @@
         });
         </script>   ------------- hasta aca lo que hable con fede
             #}
-        <script>
-            const formulario = document.querySelector('#formulario');
-            const boton = document.querySelector('#boton');
-         //   const resultado = document.querySelector('resultado');
-
-            const filtrar = ()=>{
-              //  resultado.innetHTML = '';
-                console.log(formulario.value);
-                const texto = formulario.value;
-                // for(let direccion of  ){
-                  //  let ubicacion =  ;
-                   // if( ubicacion.indexOf(texto) !== -1){ //lo encontro, coincide el texto
-                     //   resultado.innerHTML += `
-                //<li>${direccion} </li>`
-                  //  }
-               // }
-                // if(resultado.innetHTML == ''){
-                   // resultado.innetHTML += `ubicacion no encontrada`
-                //}
-            }
-
-            boton.addEventListener('click', filtrar)
-
-        </script>
+        
             {# cuando se haga click en el boton se ejecutara la funcion filtrar
         formulario.addEventListener('keyup', filtrar) {# cada vez que escriba una letra o se presione una tecla
 
@@ -89,7 +66,7 @@
 <br><br><br><br><br>
     <h1>Listado de bienes MIGyD
     <h3>
-<ul id="resultado">
+<ul>
     <table>
         <thead>
             <tr>
@@ -103,7 +80,7 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="direccion">
         {% for bien in biens %}
 
             <tr>
@@ -111,9 +88,9 @@
                 <td>{{ bien.codigo }}</td>
                 <td>{{ bien.responsable }}</td>
                 <td>{{ bien.descripcion }}</td>
-                <td>{{ bien.ubicacion }}</td>
+                <td id="ubicaciones"> {{ bien.ubicacion }}</td>
                 <td>{{ bien.estado }}</td>
-                <td>{% if bien.fechaAlta %}{{ bien.fechaAlta|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if bien.fechaAlta %}{{ bien.fechaAlta|date('d-m-Y') }}{% endif %}</td>
                 <td>
                     <ul>
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
@@ -141,4 +118,33 @@
         </div>
     </ul>
     </h3>
+    <script>
+            const formulario = document.querySelector('#formulario');
+            
+         //   const resultado = document.querySelector('resultado');
+
+            const columna = document.getElementById("direccion");
+            
+
+            const filtrar = ()=>{
+              //  resultado.innetHTML = '';
+                console.log(formulario.value);
+                console.log("hola");
+                 
+                //const texto = formulario.value;
+                // for(let direccion of  ){
+                  //  let ubicacion =  ;
+                   // if( ubicacion.indexOf(texto) !== -1){ //lo encontro, coincide el texto
+                     //   resultado.innerHTML += `
+                //<li>${direccion} </li>`
+                  //  }
+               // }
+                // if(resultado.innetHTML == ''){
+                   // resultado.innetHTML += `ubicacion no encontrada`
+                //}
+            }
+
+            formulario.addEventListener('input', filtrar)
+
+        </script>
 {% endblock %}
