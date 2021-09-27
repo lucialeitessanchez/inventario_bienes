@@ -26,7 +26,7 @@
                     <a class="nav-link" href="{{ path('bienes_homepage') }}">Menú Principal <span class="sr-only">(current)</span></a>
                 </li>
                 <li><input type="text" id="formulario" class="autocomplete">
-                   
+
 
             </ul>
 
@@ -80,10 +80,10 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody id="direccion">
+        <tbody>
         {% for bien in biens %}
 
-            <tr>
+            <tr id="direccion">
                 <td><a href="{{ path('bien_show', { 'id': bien.id }) }}">{{ bien.id }}</a></td>
                 <td>{{ bien.codigo }}</td>
                 <td>{{ bien.responsable }}</td>
@@ -119,17 +119,17 @@
     </ul>
     </h3>
     <script>
-            const formulario = document.querySelector('#formulario');
+         //es    const formulario = document.querySelector('#formulario');
             
          //   const resultado = document.querySelector('resultado');
 
-            const columna = document.getElementById("direccion");
+          //es  const columna = document.getElementById("direccion");
             
 
-            const filtrar = ()=>{
+          //es  const filtrar = ()=>{
               //  resultado.innetHTML = '';
-                console.log(formulario.value);
-                console.log("hola");
+              //es  console.log(formulario.value);
+                // es console.log("hola");
                  
                 //const texto = formulario.value;
                 // for(let direccion of  ){
@@ -142,9 +142,28 @@
                 // if(resultado.innetHTML == ''){
                    // resultado.innetHTML += `ubicacion no encontrada`
                 //}
-            }
+          //es  }
 
-            formulario.addEventListener('input', filtrar)
+           //es  formulario.addEventListener('input', filtrar)
 
+         $("#formulario").on("keyup", function() {
+             var value = $(this).val();
+
+             $("table tr").each(function(ubicaciones) {
+                 if (ubicaciones != 0) {
+
+                     $row = $(this);
+
+                     var id = $row.find("td:first").text();
+
+                     if (id.indexOf(value) != 0) {
+                         $(this).hide();
+                     }
+                     else {
+                         $(this).show();
+                     }
+                 }
+             });
+         });
         </script>
 {% endblock %}
