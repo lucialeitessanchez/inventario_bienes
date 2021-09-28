@@ -147,15 +147,20 @@
            //es  formulario.addEventListener('input', filtrar)
 
          $("#formulario").on("keyup", function() {
-             var value = $(this).val();
-
+             var value = $(this).val(); //lo que voy escribiendo
+             
              $("table tr").each(function(ubicaciones) {
                  if (ubicaciones != 0) {
-
+                     
                      $row = $(this);
 
                      var id = $row.find("td:first").text();
+                    
 
+var MyRows = $('table#hdireccion').find('tbody').find('tr');
+for (var i = 0; i < MyRows.length; i++) {
+var MyIndexValue = $(MyRows[i]).find('td:eq(4)').html();
+}
                      if (id.indexOf(value) != 0) {
                          $(this).hide();
                      }
