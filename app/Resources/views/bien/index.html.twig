@@ -31,35 +31,6 @@
             </ul>
 
 
-            {#
-            <li><input type="text" id="formulario" class="autocomplete">
-                <button class="btn btn-secondary my-2 my-sm-0" id="boton" type="submit">Buscar</button></li>
-
-        <div class="search">
-            <input type="text" id="busqueda" placeholder="Buscar ...">
-            <i class="fa fa-search"></i>
-        </div>
-        <script>
-            const lupita = document.getElementById("busqueda");
-            lupita.addEventListener("change", () =>{
-                console.log("cambia");
-            })
-
-        $(document).ready(function(){
-        var busqueda = $('#busqueda'),
-        titulo = $('th td');
-        });
-        </script>   ------------- hasta aca lo que hable con fede
-            #}
-        
-            {# cuando se haga click en el boton se ejecutara la funcion filtrar
-        formulario.addEventListener('keyup', filtrar) {# cada vez que escriba una letra o se presione una tecla
-
-        filtrar();
-        #}
-
-
-
         </div>
     </nav>
 
@@ -88,7 +59,7 @@
                 <td>{{ bien.codigo }}</td>
                 <td>{{ bien.responsable }}</td>
                 <td>{{ bien.descripcion }}</td>
-                <td id="ubicaciones"> {{ bien.ubicacion }}</td>
+                <td>{{ bien.ubicacion }}</td>
                 <td>{{ bien.estado }}</td>
                 <td>{% if bien.fechaAlta %}{{ bien.fechaAlta|date('d-m-Y') }}{% endif %}</td>
                 <td>
@@ -119,49 +90,22 @@
     </ul>
     </h3>
     <script>
-         //es    const formulario = document.querySelector('#formulario');
-            
-         //   const resultado = document.querySelector('resultado');
+       
 
-          //es  const columna = document.getElementById("direccion");
-            
-
-          //es  const filtrar = ()=>{
-              //  resultado.innetHTML = '';
-              //es  console.log(formulario.value);
-                // es console.log("hola");
-                 
-                //const texto = formulario.value;
-                // for(let direccion of  ){
-                  //  let ubicacion =  ;
-                   // if( ubicacion.indexOf(texto) !== -1){ //lo encontro, coincide el texto
-                     //   resultado.innerHTML += `
-                //<li>${direccion} </li>`
-                  //  }
-               // }
-                // if(resultado.innetHTML == ''){
-                   // resultado.innetHTML += `ubicacion no encontrada`
-                //}
-          //es  }
-
-           //es  formulario.addEventListener('input', filtrar)
-
-         $("#formulario").on("keyup", function() {
-             var value = $(this).val(); //lo que voy escribiendo
+         $("#formulario").on("keyup", function() { // funcion de filtrado por ubicacion
+             var value = $(this).val().toUpperCase(); //lo que voy escribiendo, lo convierto todo en mayusculas para cuando lo comparto con lo de la tabla
              
-             $("table tr").each(function(ubicaciones) {
-                 if (ubicaciones != 0) {
+             $("table tr").each(function(direccion) { //recorre toda la tabla
+                 if (direccion != 0) {
                      
                      $row = $(this);
 
-                     var id = $row.find("td:first").text();
+                     
+                     var id = $row.find("td:nth-child(5)").text().toUpperCase(); //en el td, el hijo de la tabla, que busque en la posicion que le paso entre parentesis, y tome el texto
+                                                                                   //lo pongo todo en mayuscula para que lo compare exacto con lo que va escribiendo 
                     
 
-var MyRows = $('table#hdireccion').find('tbody').find('tr');
-for (var i = 0; i < MyRows.length; i++) {
-var MyIndexValue = $(MyRows[i]).find('td:eq(4)').html();
-}
-                     if (id.indexOf(value) != 0) {
+         if (id.indexOf(value) != 0) {
                          $(this).hide();
                      }
                      else {
