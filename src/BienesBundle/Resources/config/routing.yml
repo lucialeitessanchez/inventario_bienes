@@ -35,6 +35,10 @@ bienes_homepage:
     path:     /
     defaults: { _controller: BienesBundle:Default:index }
 
+prueba_pdf:
+    path:     /pruebaPDF
+    defaults: { _controller: BienesBundle:Default:pruebaPDF }
+
 user_registration:
     path:     /register
     defaults: { _controller: BienesBundle:Registro:register }

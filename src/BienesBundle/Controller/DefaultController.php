@@ -3,6 +3,8 @@
 namespace BienesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use WhiteOctober\TCPDFBundle\Controller\TCPDFController;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -47,4 +49,26 @@ class DefaultController extends Controller
 
     }
 
+    public function pruebaPDFAction(Request $request) {
+
+        $pdf = $this->get("white_october.tcpdf")->create();
+        $pdf->AddPage();
+
+        if ($request->query->has('saludo')) {
+            $pdf->Write(0, 'Parametro Saludo: '.$request->get('saludo'), '', 0, 'C', true, 0, false, false, 0);
+            $pdf->Write(0, print_r($request->query->all(),1), '', 0, 'L', true, 0, false, false, 0);
+        }
+
+        $pdf->Write(0, 'Hola que tal es un ejemplo', '', 0, 'C', true, 0, false, false, 0);
+        $pdf->Output('example_001.pdf', 'I');
+    }
+
 }
+
+/*class MyReporte extends \TCPDF {
+    public function __construct() {
+        $this->SetCreator(PDF_CREATOR);
+        $this->SetAuthor('Nicola Asuni');
+
+    }
+}*/
