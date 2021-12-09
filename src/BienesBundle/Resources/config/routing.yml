@@ -24,7 +24,7 @@ bienes_responsable:
     prefix:   /responsable
 
 bienes_responsableA:
-    resource: "@BienesBundle/Resources/config/routing/responsableArea.yml"
+    resource: "@BienesBundle/Resources/config/routing/responsablearea.yml"
     prefix:   /responsableA
 
 bienes_ubicacion:
