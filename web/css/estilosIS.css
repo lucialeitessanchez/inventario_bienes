@@ -7,16 +7,7 @@
     color: whitesmoke !important;
 }
 
-#banner{ /* la imagen del ministerio se amolda a todas las pantallas */
 
-    width: 70%;
-    max-width: 960px;
-    margin: 0 auto;
-
-    width: 50%;
-    height: auto;
-
-}
 
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
