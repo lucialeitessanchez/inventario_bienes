@@ -1,4 +1,4 @@
-Sistema de inventario para bienes de la SEIyG Prov.Santa Fe
+Sistema de inventario para bienes de la MIGyD Prov.Santa Fe
 ========================
 
 Welcome to the Symfony Standard Edition - a fully-functional Symfony
