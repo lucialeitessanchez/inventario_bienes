@@ -5,6 +5,7 @@ namespace BienesBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use WhiteOctober\TCPDFBundle\Controller\TCPDFController;
 use Symfony\Component\HttpFoundation\Request;
+use BienesBundle\Entity\Bien;
 
 class DefaultController extends Controller
 {
@@ -49,7 +50,12 @@ class DefaultController extends Controller
 
     }
 
-    public function pruebaPDFAction(Request $request) {
+    public function pruebaPDFAction(Request $request,int $id) {
+        
+        $em = $this->getDoctrine()->getManager();
+        $bien = $em->getRepository('BienesBundle:Bien')->find($id);
+        $codigo = $bien->getCodigo();
+
         $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
         //$pdf = $this->get("white_october.tcpdf")->create();
@@ -60,20 +66,27 @@ class DefaultController extends Controller
             $pdf->Write(0, print_r($request->query->all(),1), '', 0, 'L', true, 0, false, false, 0);
         }
 
-    //or medio de la presente la sectorial de informática del Ministerio de Igualdad, Género y Diversidad de la provincia de Santa Fe deja constancia que
+    
 
-        // set some text to print
-        $txt = "PRESTAMO PATRIMONIO INFORMÁTICO";
-        // print a block of text using Write()
-        $pdf->Write(3, ' ', '', 0, 'C', true, 0, false, false, 0);
-        $pdf->Write(0, $txt, '', 0, 'C', true, 0, false, false, 0);
-      //  $pdf->Write(3, 'Hola que tal es un ejemplo', '', 0, 'C', true, 0, false, false, 0);
+
+        //textos
+        $txt = "PRÉSTAMO PATRIMONIO INFORMÁTICO";
+        $txt2 = "Por medio de la presente, La Sectorial de Informática del Ministerio de Igualdad, Género y Diversidad de la Provincia de Santa Fe, deja constancia que ";
+        $txt3=$bien->getTipo()." ".$bien->getRama();
+        $txt4=" número de código sistema: ".$codigo;
+        $txt5=" y SARI/serie: ".$bien->getDescripcion();
+        $txt6=" es cedido, y pasa a ser responsable de la tenencia, guarda y conservación del mismo al agente ".$bien->getResponsable();
+        $txt7=", a partir del día ".date("d/m/Y").".";
+
+        $pdf->Write(3,' ', '', 0, 'C', true, 0, false, false, 0);
+        $pdf->Write(0, $txt,'', 0, 'C', true, 0, false, false, 0);
         
-      $txt2 = "Por medio de la presente la sectorial de informática del Ministerio de Igualdad, Género y Diversidad de la provincia de Santa Fe deja constancia que";
-       $pdf->Write(3, ' ', '', 0, 'C', true, 0, false, false, 0); 
+      
+      $pdf->Write(3, ' ', '', 0, 'C', true, 0, false, false, 0); 
       $pdf->Write(3, ' ', '', 0, 'C', true, 0, false, false, 0);
       $pdf->Write(3, ' ', '', 0, 'C', true, 0, false, false, 0); 
-      $pdf->Write(0, $txt2, '', 0, 'C', true, 0, false, false, 0);
+      $pdf->Write(0, $txt2.$txt3.$txt4.$txt5.$txt6.$txt7, '', 0, 'C', true, 0, false, false, 0);
+      
       $pdf->Output('example_001.pdf', 'I');
 
 
