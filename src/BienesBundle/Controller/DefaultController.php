@@ -88,7 +88,8 @@ class DefaultController extends Controller
       $pdf->Write(0, $txt2.$txt3.$txt4.$txt5.$txt6.$txt7, '', 0, 'C', true, 0, false, false, 0);
       
       //$pdf->Image('imagenes/logo ministerio-negro_sin fondo.png');
-      $pdf->Image('imagenes/logo ministerio-negro_sin fondo.png', 30, 140, 120, 15, 'PNG','' , '', true, 150, '', false, false, 0, false, false, false);
+      
+      //$pdf->Image('imagenes/logo ministerio-negro_sin fondo.png', 30, 140, 120, 15, 'PNG','' , '', true, 150, '', false, false, 0, false, false, false);
       
 
       $pdf->Output('example_001.pdf', 'I');
@@ -118,10 +119,20 @@ class MYPDF extends \TCPDF {
         // Set font
         $this->SetFont('helvetica', 'I', 8);
         //$image_file = 'imagenes/logo ministerio-negro_sin fondo.png';
-        $this->Image('imagenes/logo ministerio-negro_sin fondo.png');
+        $logoFileName ="imagenes/logo ministerio-negro_sin fondo.png";
+
         // Page number
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        //$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+         $logoX = 40; // 
+   $logoFileName = "/images/myLogo.jpg";
+   $logoWidth = 130; // 15mm
+   $logoY = 280;
+        $logoWidth = 15; // 15mm
+        $logo = $this->PageNo() . ' | '. $this->Image($logoFileName, $logoX, $logoY, $logoWidth);
+
+        //$this->SetX($this->w - $this->documentRightMargin - $logoWidth); 
         
+        $this->Cell(10,10, $logo, 0, 0, 'R');
     }
 }
 
