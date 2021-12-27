@@ -68,7 +68,14 @@ class BienController extends Controller
         $form->handleRequest($request);
         $bien->setCodigo(0);
         $bien->setUsuario($this->get_ip()." ".$this->convertirUsuarioIP($this->get_ip())); //guarda el usuario que cargo la ip y el nombre si lo tiene guardado
+        
+        $userProvider = new UserProvider();
 
+        // Obtengo la direccion ip del cliente
+        $clientIp = $request->getClientIp();
+        // Obtengo el usuario logueado
+        $user = $this->getUser();
+        $usuario_ip = sprintf('%s@%s',$user->getUsername(),$clientIp);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -128,7 +135,6 @@ class BienController extends Controller
     {
         $deleteForm = $this->createDeleteForm($bien);
         $em = $this->getDoctrine()->getManager(); // de aca para abajo hago todo para que se actualice el codigo
-
 
 
         //le pido a la base de datos los objetos tipo

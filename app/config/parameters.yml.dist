@@ -12,3 +12,4 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: ThisTokenIsNotSoSecretChangeIt
+    session_name: MIGYD_BIENES_SERVICIOS

@@ -4,27 +4,29 @@ security:
     encoders:
         BienesBundle\Entity\User:
             algorithm: bcrypt
+
+        BienesBundle\Security\User:
+            algorithm: bcrypt
+
         Symfony\Component\Security\Core\User\User: plaintext
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         users:
             chain:
-                providers: [users_in_memory,our_db_provider]
-        our_db_provider:
-                entity:
-                    class: BienesBundle:User
+                providers: [users_in_memory , proveedor_usuario ]
+        proveedor_usuario: 
+            id: BienesBundle\Security\UserProvider
         users_in_memory:
             memory:
                 users:
                     admin:
                         password: 'admin'
-                        roles: 'ROLE_USUARIO'
+                        roles: 'ROLE_ADMIN'
                     admin2:
                         password: 'admin2'
                         roles: 'ROLE_ADMIN'
         
-
     firewalls:
         main:
             anonymous: ~
@@ -73,4 +75,5 @@ security:
         - { path: ^/denegado, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/factura, roles: ROLE_ADMIN }
         #- { path: ^/bien, roles: ROLE_SUPERADMIN }
+        - { path: ^/user, roles: ROLE_ADMIN }
         - { path: ^/, roles: ROLE_USUARIO }

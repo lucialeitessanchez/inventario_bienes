@@ -28,6 +28,19 @@ services:
         resource: '../../src/AppBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
+    
+    BienesBundle\:
+        resource: '../../src/BienesBundle/*'
+        # you can exclude directories or files
+        # but if a service is unused, it's removed anyway
+        exclude: '../../src/BienesBundle/{Entity,Repository,Tests}'
+
+    # controllers are imported separately to make sure they're public
+    # and have a tag that allows actions to type-hint services
+    BienesBundle\Controller\:
+        resource: '../../src/BienesBundle/Controller'
+        public: true
+        tags: ['controller.service_arguments']
 
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:

@@ -1,6 +1,6 @@
 <?php
  
-namespace Web\BlogBundle\Form\Type;
+namespace BienesBundle\Form;
  
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

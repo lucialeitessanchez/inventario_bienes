@@ -6,7 +6,6 @@ bienes_factura:
     resource: "@BienesBundle/Resources/config/routing/factura.yml"
     prefix:   /factura
 
-
 bienes_proveedor:
     resource: "@BienesBundle/Resources/config/routing/proveedor.yml"
     prefix:   /proveedor
@@ -30,6 +29,10 @@ bienes_responsableA:
 bienes_ubicacion:
     resource: "@BienesBundle/Resources/config/routing/ubicacion.yml"
     prefix:   /ubicacion
+
+bienes_user:
+    resource: "@BienesBundle/Resources/config/routing/user.yml"
+    prefix:   /user
 
 bienes_homepage:
     path:     /
