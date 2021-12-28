@@ -50,6 +50,17 @@ class DefaultController extends Controller
 
     }
 
+    public function pdfAltaAction(int $id){
+        $em = $this->getDoctrine()->getManager();
+        $bien = $em->getRepository('BienesBundle:Bien')->find($id);
+        $codigo = $bien->getCodigo();
+
+        $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+        //$pdf = $this->get("white_october.tcpdf")->create();
+        $pdf->AddPage();
+    }
+
     public function pruebaPDFAction(Request $request,int $id) {
         
         $em = $this->getDoctrine()->getManager();
@@ -88,13 +99,13 @@ class DefaultController extends Controller
       $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0); 
       $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0);
       $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0); 
-      $pdf->Write(0, $txt2.$txt3.$txt4.$txt5.$txt6.$txt7, '', 0, 'L', true, 0, false, false, 0);
+      $pdf->Write(0, $txt2.$txt3.$txt4.$txt5.$txt6.$txt7, '', 0, '', true, 0, false, false, 0);
       
       //$pdf->Image('imagenes/logo ministerio-negro_sin fondo.png');
      // $pdf->Image('imagenes/logo ministerio-negro_sin fondo.png', 30, 140, 120, 15, 'PNG','' , '', true, 150, '', false, false, 0, false, false, false);
       
 
-      $pdf->Output('example_001.pdf', 'I');
+      $pdf->Output('prestamo.pdf', 'I');
 
 
     }
