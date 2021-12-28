@@ -66,11 +66,14 @@ class DefaultController extends Controller
             $pdf->Write(0, print_r($request->query->all(),1), '', 0, 'L', true, 0, false, false, 0);
         }
 
-    
-
-
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        
+        $html1 ='<div align="center"> <img src="imagenes/logo ministerio-negro_sin fondo.png" alt="Elva dressed as a fairy" id="banner"> </div>';
+        $pdf->writeHTML($html1, true, false, true, false, '');
         //textos
-        $txt = "PRÉSTAMO PATRIMONIO INFORMÁTICO";
+        $html = '<div align="center"><h1>PRÉSTAMO PATRIMONIO INFORMÁTICO</h1></div>' ;
+        $pdf->writeHTML($html, true, false, true, false, '');
+        
         $txt2 = "Por medio de la presente, La Sectorial de Informática del Ministerio de Igualdad, Género y Diversidad de la Provincia de Santa Fe, deja constancia que ";
         $txt3=$bien->getTipo()." ".$bien->getRama();
         $txt4=" número de código sistema: ".$codigo;
@@ -78,17 +81,17 @@ class DefaultController extends Controller
         $txt6=" es cedido, y pasa a ser responsable de la tenencia, guarda y conservación del mismo al agente ".$bien->getResponsable();
         $txt7=", a partir del día ".date("d/m/Y").".";
 
-        $pdf->Write(3,' ', '', 0, 'C', true, 0, false, false, 0);
-        $pdf->Write(0, $txt,'', 0, 'C', true, 0, false, false, 0);
+        $pdf->Write(3,' ', '', 0, 'R', true, 0, false, false, 0);
+      
         
       
-      $pdf->Write(3, ' ', '', 0, 'C', true, 0, false, false, 0); 
-      $pdf->Write(3, ' ', '', 0, 'C', true, 0, false, false, 0);
-      $pdf->Write(3, ' ', '', 0, 'C', true, 0, false, false, 0); 
-      $pdf->Write(0, $txt2.$txt3.$txt4.$txt5.$txt6.$txt7, '', 0, 'C', true, 0, false, false, 0);
+      $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0); 
+      $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0);
+      $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0); 
+      $pdf->Write(0, $txt2.$txt3.$txt4.$txt5.$txt6.$txt7, '', 0, 'L', true, 0, false, false, 0);
       
       //$pdf->Image('imagenes/logo ministerio-negro_sin fondo.png');
-      $pdf->Image('imagenes/logo ministerio-negro_sin fondo.png', 30, 140, 120, 15, 'PNG','' , '', true, 150, '', false, false, 0, false, false, false);
+     // $pdf->Image('imagenes/logo ministerio-negro_sin fondo.png', 30, 140, 120, 15, 'PNG','' , '', true, 150, '', false, false, 0, false, false, false);
       
 
       $pdf->Output('example_001.pdf', 'I');
@@ -120,7 +123,10 @@ class MYPDF extends \TCPDF {
         //$image_file = 'imagenes/logo ministerio-negro_sin fondo.png';
         $this->Image('imagenes/logo ministerio-negro_sin fondo.png');
         // Page number
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        $this->Cell(0, 10, 'Sectorial de Informática
+        Ministerio de Igualdad, Género y Diversidad
+        Corrientes 2879 - (3000) Santa Fe
+        Tel: (0342) 4572888 / 4589468', 0, false, 'C', 0, '', 0, false, 'T', 'M');
         
     }
 }
