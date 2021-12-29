@@ -85,6 +85,7 @@ class DefaultController extends Controller
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             $filename
         );
+        $response->deleteFileAfterSend(true);
 
         return $response;
     }
