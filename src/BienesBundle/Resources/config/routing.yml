@@ -44,6 +44,12 @@ prueba_pdf:
     requirements:
         id: '\d+'
 
+alta_pdf:
+    path:     /pdfAlta/{id}
+    defaults: { _controller: BienesBundle:Default:pdfAlta }
+    requirements:
+        id: '\d+'        
+
 user_registration:
     path:     /register
     defaults: { _controller: BienesBundle:Registro:register }
