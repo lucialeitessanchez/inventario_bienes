@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use WhiteOctober\TCPDFBundle\Controller\TCPDFController;
 use Symfony\Component\HttpFoundation\Request;
 use BienesBundle\Entity\Bien;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class DefaultController extends Controller
 {
@@ -61,8 +64,29 @@ class DefaultController extends Controller
         $pdf->AddPage();
         $pdf->Write(0,$id.' '.$request->get('color'));
 
-        $pdf->Output('prestamo.pdf', 'I');
 
+        /**
+         * Genero el path del archivo
+         */
+        $filename = 'prestamo.pdf';
+        $cache_dir = $this->getParameter('kernel.cache_dir');
+        $file = $cache_dir. DIRECTORY_SEPARATOR .$filename;
+
+        /**
+         * Guardo el pdf en un archivo local
+         */
+        $pdf->Output($file, 'F');
+
+        /**
+         * genero una respuesta para la descarga del archivo
+         */
+        $response = new BinaryFileResponse($file);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $filename
+        );
+
+        return $response;
     }
 
     public function pruebaPDFAction(Request $request,int $id) {
