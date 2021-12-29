@@ -45,7 +45,7 @@ prueba_pdf:
         id: '\d+'
 
 alta_pdf:
-    path:     /pdfAlta/{id}
+    path:     /bien/{id}/pdf
     defaults: { _controller: BienesBundle:Default:pdfAlta }
     requirements:
         id: '\d+'        
