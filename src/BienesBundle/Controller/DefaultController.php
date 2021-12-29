@@ -53,7 +53,7 @@ class DefaultController extends Controller
 
     }
 
-    public function pdfAltaAction(Request $request,int $id){
+    public function pdfAltaAction(Request $request,int $id) {
         $em = $this->getDoctrine()->getManager();
         $bien = $em->getRepository('BienesBundle:Bien')->find($id);
         $codigo = $bien->getCodigo();
@@ -64,13 +64,13 @@ class DefaultController extends Controller
         $pdf->AddPage();
         $pdf->Write(0,$id.' '.$request->get('color'));
 
-
         /**
-         * Genero el path del archivo
+         * Genero el path del archivo con un nombre temporal
          */
         $filename = 'prestamo.pdf';
         $cache_dir = $this->getParameter('kernel.cache_dir');
-        $file = $cache_dir. DIRECTORY_SEPARATOR .$filename;
+        //$file = $cache_dir. DIRECTORY_SEPARATOR .$filename;
+        $file = tempnam($cache_dir,'reporte_bien');
 
         /**
          * Guardo el pdf en un archivo local
