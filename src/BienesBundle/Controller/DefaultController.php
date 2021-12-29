@@ -50,7 +50,7 @@ class DefaultController extends Controller
 
     }
 
-    public function pdfAltaAction(int $id){
+    public function pdfAltaAction(Request $request,int $id){
         $em = $this->getDoctrine()->getManager();
         $bien = $em->getRepository('BienesBundle:Bien')->find($id);
         $codigo = $bien->getCodigo();
@@ -59,6 +59,10 @@ class DefaultController extends Controller
 
         //$pdf = $this->get("white_october.tcpdf")->create();
         $pdf->AddPage();
+        $pdf->Write(0,$id.' '.$request->get('color'));
+
+        $pdf->Output('prestamo.pdf', 'I');
+
     }
 
     public function pruebaPDFAction(Request $request,int $id) {
@@ -82,15 +86,15 @@ class DefaultController extends Controller
         $html1 ='<div align="center"> <img src="imagenes/logo ministerio-negro_sin fondo.png" alt="Elva dressed as a fairy" id="banner"> </div>';
         $pdf->writeHTML($html1, true, false, true, false, '');
         //textos
-        $html = '<div align="center"><h1>PRÉSTAMO PATRIMONIO INFORMÁTICO</h1></div>' ;
+        $html = '<div align="center"><h1>PRÉSTAMO DE PATRIMONIO INFORMÁTICO</h1></div>' ;
         $pdf->writeHTML($html, true, false, true, false, '');
         
-        $txt2 = "Por medio de la presente, La Sectorial de Informática del Ministerio de Igualdad, Género y Diversidad de la Provincia de Santa Fe, deja constancia que ";
+        $txt2 = "Por medio de la presente, la Sectorial de Informática del Ministerio de Igualdad, Género y Diversidad de la Provincia de Santa Fe, deja constancia de que el/la ";
         $txt3=$bien->getTipo()." ".$bien->getRama();
         $txt4=" número de código sistema: ".$codigo;
         $txt5=" y SARI/serie: ".$bien->getDescripcion();
         $txt6=" es cedido, y pasa a ser responsable de la tenencia, guarda y conservación del mismo al agente ".$bien->getResponsable();
-        $txt7=", a partir del día ".date("d/m/Y").".";
+        $txt7=", a partir del día ".date("d/m/Y").".\n";
 
         $pdf->Write(3,' ', '', 0, 'R', true, 0, false, false, 0);
       
@@ -99,7 +103,7 @@ class DefaultController extends Controller
       $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0); 
       $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0);
       $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0); 
-      $pdf->Write(0, $txt2.$txt3.$txt4.$txt5.$txt6.$txt7, '', 0, '', true, 0, false, false, 0);
+      $pdf->Write(0, $txt2.$txt3.$txt4.$txt5.$txt6.$txt7, '', 0, 'J', true, 0, false, false, 0);
       
       //$pdf->Image('imagenes/logo ministerio-negro_sin fondo.png');
      // $pdf->Image('imagenes/logo ministerio-negro_sin fondo.png', 30, 140, 120, 15, 'PNG','' , '', true, 150, '', false, false, 0, false, false, false);

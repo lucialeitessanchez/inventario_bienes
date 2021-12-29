@@ -28,20 +28,22 @@
                     Bien Adquirido
                     <ul>Detalle: {{ bien.estado }}
                         <br>Descripcion/SARI/N° de Serie: {{ bien.descripcion }}
+<form action="{{ path('alta_pdf', {'id':bien.id}) }}">
                         <br>Color:  <select name=color id="selectColor">
                             <option value="0" selected>Colores..
-                            <option value="1">Negro
-                            <option value="2">Blanco
-                            <option value="3">Azul
-                            <option value="4">Naranja
-                            <option value="5">Rojo
-                            <option value="6">Amarillo
-                            <option value="7">Verde
-                            <option value="8">Marrón
-                            <option value="9">Gris
-                            <option value="10">Sin color - no es fisico
+                            <option value="Negro">Negro
+                            <option value="Blanco">Blanco
+                            <option value="Azul">Azul
+                            <option value="Naranja">Naranja
+                            <option value="Rojo">Rojo
+                            <option value="Amarillo">Amarillo
+                            <option value="Verde">Verde
+                            <option value="Marrón">Marrón
+                            <option value="Gris">Gris
+                            <option value="Sin color - no es fisico">Sin color - no es fisico
                         </select>
-
+<button type="submit">Generar PDF</button>
+</form>
                         <br>N° codigo sistema: {{ bien.codigo }}
                         <br>Caracteristica: {{ bien.tipo }} {{ bien.rama }}
                     </ul>
