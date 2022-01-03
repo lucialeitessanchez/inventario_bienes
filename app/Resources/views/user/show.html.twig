@@ -1,7 +1,7 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-    <h1>User</h1>
+    <h1>Usuario</h1>
 
     <table>
         <tbody>
@@ -18,27 +18,23 @@
                 <td>{{ user.password | slice( -15 ) }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>E-Mail</th>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Isactive</th>
+                <th>Activo</th>
                 <td>{% if user.isActive %}Yes{% else %}No{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a  class="btn btn-primary"  href="{{ path('user_index') }}">Listado de Usuarios</a>
-        </li>
-        <li>
-            <a  class="btn btn-primary"  href="{{ path('user_edit', { 'id': user.id }) }}">Modificar</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input  class="btn btn-danger"  type="submit" value="Eliminar">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    
+    <a  class="btn btn-primary"  href="{{ path('user_index') }}">Listado de Usuarios</a>
+
+    <a  class="btn btn-primary"  href="{{ path('user_edit', { 'id': user.id }) }}">Modificar</a>
+
+    {{ form_start(delete_form) }}
+        <input  class="btn btn-danger"  type="submit" value="Eliminar">
+    {{ form_end(delete_form) }}
+
 {% endblock %}
