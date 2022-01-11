@@ -73,10 +73,10 @@ class DefaultController extends Controller
         $pdf->writeHTML($html, true, false, true, false, '');
 
         $txt="\n\n\nResponsable de la tenencia, guarda y conservación";
-        $txt2="\n\nOficina: ".$responsable->getCargo();
+        $txt2="\nOficina: ".$responsable->getCargo();
         $txt3="\nAgente: ".$responsable->getNombre();
-        $txt4="\nDatos de adquisición";
-        $txt5="\n\nFecha adquisición: ".$fecha;
+        $txt4="\n\nDatos de adquisición";
+        $txt5="\nFecha adquisición: ".$fecha;
         $txt6="\nProveedor ".$bien->getProveedor();
         $txt7="\nNº de Factura: ".$factura->getNumeroFactura();
         $txt9="\nImporte unitario: $".$factura->getMontoUnitario();
