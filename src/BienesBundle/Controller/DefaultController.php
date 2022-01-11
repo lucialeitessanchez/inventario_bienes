@@ -56,18 +56,59 @@ class DefaultController extends Controller
     public function pdfAltaAction(Request $request,int $id) {
         $em = $this->getDoctrine()->getManager();
         $bien = $em->getRepository('BienesBundle:Bien')->find($id);
+        $responsable= $bien->getResponsable();
+        $factura = $bien->getFactura();
         $codigo = $bien->getCodigo();
+
+        $fecha=date_format($factura->getFecha(), 'd/m/Y'); //transformo la fecha con ese formato porque no esta en string
 
         $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
         //$pdf = $this->get("white_october.tcpdf")->create();
         $pdf->AddPage();
-        $pdf->Write(0,$id.' '.$request->get('color'));
+       
 
+        //documento en si
+        $html = '<div align="center"><h1>CARGO DE BIENES DE CAPITAL</h1></div>' ;
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $txt="\n\n\nResponsable de la tenencia, guarda y conservación";
+        $txt2="\n\nOficina: ".$responsable->getCargo();
+        $txt3="\nAgente: ".$responsable->getNombre();
+        $txt4="\nDatos de adquisición";
+        $txt5="\n\nFecha adquisición: ".$fecha;
+        $txt6="\nProveedor ".$bien->getProveedor();
+        $txt7="\nNº de Factura: ".$factura->getNumeroFactura();
+        $txt9="\nImporte unitario: $".$factura->getMontoUnitario();
+        $txt10="\nImporte total: $".$factura->getMontoTotal();
+        $txt11="\n\nBien adquirido";
+        $txt12="\nDetalle: ".$bien->getEstado();
+        $txt13="\nDescripcion/SARI/N° de Serie: ".$bien->getDescripcion();
+        $txt14="\nColor: ".$request->get('color');
+        $txt15="\nNº codigo de sistema: ".$codigo;
+        $txt16="\nCaracteristica: ".$bien->getTipo()." ".$bien->getRama();
+
+        //cuerpo del texto
+        $pdf->Write(0, $txt.$txt2.$txt3.$txt4.$txt5.$txt6.$txt7.$txt9.$txt10.$txt11.$txt12.$txt13.$txt14.$txt15.$txt16, '', 0, '', true, 0, false, false, 0);
+
+        //firmas
+        if($responsable->getFuncionario()){ //si es funcionario solo aparece el mismo, no necesita autorizacion
+        $txtF="\n\n\n ............................................ \n Firma Respomsable - ".$responsable->getNombre();
+        $pdf->Write(0,$txtF,'',0,'',true, 0,false,false,0);
+        }
+        else{
+            $txtR="\n\n\n\n ............................................ \n Firma Responsable - ".$responsable->getNombre(); 
+            $txtF="\n\n\n\n\n ............................................ \n Firma Responsable del Sector- ".$responsable->getResponsableArea();
+            $pdf->Write(0,$txtR.$txtF,'',0,'',true, 0,false,false,0);
+        }
+        $txtC="\n\n\n\n ............................................ \n Firma Responsable de compras";
+        $pdf->Write(0, $txtC, '', 0, 'C', true, 0, false, false, 0);
+        
+        
         /**
          * Genero el path del archivo con un nombre temporal
          */
-        $filename = 'prestamo.pdf';
+        $filename = $id.'alta.pdf';
         $cache_dir = $this->getParameter('kernel.cache_dir');
         //$file = $cache_dir. DIRECTORY_SEPARATOR .$filename;
         $file = tempnam($cache_dir,'reporte_bien');
