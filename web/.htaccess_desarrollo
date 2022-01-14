@@ -1,9 +1,9 @@
-#<FilesMatch \.php$>
+<FilesMatch \.php$>
   # For Apache version 2.4.10 and above, use SetHandler to run PHP as a fastCGI process server
   #SetHandler "proxy:unix:/run/php/php8.0-fpm.sock|fcgi://localhost"
-  #SetHandler "proxy:unix:/run/php/php7.2-fpm.sock|fcgi://localhost"
+  SetHandler "proxy:unix:/run/php/php7.2-fpm.sock|fcgi://localhost"
   #SetHandler "proxy:unix:/run/php/php5.6-fpm.sock|fcgi://localhost"
-#</FilesMatch>
+</FilesMatch>
 
 # Use the front controller as index file. It serves as a fallback solution when
 # every other rewrite/redirect fails (e.g. in an aliased environment without
