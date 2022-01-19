@@ -1,40 +1,76 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-    <h1>Usuario</h1>
+  <h1>
+    Usuario
+  </h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password | slice( -15 ) }}</td>
-            </tr>
-            <tr>
-                <th>E-Mail</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Activo</th>
-                <td>{% if user.isActive %}Yes{% else %}No{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="row-table">
+    <tbody>
+      <tr>
+        <th>
+          Id
+        </th>
+        <td>
+          {{ user.id }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Username
+        </th>
+        <td>
+          {{ user.username }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Password
+        </th>
+        <td>
+          {{ user.password|slice(- 15) }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          E-Mail
+        </th>
+        <td>
+          {{ user.email }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Activo
+        </th>
+        <td>
+          {% if user.isActive %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-    
-    <a  class="btn btn-primary"  href="{{ path('user_index') }}">Listado de Usuarios</a>
+  <a class="btn btn-primary btn-margin" href="{{ path('user_index') }}">
+    Listado de Usuarios
+  </a>
 
-    <a  class="btn btn-primary"  href="{{ path('user_edit', { 'id': user.id }) }}">Modificar</a>
+  <a class="btn btn-primary bts-margin"
+    href="{{
+    path(
+      'user_edit',
+      {
+        id: user.id
+      }
+    )
+    }}">
+    Modificar
+  </a>
 
-    {{ form_start(delete_form) }}
-        <input  class="btn btn-danger"  type="submit" value="Eliminar">
-    {{ form_end(delete_form) }}
-
+  {{ form_start(delete_form) }}
+  <input class="btn btn-danger bts-margin" type="submit" value="Eliminar" />
+  {{ form_end(delete_form) }}
 {% endblock %}

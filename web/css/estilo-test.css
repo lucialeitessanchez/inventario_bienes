@@ -1,0 +1,20 @@
+.backgroundtable {
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.backgroundtable thead {
+  background-color: #f0f1f2;
+}
+
+.row-table {
+  line-height: 2em;
+}
+
+.row-table tbody td {
+  padding-left: 1.5em;
+}
+
+.btn-margin {
+  margin-bottom: 6px;
+}
