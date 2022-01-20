@@ -1,17 +1,58 @@
 {% extends 'base_new.html.twig' %}
 
-{% block body %}
-    <h1>User edit</h1>
+{% set campos = [
+    {campo: "username"},
+    {campo: "email"},
+    {campo: "password"},
+    {campo: "repetir password"}
+] %}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input  class="btn btn-primary" type="submit" value="Guardar" />
-    {{ form_end(edit_form) }}
-<br>
-<div class="form-row"> 
-    <a class="btn btn-primary"  href="{{ path('user_index') }}">Listado de Usuarios</a>
+{% block body %}
+  <h1>
+    User edit
+  </h1>
+
+  {#  {{ form_start(edit_form) }}
+  {{ form_widget(edit_form, {'attr': {'class': 'mini-form'}}) }}
+  <input class="btn btn-primary" type="submit" value="Guardar" />
+  {{ form_end(edit_form) }} #}
+
+  {{ form_start(edit_form) }}
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      {{ form_label(edit_form.username) }}
+      {{ form_widget(edit_form.username, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
+   <div class="form-row">
+    <div class="form-group col-md-6">
+      {{ form_label(edit_form.email) }}
+      {{ form_widget(edit_form.email, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
+   <div class="form-row">
+    <div class="form-group col-md-6">
+      {{ form_label(edit_form.password) }}
+      {{ form_widget(edit_form.password, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
+   
+   {#  {% for child in edit_form.vars %}
+        1
+    {% endfor %} #}
+
+  
+  
+  <input class="btn btn-primary" type="submit" value="Guardar" />
+  {{ form_end(edit_form) }}
+
+  <br />
+  <div>
+    <a class="btn btn-primary" href="{{ path('user_index') }}">
+      Listado de Usuarios
+    </a>
     {{ form_start(delete_form) }}
-        <input class="btn btn-danger" type="submit" value="Eliminar">
+    <input class="btn btn-danger" type="submit" value="Eliminar" />
     {{ form_end(delete_form) }}
-</div>
+  </div>
 {% endblock %}
