@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SomeControllerController extends AbstractController
 {
-    public function pdfAction(Knp\Snappy\Pdf $knpSnappyPdf)
+    /*public function pdfAction(Knp\Snappy\Pdf $knpSnappyPdf)
     {
         $html = $this->renderView('app/Resources/views/bien/index.html.twig');
 
@@ -18,5 +18,5 @@ class SomeControllerController extends AbstractController
             $knpSnappyPdf->getOutputFromHtml($html),
             'file.pdf'
         );
-    }
+    }*/
 }

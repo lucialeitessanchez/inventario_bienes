@@ -16,4 +16,8 @@ login:
     path:     /login
     defaults: { _controller: BienesBundle:Login:login }
 
+denegado:
+    path:     /denegado
+    defaults: { _controller: BienesBundle:Login:denegado }
+
 

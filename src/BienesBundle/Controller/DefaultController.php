@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use WhiteOctober\TCPDFBundle\Controller\TCPDFController;
 use Symfony\Component\HttpFoundation\Request;
 use BienesBundle\Entity\Bien;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class DefaultController extends Controller
 {
@@ -50,6 +53,84 @@ class DefaultController extends Controller
 
     }
 
+    public function pdfAltaAction(Request $request,int $id) {
+        $em = $this->getDoctrine()->getManager();
+        $bien = $em->getRepository('BienesBundle:Bien')->find($id);
+        $responsable= $bien->getResponsable();
+        $factura = $bien->getFactura();
+        $codigo = $bien->getCodigo();
+
+        $fecha=date_format($factura->getFecha(), 'd/m/Y'); //transformo la fecha con ese formato porque no esta en string
+
+        $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+        //$pdf = $this->get("white_october.tcpdf")->create();
+        $pdf->AddPage();
+       
+
+        //documento en si
+        $html = '<div align="center"><h1>CARGO DE BIENES DE CAPITAL</h1></div>' ;
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $txt="\n\n\nResponsable de la tenencia, guarda y conservación";
+        $txt2="\nOficina: ".$responsable->getCargo();
+        $txt3="\nAgente: ".$responsable->getNombre();
+        $txt4="\n\nDatos de adquisición";
+        $txt5="\nFecha adquisición: ".$fecha;
+        $txt6="\nProveedor ".$bien->getProveedor();
+        $txt7="\nNº de Factura: ".$factura->getNumeroFactura();
+        $txt9="\nImporte unitario: $".$factura->getMontoUnitario();
+        $txt10="\nImporte total: $".$factura->getMontoTotal();
+        $txt11="\n\nBien adquirido";
+        $txt12="\nDetalle: ".$bien->getEstado();
+        $txt13="\nDescripcion/SARI/N° de Serie: ".$bien->getDescripcion();
+        $txt14="\nColor: ".$request->get('color');
+        $txt15="\nNº codigo de sistema: ".$codigo;
+        $txt16="\nCaracteristica: ".$bien->getTipo()." ".$bien->getRama();
+
+        //cuerpo del texto
+        $pdf->Write(0, $txt.$txt2.$txt3.$txt4.$txt5.$txt6.$txt7.$txt9.$txt10.$txt11.$txt12.$txt13.$txt14.$txt15.$txt16, '', 0, '', true, 0, false, false, 0);
+
+        //firmas
+        if($responsable->getFuncionario()){ //si es funcionario solo aparece el mismo, no necesita autorizacion
+        $txtF="\n\n\n ............................................ \n Firma Respomsable - ".$responsable->getNombre();
+        $pdf->Write(0,$txtF,'',0,'',true, 0,false,false,0);
+        }
+        else{
+            $txtR="\n\n\n\n ............................................ \n Firma Responsable - ".$responsable->getNombre(); 
+            $txtF="\n\n\n\n\n ............................................ \n Firma Responsable del Sector- ".$responsable->getResponsableArea();
+            $pdf->Write(0,$txtR.$txtF,'',0,'',true, 0,false,false,0);
+        }
+        $txtC="\n\n\n\n ............................................ \n Firma Responsable de compras";
+        $pdf->Write(0, $txtC, '', 0, 'C', true, 0, false, false, 0);
+        
+        
+        /**
+         * Genero el path del archivo con un nombre temporal
+         */
+        $filename = $id.'alta.pdf';
+        $cache_dir = $this->getParameter('kernel.cache_dir');
+        //$file = $cache_dir. DIRECTORY_SEPARATOR .$filename;
+        $file = tempnam($cache_dir,'reporte_bien');
+
+        /**
+         * Guardo el pdf en un archivo local
+         */
+        $pdf->Output($file, 'F');
+
+        /**
+         * genero una respuesta para la descarga del archivo
+         */
+        $response = new BinaryFileResponse($file);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $filename
+        );
+        $response->deleteFileAfterSend(true);
+
+        return $response;
+    }
+
     public function pruebaPDFAction(Request $request,int $id) {
         
         $em = $this->getDoctrine()->getManager();
@@ -66,33 +147,35 @@ class DefaultController extends Controller
             $pdf->Write(0, print_r($request->query->all(),1), '', 0, 'L', true, 0, false, false, 0);
         }
 
-    
-
-
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        
+        $html1 ='<div align="center"> <img src="imagenes/logo ministerio-negro_sin fondo.png" alt="Elva dressed as a fairy" id="banner"> </div>';
+        $pdf->writeHTML($html1, true, false, true, false, '');
         //textos
-        $txt = "PRÉSTAMO PATRIMONIO INFORMÁTICO";
-        $txt2 = "Por medio de la presente, La Sectorial de Informática del Ministerio de Igualdad, Género y Diversidad de la Provincia de Santa Fe, deja constancia que ";
+        $html = '<div align="center"><h1>PRÉSTAMO DE PATRIMONIO INFORMÁTICO</h1></div>' ;
+        $pdf->writeHTML($html, true, false, true, false, '');
+        
+        $txt2 = "Por medio de la presente, la Sectorial de Informática del Ministerio de Igualdad, Género y Diversidad de la Provincia de Santa Fe, deja constancia de que el/la ";
         $txt3=$bien->getTipo()." ".$bien->getRama();
         $txt4=" número de código sistema: ".$codigo;
         $txt5=" y SARI/serie: ".$bien->getDescripcion();
         $txt6=" es cedido, y pasa a ser responsable de la tenencia, guarda y conservación del mismo al agente ".$bien->getResponsable();
-        $txt7=", a partir del día ".date("d/m/Y").".";
+        $txt7=", a partir del día ".date("d/m/Y").".\n";
 
-        $pdf->Write(3,' ', '', 0, 'C', true, 0, false, false, 0);
-        $pdf->Write(0, $txt,'', 0, 'C', true, 0, false, false, 0);
+        $pdf->Write(3,' ', '', 0, 'R', true, 0, false, false, 0);
+      
         
       
-      $pdf->Write(3, ' ', '', 0, 'C', true, 0, false, false, 0); 
-      $pdf->Write(3, ' ', '', 0, 'C', true, 0, false, false, 0);
-      $pdf->Write(3, ' ', '', 0, 'C', true, 0, false, false, 0); 
-      $pdf->Write(0, $txt2.$txt3.$txt4.$txt5.$txt6.$txt7, '', 0, 'C', true, 0, false, false, 0);
+      $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0); 
+      $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0);
+      $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0); 
+      $pdf->Write(0, $txt2.$txt3.$txt4.$txt5.$txt6.$txt7, '', 0, 'J', true, 0, false, false, 0);
       
       //$pdf->Image('imagenes/logo ministerio-negro_sin fondo.png');
-      
-      //$pdf->Image('imagenes/logo ministerio-negro_sin fondo.png', 30, 140, 120, 15, 'PNG','' , '', true, 150, '', false, false, 0, false, false, false);
+     // $pdf->Image('imagenes/logo ministerio-negro_sin fondo.png', 30, 140, 120, 15, 'PNG','' , '', true, 150, '', false, false, 0, false, false, false);
       
 
-      $pdf->Output('example_001.pdf', 'I');
+      $pdf->Output('prestamo.pdf', 'I');
 
 
     }
@@ -119,20 +202,13 @@ class MYPDF extends \TCPDF {
         // Set font
         $this->SetFont('helvetica', 'I', 8);
         //$image_file = 'imagenes/logo ministerio-negro_sin fondo.png';
-        $logoFileName ="imagenes/logo ministerio-negro_sin fondo.png";
-
+        $this->Image('imagenes/logo ministerio-negro_sin fondo.png');
         // Page number
-        //$this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-         $logoX = 40; // 
-   $logoFileName = "/images/myLogo.jpg";
-   $logoWidth = 130; // 15mm
-   $logoY = 280;
-        $logoWidth = 15; // 15mm
-        $logo = $this->PageNo() . ' | '. $this->Image($logoFileName, $logoX, $logoY, $logoWidth);
-
-        //$this->SetX($this->w - $this->documentRightMargin - $logoWidth); 
+        $this->Cell(0, 10, 'Sectorial de Informática
+        Ministerio de Igualdad, Género y Diversidad
+        Corrientes 2879 - (3000) Santa Fe
+        Tel: (0342) 4572888 / 4589468', 0, false, 'C', 0, '', 0, false, 'T', 'M');
         
-        $this->Cell(10,10, $logo, 0, 0, 'R');
     }
 }
 

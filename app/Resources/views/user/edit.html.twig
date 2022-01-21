@@ -1,0 +1,17 @@
+{% extends 'base_new.html.twig' %}
+
+{% block body %}
+    <h1>User edit</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input  class="btn btn-primary" type="submit" value="Guardar" />
+    {{ form_end(edit_form) }}
+<br>
+<div class="form-row"> 
+    <a class="btn btn-primary"  href="{{ path('user_index') }}">Listado de Usuarios</a>
+    {{ form_start(delete_form) }}
+        <input class="btn btn-danger" type="submit" value="Eliminar">
+    {{ form_end(delete_form) }}
+</div>
+{% endblock %}

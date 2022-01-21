@@ -33,12 +33,14 @@ class LoginController extends Controller
         );
     }
 
-    /**
-     * @Route("/login_check", name="login_check")
-     */
     public function loginCheckAction()
     {
         // este controller no se ejecutará,
         // ya que la route se maneja por el sistema de seguridad
+    }
+
+    public function denegadoAction()
+    {
+        return $this->render('security/denegado.html.twig');
     }
 }

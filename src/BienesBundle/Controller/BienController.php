@@ -68,7 +68,14 @@ class BienController extends Controller
         $form->handleRequest($request);
         $bien->setCodigo(0);
         $bien->setUsuario($this->get_ip()." ".$this->convertirUsuarioIP($this->get_ip())); //guarda el usuario que cargo la ip y el nombre si lo tiene guardado
+        
+       // $userProvider = new UserProvider();
 
+        // Obtengo la direccion ip del cliente
+        $clientIp = $request->getClientIp();
+        // Obtengo el usuario logueado
+        $user = $this->getUser();
+        $usuario_ip = sprintf('%s@%s',$user->getUsername(),$clientIp);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -128,7 +135,6 @@ class BienController extends Controller
     {
         $deleteForm = $this->createDeleteForm($bien);
         $em = $this->getDoctrine()->getManager(); // de aca para abajo hago todo para que se actualice el codigo
-
 
 
         //le pido a la base de datos los objetos tipo
@@ -302,33 +308,7 @@ class BienController extends Controller
      * @return JsonResponse
      */
 
-    public function listRamasOfTipoAction(Request $request){
-        //get entity manager and repository - obtiene administrador de entidades y repositorio
-        $em = $this->getDoctrine()->getManager();
-        $ramasRepository = $em->getRepository("BienBundle:Rama");
-
-        // busca las ramas que pertenecen al tipo con el id dado como parametro get"tipoid"
-        $ramas = $ramasRepository->createQueryBuilder("q")
-        ->where("q.tipo = :idtipo")
-        ->setParameter("idtipo", $request->query->get("idtipo"))
-        ->getQuery()
-        ->getResult();
-
-        //Serializo en una matriz los datos que se necesitan, en este caso solo el nombre y el id
-        $responseArray = array();
-        foreach ($ramas as $rama){
-            $responseArray[] = array(
-                "id"=> $rama->getId(),
-                "nombre" =>$rama->getNombreRama()
-            );
-        }
-        // devuelve una matriz con la estructura de las ramas de la id del tipo proporcionado
-        return new JsonResponse($responseArray);
-
-
-
-
-    }
+   
 
     public function returnPDFResponseFromHTMLAction($html){
         // set_time_limit (30); descomenta esta línea según tus necesidades
@@ -350,18 +330,5 @@ class BienController extends Controller
         $pdf->Output($filename.".pdf",'I'); // Esto generará el PDF como respuesta directamente
     }
 
-    public function buscarPorDireccion($palabra){
-        //le pido a la base de datos los objetos proveedor
-        $repository = $this->getDoctrine()->getRepository(Bien::class);
-        $query = $repository->createQueryBuilder('b')
-            ->where('p.ubicacion LIKE :palabra')
-            ->setParameter('palabra', '%'.$palabra.'%')
-            ->getQuery();
-        $bienes = $query->getResult();
-        return $this->render('bien/buscarDireccion.html.twig', array(
-              'bienes' => $bienes
-            )
-
-        );
-    }
+    
 }
