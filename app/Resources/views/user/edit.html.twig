@@ -9,11 +9,11 @@
     {% for campo, obj in edit_form %}
         {% if loop.last %}
         {% elseif campo == "password" %}
-         {% for pass, label in obj %}
+         {% for label, pass in obj %}
            <div class="form-row">
             <div class="form-group col-md-4">
-              {{ form_label(label) }}
-              {{ form_widget(label, {'attr': {'class': 'form-control'}}) }}
+              {{ form_label(pass) }}
+              {{ form_widget(pass, {'attr': {'class': 'form-control'}}) }}
             </div>
           </div>  
            {% endfor %}
@@ -26,16 +26,16 @@
           </div>  
         {% endif %}
     {% endfor %}
-    <input class="btn btn-primary" type="submit" value="Guardar" />
+    <input class="btn btn-primary btn-margin" type="submit" value="Guardar" />
   {{ form_end(edit_form) }}
   
   <br />
   <div>
-    <a class="btn btn-primary" href="{{ path('user_index') }}">
+    <a class="btn btn-primary btn-margin" href="{{ path('user_index') }}">
       Listado de Usuarios
     </a>
     {{ form_start(delete_form) }}
-    <input class="btn btn-danger" type="submit" value="Eliminar" />
+    <input class="btn btn-danger btn-margin" type="submit" value="Eliminar" />
     {{ form_end(delete_form) }}
   </div>
 {% endblock %}

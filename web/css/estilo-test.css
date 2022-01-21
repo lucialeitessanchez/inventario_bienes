@@ -11,6 +11,14 @@
   background-color: #f0f1f2;
 }
 
+.black-important {
+  color: black !important;
+}
+
+.black-c td {
+  font-weight: lighter !important;
+}
+
 .mini-form {
   line-height: 2em;
 }
@@ -18,10 +26,13 @@
 .mini-table {
   line-height: 2em;
   margin: 15px;
+  color: black;
+  font-size: 16px;
 }
 
 .mini-table tbody td {
   padding-left: 1.6em;
+  font-weight: lighter;
 }
 
 .btn-margin {

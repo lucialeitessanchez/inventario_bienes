@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_new.html.twig' %}
 
 {% block body %}
     <ul>
     <h1>Editar un proveedor</h1>
-    <h3>
+   
     {{ form_start(edit_form) }}
         {% for campo, obj in edit_form %}
             {% if loop.last %}
@@ -16,7 +16,9 @@
             </div>
             {% endif %}
         {% endfor %}
+         <input class="btn btn-primary btn-margin" type="submit" value="Guardar" />
     {{ form_end(edit_form) }}
+    
     <div class="btn-group" role="group" aria-label="Basic outlined example">
         <input type="submit" value="Editar" class="btn btn-outline-primary"></a>   
         <a href="{{ path('proveedor_index') }}" class="btn btn-outline-primary"> Volver al listado de proveedores </a>
@@ -24,6 +26,6 @@
         <input type="submit" value="Eliminar" class="btn btn-outline-primary"> </a>
         {{ form_end(delete_form) }}
     </div>
-    </h3>
+    
     </ul>
 {% endblock %}

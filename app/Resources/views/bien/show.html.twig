@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_new.html.twig' %}
 
 {% block body %}
     <ul>
     <h1>Bien</h1>
-        <h3>
-    <table>
+       
+    <table class="mini-table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -41,6 +41,6 @@
             <a href="{{ path('bien_index') }}" class="btn btn-outline-primary"> Volver al listado de bienes </a>
             <a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-outline-primary"> Editar </a>
         </div>
-    </ul></h3>
+    </ul>
     </ul>
 {% endblock %}

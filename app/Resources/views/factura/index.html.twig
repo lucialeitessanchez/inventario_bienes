@@ -1,57 +1,119 @@
-{% extends 'baseVer.html.twig' %}
+{% extends 'base_new.html.twig' %}
 
 {% block body %}
+  <ul>
+    <h1>
+      Facturas
+    </h1>
 
-<ul>
-    <h1>Facturas</h1>
-    
-    <h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Numero de factura</th>
-                <th>Fecha</th>
-                <th>Monto unitario</th>
-                <th>Monto total:</th>
-                <th>Descripcion</th>
-                <th>Tipo de adquisicion</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
+    <table class="table table-bordered table-hover backgroundtable">
+      <thead>
+        <tr>
+          <th>
+            Id
+          </th>
+          <th>
+            Numero de factura
+          </th>
+          <th>
+            Fecha
+          </th>
+          <th>
+            Monto unitario
+          </th>
+          <th>
+            Monto total:
+          </th>
+          <th>
+            Descripcion
+          </th>
+          <th>
+            Tipo de adquisicion
+          </th>
+          <th>
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody>
         {% for factura in facturas %}
-            <tr>
-                <td><a href="{{ path('factura_show', { 'id': factura.id }) }}">{{ factura.id }}</a></td>
-                <td>{{ factura.numeroFactura }}</td>
-                <td>{% if factura.fecha %}{{ factura.fecha|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ factura.montoUnitario }}</td>
-                <td>{{ factura.montoTotal }}</td>
-                <td>{{ factura.descripcion }}</td>
-                <td>{{ factura.tipoAdquisicion }}</td>
-                <td>
-                    <ul>
-                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+          <tr>
+            <td>
+              <a href="{{
+                path(
+                  'factura_show',
+                  {
+                    id: factura.id
+                  }
+                )
+                }}">
+                {{ factura.id }}
+              </a>
+            </td>
+            <td>
+              {{ factura.numeroFactura }}
+            </td>
+            <td>
+              {% if factura.fecha %}{{ factura.fecha|date('Y-m-d') }}{% endif %}
+            </td>
+            <td>
+              {{ factura.montoUnitario }}
+            </td>
+            <td>
+              {{ factura.montoTotal }}
+            </td>
+            <td>
+              {{ factura.descripcion }}
+            </td>
+            <td>
+              {{ factura.tipoAdquisicion }}
+            </td>
+            <td>
+              <ul>
+                <div class="btn-group"
+                  role="group"
+                  aria-label="Basic outlined example">
+                  <a href="{{
+                    path(
+                      'factura_show',
+                      {
+                        id: factura.id
+                      }
+                    )
+                    }}"
+                    class="btn btn-outline-primary">
+                    ver
+                  </a>
 
-                            <a href="{{ path('factura_show', { 'id': factura.id }) }}" class="btn btn-outline-primary"> ver</a>
-
-                            <a href="{{ path('factura_edit', { 'id': factura.id }) }}" class="btn btn-outline-primary">editar</a>
-
-                        </div>
-                    </ul>
-                </td>
-            </tr>
+                  <a href="{{
+                    path(
+                      'factura_edit',
+                      {
+                        id: factura.id
+                      }
+                    )
+                    }}"
+                    class="btn btn-outline-primary">
+                    editar
+                  </a>
+                </div>
+              </ul>
+            </td>
+          </tr>
         {% endfor %}
-        </tbody>
+      </tbody>
     </table>
 
     <ul>
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
-
-            <a href="{{ path('factura_new') }}" class="btn btn-outline-primary"> Alta nueva factura</a>
-            <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary"> Volver al menú principal </a>
-        </div>
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <a href="{{ path('factura_new') }}" class="btn btn-primary btn-margin">
+          Alta nueva factura
+        </a>
+        <a href="{{ path('bienes_homepage') }}"
+          class="btn btn-primary btn-margin">
+          Volver al menú principal
+        </a>
+      </div>
     </ul>
-    </h3>
-</ul>
+  </ul>
 {% endblock %}

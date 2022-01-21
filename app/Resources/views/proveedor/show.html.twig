@@ -1,50 +1,89 @@
-{% extends 'baseVer.html.twig' %}
-
+{% extends 'base_new.html.twig' %}
 {% block body %}
-    <h1>Proveedor</h1>
-    <h2>
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ proveedor.id }}</td>
-            </tr>
-            <tr>
-                <th>Cuil/Cuit</th>
-                <td>{{ proveedor.cuil }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ proveedor.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Direccion</th>
-                <td>{{ proveedor.direccion }}</td>
-            </tr>
-            <tr>
-                <th>Localidad</th>
-                <td>{{ proveedor.localidad }}</td>
-            </tr>
-            <tr>
-                <th>Provincia</th>
-                <td>{{ proveedor.provincia }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ proveedor.email }}</td>
-            </tr>
-        </tbody>
-    </table>
-    </h2>
-    <ul>
+  <h1>
+    Proveedor
+  </h1>
 
-            <a href="{{ path('proveedor_index') }}">Volver a los proveedores</a>
+  <table class="mini-table">
+    <tbody>
+      <tr>
+        <th>
+          Id
+        </th>
+        <td>
+          {{ proveedor.id }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Cuil/Cuit
+        </th>
+        <td>
+          {{ proveedor.cuil }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Nombre
+        </th>
+        <td>
+          {{ proveedor.nombre }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Direccion
+        </th>
+        <td>
+          {{ proveedor.direccion }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Localidad
+        </th>
+        <td>
+          {{ proveedor.localidad }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Provincia
+        </th>
+        <td>
+          {{ proveedor.provincia }}
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Email
+        </th>
+        <td>
+          {{ proveedor.email }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-            <a href="{{ path('proveedor_edit', { 'id': proveedor.id }) }}">Editar</a>
+  <ul>
+    <a class="btn btn-primary btn-margin" href="{{ path('proveedor_index') }}">
+      Volver a los proveedores
+    </a>
 
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Borrar">
-            {{ form_end(delete_form) }}
+    <a class="btn btn-primary btn-margin"
+      href="{{
+      path(
+        'proveedor_edit',
+        {
+          id: proveedor.id
+        }
+      )
+      }}">
+      Editar
+    </a>
 
-    </ul>
+    {{ form_start(delete_form) }}
+    <input class="btn btn-primary btn-margin" type="submit" value="Borrar" />
+    {{ form_end(delete_form) }}
+  </ul>
 {% endblock %}
