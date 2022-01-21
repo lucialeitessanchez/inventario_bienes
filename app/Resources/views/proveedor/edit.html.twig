@@ -4,24 +4,26 @@
     <ul>
     <h1>Editar un proveedor</h1>
     <h3>
-
-
+    {{ form_start(edit_form) }}
+        {% for campo, obj in edit_form %}
+            {% if loop.last %}
+            {% else %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                {{ form_label(edit_form[campo]) }}
+                {{ form_widget(edit_form[campo], {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
     {{ form_end(edit_form) }}
-
-    <ul>
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
-
-            <input type="submit" value="Editar" class="btn btn-outline-primary"></a>
-            {{ form_end(edit_form) }}
-            <a href="{{ path('proveedor_index') }}" class="btn btn-outline-primary"> Volver al listado de proveedores </a>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Eliminar" class="btn btn-outline-primary"> </a>
-            {{ form_end(delete_form) }}
-        </div>
-
-
-
-    </ul>
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <input type="submit" value="Editar" class="btn btn-outline-primary"></a>   
+        <a href="{{ path('proveedor_index') }}" class="btn btn-outline-primary"> Volver al listado de proveedores </a>
+        {{ form_start(delete_form) }}
+        <input type="submit" value="Eliminar" class="btn btn-outline-primary"> </a>
+        {{ form_end(delete_form) }}
+    </div>
     </h3>
     </ul>
 {% endblock %}
