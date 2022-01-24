@@ -4,9 +4,9 @@
     <ul>
     <h1>Editar un proveedor</h1>
    
-    {% with {'form': edit_form}%}
-        {{ block("formBlock", "./blocks/formBlock.twig") }}
-    {% endwith %}
+     {% with {'form': edit_form, 'btnTxt': 'Guardar'}%}
+    {{ block("formBlock", "./blocks/formBlock.twig") }}
+  {% endwith %}
     
     <div class="btn-group" role="group" aria-label="Basic outlined example">
         <input type="submit" value="Editar" class="btn btn-outline-primary"></a>   

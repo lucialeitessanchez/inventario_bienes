@@ -3,10 +3,9 @@
 {% block body %}
     <h1>Ubicacion creation</h1>
 <h3>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    {% with {'form': form, 'btnTxt': 'Crear'}%}
+    {{ block("formBlock", "./blocks/formBlock.twig") }}
+  {% endwith %}
 
     <ul>
         <li>

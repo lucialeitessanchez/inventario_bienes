@@ -4,7 +4,7 @@
     <h1>Editar Bien</h1>
     <ul>
 
-     {% with {'form': edit_form}%}
+     {% with {'form': edit_form, 'btnTxt': 'Guardar'}%}
   {{ block("formBlock", "./blocks/formBlock.twig") }}
   {% endwith %}
 

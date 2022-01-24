@@ -4,12 +4,9 @@
     <ul><br>
     <h1>Alta Proveedor</h1>
     <h3>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-
-       <br> <ul>  <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <input type="submit" class="btn btn-outline-primary" value="Alta proveedor"></a>
-                {{ form_end(form) }}
+     {% with {'form': form, 'btnTxt': 'Guardar'}%}
+    {{ block("formBlock", "./blocks/formBlock.twig") }}
+  {% endwith %}
                 <a href="{{ path('proveedor_index') }}" class="btn btn-outline-primary"> Volver al listado de proveedores </a>
                 <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary"> Volver al menú principal </a>
             </div>

@@ -3,10 +3,9 @@
 {% block body %}
     <h1>User creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input class="btn btn-primary"  type="submit" value="Guardar" />
-    {{ form_end(form) }}
+    {% with {'form': form, 'btnTxt': 'Crear'}%}
+        {{ block("formBlock", "./blocks/formBlock.twig") }}
+    {% endwith %}
 
     <ul>
         <li>

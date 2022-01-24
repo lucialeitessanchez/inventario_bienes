@@ -3,10 +3,9 @@
 {% block body %}
     <h1>Tipo edit</h1>
 <h3>
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+   {% with {'edit_form': edit_form, 'btnTxt': 'Guardar'}%}
+    {{ block("formBlock", "./blocks/formBlock.twig") }}
+  {% endwith %}
 
     <ul>
         <li>

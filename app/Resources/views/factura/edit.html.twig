@@ -6,8 +6,8 @@
     <h1>Editar factura</h1>
 
    
-  {% with {'form': edit_form}%}
-     {{ block("formBlock", "./blocks/formBlock.twig") }}
+   {% with {'form': edit_form, 'btnTxt': 'Guardar'}%}
+    {{ block("formBlock", "./blocks/formBlock.twig") }}
   {% endwith %}
 
 
