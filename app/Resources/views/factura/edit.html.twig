@@ -6,29 +6,9 @@
     <h1>Editar factura</h1>
 
    
-    {{ form_start(edit_form) }}
-    {% for campo, obj in edit_form %}
-        {% if loop.last %}
-        {% elseif campo == "password" %}
-         {% for label, pass in obj %}
-           <div class="form-row">
-            <div class="form-group col-md-4">
-              {{ form_label(pass) }}
-              {{ form_widget(pass, {'attr': {'class': 'form-control'}}) }}
-            </div>
-          </div>  
-           {% endfor %}
-        {% else %}
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              {{ form_label(obj) }}
-              {{ form_widget(obj, {'attr': {'class': 'form-control'}}) }}
-            </div>
-          </div>  
-        {% endif %}
-    {% endfor %}
-    <input class="btn btn-primary btn-margin" type="submit" value="Guardar" />
-  {{ form_end(edit_form) }}
+  {% with {'form': edit_form}%}
+     {{ block("formBlock", "./blocks/formBlock.twig") }}
+  {% endwith %}
 
 
     <ul>

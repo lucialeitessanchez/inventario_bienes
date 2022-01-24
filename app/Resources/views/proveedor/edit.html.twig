@@ -4,20 +4,9 @@
     <ul>
     <h1>Editar un proveedor</h1>
    
-    {{ form_start(edit_form) }}
-        {% for campo, obj in edit_form %}
-            {% if loop.last %}
-            {% else %}
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                {{ form_label(edit_form[campo]) }}
-                {{ form_widget(edit_form[campo], {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
-            {% endif %}
-        {% endfor %}
-         <input class="btn btn-primary btn-margin" type="submit" value="Guardar" />
-    {{ form_end(edit_form) }}
+    {% with {'form': edit_form}%}
+        {{ block("formBlock", "./blocks/formBlock.twig") }}
+    {% endwith %}
     
     <div class="btn-group" role="group" aria-label="Basic outlined example">
         <input type="submit" value="Editar" class="btn btn-outline-primary"></a>   
