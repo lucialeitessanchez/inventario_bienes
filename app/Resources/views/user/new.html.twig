@@ -1,15 +1,21 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-    <h1>User creation</h1>
+  <h1>
+    User creation
+  </h1>
 
-    {% with {'form': form, 'btnTxt': 'Crear'}%}
-        {{ block("formBlock", "./blocks/formBlock.twig") }}
-    {% endwith %}
+  {% with {
+    form: form,
+    btnTxt: 'Crear'
+  }
+  %}
+  {{ block('formBlock', './blocks/formBlock.twig') }}
+  {% endwith %}
 
-    <ul>
-        <li>
-            <a class="btn btn-primary" href="{{ path('user_index') }}">Listado de Usuarios</a>
-        </li>
-    </ul>
+  <div>
+    <a class="btn btn-primary btn-margin" href="{{ path('user_index') }}">
+      Listado de Usuarios
+    </a>
+  </div>
 {% endblock %}

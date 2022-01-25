@@ -7,7 +7,7 @@
            <div class="form-row">
             <div class="form-group col-md-4">
               {{ form_label(pass) }}
-              {{ form_widget(pass, {'attr': {'class': 'form-control'}}) }}
+              {{ form_widget(pass, {'attr': {'class': 'form-control form-control-sm'}}) }}
             </div>
           </div>  
            {% endfor %}
@@ -15,12 +15,12 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               {{ form_label(obj) }}
-              {{ form_widget(obj, {'attr': {'class': 'form-control'}}) }}
+              {{ form_widget(obj, {'attr': {'class': 'form-control form-control-sm'}}) }}
             </div>
           </div>  
         {% endif %}
     {% endfor %}
-    <input class="btn btn-primary btn-margin" type="submit" value="{{btnTxt}}" />
+    <input class="btn btn-outline-primary btn-margin btn-sm" type="submit" value="{{btnTxt}}" />
   {{ form_end(form) }}
 {% endblock %}
 

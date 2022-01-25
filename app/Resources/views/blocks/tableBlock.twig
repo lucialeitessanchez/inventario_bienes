@@ -1,12 +1,6 @@
-{% extends 'base_new.html.twig' %}
-
-{% block body %}
-  <h1>
-    Listado de Usuarios
-  </h1>
-
-  <table class="table bg-light table-sm table-striped table-bordered borderRad table-hover text-center text-dark">
-    <thead class="tableHead-bg">
+{% block tableBlock %}
+  <table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+    <thead>
       <tr>
         <th>
           Id
@@ -87,8 +81,4 @@
       {% endfor %}
     </tbody>
   </table>
-
-  <a class="btn btn-sm btn-primary btn-margin" href="{{ path('user_new') }}">
-    Crear Nuevo Usuario
-  </a>
 {% endblock %}

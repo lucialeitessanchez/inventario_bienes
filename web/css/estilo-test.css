@@ -1,28 +1,20 @@
 /*
 #108A97 color retra
 */
-.backgroundtable {
-  background-color: #f8f9fa;
-  text-align: center;
-  color: black;
+.borderRad {
+  border-radius: 10px;
 }
 
-.backgroundtable thead {
-  background-color: #f0f1f2;
-}
-
-.black-important {
-  color: black !important;
-}
-
-.black-c td {
-  font-weight: lighter !important;
+.tableHead-bg {
+  background-color: #c5d4de;
 }
 
 .mini-form {
   line-height: 2em;
 }
-
+.black-important {
+  color: black !important;
+}
 .mini-table {
   line-height: 2em;
   margin: 15px;
