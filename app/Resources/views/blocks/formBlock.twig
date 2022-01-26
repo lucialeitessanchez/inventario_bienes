@@ -6,16 +6,24 @@
          {% for label, pass in obj %}
            <div class="form-row">
             <div class="form-group col-md-4">
+            
               {{ form_label(pass) }}
-              {{ form_widget(pass, {'attr': {'class': 'form-control form-control-sm'}}) }}
+              {{ form_widget(pass, {'attr': {'class': 'form-control form-control-sm '}}) }}
+              <small id="form-error" class="text-danger">
+               {{ form_errors(pass) }}
+              </small>
             </div>
           </div>  
            {% endfor %}
         {% else %}
           <div class="form-row">
             <div class="form-group col-md-4">
+              
               {{ form_label(obj) }}
               {{ form_widget(obj, {'attr': {'class': 'form-control form-control-sm'}}) }}
+              <small id="form-error" class="text-danger">
+               {{ form_errors(obj) }}
+              </small>
             </div>
           </div>  
         {% endif %}

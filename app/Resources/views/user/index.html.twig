@@ -1,35 +1,31 @@
 {% extends 'base_new.html.twig' %}
 
+{% set tableData = [
+  'id',
+  'username',
+  'Password',
+  'email',
+  'activo',
+  'acciones'
+] %}
+
 {% block body %}
   <h1>
     Listado de Usuarios
   </h1>
 
   <div class="table-responsive borderRad">
-    <table class="table borderRad bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+    <table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
       <thead class="tableHead-bg">
         <tr>
-          <th>
-            Id
-          </th>
-          <th>
-            Username
-          </th>
-          <th>
-            Password
-          </th>
-          <th>
-            E-Mail
-          </th>
-          <th>
-            Activo
-          </th>
-          <th>
-            Acciones
-          </th>
+          {% for colHead in tableData %}
+            <th>
+              {{ colHead }}
+            </th>
+          {% endfor %}
         </tr>
       </thead>
-      <tbody>
+      <tbody class="font-weight-normal text-lowercase">
         {% for user in users %}
           <tr>
             <td>

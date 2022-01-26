@@ -5,54 +5,56 @@
     Usuario
   </h1>
 
-  <table class="mini-table table-striped">
-    <tbody>
-      <tr>
-        <th>
-          Id
-        </th>
-        <td>
-          {{ user.id }}
-        </td>
-      </tr>
-      <tr>
-        <th>
-          Username
-        </th>
-        <td>
-          {{ user.username }}
-        </td>
-      </tr>
-      <tr>
-        <th>
-          Password
-        </th>
-        <td>
-          {{ user.password|slice(- 15) }}
-        </td>
-      </tr>
-      <tr>
-        <th>
-          E-Mail
-        </th>
-        <td>
-          {{ user.email }}
-        </td>
-      </tr>
-      <tr>
-        <th>
-          Activo
-        </th>
-        <td>
-          {% if user.isActive %}
-            Yes
-          {% else %}
-            No
-          {% endif %}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="mini-table table-striped">
+      <tbody>
+        <tr>
+          <th>
+            Id
+          </th>
+          <td>
+            {{ user.id }}
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Username
+          </th>
+          <td>
+            {{ user.username }}
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Password
+          </th>
+          <td>
+            {{ user.password|slice(- 15) }}
+          </td>
+        </tr>
+        <tr>
+          <th>
+            E-Mail
+          </th>
+          <td>
+            {{ user.email }}
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Activo
+          </th>
+          <td>
+            {% if user.isActive %}
+              Yes
+            {% else %}
+              No
+            {% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <a class="btn btn-primary btn-margin" href="{{ path('user_index') }}">
     Listado de Usuarios

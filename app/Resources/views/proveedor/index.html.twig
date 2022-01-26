@@ -5,72 +5,40 @@
     Lista de Proveedores
   </h1>
   <h3>
-    <table class="table bg-light table-sm table-striped table-bordered borderRad table-hover text-center text-dark">
-      <thead class="tableHead-bg">
-        <tr>
-          <th>
-            Id
-          </th>
-          <th>
-            Cuil/Cuit
-          </th>
-          <th>
-            Nombre
-          </th>
-          <th>
-            Dirección
-          </th>
-          <th>
-            Localidad
-          </th>
-          <th>
-            Provincia
-          </th>
-          <th>
-            Email
-          </th>
-          <th>
-            Acciones
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for proveedor in proveedors %}
+    <div class="table-responsive borderRad">
+      <table class="table borderRad bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+        <thead class="tableHead-bg">
           <tr>
-            <td>
-              <a href="{{
-                path(
-                  'proveedor_show',
-                  {
-                    id: proveedor.id
-                  }
-                )
-                }}">
-                {{ proveedor.id }}
-              </a>
-            </td>
-            <td>
-              {{ proveedor.cuil }}
-            </td>
-            <td>
-              {{ proveedor.nombre }}
-            </td>
-            <td>
-              {{ proveedor.direccion }}
-            </td>
-            <td>
-              {{ proveedor.localidad }}
-            </td>
-            <td>
-              {{ proveedor.provincia }}
-            </td>
-            <td>
-              {{ proveedor.email }}
-            </td>
-            <td>
-              <div class="btn-group"
-                role="group"
-                aria-label="Basic outlined example">
+            <th>
+              Id
+            </th>
+            <th>
+              Cuil/Cuit
+            </th>
+            <th>
+              Nombre
+            </th>
+            <th>
+              Dirección
+            </th>
+            <th>
+              Localidad
+            </th>
+            <th>
+              Provincia
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
+              Acciones
+            </th>
+          </tr>
+        </thead>
+        <tbody class="font-weight-normal text-lowercase">
+          {% for proveedor in proveedors %}
+            <tr>
+              <td>
                 <a href="{{
                   path(
                     'proveedor_show',
@@ -78,28 +46,61 @@
                       id: proveedor.id
                     }
                   )
-                  }}"
-                  class="btn btn-sm btn-outline-primary">
-                  ver
+                  }}">
+                  {{ proveedor.id }}
                 </a>
-                <a href="{{
-                  path(
-                    'proveedor_edit',
-                    {
-                      id: proveedor.id
-                    }
-                  )
-                  }}"
-                  class="btn btn-sm btn-outline-primary">
-                  editar
-                </a>
-              </div>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
+              </td>
+              <td>
+                {{ proveedor.cuil }}
+              </td>
+              <td>
+                {{ proveedor.nombre }}
+              </td>
+              <td>
+                {{ proveedor.direccion }}
+              </td>
+              <td>
+                {{ proveedor.localidad }}
+              </td>
+              <td>
+                {{ proveedor.provincia }}
+              </td>
+              <td>
+                {{ proveedor.email }}
+              </td>
+              <td>
+                <div class="btn-group"
+                  role="group"
+                  aria-label="Basic outlined example">
+                  <a href="{{
+                    path(
+                      'proveedor_show',
+                      {
+                        id: proveedor.id
+                      }
+                    )
+                    }}"
+                    class="btn btn-sm btn-outline-primary">
+                    ver
+                  </a>
+                  <a href="{{
+                    path(
+                      'proveedor_edit',
+                      {
+                        id: proveedor.id
+                      }
+                    )
+                    }}"
+                    class="btn btn-sm btn-outline-primary">
+                    editar
+                  </a>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
     <ul>
       <div class="btn-group" role="group" aria-label="Basic outlined example">
         <a href="{{ path('proveedor_new') }}" class="btn btn-outline-primary">
