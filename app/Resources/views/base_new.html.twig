@@ -1,5 +1,12 @@
 <!doctype html>
 <html lang="en">
+
+{%  
+    set currentPath = path(app.request.attributes.get('_route'),
+    app.request.attributes.get('_route_params')) 
+%}
+
+
 <head>
     <title>{% block title %}Sistema de bienes patrimoniales SEIyG{% endblock %}</title>
     <!-- Required meta tags -->
@@ -26,7 +33,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
+        <ul id="ulbar" class="navbar-nav mr-auto">
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('proveedor_index') }}">Proveedor <span class="sr-only">(current)</span></a>
@@ -35,11 +42,23 @@
                 <a class="nav-link" href="{{ path('factura_index') }}">Factura <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('bien_index') }}">Bien <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
                 <a class="nav-link" href="{{ path('user_index') }}">Usuarios<span class="sr-only">(current)</span></a>
             </li>
+             {% if currentPath == "/~hugo/inventario_bienes/web/bien/" %}
+           <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('bien_new') }}">Alta nuevo bien <span class="sr-only">(current)</span></a>
+                </li>
+                 <li class="nav-item active">
+                  <input id="searchbox" class="form-control" type="text" placeholder="buscar por Descripcion">
+                  </li>
+            {% else %}
+             <li class="nav-item active">
+                <a class="nav-link" href="{{ path('bien_index') }}">Bien <span class="sr-only">(current)</span></a>
+            </li>
+            {% endif %}
+           
+            
+            
 
              <!-- Dropdown -->
             <li class="nav-item dropdown">

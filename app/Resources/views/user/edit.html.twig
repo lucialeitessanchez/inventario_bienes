@@ -1,20 +1,23 @@
 {% extends 'base_new.html.twig' %}
 
-
 {% block body %}
   <h1>
     User edit
   </h1>
-   {% with {'form': edit_form, 'btnTxt': 'Guardar'}%}
-    {{ block("formBlock", "./blocks/formBlock.twig") }}
+  {% with {
+    form: edit_form,
+    btnTxt: 'Guardar'
+  }
+  %}
+  {{ block('formBlock', './blocks/formBlock.twig') }}
   {% endwith %}
   <br />
   <div>
-    <a class="btn btn-primary btn-margin" href="{{ path('user_index') }}">
+    <a class="btn btn-primary mb-2" href="{{ path('user_index') }}">
       Listado de Usuarios
     </a>
     {{ form_start(delete_form) }}
-    <input class="btn btn-danger btn-margin" type="submit" value="Eliminar" />
+    <input class="btn btn-danger mb-2" type="submit" value="Eliminar" />
     {{ form_end(delete_form) }}
   </div>
 {% endblock %}

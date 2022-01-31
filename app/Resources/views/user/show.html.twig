@@ -6,7 +6,7 @@
   </h1>
 
   <div class="table-responsive">
-    <table class="mini-table table-striped">
+    <table class="table-sm table-striped mb-3">
       <tbody>
         <tr>
           <th>
@@ -56,11 +56,11 @@
     </table>
   </div>
 
-  <a class="btn btn-primary btn-margin" href="{{ path('user_index') }}">
+  <a class="btn btn-primary mb-2" href="{{ path('user_index') }}">
     Listado de Usuarios
   </a>
 
-  <a class="btn btn-primary btn-margin"
+  <a class="btn btn-primary mb-2"
     href="{{
     path(
       'user_edit',
@@ -73,6 +73,6 @@
   </a>
 
   {{ form_start(delete_form) }}
-  <input class="btn btn-danger btn-margin" type="submit" value="Eliminar" />
+  <input class="btn btn-danger mb-2" type="submit" value="Eliminar" />
   {{ form_end(delete_form) }}
 {% endblock %}

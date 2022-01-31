@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+  {#   <nav class="navbar navbar-expand-md navbar-light fixed-top">
         <a class="navbar-brand" href="https://www.santafe.gob.ar"><img
                     src="https://www.santafe.gob.ar/assets/standard/images/gob-santafe.png"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
@@ -25,7 +25,8 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('bienes_homepage') }}">Menú Principal <span class="sr-only">(current)</span></a>
                 </li>
-                <li><input type="text" id="formulario" class="autocomplete"></li>
+                <li>
+                <input type="text" id="formulario" class="autocomplete"></li>
 
               
 
@@ -33,14 +34,16 @@
 
 
         </div>
-    </nav>
+    </nav> #}
 
-
+   
+   
     <h1>Listado de bienes MIGyD
     <h3>
-<ul>
-    <table class="table table-bordered table-hover backgroundtable">
-        <thead>
+
+    <div class="table-responsive borderRad">
+    <table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+      <thead class="tableHead-bg">
             <tr>
                 <th>Id bien</th>
                 <th>Codigo</th>
@@ -54,7 +57,7 @@
         </thead>
         <tbody>
         {% for bien in biens %}
-
+        
             <tr id="direccion">
                 <td><a href="{{ path('bien_show', { 'id': bien.id }) }}">{{ bien.id }}</a></td>
                 <td>{{ bien.codigo }}</td>
@@ -66,13 +69,13 @@
                 <td>
                     <ul>
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
-                            <a href="{{ path('bien_show', { 'id': bien.id }) }}" class="btn btn-outline-primary">ver</a>
+                            <a href="{{ path('bien_show', { 'id': bien.id }) }}" class="btn btn-sm btn-outline-primary">ver</a>
 
-                            <a href="{{ path('bien_edit', { 'id': bien.id }) }}"class="btn btn-outline-primary">editar</a>
+                            <a href="{{ path('bien_edit', { 'id': bien.id }) }}"class="btn btn-sm  btn-outline-primary">editar</a>
 
-                            <a href="{{ path('prestamo_imprimir', { 'id': bien.id }) }}"class="btn btn-outline-primary">imprimir alta</a>
+                            <a href="{{ path('prestamo_imprimir', { 'id': bien.id }) }}"class="btn btn-sm  btn-outline-primary">imprimir alta</a>
 
-                            <a href="{{ path('prestamo_bien', { 'id': bien.id }) }}"class="btn btn-outline-primary">imprimir prestamo</a>
+                            <a href="{{ path('prestamo_bien', { 'id': bien.id }) }}"class="btn btn-sm  btn-outline-primary">imprimir prestamo</a>
                         </div>
                     </ul>
                 </td>
@@ -80,7 +83,7 @@
 
         {% endfor %}
         </tbody>
-    </table> </ul>
+    </table> </div>
 
     <ul>
         <div class="btn-group" role="group" aria-label="Basic outlined example">
@@ -91,11 +94,16 @@
     </ul>
     </h3>
     <script>
-       
+        input = document.getElementById('searchbox');  
+         
+        input.addEventListener('input',() => {
+            console.log("input change ")
+        });
+
 
          $("#formulario").on("keyup", function() { // funcion de filtrado por ubicacion
              var value = $(this).val().toUpperCase(); //lo que voy escribiendo, lo convierto todo en mayusculas para cuando lo comparto con lo de la tabla
-             
+         
              $("table tr").each(function(direccion) { //recorre toda la tabla
                  if (direccion != 0) {
                      
@@ -115,5 +123,10 @@
                  }
              });
          });
+
+       
         </script>
+
+
+
 {% endblock %}

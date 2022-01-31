@@ -8,7 +8,7 @@
     {{ block("formBlock", "./blocks/formBlock.twig") }}
     {% endwith %}
     
-    <div class="btn-group btn-margin" role="group" aria-label="Basic outlined example"  >
+    <div class="btn-group mb-2" role="group" aria-label="Basic outlined example"  >
         <input type="submit" value="Editar" class="btn btn-outline-primary"></a>   
         <a href="{{ path('proveedor_index') }}" class="btn btn-outline-primary"> Volver al listado de proveedores </a>
         {{ form_start(delete_form) }}

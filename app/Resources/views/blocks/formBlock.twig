@@ -28,7 +28,11 @@
           </div>  
         {% endif %}
     {% endfor %}
-    <input class="btn btn-outline-primary btn-margin btn-sm" type="submit" value="{{btnTxt}}" />
+    <input class="btn btn-outline-primary mb-2 btn-sm" type="submit" value="{{btnTxt|default('Cargar')}}" />
   {{ form_end(form) }}
+
+  {% set fruits = ['apple', 'orange', 'citrus'] %}
+
+
 {% endblock %}
 

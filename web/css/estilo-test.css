@@ -1,38 +1,9 @@
-/*
-#108A97 color retra
-*/
 .borderRad {
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .tableHead-bg {
   background-color: #c5d4de;
-}
-
-.mini-form {
-  line-height: 2em;
-}
-.black-important {
-  color: black !important;
-}
-.mini-table {
-  line-height: 2em;
-  margin: 15px;
-  color: black;
-  font-size: 16px;
-}
-
-.mini-table tbody td {
-  padding-left: 1.6em;
-  font-weight: lighter;
-}
-
-.btn-margin {
-  margin-bottom: 8px;
-}
-
-.padding-row tr {
-  padding: 20px;
 }
 
 .table-hover tbody tr:hover td {
