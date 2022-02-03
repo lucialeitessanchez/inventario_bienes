@@ -2,131 +2,104 @@
 
 {% block body %}
 
-  {#   <nav class="navbar navbar-expand-md navbar-light fixed-top">
-        <a class="navbar-brand" href="https://www.santafe.gob.ar"><img
-                    src="https://www.santafe.gob.ar/assets/standard/images/gob-santafe.png"/></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
+
+	<h1>Listado de bienes MIGyD
+		<h3>
+
+			<div class="table-responsive borderRad">
+				<table id="tableData" class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+					<thead class="tableHead-bg">
+						<tr>
+							<th>Id bien</th>
+							<th>Codigo</th>
+							<th>Usuario</th>
+							<th>Descripcion/codigo SARI</th>
+							<th>Lugar</th>
+							<th>Estado</th>
+							<th>Fecha de alta</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
 
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('bien_new') }}">Alta nuevo bien <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('factura_index') }}">Factura <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('proveedor_index') }}">Proveedor <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('bienes_homepage') }}">Menú Principal <span class="sr-only">(current)</span></a>
-                </li>
-                <li>
-                <input type="text" id="formulario" class="autocomplete"></li>
+						{% for bien in biens|filter((b) => b) %}
 
-              
+							<tr id="direccion">
+								<td>
+									<a href="{{ path('bien_show', { 'id': bien.id }) }}">{{ bien.id }}</a>
+								</td>
+								<td>{{ bien.codigo }}</td>
+								<td>{{ bien.responsable }}</td>
+								<td>{{ bien.descripcion }}</td>
+								<td>{{ bien.ubicacion }}</td>
+								<td>{{ bien.estado }}</td>
+								<td>
+									{% if bien.fechaAlta %}
+										{{ bien.fechaAlta|date('d-m-Y') }}
+									{% endif %}
+								</td>
+								<td>
+									<ul>
+										<div class="btn-group" role="group" aria-label="Basic outlined example">
+											<a href="{{ path('bien_show', { 'id': bien.id }) }}" class="btn btn-sm btn-outline-primary">ver</a>
 
-            </ul>
+											<a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">editar</a>
 
+											<a href="{{ path('prestamo_imprimir', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir alta</a>
 
-        </div>
-    </nav> #}
+											<a href="{{ path('prestamo_bien', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir prestamo</a>
+										</div>
+									</ul>
+								</td>
+							</tr>
 
-   
-   
-    <h1>Listado de bienes MIGyD
-    <h3>
+						{% endfor %}
 
-    <div class="table-responsive borderRad">
-    <table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
-      <thead class="tableHead-bg">
-            <tr>
-                <th>Id bien</th>
-                <th>Codigo</th>
-                <th>Usuario</th>
-                <th>Descripcion/codigo SARI</th>
-                <th>Lugar</th>
-                <th>Estado</th>
-                <th>Fecha de alta</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for bien in biens %}
-        
-            <tr id="direccion">
-                <td><a href="{{ path('bien_show', { 'id': bien.id }) }}">{{ bien.id }}</a></td>
-                <td>{{ bien.codigo }}</td>
-                <td>{{ bien.responsable }}</td>
-                <td>{{ bien.descripcion }}</td>
-                <td>{{ bien.ubicacion }}</td>
-                <td>{{ bien.estado }}</td>
-                <td>{% if bien.fechaAlta %}{{ bien.fechaAlta|date('d-m-Y') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <div class="btn-group" role="group" aria-label="Basic outlined example">
-                            <a href="{{ path('bien_show', { 'id': bien.id }) }}" class="btn btn-sm btn-outline-primary">ver</a>
+					</tbody>
+				</table>
+			</div>
 
-                            <a href="{{ path('bien_edit', { 'id': bien.id }) }}"class="btn btn-sm  btn-outline-primary">editar</a>
+			<ul>
+				<div class="btn-group" role="group" aria-label="Basic outlined example">
 
-                            <a href="{{ path('prestamo_imprimir', { 'id': bien.id }) }}"class="btn btn-sm  btn-outline-primary">imprimir alta</a>
-
-                            <a href="{{ path('prestamo_bien', { 'id': bien.id }) }}"class="btn btn-sm  btn-outline-primary">imprimir prestamo</a>
-                        </div>
-                    </ul>
-                </td>
-            </tr>
-
-        {% endfor %}
-        </tbody>
-    </table> </div>
-
-    <ul>
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
-
-            <a href="{{ path('bien_new') }}" class="btn btn-outline-primary"> Alta nuevo bien </a>
-            <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary"> Volver al menú principal </a>
-        </div>
-    </ul>
-    </h3>
-    <script>
-        input = document.getElementById('searchbox');  
-         
-        input.addEventListener('input',() => {
-            console.log("input change ")
-        });
+					<a href="{{ path('bien_new') }}" class="btn btn-outline-primary">
+						Alta nuevo bien
+					</a>
+					<a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
+						Volver al menú principal
+					</a>
+				</div>
+			</ul>
+		</h3>
 
 
-         $("#formulario").on("keyup", function() { // funcion de filtrado por ubicacion
-             var value = $(this).val().toUpperCase(); //lo que voy escribiendo, lo convierto todo en mayusculas para cuando lo comparto con lo de la tabla
-         
-             $("table tr").each(function(direccion) { //recorre toda la tabla
-                 if (direccion != 0) {
-                     
-                     $row = $(this);
+		<script>
+			let input = document.getElementById('searchbox');
+let rowsData = document.getElementById("tableData").rows;
+console.log(rowsData[0].cells);
+// rowsData[0].style.display = "none"
 
-                     
-                     var id = $row.find("td:nth-child(5)").text().toUpperCase(); //en el td, el hijo de la tabla, que busque en la posicion que le paso entre parentesis, y tome el texto
-                                                                                   //lo pongo todo en mayuscula para que lo compare exacto con lo que va escribiendo 
-                    
+// console.log(rowsData[1].cells[3].innerHTML);
+input.addEventListener('input', (e) => {
+let value = e.target.value.toUpperCase()
+let matcher = new RegExp (`^${value}`, 'g');
+console.log(matcher);
+for (i in rowsData) {
 
-         if (id.indexOf(value) != 0) {
-                         $(this).hide();
-                     }
-                     else {
-                         $(this).show();
-                     }
-                 }
-             });
-         });
-
-       
-        </script>
+if (rowsData[i].cells[3].innerHTML.toUpperCase().match(matcher) || rowsData[i].cells[2].innerHTML.toUpperCase().match(matcher)) {
+rowsData[i].style.display = "block"
+} else 
+rowsData[i].style.display = "none"
 
 
 
-{% endblock %}
+
+
+}
+
+});
+		</script>
+
+
+	{% endblock %}
