@@ -1,11 +1,13 @@
 .borderRad {
-  border-radius: 8px;
+    border-radius: 8px;
 }
 
 .tableHead-bg {
-  background-color: #c5d4de;
+    background-color: #c5d4de;
+    display: flex;
+    width: auto;
 }
 
 .table-hover tbody tr:hover td {
-  background-color: #a8d5e5;
+    background-color: #a8d5e5;
 }

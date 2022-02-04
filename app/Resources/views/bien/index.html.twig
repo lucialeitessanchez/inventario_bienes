@@ -2,104 +2,108 @@
 
 {% block body %}
 
+<h1>Listado de bienes MIGyD
+	<h3>
 
-	<h1>Listado de bienes MIGyD
-		<h3>
+		<div class="table-responsive borderRad">
+			<table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+				<thead class="tableHead-bg">
+					<tr>  
+						<th>Id bien</th>
+						<th>Codigo</th>
+						<th>Usuario</th>
+						<th>Descripcion/codigo SARI</th>
+						<th id="ordeninput">Lugar  </th>
+						<th>Estado</th>
+						<th>Fecha de alta</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody id="tableData">
 
-			<div class="table-responsive borderRad">
-				<table id="tableData" class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
-					<thead class="tableHead-bg">
-						<tr>
-							<th>Id bien</th>
-							<th>Codigo</th>
-							<th>Usuario</th>
-							<th>Descripcion/codigo SARI</th>
-							<th>Lugar</th>
-							<th>Estado</th>
-							<th>Fecha de alta</th>
-							<th>Acciones</th>
+
+					{% for bien in biens %}
+
+						<tr id="data{{loop.index}}">
+							<td>
+
+								<a href="{{ path('bien_show', { 'id': bien.id }) }}">{{ bien.id }}</a>
+							</td>
+							<td>{{ bien.codigo }}</td>
+							<td>{{ bien.responsable }}</td>
+							<td>{{ bien.descripcion }}</td>
+							<td>{{ bien.ubicacion }}</td>
+							<td>{{ bien.estado }}</td>
+							<td>
+								{% if bien.fechaAlta %}
+									{{ bien.fechaAlta|date('d-m-Y') }}
+								{% endif %}
+							</td>
+							<td>
+								<ul>
+									<div class="btn-group" role="group" aria-label="Basic outlined example">
+										<a href="{{ path('bien_show', { 'id': bien.id }) }}" class="btn btn-sm btn-outline-primary">ver</a>
+
+										<a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">editar</a>
+
+										<a href="{{ path('prestamo_imprimir', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir alta</a>
+
+										<a href="{{ path('prestamo_bien', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir prestamo</a>
+									</div>
+								</ul>
+							</td>
 						</tr>
-					</thead>
-					<tbody>
 
+					{% endfor %}
 
-						{% for bien in biens|filter((b) => b) %}
+				</tbody>
+			</table>
+		</div>
 
-							<tr id="direccion">
-								<td>
-									<a href="{{ path('bien_show', { 'id': bien.id }) }}">{{ bien.id }}</a>
-								</td>
-								<td>{{ bien.codigo }}</td>
-								<td>{{ bien.responsable }}</td>
-								<td>{{ bien.descripcion }}</td>
-								<td>{{ bien.ubicacion }}</td>
-								<td>{{ bien.estado }}</td>
-								<td>
-									{% if bien.fechaAlta %}
-										{{ bien.fechaAlta|date('d-m-Y') }}
-									{% endif %}
-								</td>
-								<td>
-									<ul>
-										<div class="btn-group" role="group" aria-label="Basic outlined example">
-											<a href="{{ path('bien_show', { 'id': bien.id }) }}" class="btn btn-sm btn-outline-primary">ver</a>
+		<ul>
+			<div class="btn-group" role="group" aria-label="Basic outlined example">
 
-											<a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">editar</a>
-
-											<a href="{{ path('prestamo_imprimir', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir alta</a>
-
-											<a href="{{ path('prestamo_bien', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir prestamo</a>
-										</div>
-									</ul>
-								</td>
-							</tr>
-
-						{% endfor %}
-
-					</tbody>
-				</table>
+				<a href="{{ path('bien_new') }}" class="btn btn-outline-primary">
+					Alta nuevo bien
+				</a>
+				<a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
+					Volver al menú principal
+				</a>
+				<a  class="btn btn-outline-primary">
+					generar PDF
+				</a>
 			</div>
-
-			<ul>
-				<div class="btn-group" role="group" aria-label="Basic outlined example">
-
-					<a href="{{ path('bien_new') }}" class="btn btn-outline-primary">
-						Alta nuevo bien
-					</a>
-					<a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
-						Volver al menú principal
-					</a>
-				</div>
-			</ul>
-		</h3>
+		</ul>
+	</h3>
 
 
-		<script>
-			let input = document.getElementById('searchbox');
-let rowsData = document.getElementById("tableData").rows;
-console.log(rowsData[0].cells);
-// rowsData[0].style.display = "none"
+	<script>
+		// search box
+let input = document.getElementById('searchbox');
 
-// console.log(rowsData[1].cells[3].innerHTML);
+let rowsData = Array.prototype.slice.call(document.getElementById("tableData").rows);
+
+
 input.addEventListener('input', (e) => {
 let value = e.target.value.toUpperCase()
-let matcher = new RegExp (`^${value}`, 'g');
-console.log(matcher);
-for (i in rowsData) {
+let matcher = new RegExp(`^${value}`, 'g');
 
-if (rowsData[i].cells[3].innerHTML.toUpperCase().match(matcher) || rowsData[i].cells[2].innerHTML.toUpperCase().match(matcher)) {
-rowsData[i].style.display = "block"
-} else 
-rowsData[i].style.display = "none"
+let checkDescription = document.getElementById('descripcion').checked;
+let checkUsuario = document.getElementById('usuario').checked;
+let checkLugar = document.getElementById('lugar').checked;
+
+rowsData.map((row) => {
+let description = row.cells[3].innerHTML.toUpperCase()
+let usuario = row.cells[2].innerHTML.toUpperCase()
+let lugar = row.cells[4].innerHTML.toUpperCase()
 
 
-
-
-
-}
-
+if (checkDescription && description.match(matcher) || (checkUsuario && usuario.match(matcher)) || (checkLugar && lugar.match(matcher))) {
+row.style.display = "table-row"
+}else row.style.display = "none"
+})
 });
-		</script>
 
 
-	{% endblock %}
+</script>
+	{%endblock%}

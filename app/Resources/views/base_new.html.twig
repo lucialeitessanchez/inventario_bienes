@@ -75,9 +75,11 @@
 							<a target="_blank" href="http://10.3.17.203/~lucia/internetycable/web">Internet y cable, facturas</a>
 						</div>
 					</li>
-					<li>
-						<input id="searchbox" class="form-control form-control-sm mt-1" type="text" placeholder="Buscar">
+					{% if currentPath == "/~hugo/inventario_bienes/web/bien/" %}
+					<li  >
+						{{ block('searchBlock', './blocks/searchBlock.twig') }}
 					</li>
+						{% endif %}
 				</ul>
 
 				<ul class="list-inline custom-icon-middle">
