@@ -1,109 +1,67 @@
 {% extends 'base_new.html.twig' %}
-
+{% set ht = "" %}
 {% block body %}
 
-<h1>Listado de bienes MIGyD
-	<h3>
+	<h1>Listado de bienes MIGyD
+		<h3>
+			{% with {'pdfp': false}%}
+			{{ block("tableBlockBien", "./bien/tableBlockBien.twig") }}
+			{% endwith %}
+			<ul>
+				<div class="btn-group" role="group" aria-label="Basic outlined example">
 
-		<div class="table-responsive borderRad">
-			<table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
-				<thead class="tableHead-bg">
-					<tr>  
-						<th>Id bien</th>
-						<th>Codigo</th>
-						<th>Usuario</th>
-						<th>Descripcion/codigo SARI</th>
-						<th id="ordeninput">Lugar  </th>
-						<th>Estado</th>
-						<th>Fecha de alta</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				<tbody id="tableData">
+					<a href="{{ path('bien_new') }}" class="btn btn-outline-primary">
+						Alta nuevo bien
+					</a>
+					<a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
+						Volver al menú principal
+					</a>
+					<a id="generarPdf" href="{{ path('pdf_bien', {"filtro": "cx", "campo": "getDescripcion" }) }}" class="btn btn-outline-primary">
+						Generar PDF
+					</a>
+				</div>
+			</ul>
+		</h3>
 
-
-					{% for bien in biens %}
-
-						<tr id="data{{loop.index}}">
-							<td>
-
-								<a href="{{ path('bien_show', { 'id': bien.id }) }}">{{ bien.id }}</a>
-							</td>
-							<td>{{ bien.codigo }}</td>
-							<td>{{ bien.responsable }}</td>
-							<td>{{ bien.descripcion }}</td>
-							<td>{{ bien.ubicacion }}</td>
-							<td>{{ bien.estado }}</td>
-							<td>
-								{% if bien.fechaAlta %}
-									{{ bien.fechaAlta|date('d-m-Y') }}
-								{% endif %}
-							</td>
-							<td>
-								<ul>
-									<div class="btn-group" role="group" aria-label="Basic outlined example">
-										<a href="{{ path('bien_show', { 'id': bien.id }) }}" class="btn btn-sm btn-outline-primary">ver</a>
-
-										<a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">editar</a>
-
-										<a href="{{ path('prestamo_imprimir', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir alta</a>
-
-										<a href="{{ path('prestamo_bien', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir prestamo</a>
-									</div>
-								</ul>
-							</td>
-						</tr>
-
-					{% endfor %}
-
-				</tbody>
-			</table>
-		</div>
-
-		<ul>
-			<div class="btn-group" role="group" aria-label="Basic outlined example">
-
-				<a href="{{ path('bien_new') }}" class="btn btn-outline-primary">
-					Alta nuevo bien
-				</a>
-				<a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
-					Volver al menú principal
-				</a>
-				<a  class="btn btn-outline-primary">
-					generar PDF
-				</a>
-			</div>
-		</ul>
-	</h3>
-
-
-	<script>
-		// search box
+		<script>
+			// --------------------------------------------------------------
+// search box
 let input = document.getElementById('searchbox');
 
+/* let gg = document.getElementById('generarPdf');
+gg.addEventListener('click', (e) => {
+gg.href = "/~hugo/inventario_bienes…_bien/hp/getDescripcion";
+} */
+
+
+// transforma HTMLCollection en Array
 let rowsData = Array.prototype.slice.call(document.getElementById("tableData").rows);
 
 
 input.addEventListener('input', (e) => {
 let value = e.target.value.toUpperCase()
-let matcher = new RegExp(`^${value}`, 'g');
+let matcher = new RegExp (`^${value}`, 'g');
 
 let checkDescription = document.getElementById('descripcion').checked;
 let checkUsuario = document.getElementById('usuario').checked;
 let checkLugar = document.getElementById('lugar').checked;
 
+// operador map como bucle for para recorrer todas las rows
 rowsData.map((row) => {
 let description = row.cells[3].innerHTML.toUpperCase()
 let usuario = row.cells[2].innerHTML.toUpperCase()
 let lugar = row.cells[4].innerHTML.toUpperCase()
 
-
 if (checkDescription && description.match(matcher) || (checkUsuario && usuario.match(matcher)) || (checkLugar && lugar.match(matcher))) {
 row.style.display = "table-row"
-}else row.style.display = "none"
+} else 
+row.style.display = "none"
+
+
+
+
+
 })
 });
-
-
-</script>
-	{%endblock%}
+		</script>
+	{% endblock %}

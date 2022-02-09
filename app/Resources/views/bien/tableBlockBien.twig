@@ -1,0 +1,63 @@
+{% block tableBlockBien %}
+
+	<div class="table-responsive borderRad" id="full_table">
+		<table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+			<thead class="table-tr-bg">
+				<tr>
+					<th>Id bien</th>
+					<th>Codigo</th>
+					<th>Usuario</th>
+					<th>Descripcion/codigo SARI</th>
+					<th id="ordeninput">Lugar
+					</th>
+					<th>Estado</th>
+					<th>Fecha de alta</th>
+					{% if pdfp  %}
+						{% else %}
+							<th>Acciones</th>
+					{% endif %}
+				</tr>
+			</thead>
+			<tbody id="tableData">
+
+				{% for bien in biens %}
+
+					<tr id="data{{loop.index}}">
+						<td>
+
+							<a href="{{ path('bien_show', { 'id': bien.id }) }}">{{ bien.id }}</a>
+						</td>
+						<td>{{ bien.codigo }}</td>
+						<td>{{ bien.responsable }}</td>
+						<td>{{ bien.descripcion }}</td>
+						<td>{{ bien.ubicacion }}</td>
+						<td>{{ bien.estado }}</td>
+						<td>
+							{% if bien.fechaAlta %}
+								{{ bien.fechaAlta|date('d-m-Y') }}
+							{% endif %}
+						</td>
+						{% if pdfp %}
+							{% else %}
+								<td>
+									<ul>
+										<div class="btn-group" role="group" aria-label="Basic outlined example">
+											<a href="{{ path('bien_show', { 'id': bien.id }) }}" class="btn btn-sm btn-outline-primary">ver</a>
+
+											<a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">editar</a>
+
+											<a href="{{ path('prestamo_imprimir', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir alta</a>
+
+											<a href="{{ path('prestamo_bien', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir prestamo</a>
+										</div>
+									</ul>
+								</td>
+						{% endif %}
+					</tr>
+
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

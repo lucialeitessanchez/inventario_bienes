@@ -4,8 +4,12 @@
 
 .tableHead-bg {
     background-color: #c5d4de;
-    display: flex;
-    width: auto;
+    /*     display: flex;
+    width: auto; */
+}
+
+.table-tr-bg {
+    background-color: #c5d4de;
 }
 
 .table-hover tbody tr:hover td {
