@@ -18,6 +18,9 @@
 					{% endif %}
 				</tr>
 			</thead>
+			{% for bien in biens %}
+	{# 		{{dump(bien.getUsuario())}} #}
+				{% endfor %}
 			<tbody id="tableData">
 
 				{% for bien in biens %}

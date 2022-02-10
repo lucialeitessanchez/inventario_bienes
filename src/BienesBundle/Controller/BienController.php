@@ -334,16 +334,42 @@ class BienController extends Controller
         $biens = $em->getRepository('BienesBundle:Bien')->findAll();
         $matcher = "/{$filtro}/i";
         $newBiens = [];
-       
-        foreach($biens as $bien){
-            if(preg_match($matcher, $bien->$campo()) == 1){
-                array_push($newBiens, $bien);
-            }
+
+        switch ($campo) {
+            case 'getDescripcion':
+                foreach($biens as $bien){
+                    if(preg_match($matcher, $bien->$campo()) == 1){
+                        array_push($newBiens, $bien);
+                    }
+                }
+                break;
+                
+            case 'getUsuario':
+                foreach($biens as $bien){
+                    if(preg_match($matcher, $bien->$campo()) == 1){
+                        array_push($newBiens, $bien);
+                    }
+                }
+                break;
+
+            case 'getUsuario':
+                foreach($biens as $bien){
+                    if(preg_match($matcher, $bien->$campo()) == 1){
+                        array_push($newBiens, $bien);
+                    }
+                }
+                break;
+                
+            default:
+               
+                break;
         }
+       
+        
         
         $htmlTable = $this->render('/bien/tableBlockBien.twig', ["biens" => $newBiens, "pdfp" => true])->getContent();
         
-        $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $htmlTable, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
+        $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $htmlTable, $border = 1, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
 
         $pdf->Output($filename.".pdf",'I'); // Esto generará el PDF como respuesta directamente
 
