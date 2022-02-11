@@ -1,18 +1,14 @@
 {% block searchBlock %}
-<input id="searchbox" class="form-control form-control-sm mt-1 ml-2" type="text" placeholder="seleccione campo" disabled  >
-	
-{% for label in ["getUsuario", "getDescripcion", "getLugar"] %}
-	
+	<input id="searchbox" class="form-control form-control-sm mt-1 ml-2" type="text" placeholder="seleccione campo" disabled>
 
-	<div class="form-check form-check-inline">
-  <input  id={{label}} class="form-check-input" type="radio" name="selectorCampo" value={{label}} >
-  <label class="form-check-label" for="inlineRadio1">{{label|slice(3)}}</label>
-</div>
+	{% for label in ["getResponsable", "getDescripcion", "getUbicacion"] %}
 
-{% endfor %}
+
+		<div class="form-check form-check-inline">
+			<input id={{label}} class="form-check-input" type="radio" name="selectorCampo" value={{label}}>
+			<label class="form-check-label" for="inlineRadio1">{{label|slice(3)}}</label>
+		</div>
+
+	{% endfor %}
 
 {% endblock %}
-
-
-
-

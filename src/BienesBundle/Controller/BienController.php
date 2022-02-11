@@ -315,7 +315,6 @@ class BienController extends Controller
 
    
     public function returnPDFResponseFromHTMLAction($filtro, $campo){
-             
         // set_time_limit (30); descomenta esta línea según tus necesidades
         // Si no estás en un controlador, recupere de alguna manera el contenedor de servicios y luego recupérelo
         //$pdf = $this->container->get("white_october.tcpdf")->create('vertical', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -335,7 +334,13 @@ class BienController extends Controller
         $matcher = "/{$filtro}/i";
         $newBiens = [];
 
-        switch ($campo) {
+        foreach($biens as $bien){
+            if(preg_match($matcher, $bien->$campo()) == 1){
+                array_push($newBiens, $bien);
+            }
+        }
+
+      /*   switch ($campo) {
             case 'getDescripcion':
                 foreach($biens as $bien){
                     if(preg_match($matcher, $bien->$campo()) == 1){
@@ -344,7 +349,7 @@ class BienController extends Controller
                 }
                 break;
                 
-            case 'getUsuario':
+            case 'getUbicacion':
                 foreach($biens as $bien){
                     if(preg_match($matcher, $bien->$campo()) == 1){
                         array_push($newBiens, $bien);
@@ -363,7 +368,7 @@ class BienController extends Controller
             default:
                
                 break;
-        }
+        } */
        
         
         

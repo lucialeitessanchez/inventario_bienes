@@ -15,66 +15,64 @@
 					<a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
 						Volver al menú principal
 					</a>
-					<a id="generarPdf"{#  href="{{ path('pdf_bien', {"filtro": "cx", "campo": "getDescripcion" }) }}" #}  class="btn btn-outline-primary">
+					<a id="generarPdf" {# href="{{ path('pdf_bien', {"filtro": "cx", "campo": "getDescripcion" }) }}" #} class="btn btn-outline-primary">
 						Generar PDF
 					</a>
 				</div>
 			</ul>
 		</h3>
 
-<script>
 
-
-
-
-
-//generar pdf
+		<script>
+			// ---- generar pdf ----
 let inputVal = '';
-let radioCheck;
+let radioCheck = "";
+let rch;
 let gpdf = document.getElementById('generarPdf');
 
-gpdf.addEventListener("click", () => window.open(`${window.location.href}pdf_bien/${inputVal}/${radioCheck}`));
-//------
-// search box
-
+gpdf.addEventListener("click", () => window.open(`${
+window.location.href
+}pdf_bien/${inputVal}/${radioCheck}`));
+// ------------------------
+// ------ search box ------
 let input = document.getElementById('searchbox');
 
 // transforma HTMLCollection en Array
 let rowsData = Array.prototype.slice.call(document.getElementById("tableData").rows);
 
 input.addEventListener('input', (e) => {
-	inputVal = e.target.value.toUpperCase()
-	let matcher = new RegExp (`^${inputVal}`, 'g');
+inputVal = e.target.value.toUpperCase()
+let matcher = new RegExp (`${inputVal}`);
 
-	rowsData.map((row) => {
-		let description = row.cells[3].innerHTML.toUpperCase()
-		let usuario = row.cells[2].innerHTML.toUpperCase()
-		let lugar = row.cells[4].innerHTML.toUpperCase()
+rowsData.map((row) => {
+let description = row.cells[3].innerHTML.toUpperCase()
+let usuario = row.cells[2].innerHTML.toUpperCase()
+let lugar = row.cells[4].innerHTML.toUpperCase()
 
-		if (radioCheck = 'getDescripcion' && description.match(matcher) || 
-			(radioCheck = 'getUsuario' && usuario.match(matcher)) || 
-			(radioCheck = 'getLugar' && lugar.match(matcher))) {
-				row.style.display = "table-row"
-			} else 
-				row.style.display = "none"
-	})
+if (description.match(matcher) || (usuario.match(matcher)) || (lugar.match(matcher))) {
+row.style.display = "table-row"
+} else 
+row.style.display = "none"
+
+
+
+
+
+})
 }, false);
-//----------------
-//selector
+// ----------------------
+// ------ selector ------
 if (document.querySelector('input[name="selectorCampo"]')) {
-	
-  document.querySelectorAll('input[name="selectorCampo"]').forEach((elem) => {
 
-    elem.addEventListener("change", (e) => {
-      let val = e.target.value;
-      radioCheck = val
-	  input.disabled = false
-	  input.placeholder = 'Buscar'
-    });
-  });
+document.querySelectorAll('input[name="selectorCampo"]').forEach((elem) => {
+
+elem.addEventListener("change", (e) => {
+radioCheck = e.target.value;
+input.disabled = false
+input.placeholder = 'Buscar'
+});
+});
 }
 		</script>
 
 	{% endblock %}
-
-

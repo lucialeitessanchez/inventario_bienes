@@ -1,7 +1,7 @@
 {% block tableBlockBien %}
 
 	<div class="table-responsive borderRad" id="full_table">
-		<table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+		<table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark" >
 			<thead class="table-tr-bg">
 				<tr>
 					<th>Id bien</th>
@@ -18,9 +18,6 @@
 					{% endif %}
 				</tr>
 			</thead>
-			{% for bien in biens %}
-	{# 		{{dump(bien.getUsuario())}} #}
-				{% endfor %}
 			<tbody id="tableData">
 
 				{% for bien in biens %}
