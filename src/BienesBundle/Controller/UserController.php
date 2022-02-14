@@ -82,16 +82,21 @@ class UserController extends Controller
      */
     public function editAction(Request $request, User $user,EncoderFactoryInterface $encoderFactory)
     {
+        $originalPassword = $user->getPassword();
+        
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('BienesBundle\Form\UserType', $user);
+         
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-            
-            $encoder = $encoderFactory->getEncoder(User::class);
-            $passwordEncode = $encoder->encodePassword($user->getPassword(),'');
-            $user->setPassword($passwordEncode);
+            if ($user->getPassword()) {
+                $encoder = $encoderFactory->getEncoder(User::class);
+                $passwordEncode = $encoder->encodePassword($user->getPassword(),'');
+                $user->setPassword($passwordEncode);
+            } else $user->setPassword($originalPassword);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_edit', array('id' => $user->getId()));

@@ -19,12 +19,16 @@
                         <br>Agente: {{ responsable.nombre }}
                            </ul>
                         Datos de adquisicion
-                    <ul>Fecha adquisicion: {{ factura.fecha|date("m/d/Y") }}
-                        <br>Proveedor: {{ proveedor.nombre }}
-                        </br>N° de Factura: {{ factura.numeroFactura }}
-                        <br>Importe unitario: $ {{ factura.montoUnitario }}
-                        <br>Importe total: $ {{ factura.montoTotal }}
-                    </ul>
+                    {% if factura %}
+                        <ul>Fecha adquisicion: {{ factura.fecha|date("m/d/Y") }}
+                            <br>Proveedor: {{ proveedor.nombre }}
+                            </br>N° de Factura: {{ factura.numeroFactura }}
+                            <br>Importe unitario: $ {{ factura.montoUnitario }}
+                            <br>Importe total: $ {{ factura.montoTotal }}
+                        </ul>
+                    {% else %}
+                        <br>Sin Datos de Factura<br>
+                    {% endif %}
                     Bien Adquirido
                     <ul>Detalle: {{ bien.estado }}
                         <br>Descripcion/SARI/N° de Serie: {{ bien.descripcion }}

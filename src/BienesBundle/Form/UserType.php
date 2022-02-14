@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserType extends AbstractType
 {
@@ -22,11 +22,12 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', TextType::class)
-            ->add('password', RepeatedType::class, array('type'=>PasswordType::class, 'first_options' => array('label'=>'Password'),
+            ->add('password', RepeatedType::class, array('type'=>PasswordType::class, 'required' => false, 'first_options' => array('label'=>'Password'),
                                                                                                     'second_options'=>array('label'=>'Repetir Password'),
                 )
             )
             ->add('email', EmailType::class)
+            ->add('isActive', CheckboxType::class, ['label' => 'Activo', 'required' => false])
             ;
     }/**
      * {@inheritdoc}

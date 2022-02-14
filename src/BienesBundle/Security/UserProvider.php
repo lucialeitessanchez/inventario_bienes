@@ -33,7 +33,7 @@ class UserProvider implements UserProviderInterface {
         $usuario = $this->em->getRepository('BienesBundle:User')->findOneBy(array('username' => $username));
         //die($username);
         
-        if ($usuario) {
+        if ($usuario && $usuario->getIsActive()) {
             
             // completamos los datos requeridos por WebserviceUser por los obtenidos desde el webservice.
             $id =  $usuario->getId();

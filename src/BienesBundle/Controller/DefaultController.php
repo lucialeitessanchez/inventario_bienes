@@ -59,8 +59,10 @@ class DefaultController extends Controller
         $responsable= $bien->getResponsable();
         $factura = $bien->getFactura();
         $codigo = $bien->getCodigo();
+        $fecha = '';
 
-        $fecha=date_format($factura->getFecha(), 'd/m/Y'); //transformo la fecha con ese formato porque no esta en string
+        if ($factura)
+            $fecha=date_format($factura->getFecha(), 'd/m/Y'); //transformo la fecha con ese formato porque no esta en string
 
         $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -78,9 +80,16 @@ class DefaultController extends Controller
         $txt4="\n\nDatos de adquisición";
         $txt5="\nFecha adquisición: ".$fecha;
         $txt6="\nProveedor ".$bien->getProveedor();
-        $txt7="\nNº de Factura: ".$factura->getNumeroFactura();
-        $txt9="\nImporte unitario: $".$factura->getMontoUnitario();
-        $txt10="\nImporte total: $".$factura->getMontoTotal();
+        if ($factura) {
+            $txt7="\nNº de Factura: ".$factura->getNumeroFactura();
+            $txt9="\nImporte unitario: $".$factura->getMontoUnitario();
+            $txt10="\nImporte total: $".$factura->getMontoTotal();
+        } else {
+            $txt7 = '';
+            $txt9 = '';
+            $txt10="\nFactura: Sin Datos de Factura.";
+        }
+
         $txt11="\n\nBien adquirido";
         $txt12="\nDetalle: ".$bien->getEstado();
         $txt13="\nDescripcion/SARI/N° de Serie: ".$bien->getDescripcion();
