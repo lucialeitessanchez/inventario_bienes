@@ -1,20 +1,19 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-  
-    <h1>Editar un proveedor</h1>
-   
-     {% with {'form': edit_form, 'btnTxt': 'Guardar'}%}
-    {{ block("formBlock", "./blocks/formBlock.twig") }}
-    {% endwith %}
-    
-    <div class="btn-group mb-2" role="group" aria-label="Basic outlined example"  >
-        <input type="submit" value="Editar" class="btn btn-outline-primary"></a>   
-        <a href="{{ path('proveedor_index') }}" class="btn btn-outline-primary"> Volver al listado de proveedores </a>
-        {{ form_start(delete_form) }}
-        <input type="submit" value="Eliminar" class="btn btn-outline-primary"> </a>
-        {{ form_end(delete_form) }}
-    </div>
-    
-   
-{% endblock %}
+
+	<h1>Editar un proveedor</h1>
+
+	{% with {'form': edit_form, 'btnTxt': 'Guardar'}%}
+	{{ block("formBlock", "./blocks/formBlock.twig") }}
+	{% endwith %}
+
+	<div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
+		<input type="submit" value="Editar" class="btn btn-sm btn-outline-primary"></a>
+	<a href="{{ path('proveedor_index') }}" class="btn btn-sm btn-outline-primary">
+		Volver al listado de proveedores
+	</a>
+	{{ form_start(delete_form) }}
+	<input type="submit" value="Eliminar" class="btn btn-sm btn-outline-danger">
+	{{ form_end(delete_form) }}
+</div>{% endblock %}

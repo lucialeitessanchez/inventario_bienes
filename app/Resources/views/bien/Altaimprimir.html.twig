@@ -2,70 +2,72 @@
 {% block body %}
 
 
-
-
-
-
-             <p class="text-end">{{ fecha|date("d/m/Y") }}</p>
-        </tr>
-             <p></p><p<p></p><p></p>
-            <ul><ul>
-                    <br><br>
-                    <p class="text-center"><th>
-                            <br><br><br>
-                    <h1> <div align="center" <>CARGO DE BIENES DE CAPITAL</b></p><br><br><br><br></div></h1></ul>
-                       <h2> <br>Responsable de la tenencia, guarda y conservación
-                        <br><ul>Oficina: {{ responsable.cargo }}
-                        <br>Agente: {{ responsable.nombre }}
-                           </ul>
-                        Datos de adquisicion
-                    <ul>Fecha adquisicion: {{ factura.fecha|date("m/d/Y") }}
-                        <br>Proveedor: {{ proveedor.nombre }}
-                        </br>N° de Factura: {{ factura.numeroFactura }}
-                        <br>Importe unitario: $ {{ factura.montoUnitario }}
-                        <br>Importe total: $ {{ factura.montoTotal }}
-                    </ul>
-                    Bien Adquirido
-                    <ul>Detalle: {{ bien.estado }}
-                        <br>Descripcion/SARI/N° de Serie: {{ bien.descripcion }}
-<form action="{{ path('alta_pdf', {'id':bien.id}) }}">
-                        <br>Color:  <select name=color id="selectColor">
-                            <option value="0" selected>Colores..
-                            <option value="Negro">Negro
-                            <option value="Blanco">Blanco
-                            <option value="Azul">Azul
-                            <option value="Naranja">Naranja
-                            <option value="Rojo">Rojo
-                            <option value="Amarillo">Amarillo
-                            <option value="Verde">Verde
-                            <option value="Marrón">Marrón
-                            <option value="Gris">Gris
-                            <option value="Sin color - no es fisico">Sin color - no es fisico
-                        </select>
-<button class="btn btn-primary" type="submit">Generar PDF</button>
-</form>
-                        <br>N° codigo sistema: {{ bien.codigo }}
-                        <br>Caracteristica: {{ bien.tipo }} {{ bien.rama }}
-                    </ul>
-                       </h2>
-                    </th>
-
-                    <br><br><br><br><br>
-                    <p align="left">...........................................................................................
-                    <br><br>Firma responsable del sector - {{ responsable.nombre }}</p>
-                    <p align="center">...........................................................................................
-                    <br><br>    Firma responsable de compras </p>
-
-                   
-
-
-
-        </ul></ul>
-
-    <div class="clearfix"><br></div>
-
-   
-        </html>
-
-
-{% endblock %}
+	<p class="text-end">{{ fecha|date("d/m/Y") }}</p>
+</tr>
+<p></p>
+<p<p></p>
+<p></p>
+<ul>
+	<ul>
+		<br><br>
+		<p class="text-center">
+			<th>
+				<br><br><br>
+				<h1>
+					<divCARGO</p align="center" <> de bienes de capital</b>><br><br><br><br></div>
+				</h1>
+			</th>
+		</p>
+	</ul>
+	<h2>
+		<br>Responsable de la tenencia, guarda y conservación
+		<br><ul>Oficina:
+			{{ responsable.cargo }}
+			<br>Agente:
+			{{ responsable.nombre }}
+		</ul>
+		Datos de adquisicion
+		<ul>Fecha adquisicion:
+			{{ factura.fecha|date("m/d/Y") }}
+			<br>Proveedor:
+			{{ proveedor.nombre }}
+		</br>N° de Factura:
+		{{ factura.numeroFactura }}
+		<br>Importe unitario: $
+		{{ factura.montoUnitario }}
+		<br>Importe total: $
+		{{ factura.montoTotal }}
+	</ul>
+	Bien Adquirido
+	<ul>Detalle:
+		{{ bien.estado }}
+		<br>Descripcion/SARI/N° de Serie:
+		{{ bien.descripcion }}
+		<form action="{{ path('alta_pdf', {'id':bien.id}) }}">
+			<br>Color:
+			<select name="color" id="selectColor">
+				<option value="0" selected>Colores..</option>
+				<option value="Negro">Negro</option>
+				<option value="Blanco">Blanco</option>
+				<option value="Azul">Azul</option>
+				<option value="Naranja">Naranja</option>
+				<option value="Rojo">Rojo</option>
+				<option value="Amarillo">Amarillo</option>
+				<option value="Verde">Verde</option>
+				<option value="Marrón">Marrón</option>
+				<option value="Gris">Gris</option>
+				<option value="Sin color - no es fisico">Sin color - no es fisico</option>
+			</select>
+			<button class="btn btn-primary" type="submit">Generar PDF</button>
+		</form>
+		<br>N° codigo sistema:
+		{{ bien.codigo }}
+		<br>Caracteristica:
+		{{ bien.tipo }}
+		{{ bien.rama }}
+	</ul>
+</h2></th><br><br><br><br><br><p align="left">...........................................................................................
+<br><br>Firma responsable del sector -
+{{ responsable.nombre }}</p><p align="center">...........................................................................................
+<br><br>
+Firma responsable de compras</p></ul></ul><div class="clearfix"><br></div></html>{% endblock %}

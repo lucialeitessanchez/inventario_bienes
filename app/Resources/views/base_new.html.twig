@@ -21,7 +21,7 @@
 		<link rel="stylesheet" href="https://www.santafe.gob.ar/assets/app/stg-theme/css/custom-v012020.css" type="text/css"/>
 		<link rel="stylesheet" href="https://www.santafe.gob.ar/assets/standard/css/fonts.css" type="text/css"/>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-		
+
 
 	</head>
 	<body>
@@ -73,10 +73,10 @@
 						</div>
 					</li>
 					{% if currentPath == "/~hugo/inventario_bienes/web/bien/" %}
-					<li  >
-						{{ block('searchBlock', './blocks/searchBlock.twig') }}
-					</li>
-						{% endif %}
+						<li>
+							{{ block('searchBlock', './blocks/searchBlock.twig') }}
+						</li>
+					{% endif %}
 				</ul>
 
 				<ul class="list-inline custom-icon-middle">
@@ -194,3 +194,27 @@
 
 		</body>
 	</html>
+
+	<style>
+
+	/* bar */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	/* Track */
+	::-webkit-scrollbar-track {
+		background: #f1f1f1;
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background: #cccccc;
+		border-radius: 6px;
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background: #8f8f8f;
+	}
+</style>

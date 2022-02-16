@@ -1,23 +1,23 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-  <h1>
-    User edit
-  </h1>
-  {% with {
+	<h1>
+		User edit
+	</h1>
+	{% with {
     form: edit_form,
     btnTxt: 'Guardar'
   }
   %}
-  {{ block('formBlock', './blocks/formBlock.twig') }}
-  {% endwith %}
-  <br />
-  <div>
-    <a class="btn btn-primary mb-2" href="{{ path('user_index') }}">
-      Listado de Usuarios
-    </a>
-    {{ form_start(delete_form) }}
-    <input class="btn btn-danger mb-2" type="submit" value="Eliminar" />
-    {{ form_end(delete_form) }}
-  </div>
+	{{ block('formBlock', './blocks/formBlock.twig') }}
+	{% endwith %}
+
+	<div class="mb-3">
+		<a class="btn btn-sm btn-primary mb-2" href="{{ path('user_index') }}">
+			Listado de Usuarios
+		</a>
+		{{ form_start(delete_form) }}
+		<input class="btn btn-sm btn-danger mb-2" type="submit" value="Eliminar"/>
+		{{ form_end(delete_form) }}
+	</div>
 {% endblock %}

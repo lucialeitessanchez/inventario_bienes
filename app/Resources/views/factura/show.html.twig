@@ -1,55 +1,61 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-<ul>
-    <h1>Factura</h1>
+
+	<h1>Factura</h1>
 
 
-    <div class="table-responsive">
-    <table class="table-sm table-striped mb-3">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ factura.id }}</td>
-            </tr>
-            <tr>
-                <th>Numero de factura</th>
-                <td>{{ factura.numeroFactura }}</td>
-            </tr>
-            <tr>
-                <th>Fecha de facturación</th>
-                <td>{% if factura.fecha %}{{ factura.fecha|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Monto: </th>
-                <td>${{ factura.montoUnitario }}</td>
-            </tr>
-            <tr>
-                <th>Monto total: </th>
-                <td>${{ factura.montoTotal }}</td>
-            </tr>
-            <tr>
-                <th>Descripcion</th>
-                <td>{{ factura.descripcion }}</td>
-            </tr>
-            <tr>
-                <th>Tipo de adquisicion</th>
-                <td>{{ factura.tipoAdquisicion }}</td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-
-    <ul>
-
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
-            {{ form_start(delete_form) }}
-            <input type="submit" class="btn btn-outline-primary" value="Borrar"></a>
-            {{ form_end(delete_form) }}
-            <a href="{{ path('factura_index') }}" class="btn btn-outline-primary"> Volver al listado de facturas </a>
-            <a href="{{ path('factura_edit', { 'id': factura.id }) }}" class="btn btn-outline-primary"> Editar </a>
-        </div>
+	<div class="table-responsive">
+		<table class="table-sm table-striped mb-3">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ factura.id }}</td>
+				</tr>
+				<tr>
+					<th>Numero de factura</th>
+					<td>{{ factura.numeroFactura }}</td>
+				</tr>
+				<tr>
+					<th>Fecha de facturación</th>
+					<td>
+						{% if factura.fecha %}
+							{{ factura.fecha|date('Y-m-d') }}
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<th>Monto:
+					</th>
+					<td>${{ factura.montoUnitario }}</td>
+				</tr>
+				<tr>
+					<th>Monto total:
+					</th>
+					<td>${{ factura.montoTotal }}</td>
+				</tr>
+				<tr>
+					<th>Descripcion</th>
+					<td>{{ factura.descripcion }}</td>
+				</tr>
+				<tr>
+					<th>Tipo de adquisicion</th>
+					<td>{{ factura.tipoAdquisicion }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 
-    </ul>
-{% endblock %}
+	<div class="btn-group mb-3" role="group" aria-label="Basic outlined example">
+
+		<a href="{{ path('factura_index') }}" class="btn btn-sm btn-outline-primary">
+			Volver al listado de facturas
+		</a>
+		<a href="{{ path('factura_edit', { 'id': factura.id }) }}" class="btn btn-sm btn-outline-primary">
+			Editar
+		</a>
+		{{ form_start(delete_form) }}
+		<input type="submit" class="btn btn-sm btn-outline-danger" value="Borrar"></a>
+	{{ form_end(delete_form) }}
+</div>{% endblock %}

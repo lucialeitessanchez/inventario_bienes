@@ -1,48 +1,54 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-    <ul>
-    <h1>Bien</h1>
-       
- <div class="table-responsive">
-    <table class="table-sm table-striped mb-3">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ bien.id }}</td>
-            </tr>
-            <tr>
-                <th>Codigo</th>
-                <td>{{ bien.codigo }}</td>
-            </tr>
-            <tr>
-                <th>Fecha de alta</th>
-                <td>{% if bien.fechaAlta %}{{ bien.fechaAlta|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Descripcion</th>
-                <td>{{ bien.descripcion }}</td>
-            </tr>
-            <tr>
-                <th>Estado</th>
-                <td>{{ bien.estado }}</td>
-            </tr>
-            <tr>
-                <th>Persona que cargo:</th>
-                <td>{{ bien.usuario }}</td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
 
-    <ul>
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
-            {{ form_start(delete_form) }}
-            <input type="submit" class="btn btn-outline-primary" value="Borrar"></a>
-            {{ form_end(delete_form) }}
-            <a href="{{ path('bien_index') }}" class="btn btn-outline-primary"> Volver al listado de bienes </a>
-            <a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-outline-primary"> Editar </a>
-        </div>
-    </ul>
-    </ul>
-{% endblock %}
+	<h1>Bien</h1>
+
+	<div class="table-responsive">
+		<table class="table-sm table-striped mb-3">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ bien.id }}</td>
+				</tr>
+				<tr>
+					<th>Codigo</th>
+					<td>{{ bien.codigo }}</td>
+				</tr>
+				<tr>
+					<th>Fecha de alta</th>
+					<td>
+						{% if bien.fechaAlta %}
+							{{ bien.fechaAlta|date('Y-m-d') }}
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<th>Descripcion</th>
+					<td>{{ bien.descripcion }}</td>
+				</tr>
+				<tr>
+					<th>Estado</th>
+					<td>{{ bien.estado }}</td>
+				</tr>
+				<tr>
+					<th>Persona que cargo:</th>
+					<td>{{ bien.usuario }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<div class="btn-group mb-3" role="group" aria-label="Basic outlined example">
+
+		<a href="{{ path('bien_index') }}" class="btn btn-sm btn-outline-primary">
+			Volver al listado de bienes
+		</a>
+		<a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-sm btn-outline-primary">
+			Editar
+		</a>
+		{{ form_start(delete_form) }}
+		<input type="submit" class="btn btn-sm btn-outline-danger" value="Borrar"></a>
+	{{ form_end(delete_form) }}
+</div>{% endblock %}

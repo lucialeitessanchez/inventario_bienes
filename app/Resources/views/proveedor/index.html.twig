@@ -1,115 +1,20 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-  <h1>
-    Lista de Proveedores
-  </h1>
-  <h3>
-    <div class="table-responsive borderRad">
-      <table class="table borderRad bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
-        <thead class="tableHead-bg">
-          <tr>
-            <th>
-              Id
-            </th>
-            <th>
-              Cuil/Cuit
-            </th>
-            <th>
-              Nombre
-            </th>
-            <th>
-              Dirección
-            </th>
-            <th>
-              Localidad
-            </th>
-            <th>
-              Provincia
-            </th>
-            <th>
-              Email
-            </th>
-            <th>
-              Acciones
-            </th>
-          </tr>
-        </thead>
-        <tbody class="font-weight-normal text-lowercase">
-          {% for proveedor in proveedors %}
-            <tr>
-              <td>
-                <a href="{{
-                  path(
-                    'proveedor_show',
-                    {
-                      id: proveedor.id
-                    }
-                  )
-                  }}">
-                  {{ proveedor.id }}
-                </a>
-              </td>
-              <td>
-                {{ proveedor.cuil }}
-              </td>
-              <td>
-                {{ proveedor.nombre }}
-              </td>
-              <td>
-                {{ proveedor.direccion }}
-              </td>
-              <td>
-                {{ proveedor.localidad }}
-              </td>
-              <td>
-                {{ proveedor.provincia }}
-              </td>
-              <td>
-                {{ proveedor.email }}
-              </td>
-              <td>
-                <div class="btn-group"
-                  role="group"
-                  aria-label="Basic outlined example">
-                  <a href="{{
-                    path(
-                      'proveedor_show',
-                      {
-                        id: proveedor.id
-                      }
-                    )
-                    }}"
-                    class="btn btn-sm btn-outline-primary">
-                    ver
-                  </a>
-                  <a href="{{
-                    path(
-                      'proveedor_edit',
-                      {
-                        id: proveedor.id
-                      }
-                    )
-                    }}"
-                    class="btn btn-sm btn-outline-primary">
-                    editar
-                  </a>
-                </div>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <ul>
-      <div class="btn-group" role="group" aria-label="Basic outlined example">
-        <a href="{{ path('proveedor_new') }}" class="btn btn-outline-primary">
-          Alta nuevo proveedor
-        </a>
-        <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
-          Volver al menú principal
-        </a>
-      </div>
-    </ul>
-  </h3>
+	<h1>
+		Lista de Proveedores
+	</h1>
+	<h3>
+		{{ block("tableBlockProveedor", "./proveedor/tableBlockProveedor.twig") }}
+
+		<div class="btn-group btn-group-sm m-3" role="group" aria-label="Basic outlined example">
+			<a href="{{ path('proveedor_new') }}" class="btn btn-outline-primary">
+				Alta nuevo proveedor
+			</a>
+			<a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
+				Volver al menú principal
+			</a>
+		</div>
+
+	</h3>
 {% endblock %}
