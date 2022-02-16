@@ -13,6 +13,10 @@ use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Bien controller.
@@ -20,6 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class BienController extends Controller
 {
+
 
     /**
      * Lists all bien entities.
@@ -315,8 +320,8 @@ class BienController extends Controller
      */
 
    
-
-    public function returnPDFResponseFromHTMLAction($html){
+    public function returnPDFResponseFromHTMLAction($filtro, $campo){
+      
         // set_time_limit (30); descomenta esta línea según tus necesidades
         // Si no estás en un controlador, recupere de alguna manera el contenedor de servicios y luego recupérelo
         //$pdf = $this->container->get("white_october.tcpdf")->create('vertical', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -331,10 +336,55 @@ class BienController extends Controller
         $pdf->AddPage();
 
         $filename = 'ourcodeworld_pdf_demo';
+        $em = $this->getDoctrine()->getManager();
+        $biens = $em->getRepository('BienesBundle:Bien')->findAll();
+        
 
-        $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
+        if($filtro != "*"  ){
+            $matcher = "/{$filtro}/i";
+             $newBiens = [];
+            foreach($biens as $bien){
+                if(preg_match($matcher, $bien->$campo()) == 1){
+                    array_push($newBiens, $bien);
+                }
+             }      
+        
+        
+            $htmlTable = $this->render('/bien/tableBlockBien.twig', ["biens" => $newBiens, "pdfp" => true])->getContent();
+        
+        }else{
+            $htmlTable = $this->render('/bien/tableBlockBien.twig', ["biens" => $biens, "pdfp" => true])->getContent();
+
+        }
+        
+        $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $htmlTable, $border = 1, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
+
         $pdf->Output($filename.".pdf",'I'); // Esto generará el PDF como respuesta directamente
+
+       
+         
+        $filename = 'alta.pdf';
+        $cache_dir = $this->getParameter('kernel.cache_dir');
+        //$file = $cache_dir. DIRECTORY_SEPARATOR .$filename;
+        $file = tempnam($cache_dir,'reporte_bien');
+
+        // Guardo el pdf en un archivo local
+
+        $pdf->Output($file, 'F');
+
+        // genero una respuesta para la descarga del archivo
+        $response = new BinaryFileResponse($file);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $filename
+        );
+        $response->deleteFileAfterSend(true);
+
+        return $response;
+       
     }
+
+    
 
     
 }

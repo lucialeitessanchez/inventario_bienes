@@ -1,0 +1,42 @@
+/* table */
+
+.dataTable {
+    display: block;
+    overflow-y: scroll;
+}
+
+.dataTable thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.borderRad {
+    border-radius: 8px;
+}
+
+.tableHead-bg {
+    background-color: #c5d4de;
+    /*     display: flex;
+    width: auto; */
+}
+
+.table-tr-bg {
+    background-color: #c5d4de;
+}
+
+.table-hover tbody tr:hover td {
+    background-color: #a8d5e5;
+}
+
+
+/* ---------- fade ---------- */
+
+.showRow {
+    transform: translateY(0%);
+    transition: transform 0.5s;
+}
+
+.cover {
+    transform: translateY(-100%);
+}

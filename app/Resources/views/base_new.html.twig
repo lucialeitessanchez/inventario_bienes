@@ -1,166 +1,220 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <title>{% block title %}Sistema de bienes patrimoniales SEIyG{% endblock %}</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="https://www.santafe.gob.ar/assets/standard/images/favicon.ico">
 
-    <link rel="stylesheet" href="https://www.santafe.gob.ar/assets/app/stg-theme/css/custom-v012020.css" type="text/css" />
-    <link rel="stylesheet" href="https://www.santafe.gob.ar/assets/standard/css/fonts.css" type="text/css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-
-    {% block stylesheets %}
-        {# <link href="{{ asset('css/estilos.css') }}" rel="stylesheet"/> #}
-    {% endblock %}
-
-</head>
-<body>
-
-<nav class="navbar navbar-expand-md navbar-light fixed-top">
-    <a class="navbar-brand" href="https://www.santafe.gob.ar"><img
-                src="https://www.santafe.gob.ar/assets/standard/images/gob-santafe.png"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('proveedor_index') }}">Proveedor <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('factura_index') }}">Factura <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('bien_index') }}">Bien <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('user_index') }}">Usuarios <span class="sr-only">(current)</span></a>
-            </li>
-
-             <!-- Dropdown -->
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                Sistemas Externos
-            </a>
-            <div class="dropdown-menu">
-                <a target="_blank" href="http://10.3.17.203/~lucia/internetycable/web">Internet y cable, facturas</a>
-            </div>
-            </li>
-        </ul>
-
-        <ul class="list-inline custom-icon-middle">
-
-            <li class="list-inline-item">
-
-                <a href="#" class="dropdown-toggle" id="dropdownMenuLinkPerson" data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false" title={{ app.user.username }}><i class="material-icons">person</i></a>
-
-                <div class="dropdown-menu custom-dropdown-menu-right" aria-labelledby="dropdownMenuLinkPerson">
-                    <a class="dropdown-item" href="#">Usuario: {{ app.user.username }}</a>
-                    <a class="dropdown-item" href="#">Roles:
-                                                            {% for rol in app.user.roles  %}
-                                                                {{ rol }}
-                                                            {% endfor %}</a>
-                    <a class="dropdown-item" href="{{ path('logout') }}">Cerrar Sesión</a>
-                </div>
-
-            </li>
-
-            <li class="list-inline-item"><a href="{{ path('logout') }}" title="Salir"><i class="material-icons">exit_to_app</i></a>
-            </li>
-
-        </ul>
-
-    </div>
-</nav>
-
-<main role="main" class="container container-fluid" style="max-width: 95%" >
-
-    <div class="row row-top">
-        <div class="col-lg-12">
-            <h1>Sistema de bienes patrimoniales</h1>
-
-            <p>Ministerio de Igualdad, Genero y Diversidad</p>
-
-         </div>
-    </div>
-
-    {# BEGIN BODY #}
-    <div class="row">
-        <div class="col-lg-12">
-            {% block body %}{% endblock %}
-        </div>
-    </div>
-    {# END BODY #}
-</main>
-
-<div class="clearfix"><br></div>
-
-<footer class="footer text-muted">
-    <div class="container container-footer">
-        <div class="row">
-
-            <div class="col-sm-12 col-md-4">
-                <div class="sociales">
-                    <p>
-                        <a href="//www.santafe.gob.ar/index.php/web/content/view/full/117678">RSS / SUSCRIPCIÓN A NOTICIAS</a>
-                    </p>
-                    <ul class="list-inline footer-ul">
-                        <li class="list-inline-item">
-                            <a target="_blank" href="http://www.twitter.com/GobSantaFe">
-                                <i class="icon-footertwitter"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a target="_blank" href="http://www.facebook.com/GobSantaFe">
-                                <i class="icon-footerfacebook"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a target="_blank" href="http://www.youtube.com/GobSantaFe">
-                                <i class="icon-footeryoutube"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div class="col-sm-12 col-md-4">
-
-                <div class="stg-logos" style="text-align:center">
-                    <img src="//www.santafe.gob.ar/assets/standard/images/marca-footer.png" alt="Santa Fe" style="margin-bottom:10px;">
-                </div>
+	{%  
+    set currentPath = path(app.request.attributes.get('_route'),
+    app.request.attributes.get('_route_params')) 
+%}
 
 
-            </div>
+	<head>
+		<title>
+			{% block title %}Sistema de bienes patrimoniales SEIyG
+			{% endblock %}
+		</title>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="icon" href="https://www.santafe.gob.ar/assets/standard/images/favicon.ico">
 
-            <div class="col-sm-12 col-md-4 contact-data-footer">
-                <p>
-                    Atenci&oacute;n telef&oacute;nica: (342) 4572888<br/>Lunes a viernes de 8 a 16 hs
-                </p>
-                <p>
-                    <span class="cc">c</span>
-                    Atribución-CompartirIgual 2.5 Argentina</p>
-
-            </div>
-
-        </div>
-
-    </div>
-</footer>
+		<link href="{{ asset('css/estilo-test.css') }}" rel="stylesheet"/>
+		<link rel="stylesheet" href="https://www.santafe.gob.ar/assets/app/stg-theme/css/custom-v012020.css" type="text/css"/>
+		<link rel="stylesheet" href="https://www.santafe.gob.ar/assets/standard/css/fonts.css" type="text/css"/>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 
 
-<script src="https://www.santafe.gob.ar/assets/jquery/jquery-v3.2.1/jquery.min.js" ></script>
-<script src="https://www.santafe.gob.ar/assets/popper/popper-v1.12.9/popper.min.js" ></script>
-<script src="https://www.santafe.gob.ar/assets/bootstrap/bootstrap-v4.0.0/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-md navbar-light fixed-top">
+			<a class="navbar-brand" href="https://www.santafe.gob.ar"><img src="https://www.santafe.gob.ar/assets/standard/images/gob-santafe.png"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul id="ulbar" class="navbar-nav mr-auto">
+
+					<li class="nav-item active">
+						<a class="nav-link" href="{{ path('proveedor_index') }}">Proveedor
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="{{ path('factura_index') }}">Factura
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="{{ path('user_index') }}">Usuarios<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					{% if currentPath == "/~hugo/inventario_bienes/web/bien/" %}
+						<li class="nav-item active">
+							<a class="nav-link" href="{{ path('bien_new') }}">Alta nuevo bien
+								<span class="sr-only">(current)</span>
+							</a>
+						</li>
+
+					{% else %}
+						<li class="nav-item active">
+							<a class="nav-link" href="{{ path('bien_index') }}">Bien
+								<span class="sr-only">(current)</span>
+							</a>
+						</li>
+					{% endif %}
 
 
-</body>
-</html>
+					<!-- Dropdown -->
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+							Sistemas Externos
+						</a>
+						<div class="dropdown-menu">
+							<a target="_blank" href="http://10.3.17.203/~lucia/internetycable/web">Internet y cable, facturas</a>
+						</div>
+					</li>
+					{% if currentPath == "/~hugo/inventario_bienes/web/bien/" %}
+						<li>
+							{{ block('searchBlock', './blocks/searchBlock.twig') }}
+						</li>
+					{% endif %}
+				</ul>
 
+				<ul class="list-inline custom-icon-middle">
+
+					<li class="list-inline-item">
+
+						<a href="#" class="dropdown-toggle" id="dropdownMenuLinkPerson" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title={{ app.user.username }}>
+							<i class="material-icons">person</i>
+						</a>
+
+						<div class="dropdown-menu custom-dropdown-menu-right" aria-labelledby="dropdownMenuLinkPerson">
+							<a class="dropdown-item" href="#">Usuario:
+								{{ app.user.username }}</a>
+							<a class="dropdown-item" href="#">Roles:
+								{% for rol in app.user.roles  %}
+									{{ rol }}
+								{% endfor %}
+							</a>
+							<a class="dropdown-item" href="{{ path('logout') }}">Cerrar Sesión</a>
+						</div>
+
+					</li>
+
+					<li class="list-inline-item">
+						<a href="{{ path('logout') }}" title="Salir">
+							<i class="material-icons">exit_to_app</i>
+						</a>
+					</li>
+
+				</ul>
+
+			</div>
+		</nav>
+
+		<main role="main" class="container container-fluid" style="max-width: 95%">
+
+			<div class="row row-top">
+				<div class="col-lg-12">
+					<h1>Sistema de bienes patrimoniales</h1>
+
+					<p>Ministerio de Igualdad, Genero y Diversidad</p>
+
+				</div>
+			</div>
+
+			{# BEGIN BODY #}
+			<div class="row">
+				<div class="col-lg-12"> {% block body %}{% endblock %}
+					</div>
+				</div>
+				{# END BODY #}
+			</main>
+
+			<div class="clearfix"><br></div>
+
+			<footer class="footer text-muted">
+				<div class="container container-footer">
+					<div class="row">
+
+						<div class="col-sm-12 col-md-4">
+							<div class="sociales">
+								<p>
+									<a href="//www.santafe.gob.ar/index.php/web/content/view/full/117678">RSS / SUSCRIPCIÓN A NOTICIAS</a>
+								</p>
+								<ul class="list-inline footer-ul">
+									<li class="list-inline-item">
+										<a target="_blank" href="http://www.twitter.com/GobSantaFe">
+											<i class="icon-footertwitter"></i>
+										</a>
+									</li>
+									<li class="list-inline-item">
+										<a target="_blank" href="http://www.facebook.com/GobSantaFe">
+											<i class="icon-footerfacebook"></i>
+										</a>
+									</li>
+									<li class="list-inline-item">
+										<a target="_blank" href="http://www.youtube.com/GobSantaFe">
+											<i class="icon-footeryoutube"></i>
+										</a>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+
+						<div class="col-sm-12 col-md-4">
+
+							<div class="stg-logos" style="text-align:center">
+								<img src="//www.santafe.gob.ar/assets/standard/images/marca-footer.png" alt="Santa Fe" style="margin-bottom:10px;">
+							</div>
+
+
+						</div>
+
+						<div class="col-sm-12 col-md-4 contact-data-footer">
+							<p>
+								Atenci&oacute;n telef&oacute;nica: (342) 4572888<br/>Lunes a viernes de 8 a 16 hs
+							</p>
+							<p>
+								<span class="cc">c</span>
+								Atribución-CompartirIgual 2.5 Argentina</p>
+
+						</div>
+
+					</div>
+
+				</div>
+			</footer>
+
+
+			<script src="https://www.santafe.gob.ar/assets/jquery/jquery-v3.2.1/jquery.min.js"></script>
+			<script src="https://www.santafe.gob.ar/assets/popper/popper-v1.12.9/popper.min.js"></script>
+			<script src="https://www.santafe.gob.ar/assets/bootstrap/bootstrap-v4.0.0/js/bootstrap.min.js"></script>
+
+
+		</body>
+	</html>
+
+	<style>
+
+	/* bar */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	/* Track */
+	::-webkit-scrollbar-track {
+		background: #f1f1f1;
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background: #cccccc;
+		border-radius: 6px;
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background: #8f8f8f;
+	}
+</style>

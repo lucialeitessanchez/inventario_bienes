@@ -1,24 +1,23 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_new.html.twig' %}
 
 {% block body %}
-  <br>
-   <ul>
-    <h1>Editar factura</h1>
+	<br>
 
-    <h3>
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
+	<h1>Editar factura</h1>
 
 
-    <ul>
+	{% with {'form': edit_form, 'btnTxt': 'Guardar'}%}
+	{{ block("formBlock", "./blocks/formBlock.twig") }}
+	{% endwith %}
 
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <input type="submit" value="Editar" class="btn btn-outline-primary"></a>
-            {{ form_end(edit_form) }}
-            <a href="{{ path('factura_index') }}" class="btn btn-outline-primary"> Volver al listado de facturas </a>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Eliminar" class="btn btn-outline-primary"> </a>
-            {{ form_end(delete_form) }}
-        </div>
-    </ul></h3></ul>
-{% endblock %}
+
+	<div class="btn-group mb-3" role="group" aria-label="Basic outlined example">
+		<input type="submit" value="Editar" class="btn btn-sm btn-outline-primary"></a>
+
+	<a href="{{ path('factura_index') }}" class="btn btn-sm btn-outline-primary">
+		Volver al listado de facturas
+	</a>
+	{{ form_start(delete_form) }}
+	<input type="submit" value="Eliminar" class="btn btn-sm btn-outline-danger">
+</a>
+{{ form_end(delete_form) }}</div>{% endblock %}

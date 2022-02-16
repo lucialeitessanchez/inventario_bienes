@@ -1,0 +1,64 @@
+{% block tableUser %}
+
+	{% set tableData = [
+  'id',
+  'username',
+  'Password',
+  'email',
+  'activo',
+  'acciones'
+] %}
+
+	<div class="table-responsive borderRad dataTable gg" id="full_table" style="max-height: 62vh">
+
+		<table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+			<thead class="table-tr-bg" style="position: sticky; top: 0; z-index: 1">
+				<tr>
+					{% for colHead in tableData %}
+						<th>
+							{{ colHead }}
+						</th>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody class="font-weight-normal text-lowercase">
+				{% for user in users %}
+					<tr>
+						<td>
+							<a href="{{ path( 'user_show', { id: user.id } ) }}">
+								{{ user.id }}
+							</a>
+						</td>
+						<td>
+							{{ user.username }}
+						</td>
+						<td>
+							...
+							{{ user.password|slice(- 15) }}
+						</td>
+						<td>
+							{{ user.email }}
+						</td>
+						<td>
+							{% if user.isActive %}
+								Yes
+							{% else %}
+								No
+							{% endif %}
+						</td>
+						<td>
+							<a class="btn btn-sm btn-info" href="{{ path( 'user_show', { id: user.id } ) }}">
+								Ver
+							</a>
+							<a class="btn btn-sm btn-primary" href="{{ path( 'user_edit', { id: user.id } ) }}">
+								Modificar
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+
+{% endblock %}

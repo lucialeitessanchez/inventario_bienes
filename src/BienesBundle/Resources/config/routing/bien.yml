@@ -1,49 +1,49 @@
 bien_index:
-    path:     /
-    defaults: { _controller: "BienesBundle:Bien:index" }
-    methods:  GET
+  path: /
+  defaults: { _controller: "BienesBundle:Bien:index" }
+  methods: GET
 
 bien_show:
-    path:     /{id}/show
-    defaults: { _controller: "BienesBundle:Bien:show" }
-    methods:  GET
+  path: /{id}/show
+  defaults: { _controller: "BienesBundle:Bien:show" }
+  methods: GET
 
 bien_new:
-    path:     /new
-    defaults: { _controller: "BienesBundle:Bien:new" }
-    methods:  [GET, POST]
+  path: /new
+  defaults: { _controller: "BienesBundle:Bien:new" }
+  methods: [GET, POST]
 
 bien_edit:
-    path:     /{id}/edit
-    defaults: { _controller: "BienesBundle:Bien:edit" }
-    methods:  [GET, POST]
+  path: /{id}/edit
+  defaults: { _controller: "BienesBundle:Bien:edit" }
+  methods: [GET, POST]
 
 bien_delete:
-    path:     /{id}/delete
-    defaults: { _controller: "BienesBundle:Bien:delete" }
-    methods:  DELETE
+  path: /{id}/delete
+  defaults: { _controller: "BienesBundle:Bien:delete" }
+  methods: DELETE
 
 prestamo_imprimir:
-    path:     /{id}/imprimir
-    defaults: { _controller: "BienesBundle:Bien:imprimir" }
-    methods:  [GET, POST]
+  path: /{id}/imprimir
+  defaults: { _controller: "BienesBundle:Bien:imprimir" }
+  methods: [GET, POST]
 
 prestamo_bien:
-    path:     /{id}/prestamo
-    defaults: { _controller: "BienesBundle:Bien:prestamo" }
-    methods:  [GET, POST]
+  path: /{id}/prestamo
+  defaults: { _controller: "BienesBundle:Bien:prestamo" }
+  methods: [GET, POST]
 
 bien_list_ramas:
-    path:     /get-ramas-from-tipo
-    defaults: { _controller: "BienesBundle:Bien:listRamasOfTipoAction" }
-    methods:  GET
+  path: /get-ramas-from-tipo
+  defaults: { _controller: "BienesBundle:Bien:listRamasOfTipoAction" }
+  methods: GET
 
 bien_buscarDireccion:
-    path:     /{palabra}/direccion
-    defaults: { _controller: "BienesBundle:Bien:buscarPorDireccion" }
-    methods:  POST
+  path: /{palabra}/direccion
+  defaults: { _controller: "BienesBundle:Bien:buscarPorDireccion" }
+  methods: POST
 
 pdf_bien:
-    path:     /pdf_bien
-    defaults: { _controller: "BienesBundle:Bien:returnPDFResponseFromHTML" }
-    methods:  [GET, POST]
+  path: /pdf_bien/{filtro}/{campo}
+  defaults: { _controller: "BienesBundle:Bien:returnPDFResponseFromHTML" }
+  methods: [GET, POST]
