@@ -1,60 +1,23 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
+    <h1>
+        Alta Bien
+    </h1>
 
-	<h1>Alta Bien</h1>
+    {% with {
+        form: form,
+        btnTxt: 'Crear'
+    }
+    %}
+    {{ block('formBlock', './blocks/formBlock.twig') }}
+    {% endwith %}
 
-	{% with {
-    form: form,
-    btnTxt: 'Crear'
-  }%}
-	{{ block('formBlock', './blocks/formBlock.twig') }}
-	{% endwith %}
-
-	<a href="{{ path('bien_index') }}" class="btn btn-sm btn-outline-primary">
-		Volver al listado de bienes
-	</a>
-	<a href="{{ path('bienes_homepage') }}" class="btn btn-sm btn-outline-primary">
-		Volver al menú principal
-	</a>
-
-
+    <a href="{{ path('bien_index') }}" class="btn btn-sm btn-outline-primary">
+        Volver al listado de bienes
+    </a>
+    <a href="{{ path('bienes_homepage') }}"
+        class="btn btn-sm btn-outline-primary">
+        Volver al menú principal
+    </a>
 {% endblock %}
-
-{#
-	{% block javascripts %}
-	    <script src="https://ewecdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	    <script>
-	        $('#bienbundle_bien_tipo').change(function () {
-	            var tipoSelector = $(this);
-	
-	            // solicita las ramas del tipo seleccionado
-	            $.ajax({
-	                url: "{{ path('bien_list_ramas') }}",
-	                type: "GET",
-	                dataType: "JSON",
-	                data: {
-	                    idtipo: tipoSelector.val()
-	                },
-	                success: function (ramas) {
-	                    var ramaSelect = $("#bienesbundle_bien_rama");
-	
-	                    // Remove current options
-	                    ramaSelect.html('');
-	
-	                    // Empty value ...
-	                    ramaSelect.append('<option value> Select a rama de ' + tipoSelector.find("option:selected").text() + ' ...</option>');
-	
-	
-	                    $.each(ramas, function (key, rama) {
-	                        ramaSelect.append('<option value="' + rama.id + '">' + rama.name + '</option>');
-	                    });
-	                },
-	                error: function (err) {
-	                    alert("An error ocurred while loading data ...");
-	                }
-	            });
-	        });
-	    </script>
-	{% endblock %}
-	*/ #}

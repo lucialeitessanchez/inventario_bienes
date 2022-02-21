@@ -1,21 +1,25 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-    <ul>
+   
     <h1>Nueva factura</h1>
     <h3>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
+    {% with {
+        form: form,
+        btnTxt: 'Crear'
+    }%}
+	{{ block('formBlock', './blocks/formBlock.twig') }}
+	{% endwith %}
 
 
 
-        <br> <ul>  <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <input type="submit" class="btn btn-outline-primary" value="Nueva factura"></a>
-                {{ form_end(form) }}
-                <a href="{{ path('factura_index') }}" class="btn btn-outline-primary"> Volver al listado de facturas </a>
-                <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary"> Volver al menú principal </a>
-            </div>
-        </ul>
-    </h3> </ul>
-    </ul>
+    <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+        <input type="submit" class="btn btn-outline-primary" value="Nueva factura"></a>
+        {{ form_end(form) }}
+        <a href="{{ path('factura_index') }}" class="btn btn-outline-primary"> Volver al listado de facturas </a>
+        <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary"> Volver al menú principal </a>
+    </div>
+      
+    </h3> 
+  
 {% endblock %}
