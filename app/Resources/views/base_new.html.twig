@@ -1,10 +1,9 @@
 <!doctype html>
 <html lang="en">
 
-	{%  
-    set currentPath = path(app.request.attributes.get('_route'),
-    app.request.attributes.get('_route_params')) 
-%}
+{% set currentPath = path(app.request.attributes.get('_route')) %}
+{% set userWeb = currentPath|split('/') %}
+{% set linkInternetCable = "http://#{app.request.host}/#{userWeb[1]}/internetycable/web" %}
 
 
 	<head>
@@ -47,7 +46,7 @@
 						<a class="nav-link" href="{{ path('user_index') }}">Usuarios<span class="sr-only">(current)</span>
 						</a>
 					</li>
-					{% if currentPath == "/~hugo/inventario_bienes/web/bien/" %}
+						{% if currentPath ends with "/inventario_bienes/web/bien/" %}
 						<li class="nav-item active">
 							<a class="nav-link" href="{{ path('bien_new') }}">Alta nuevo bien
 								<span class="sr-only">(current)</span>
@@ -61,8 +60,7 @@
 							</a>
 						</li>
 					{% endif %}
-
-
+	
 					<!-- Dropdown -->
 					
 					<li class="nav-item dropdown">
@@ -71,12 +69,12 @@
 							Sistemas Externos
 						</a>
 						<div class="dropdown-menu" >
-							<a class="dropdown-item" target="_blank" href="http://10.3.17.203/~lucia/internetycable/web">Internet y cable, facturas</a>
+							<a class="dropdown-item" target="_blank" href={{linkInternetCable}}>Internet y cable, facturas</a>
 						</div>
 					<div/>
 					</li>
 					
-					{% if currentPath == "/~hugo/inventario_bienes/web/bien/" %}
+					{% if currentPath ends with "/inventario_bienes/web/bien/" %}
 						<li>
 							{{ block('searchBlock', './blocks/searchBlock.twig') }}
 						</li>
@@ -225,4 +223,8 @@
 		
 	}
 </style>
+<script>
 
+
+
+</script>
