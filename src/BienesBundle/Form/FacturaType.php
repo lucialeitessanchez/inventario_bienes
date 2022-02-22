@@ -5,6 +5,7 @@ namespace BienesBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class FacturaType extends AbstractType
 {
@@ -13,7 +14,11 @@ class FacturaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('numeroFactura')->add('fecha')->add('montoUnitario')->add('montoTotal')->add('descripcion')->add('tipoAdquisicion')->add('proveedor');
+        $builder->add('numeroFactura')->add('fecha', DateType::class, [
+            'label' => 'Fecha de Vencimiento'
+            ,'widget' => 'single_text'
+            ,'html5' => true
+        ])->add('montoUnitario')->add('montoTotal')->add('descripcion')->add('tipoAdquisicion')->add('proveedor');
     }/**
      * {@inheritdoc}
      */

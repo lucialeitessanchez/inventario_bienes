@@ -64,14 +64,18 @@
 
 
 					<!-- Dropdown -->
+					
 					<li class="nav-item dropdown">
+					<div class="dropdown" >
 						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 							Sistemas Externos
 						</a>
-						<div class="dropdown-menu">
-							<a target="_blank" href="http://10.3.17.203/~lucia/internetycable/web">Internet y cable, facturas</a>
+						<div class="dropdown-menu" >
+							<a class="dropdown-item" target="_blank" href="http://10.3.17.203/~lucia/internetycable/web">Internet y cable, facturas</a>
 						</div>
+					<div/>
 					</li>
+					
 					{% if currentPath == "/~hugo/inventario_bienes/web/bien/" %}
 						<li>
 							{{ block('searchBlock', './blocks/searchBlock.twig') }}
