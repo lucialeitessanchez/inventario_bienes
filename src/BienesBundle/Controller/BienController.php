@@ -327,15 +327,15 @@ class BienController extends Controller
         //$pdf = $this->container->get("white_october.tcpdf")->create('vertical', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         // si estás en un controlador, usa:
         $pdf = $this->get("white_october.tcpdf")->create('vertical', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->SetAuthor('Our Code World');
-        $pdf->SetTitle(('Our Code World Title'));
-        $pdf->SetSubject('Our Code World Subject');
+        $pdf->SetAuthor('Informatica MIGyD');
+        $pdf->SetTitle(('Listado Bienes'));
+        $pdf->SetSubject('Listado Bienes');
         $pdf->setFontSubsetting(true);
         $pdf->SetFont('helvetica', '', 11, '', true);
         //$pdf->SetMargins(20,20,40, true);
         $pdf->AddPage();
 
-        $filename = 'ourcodeworld_pdf_demo';
+        $filename = $campo.'Listado_Bienes';
         $em = $this->getDoctrine()->getManager();
         $biens = $em->getRepository('BienesBundle:Bien')->findAll();
         
