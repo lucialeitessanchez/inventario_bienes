@@ -102,7 +102,7 @@ class DefaultController extends Controller
 
         //firmas
         if($responsable->getFuncionario()){ //si es funcionario solo aparece el mismo, no necesita autorizacion
-        $txtF="\n\n\n ............................................ \n Firma Respomsable - ".$responsable->getNombre();
+        $txtF="\n\n\n ............................................ \n Firma Responsable - ".$responsable->getNombre();
         $pdf->Write(0,$txtF,'',0,'',true, 0,false,false,0);
         }
         else{
@@ -179,6 +179,8 @@ class DefaultController extends Controller
       $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0);
       $pdf->Write(3, ' ', '', 0, 'R', true, 0, false, false, 0); 
       $pdf->Write(0, $txt2.$txt3.$txt4.$txt5.$txt6.$txt7, '', 0, 'J', true, 0, false, false, 0);
+      $txtF="\n\n\n\n\n .......................................................... \n Firma Responsable - ".$bien->getResponsable();
+        $pdf->Write(0,$txtF,'',0,'C',true, 0,false,false,0);
       
       //$pdf->Image('imagenes/logo ministerio-negro_sin fondo.png');
      // $pdf->Image('imagenes/logo ministerio-negro_sin fondo.png', 30, 140, 120, 15, 'PNG','' , '', true, 150, '', false, false, 0, false, false, false);
