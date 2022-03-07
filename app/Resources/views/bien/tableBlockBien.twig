@@ -62,7 +62,11 @@
 						<tr style="display: none" name="hideRow" id="hideRow{{loop.index}}">
 							<td colspan="12" class="text-left p-2" style="background: #d5dee3">
 								<div class="collapse" name"collapsediv" id="collapsediv{{loop.index}}">
-									{{ bien.responsable }}
+									{% for responsable in responsables %}
+									{% if  bien.responsable == responsable.nombre  %}		
+										 {{ responsable.responsableArea }} \ {{ bien.responsable }}
+										{% endif %}
+									{% endfor %}
 								</div>
 							</td>
 						</tr>

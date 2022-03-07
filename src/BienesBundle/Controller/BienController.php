@@ -37,8 +37,12 @@ class BienController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $biens = $em->getRepository('BienesBundle:Bien')->findAll();
+        $responsables = $em->getRepository('BienesBundle:Responsable')->findAll();
+       // $responsables = $em->getRepository('BienesBundle:Responsable')->find($biens->getResponsable());
+
         return $this->render('bien/index.html.twig', array(
-            'biens' => $biens
+            'biens' => $biens,
+            'responsables' => $responsables
         ));
     }
 
