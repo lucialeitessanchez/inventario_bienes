@@ -50,6 +50,14 @@ class Bien
     private $estado;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="consumible", type="boolean")
+     */
+    private $consumible;
+
+
+    /**
      * @var string
      *
      * @ORM\Column(name="usuario", type="string", length=50)
