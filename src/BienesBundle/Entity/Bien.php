@@ -52,7 +52,7 @@ class Bien
     /**
      * @var bool
      *
-     * @ORM\Column(name="consumible", type="boolean")
+     * @ORM\Column(name="consumible", type="boolean", nullable=true)
      */
     private $consumible;
 
@@ -101,6 +101,30 @@ class Bien
     private $factura;
 
 
+
+    /**
+     * Set consumible
+     *
+     * @param boolean $consumible
+     *
+     * @return Bien
+     */
+    public function setConsumible($consumible)
+    {
+        $this->consumible = $consumible;
+
+        return $this;
+    }
+
+    /**
+     * Get consumible
+     *
+     * @return bool
+     */
+    public function getConsumible()
+    {
+        return $this->consumible;
+    }
 
     /**
      * Get id

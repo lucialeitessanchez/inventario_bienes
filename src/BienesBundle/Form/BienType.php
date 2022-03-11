@@ -39,9 +39,11 @@ class BienType extends AbstractType
         //$builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
         $builder->add('tipo');
         $builder->add('rama');
+        $builder->add('consumible');
+        
     }
 
-
+  
 
     /**
      * {@inheritdoc}
