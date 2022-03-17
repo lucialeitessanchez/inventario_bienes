@@ -17,4 +17,42 @@
 	{{ form_start(delete_form) }}
 	<input type="submit" value="Eliminar" class="btn btn-sm btn-outline-danger">
 </a>
-{{ form_end(delete_form) }}</div>{% endblock %}
+{{ form_end(delete_form) }}</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $('#bienesbundle_bien_tipo').change(function () {
+            var tipoSelector = $(this);
+            
+            // Solicite las rama del tipo seleccionado.
+            $.ajax({
+                url: "{{ path('bien_list_ramas') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    tipoid: tipoSelector.val()
+                },
+                success: function (ramas) {
+                    var ramaSelect = $("#bienesbundle_bien_rama");
+
+                    // Eliminar opciones actuales
+                    ramaSelect.html('');
+                    
+                    // Valor vacío...
+                    ramaSelect.append('<option value> Seleccione una rama del tipo ' + tipoSelector.find("option:selected").text() + ' ...</option>');
+                    
+                    
+                    $.each(ramas, function (key, rama) {
+                        ramaSelect.append('<option value="' + rama.id + '">' + rama.name + '</option>'); //ojo aca capaz va nombreRama
+                    });
+                },
+                error: function (err) {
+                    alert("Ocurrio un problema con la loading data ...");
+                }
+            });
+        });
+    </script>
+
+
+{% endblock %}
+

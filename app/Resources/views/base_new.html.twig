@@ -1,12 +1,6 @@
 <!doctype html>
 <html lang="en">
 
-	{%  
-    set currentPath = path(app.request.attributes.get('_route'),
-    app.request.attributes.get('_route_params')) 
-%}
-
-
 	<head>
 		<title>
 			{% block title %}Sistema de bienes patrimoniales SEIyG
@@ -25,91 +19,8 @@
 
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-md navbar-light fixed-top">
-			<a class="navbar-brand" href="https://www.santafe.gob.ar"><img src="https://www.santafe.gob.ar/assets/standard/images/gob-santafe.png"></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarCollapse">
-				<ul id="ulbar" class="navbar-nav mr-auto">
-
-					<li class="nav-item active">
-						<a class="nav-link" href="{{ path('proveedor_index') }}">Proveedor
-							<span class="sr-only">(current)</span>
-						</a>
-					</li>
-					<li class="nav-item active">
-						<a class="nav-link" href="{{ path('factura_index') }}">Factura
-							<span class="sr-only">(current)</span>
-						</a>
-					</li>
-					<li class="nav-item active">
-						<a class="nav-link" href="{{ path('user_index') }}">Usuarios<span class="sr-only">(current)</span>
-						</a>
-					</li>
-					{% if currentPath == "/~hugo/inventario_bienes/web/bien/" %}
-						<li class="nav-item active">
-							<a class="nav-link" href="{{ path('bien_new') }}">Alta nuevo bien
-								<span class="sr-only">(current)</span>
-							</a>
-						</li>
-
-					{% else %}
-						<li class="nav-item active">
-							<a class="nav-link" href="{{ path('bien_index') }}">Bien
-								<span class="sr-only">(current)</span>
-							</a>
-						</li>
-					{% endif %}
-
-
-					<!-- Dropdown -->
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-							Sistemas Externos
-						</a>
-						<div class="dropdown-menu">
-							<a target="_blank" href="http://10.3.17.203/~lucia/internetycable/web">Internet y cable, facturas</a>
-						</div>
-					</li>
-					{% if currentPath == "/~hugo/inventario_bienes/web/bien/" %}
-						<li>
-							{{ block('searchBlock', './blocks/searchBlock.twig') }}
-						</li>
-					{% endif %}
-				</ul>
-
-				<ul class="list-inline custom-icon-middle">
-
-					<li class="list-inline-item">
-
-						<a href="#" class="dropdown-toggle" id="dropdownMenuLinkPerson" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title={{ app.user.username }}>
-							<i class="material-icons">person</i>
-						</a>
-
-						<div class="dropdown-menu custom-dropdown-menu-right" aria-labelledby="dropdownMenuLinkPerson">
-							<a class="dropdown-item" href="#">Usuario:
-								{{ app.user.username }}</a>
-							<a class="dropdown-item" href="#">Roles:
-								{% for rol in app.user.roles  %}
-									{{ rol }}
-								{% endfor %}
-							</a>
-							<a class="dropdown-item" href="{{ path('logout') }}">Cerrar Sesión</a>
-						</div>
-
-					</li>
-
-					<li class="list-inline-item">
-						<a href="{{ path('logout') }}" title="Salir">
-							<i class="material-icons">exit_to_app</i>
-						</a>
-					</li>
-
-				</ul>
-
-			</div>
-		</nav>
+		
+		{{ block("headerBlock", "./blocks/headerBlock.twig") }}
 
 		<main role="main" class="container container-fluid" style="max-width: 95%">
 
@@ -200,6 +111,7 @@
 	/* bar */
 	::-webkit-scrollbar {
 		width: 8px;
+		
 	}
 
 	/* Track */
@@ -211,10 +123,17 @@
 	::-webkit-scrollbar-thumb {
 		background: #cccccc;
 		border-radius: 6px;
+		  background-clip: padding-box;
 	}
 
 	/* Handle on hover */
 	::-webkit-scrollbar-thumb:hover {
 		background: #8f8f8f;
+		
 	}
 </style>
+<script>
+
+
+
+</script>

@@ -1,145 +1,94 @@
 {% extends 'base_new.html.twig' %}
 {% block body %}
+    <h1>
+        Listado de bienes MIGyD
+    </h1>
 
-	<h1>Listado de bienes MIGyD</h1>
+    {% with {
+        pdfp: false
+    }%}
+    {{ block('tableBlockBien', './bien/tableBlockBien.twig') }}
+    {% endwith %}
 
-	{% with {'pdfp': false}%}
-	{{ block("tableBlockBien", "./bien/tableBlockBien.twig") }}
-	{% endwith %}
+    <div class="btn-group btn-group-sm m-3"
+        role="group"
+        aria-label="Basic outlined example">
+        <a href="{{ path('bien_new') }}" class="btn btn-outline-primary">
+            Alta nuevo bien
+        </a>
+        <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
+            Volver al menú principal
+        </a>
+        <a id="generarPdf" class="btn btn-outline-primary text-info">
+            Generar PDF
+        </a>
+    </div>
 
-	<div class="btn-group btn-group-sm m-3" role="group" aria-label="Basic outlined example">
+    <script>
+        // -------- hide rows -----------------
+        document.querySelectorAll('td[name="tdResp"]').forEach((tdClick, i) => {
+           tdClick.addEventListener("click", () => { 
+               let hideR = document.getElementById (`hideRow${ i + 1 }`); 
+               if (hideR.style.display == 'none') hideR.style.display = "table-row" 
+               else hideR.style.display = 'none'
+            });
+        }); 
+        // ------------------------- 
+        // -------- generar pdf ----------------- 
+        let inputVal = '*'; 
+        let radioCheck = "*";
+        let gpdf = document.getElementById('generarPdf');
+  
+        gpdf.addEventListener("click", () => { 
+           if (inputVal == '') inputVal = '*'
+            window.open(`${window.location.href}pdf_bien/${inputVal}/${radioCheck}`);
+        });
+        
+       
+        // ------ search box --------------- 
+        let input = document.getElementById('searchbox'); 
+        let rowsData = Array.prototype.slice.call(document.getElementById("tableData").rows).filter((r,i) => (i % 2) === 0);
+       
+         input.addEventListener('input', (e) => { 
+            inputVal = e.target.value.toUpperCase();
+            let matcher = new RegExp (`${inputVal}`);
+            rowsData.map((row) => { 
+                let description = row.cells[3].innerHTML.toUpperCase() 
+                let usuario = row.cells[2].innerHTML.toUpperCase() 
+                let lugar = row.cells[4].innerHTML.toUpperCase()
 
-		<a href="{{ path('bien_new') }}" class="btn btn-outline-primary">
-			Alta nuevo bien
-		</a>
-		<a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
-			Volver al menú principal
-		</a>
-		<a id="generarPdf" class="btn btn-outline-primary text-info ">
-			Generar PDF
-		</a>
+                 switch (radioCheck) { 
+                            case 'getResponsable': 
+                                if (usuario.match(matcher))
+                                row.style.display = "table-row" 
+                                else row.style.display = "none"
+                            break 
+                            case 'getDescripcion': 
+                                if (description.match(matcher)) row.style.display = "table-row" 
+                                else row.style.display = "none" 
+                            break
+                            case 'getUbicacion': 
+                                if (lugar.match(matcher)) row.style.display = "table-row" 
+                                else row.style.display = "none"
+                            break 
+                            default: 
+                            break 
+                }   
+            })
+        })  
+               
 
-	</div>
+        // ------ selector ---------------
+        document.querySelectorAll('input[name="selectorCampo"]').forEach((elem) => {
+           
+            elem.addEventListener("change", (e) => { 
+                radioCheck = e.target.value;
+                input.disabled = false 
+                input.placeholder = 'Buscar' 
+            }); 
+        })
+       
+     
 
-
-	<script>
-		// -------- hide rows -----------------
-document.querySelectorAll('td[name="tdResp"]').forEach((tdClick, i) => {
-tdClick.addEventListener("click", () => {
-let hideR = document.getElementById (`hideRow${
-i + 1
-}`);
-if (hideR.style.display == 'none') 
-hideR.style.display = "table-row"
- else 
-hideR.style.display = 'none'
-
-
-
-
-
-});
-});
-// -------------------------
-// -------- generar pdf -----------------
-let inputVal = '*';
-let radioCheck = "*";
-
-let gpdf = document.getElementById('generarPdf');
-
-// filtro = inputVal, campo = radioCheck
-gpdf.addEventListener("click", () => {
-if (inputVal == '') 
-inputVal = '*'
-
-
-
-
-
-console.log(`${
-window.location.href
-}pdf_bien/${inputVal}/${radioCheck}`)
-
-window.open(`${
-window.location.href
-}pdf_bien/${inputVal}/${radioCheck}`)
-});
-// ---------------------------------
-
-// ------ search box ---------------
-let input = document.getElementById('searchbox');
-let rowsData = Array.prototype.slice.call(document.getElementById("tableData").rows).filter((r, i) => (i % 2) === 0);
-
-
-input.addEventListener('input', (e) => {
-inputVal = e.target.value.toUpperCase()
-let matcher = new RegExp (`${inputVal}`);
-rowsData.map((row) => {
-let description = row.cells[3].innerHTML.toUpperCase()
-let usuario = row.cells[2].innerHTML.toUpperCase()
-let lugar = row.cells[4].innerHTML.toUpperCase()
-
-switch (radioCheck) {
-case 'getResponsable':
-if (usuario.match(matcher)) 
-row.style.display = "table-row"
- else 
-row.style.display = "none"
-
-
-
-
-
-break
-case 'getDescripcion':
-if (description.match(matcher)) 
-row.style.display = "table-row"
- else 
-row.style.display = "none"
-
-
-
-
-
-break
-case 'getUbicacion':
-if (lugar.match(matcher)) 
-row.style.display = "table-row"
- else 
-row.style.display = "none"
-
-
-
-
-
-break
-default:
-break
-}
-
-
-/*	if ((description.match(matcher)) || (usuario.match(matcher)) || (lugar.match(matcher))) {
-			row.style.display = "table-row"
-		} else 
-			row.style.display = "none" */
-})
-});
-// -------------------------------
-
-// ------ selector ---------------
-if (document.querySelector('input[name="selectorCampo"]')) {
-
-document.querySelectorAll('input[name="selectorCampo"]').forEach((elem) => {
-
-elem.addEventListener("change", (e) => {
-radioCheck = e.target.value;
-input.disabled = false
-input.placeholder = 'Buscar'
-});
-});
-}
-
-// ---------------------------------------------------
-	</script>
-
+    </script>
 {% endblock %}

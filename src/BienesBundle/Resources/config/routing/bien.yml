@@ -35,7 +35,7 @@ prestamo_bien:
 
 bien_list_ramas:
   path: /get-ramas-from-tipo
-  defaults: { _controller: "BienesBundle:Bien:listRamasOfTipoAction" }
+  defaults: { _controller: "BienesBundle:Bien:listRamasOfTipo" }
   methods: GET
 
 bien_buscarDireccion:
@@ -47,3 +47,4 @@ pdf_bien:
   path: /pdf_bien/{filtro}/{campo}
   defaults: { _controller: "BienesBundle:Bien:returnPDFResponseFromHTML" }
   methods: [GET, POST]
+

@@ -9,6 +9,7 @@
 					<th>Codigo</th>
 					<th>Usuario</th>
 					<th>Descripcion</th>
+					<th>Tipo</th>
 					<th id="ordeninput">Ubicacion
 					</th>
 					<th>Estado</th>
@@ -33,6 +34,7 @@
 						<td name="tdResp" id="resp{{loop.index}}" style="cursor: pointer" data-toggle="collapse" href="#collapsediv{{loop.index}}">{{ bien.responsable }}</td>
 
 						<td>{{ bien.descripcion }}</td>
+						<td>{{ bien.tipo }}</td>
 						<td>{{ bien.ubicacion }}</td>
 						<td>{{ bien.estado }}</td>
 						<td>
@@ -62,7 +64,11 @@
 						<tr style="display: none" name="hideRow" id="hideRow{{loop.index}}">
 							<td colspan="12" class="text-left p-2" style="background: #d5dee3">
 								<div class="collapse" name"collapsediv" id="collapsediv{{loop.index}}">
-									Leonardo Lentini / Alejandra Robledo / Carolina Tarre
+									{% for responsable in responsables %}
+									{% if  bien.responsable == responsable.nombre  %}		
+										 {{ responsable.responsableArea }} \ {{ bien.responsable }}
+										{% endif %}
+									{% endfor %}
 								</div>
 							</td>
 						</tr>

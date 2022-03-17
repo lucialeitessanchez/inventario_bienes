@@ -1,5 +1,6 @@
 {% block formBlock %}
     {{ form_start(form) }}
+    
     {% for campo, obj in form %}
         {% if loop.last %}
         {% elseif campo == "password" %}
@@ -27,7 +28,19 @@
             </div>
           </div>  
         {% endif %}
+
+        {{ form_row(form.consumible, {
+  "help": "Help text",
+  "required": true,
+  "disabled": false,
+  "params": {
+    "container": false
+  }
+}) }}
     {% endfor %}
+ 
+  
+
     <input class="btn btn-outline-primary mb-2 btn-sm" type="submit" value="{{btnTxt|default('Cargar')}}" />
   {{ form_end(form) }}
 
