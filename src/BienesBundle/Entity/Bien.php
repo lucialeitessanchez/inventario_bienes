@@ -50,6 +50,14 @@ class Bien
     private $estado;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="consumible", type="boolean", nullable=true)
+     */
+    private $consumible;
+
+
+    /**
      * @var string
      *
      * @ORM\Column(name="usuario", type="string", length=50)
@@ -93,6 +101,30 @@ class Bien
     private $factura;
 
 
+
+    /**
+     * Set consumible
+     *
+     * @param boolean $consumible
+     *
+     * @return Bien
+     */
+    public function setConsumible($consumible)
+    {
+        $this->consumible = $consumible;
+
+        return $this;
+    }
+
+    /**
+     * Get consumible
+     *
+     * @return bool
+     */
+    public function getConsumible()
+    {
+        return $this->consumible;
+    }
 
     /**
      * Get id

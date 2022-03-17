@@ -25,6 +25,40 @@ use Symfony\Component\Validator\Constraints as Assert;
 class BienController extends Controller
 {
 
+     /**
+     * Devuelve una cadena JSON con las ramas de los tipos con la identificación proporcionada.
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function listRamasOfTipoAction(Request $request)
+    {
+        // Obtener administrador de entidades y repositorio
+        $em = $this->getDoctrine()->getManager();
+        $ramasRepository = $em->getRepository("BienesBundle:Rama");
+        
+        // Busque las ramas que pertenecen al tipo con el ID dado como parámetro GET "tipoid"
+        $ramas = $ramasRepository->createQueryBuilder("q")
+            ->where("q.tipo = :tipoid")
+            ->setParameter("tipoid", $request->query->get("tipoid"))
+            ->getQuery()
+            ->getResult();
+        
+        // Serializar en una matriz los datos que necesitamos, en este caso solo el nombre y la identificación
+        // Nota: también puede usar un serializador, para fines explicativos, lo haremos manualmente
+        $responseArray = array();
+        foreach($ramas as $rama){
+            $responseArray[] = array(
+                "id" => $rama->getId(),
+                "name" => $rama->getNombreRama()
+            );
+        }
+        
+        // Matriz de retorno con estructura de las ramas de la identificación de tipo proporcionada
+        return new JsonResponse($responseArray);
+
+       
+    }
 
     /**
      * Lists all bien entities.
@@ -37,8 +71,12 @@ class BienController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $biens = $em->getRepository('BienesBundle:Bien')->findAll();
+        $responsables = $em->getRepository('BienesBundle:Responsable')->findAll();
+       // $responsables = $em->getRepository('BienesBundle:Responsable')->find($biens->getResponsable());
+
         return $this->render('bien/index.html.twig', array(
-            'biens' => $biens
+            'biens' => $biens,
+            'responsables' => $responsables
         ));
     }
 
@@ -192,7 +230,7 @@ class BienController extends Controller
             return $this->redirectToRoute('bien_edit', array('id' => $bien->getId()));
         }
 
-        return $this->render('bien/edit.html.twig', array(
+        return $this->render('bien/index.html.twig', array(
             'bien' => $bien,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
