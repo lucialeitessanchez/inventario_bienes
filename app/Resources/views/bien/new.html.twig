@@ -42,7 +42,7 @@
                     ramaSelect.html('');
                     
                     // Valor vacío...
-                    ramaSelect.append('<option value> Select a rama of ' + tipoSelector.find("option:selected").text() + ' ...</option>');
+                    ramaSelect.append('<option value> Seleccione rama de ' + tipoSelector.find("option:selected").text() + ' ...</option>');
                     
                     
                     $.each(ramas, function (key, rama) {
@@ -50,7 +50,7 @@
                     });
                 },
                 error: function (err) {
-                    alert("An error ocurred while loading data ...");
+                    alert("Ocurio loading data ...");
                 }
             });
         });

@@ -54,11 +54,10 @@ class BienController extends Controller
             );
         }
         
-        // Matriz de retorno con estructura de los barrios de la identificación de ciudad proporcionada
+        // Matriz de retorno con estructura de las ramas de la identificación de tipo proporcionada
         return new JsonResponse($responseArray);
 
-        // e.g
-        // [{"id":"3","name":"Treasure Island"},{"id":"4","name":"Presidio of San Francisco"}]
+       
     }
 
     /**
