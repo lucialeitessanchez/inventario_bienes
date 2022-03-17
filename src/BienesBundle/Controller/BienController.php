@@ -25,6 +25,41 @@ use Symfony\Component\Validator\Constraints as Assert;
 class BienController extends Controller
 {
 
+     /**
+     * Devuelve una cadena JSON con las ramas de los tipos con la identificación proporcionada.
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function listRamasOfTipoAction(Request $request)
+    {
+        // Obtener administrador de entidades y repositorio
+        $em = $this->getDoctrine()->getManager();
+        $ramasRepository = $em->getRepository("BienesBundle:Rama");
+        
+        // Busque las ramas que pertenecen al tipo con el ID dado como parámetro GET "tipoid"
+        $ramas = $ramasRepository->createQueryBuilder("q")
+            ->where("q.tipo = :tipoid")
+            ->setParameter("tipoid", $request->query->get("tipoid"))
+            ->getQuery()
+            ->getResult();
+        
+        // Serializar en una matriz los datos que necesitamos, en este caso solo el nombre y la identificación
+        // Nota: también puede usar un serializador, para fines explicativos, lo haremos manualmente
+        $responseArray = array();
+        foreach($ramas as $rama){
+            $responseArray[] = array(
+                "id" => $rama->getId(),
+                "name" => $rama->getNombreRama()
+            );
+        }
+        
+        // Matriz de retorno con estructura de los barrios de la identificación de ciudad proporcionada
+        return new JsonResponse($responseArray);
+
+        // e.g
+        // [{"id":"3","name":"Treasure Island"},{"id":"4","name":"Presidio of San Francisco"}]
+    }
 
     /**
      * Lists all bien entities.
