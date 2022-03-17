@@ -9,6 +9,7 @@
 					<th>Codigo</th>
 					<th>Usuario</th>
 					<th>Descripcion</th>
+					<th>Tipo</th>
 					<th id="ordeninput">Ubicacion
 					</th>
 					<th>Estado</th>
@@ -33,6 +34,7 @@
 						<td name="tdResp" id="resp{{loop.index}}" style="cursor: pointer" data-toggle="collapse" href="#collapsediv{{loop.index}}">{{ bien.responsable }}</td>
 
 						<td>{{ bien.descripcion }}</td>
+						<td>{{ bien.tipo }}</td>
 						<td>{{ bien.ubicacion }}</td>
 						<td>{{ bien.estado }}</td>
 						<td>
