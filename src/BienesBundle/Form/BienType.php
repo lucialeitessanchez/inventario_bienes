@@ -45,7 +45,7 @@ class BienType extends AbstractType
     {
 
         $builder->add('fechaAlta', DateType::class, [
-            'label' => 'Fecha de Vencimiento',
+            'label' => 'Fecha de Alta',
             'widget' => 'single_text',
             'html5' => true
         ])->add('descripcion')->add('estado')->add('proveedor')->add(('responsable'))->add('ubicacion')
