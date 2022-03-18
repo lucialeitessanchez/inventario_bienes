@@ -230,7 +230,7 @@ class BienController extends Controller
             return $this->redirectToRoute('bien_edit', array('id' => $bien->getId()));
         }
 
-        return $this->render('bien/index.html.twig', array(
+        return $this->render('bien/edit.html.twig', array(
             'bien' => $bien,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
