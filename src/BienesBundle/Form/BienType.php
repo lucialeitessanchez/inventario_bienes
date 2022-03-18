@@ -8,6 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormInterface;
@@ -52,7 +54,7 @@ class BienType extends AbstractType
         //$builder->addEventListener(FormEvents::PRE_SET_DATA, array($this,'onPreSetData'));
         //$builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
       
-        $builder->add('consumible');
+        $builder->add('consumible',CheckboxType::class,['label'=>'Es Consumible','required' => false,'empty_data'=>'0','value'=>1]);
 
         // Agregue 2 detectores de eventos para el formulario
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
