@@ -9,9 +9,9 @@
 					<th>Codigo</th>
 					<th>Usuario</th>
 					<th>Descripcion</th>
-					<th>Tipo</th>
 					<th id="ordeninput">Ubicacion
 					</th>
+					<th>Tipo</th>
 					<th>Estado</th>
 					<th>Fecha de alta</th>
 					{% if not pdfp  %}
@@ -34,8 +34,8 @@
 						<td name="tdResp" id="resp{{loop.index}}" style="cursor: pointer" data-toggle="collapse" href="#collapsediv{{loop.index}}">{{ bien.responsable }}</td>
 
 						<td>{{ bien.descripcion }}</td>
-						<td>{{ bien.tipo }}</td>
 						<td>{{ bien.ubicacion }}</td>
+						<td>{{ bien.tipo }}</td>
 						<td>{{ bien.estado }}</td>
 						<td>
 							{% if bien.fechaAlta %}
