@@ -54,7 +54,7 @@ class BienType extends AbstractType
         //$builder->addEventListener(FormEvents::PRE_SET_DATA, array($this,'onPreSetData'));
         //$builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
       
-        $builder->add('consumible',CheckboxType::class,['label'=>'Es Consumible','required' => false,'empty_data'=>'0','value'=>1]);
+        $builder->add('consumible',CheckboxType::class,['label'=>'Es Consumible? ','required' => false,'empty_data'=>'0','value'=>1]);
 
         // Agregue 2 detectores de eventos para el formulario
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
