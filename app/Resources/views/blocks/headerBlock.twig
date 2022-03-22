@@ -29,17 +29,34 @@
 					</li>
 					
 						<li class="nav-item active">
-							<a class="nav-link" href="{{ path('bien_new') }}">Alta nuevo bien
-								<span class="sr-only">(current)</span>
-							</a>
-						</li>
-
-						<li class="nav-item active">
 							<a class="nav-link" href="{{ path('bien_index') }}">Bien
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
-					
+					{% if is_granted('ROLE_ADMIN') %}
+						<li class="nav-item active">
+							<a class="nav-link" href="{{ path('responsable_index') }}">Responsable<span class="sr-only">(current)</span>
+							</a>
+						</li>
+					{% endif %}
+							{% if is_granted('ROLE_ADMIN') %}
+						<li class="nav-item active">
+							<a class="nav-link" href="{{ path('responsablearea_index') }}">Responsable Area<span class="sr-only">(current)</span>
+							</a>
+						</li>
+					{% endif %}
+						{% if is_granted('ROLE_ADMIN') %}
+						<li class="nav-item active">
+							<a class="nav-link" href="{{ path('tipo_index') }}">Tipo<span class="sr-only">(current)</span>
+							</a>
+						</li>
+					{% endif %}
+						{% if is_granted('ROLE_ADMIN') %}
+						<li class="nav-item active">
+							<a class="nav-link" href="{{ path('rama_index') }}">Rama<span class="sr-only">(current)</span>
+							</a>
+						</li>
+					{% endif %}
 	
 					<!-- Dropdown -->
 					
