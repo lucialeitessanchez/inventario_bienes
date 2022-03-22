@@ -76,4 +76,8 @@ security:
         #- { path: ^/factura, roles: ROLE_ADMIN }
         #- { path: ^/bien, roles: ROLE_SUPERADMIN }
         - { path: ^/user, roles: ROLE_ADMIN }
+        - { path: ^/responsable, roles: ROLE_ADMIN }
+        - { path: ^/responsableArea, roles: ROLE_ADMIN }
+        - { path: ^/tipo, roles: ROLE_ADMIN }
+        - { path: ^/rama, roles: ROLE_ADMIN }
         - { path: ^/, roles: ROLE_USUARIO }
