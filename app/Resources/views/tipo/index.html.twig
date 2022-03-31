@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Tipos list</h1>
+    <h1>Tipos </h1>
     <h2>
     <table>
         <thead>
@@ -35,8 +35,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('tipo_new') }}">Create a new tipo</a>
+            <a href="{{ path('tipo_new') }}">Create nuevo tipo</a>
         </li>
+         <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
+            Volver al menú principal</a>
     </ul>
 </h2>
 {% endblock %}

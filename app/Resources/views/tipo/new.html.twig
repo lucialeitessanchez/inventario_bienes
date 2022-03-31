@@ -4,14 +4,19 @@
 
     <h1>Tipo creation</h1>
     <h2>
-    {% with {'form': edit_form, 'btnTxt': 'Crear'}%}
-  {{ block("formBlock", "./blocks/formBlock.twig") }}
-  {% endwith %}
+  
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Crear" />
+    {{ form_end(form) }}
+
 
     <ul>
         <li>
-            <a href="{{ path('tipo_index') }}">Back to the list</a>
+            <a href="{{ path('tipo_index') }}">Volver al listado</a>
         </li>
+         <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
+            Volver al menú principal</a>
     </ul>
 </h2>
 {% endblock %}
