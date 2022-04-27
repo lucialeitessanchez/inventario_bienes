@@ -1,24 +1,24 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-	<h1>Editar Bien</h1>
+	<h1>Baja Bien</h1>
 
-      
-	
-	{% with {'form': edit_form, 'btnTxt': 'Guardar'}%}
-	{{ block("formBlock", "./blocks/formBlock.twig") }}
+ 
+	{% with {'form': edit_form, 'btnTxt': 'Dar de baja Bien'}%}
+	{{ block("formBlock", "./blocks/formBlockbaja.twig") }}
+       {{ form_widget(form.motivoBaja, { 'attr': {'style': 'display:block'} }) }}
 	{% endwith %}
 
+  
 
 	<div class="btn-group mb-3" role="group" aria-label="Basic outlined example">
-		
+		</a>
 	<a href="{{ path('bien_index') }}" class="btn btn-sm btn-outline-primary">
 		Volver al listado de bienes
 	</a>
 	{{ form_start(delete_form) }}
 	<input type="submit" value="Eliminar" class="btn btn-sm btn-outline-danger">
 </a>
-
 {{ form_end(delete_form) }}</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -57,4 +57,3 @@
 
 
 {% endblock %}
-

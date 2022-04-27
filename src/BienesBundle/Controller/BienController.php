@@ -422,6 +422,26 @@ class BienController extends Controller
        
     }
 
+    //dar de baja un bien de manera logica
+    public function bajaAction(Request $request, Bien $bien)
+    {
+        $deleteForm = $this->createDeleteForm($bien);
+        $editForm = $this->createForm('BienesBundle\Form\BienType', $bien);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $bien->setEstado("Baja");
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('bien_index', array('id' => $bien->getId()));
+        }
+
+        return $this->render('bien/baja.html.twig', array(
+            'bien' => $bien,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
     
 
     

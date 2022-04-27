@@ -18,12 +18,9 @@
           </div>  
           
            {% endfor %}
-            {% elseif campo == "fechaBaja"%}
-           {{ form_widget(form.fechaBaja, { 'attr': {'style': 'display:none'} }) }}
         {% elseif campo == "consumible" %}
-        {{ form_row(form.consumible) }}
-       {% elseif campo == "motivoBaja"%}
-           {{ form_widget(form.motivoBaja, { 'attr': {'style': 'display:none'} }) }} {# si esta estiando o dando de alta tiene que estar oculto este campo#}
+    
+           {{ form_widget(form.consumible, { 'attr': {'style': 'display:none'} }) }} {# si esta estiando o dando de alta tiene que estar oculto este campo#}
         {% else %}
           <div class="form-row">
             <div class="form-group col-md-4">

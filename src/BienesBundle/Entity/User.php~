@@ -50,6 +50,14 @@ class User implements AdvancedUserInterface, \Serializable
     private $isActive;
 
     /**
+    * @ORM\OneToMany(targetEntity="Bien", mappedBy="usuario")
+    */
+    private $bienes;
+
+
+
+
+    /**
      * Get id
      *
      * @return int
