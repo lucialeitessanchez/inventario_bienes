@@ -53,7 +53,7 @@ class BienType extends AbstractType
 
     
       
-        $builder->add('consumible',CheckboxType::class);
+       // $builder->add('consumible',CheckboxType::class);
 
         // Agregue 2 detectores de eventos para el formulario
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
