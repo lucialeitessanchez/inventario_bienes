@@ -51,14 +51,19 @@ class BienType extends AbstractType
         ])->add('descripcion')->add('estado')->add('proveedor')->add(('responsable'))->add('ubicacion')
             ->add('factura');
 
-        //$builder->addEventListener(FormEvents::PRE_SET_DATA, array($this,'onPreSetData'));
-        //$builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
+    
       
         $builder->add('consumible',CheckboxType::class,['label'=>'Es Consumible? ','required' => false,'empty_data'=>'0','value'=>1]);
 
         // Agregue 2 detectores de eventos para el formulario
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
         $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
+
+        $builder->add('motivoBaja')->add('fechaBaja', DateType::class, [
+            'label' => 'Fecha de baja',
+            'widget' => 'single_text',
+            'html5' => true
+        ]);    
         
     }
  

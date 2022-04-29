@@ -18,6 +18,11 @@ bien_edit:
   defaults: { _controller: "BienesBundle:Bien:edit" }
   methods: [GET, POST]
 
+bien_baja:
+  path: /{id}/baja
+  defaults: { _controller: "BienesBundle:Bien:baja" }
+  methods: [GET, POST]
+
 bien_delete:
   path: /{id}/delete
   defaults: { _controller: "BienesBundle:Bien:delete" }

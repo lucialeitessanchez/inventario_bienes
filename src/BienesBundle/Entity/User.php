@@ -50,6 +50,14 @@ class User implements AdvancedUserInterface, \Serializable
     private $isActive;
 
     /**
+    * @ORM\OneToMany(targetEntity="Bien", mappedBy="usuario")
+    */
+    private $bienes;
+
+
+
+
+    /**
      * Get id
      *
      * @return int
@@ -228,4 +236,38 @@ class User implements AdvancedUserInterface, \Serializable
 
 
 
+
+    /**
+     * Add biene
+     *
+     * @param \BienesBundle\Entity\Bien $biene
+     *
+     * @return User
+     */
+    public function addBiene(\BienesBundle\Entity\Bien $biene)
+    {
+        $this->bienes[] = $biene;
+
+        return $this;
+    }
+
+    /**
+     * Remove biene
+     *
+     * @param \BienesBundle\Entity\Bien $biene
+     */
+    public function removeBiene(\BienesBundle\Entity\Bien $biene)
+    {
+        $this->bienes->removeElement($biene);
+    }
+
+    /**
+     * Get bienes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBienes()
+    {
+        return $this->bienes;
+    }
 }

@@ -47,9 +47,13 @@
 		<a href="{{ path('bien_index') }}" class="btn btn-sm btn-outline-primary">
 			Volver al listado de bienes
 		</a>
+		{% if bien.estado == "Baja" %}
+		<a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary disabled" >editar</a>
+		{% else %}
 		<a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-sm btn-outline-primary">
 			Editar
 		</a>
+		{% endif %}
 		{{ form_start(delete_form) }}
 		<input type="submit" class="btn btn-sm btn-outline-danger" value="Borrar"></a>
 	{{ form_end(delete_form) }}
