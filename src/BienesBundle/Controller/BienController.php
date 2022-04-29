@@ -18,6 +18,8 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use BienesBundle\Reporte\BienPDF;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * Bien controller.
  *
@@ -110,7 +112,7 @@ class BienController extends Controller
         $form = $this->createForm('BienesBundle\Form\BienType', $bien);
         $form->handleRequest($request);
         $bien->setCodigo(0);
-        
+        $user=$this->getUser();
     
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -123,6 +125,8 @@ class BienController extends Controller
             $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo
             $tipe=($repository->find($bien->getTipo()));//esto no se que me devuelve
             $tipo=intval($tipe->getId());//me devuelve el objeto que coincide con el nombre de la rama que es el que obtengo en el toString de tipo
+
+            $bien->setUsuario($user);
 
             $em->persist($bien);
             $em->flush();
