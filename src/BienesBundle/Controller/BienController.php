@@ -9,6 +9,7 @@ use BienesBundle\Entity\Rama;
 use BienesBundle\Entity\Responsable;
 use BienesBundle\Entity\ResponsableArea;
 use BienesBundle\Entity\Tipo;
+use BienesBundle\Entity\User;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -112,7 +113,8 @@ class BienController extends Controller
         $form = $this->createForm('BienesBundle\Form\BienType', $bien);
         $form->handleRequest($request);
         $bien->setCodigo(0);
-        $user=$this->getUser();
+        //$user=$this->getUser();
+       
     
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -126,7 +128,9 @@ class BienController extends Controller
             $tipe=($repository->find($bien->getTipo()));//esto no se que me devuelve
             $tipo=intval($tipe->getId());//me devuelve el objeto que coincide con el nombre de la rama que es el que obtengo en el toString de tipo
 
-            $bien->setUsuario($user);
+           // $repository = $this->getDoctrine()->getRepository(User::class);
+           // $usuario=$repository->findBy();
+           // $bien->setUsuario($user);
 
             $em->persist($bien);
             $em->flush();

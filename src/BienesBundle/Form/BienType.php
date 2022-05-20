@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormInterface;
@@ -59,11 +60,12 @@ class BienType extends AbstractType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
         $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
 
-        $builder->add('motivoBaja')->add('fechaBaja', DateType::class, [
-            'label' => 'Fecha de baja',
-            'widget' => 'single_text',
-            'html5' => true
-        ]);    
+        $builder->add('motivoBaja',TextType::class,['required' => false])
+                ->add('fechaBaja', DateType::class, [
+                        'label' => 'Fecha de baja',
+                        'widget' => 'single_text',
+                        'html5' => true,'required' =>false
+                    ]);    
         
     }
  
