@@ -519,7 +519,7 @@ class BienController extends Controller
     public function bajaAction(Request $request, Bien $bien)
     {
         $deleteForm = $this->createDeleteForm($bien);
-        $editForm = $this->createForm('BienesBundle\Form\BienType', $bien);
+        $editForm = $this->createForm('BienesBundle\Form\BienBajaType', $bien);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
