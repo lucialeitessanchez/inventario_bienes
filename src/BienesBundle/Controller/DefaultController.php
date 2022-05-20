@@ -79,6 +79,7 @@ class DefaultController extends Controller
         $txt3="\nAgente: ".$responsable->getNombre();
         $txt4="\n\nDatos de adquisición";
         $txt5="\nFecha adquisición: ".$fecha;
+        $txtb="\nTipo de adquisición: ".$factura->getTipoAdquisicion();
         $txt6="\nProveedor ".$bien->getProveedor();
         if ($factura) {
             $txt7="\nNº de Factura: ".$factura->getNumeroFactura();
