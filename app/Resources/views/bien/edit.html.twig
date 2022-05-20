@@ -55,6 +55,38 @@
                 }
             });
         });
+
+        //filtro de proveedor-factura
+         $('#bienesbundle_bien_proveedor').change(function () {
+            var proveedorSelector = $(this);
+            
+            // Solicite las facturas del proveedor seleccionado.
+            $.ajax({
+                url: "{{ path('bien_list_facturas') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    proveedorid: proveedorSelector.val()
+                },
+                success: function (facturas) {
+                    var facturaSelect = $("#bienesbundle_bien_factura");
+
+                    // Eliminar opciones actuales
+                    facturaSelect.html('');
+                    
+                    // Valor vacío...
+                    facturaSelect.append('<option value> Seleccione una factura de ' + proveedorSelector.find("option:selected").text() + ' ...</option>');
+                    
+                    
+                    $.each(facturas, function (key, factura) {
+                        facturaSelect.append('<option value="' + factura.id + '">' + factura.name + '</option>'); 
+                    });
+                },
+                error: function (err) {
+                    alert("Ocurio un problema loading data ...");
+                }
+            });
+        });
     </script>
 
 

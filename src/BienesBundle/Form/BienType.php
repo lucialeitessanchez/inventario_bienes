@@ -3,6 +3,7 @@
 namespace BienesBundle\Form;
 
 use BienesBundle\BienesBundle;
+use BienesBundle\Entity\Proveedor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -69,7 +70,7 @@ class BienType extends AbstractType
         
     }
  
-    protected function addElements(FormInterface $form, Tipo $tipo = null) {
+    protected function addElements(FormInterface $form, Tipo $tipo = null,Proveedor $proveedor = null) {
         // 4. Agregar el elemento de rama
         $form->add('tipo', EntityType::class, array(
             'required' => true,
@@ -100,6 +101,36 @@ class BienType extends AbstractType
             'class' => 'BienesBundle:Rama',
             'choices' => $ramas
         ));
+   
+        //logica de proveedor y factura
+        $form->add('proveedor', EntityType::class, array(
+            'required' => true,
+            'data' => $proveedor,
+            'placeholder' => 'Seleccionar Proveedor..',
+            'class' => 'BienesBundle:Proveedor'
+        ));
+        
+        $facturas = array();
+
+        if ($proveedor) {
+            // Obtener ramas del tipo si hay un tipo seleccionada
+            $repoFactura = $this->em->getRepository('BienesBundle:Factura');
+            
+            $facturas = $repoFactura->createQueryBuilder("q")
+                ->where("q.proveedor = :proveedorid")
+                ->setParameter("proveedorid", $proveedor->getId())
+                ->getQuery()
+                ->getResult();
+        }
+        
+        // Agregue el campo rama con los datos adecuados
+        $form->add('factura', EntityType::class, array(
+            'required' => true,
+            'placeholder' => 'Seleccione proveedor primero ...',
+            'class' => 'BienesBundle:Factura',
+            'choices' => $facturas
+        ));
+   
     }
 
     function onPreSubmit(FormEvent $event) {
@@ -109,7 +140,11 @@ class BienType extends AbstractType
         // Busque la ciudad seleccionada y conviértala en una entidad
         $city = $this->em->getRepository('BienesBundle:Tipo')->find($data['tipo']);
         
-        $this->addElements($form, $city);
+       
+
+        $prov = $this->em->getRepository('BienesBundle:Proveedor')->find($data['proveedor']);
+        
+        $this->addElements($form, $city, $prov);
     }
 
     function onPreSetData(FormEvent $event) {
@@ -118,8 +153,8 @@ class BienType extends AbstractType
 
         // Cuando creas una nueva persona, la ciudad siempre está vacía
         $tipo = $bien->getTipo() ? $bien->getTipo() : null;
-        
-        $this->addElements($form, $tipo);
+        $proveedor = $bien->getProveedor() ? $bien->getProveedor() : null;
+        $this->addElements($form, $tipo, $proveedor);
     }
 
     /**

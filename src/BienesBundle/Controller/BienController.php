@@ -63,6 +63,44 @@ class BienController extends Controller
        
     }
 
+
+    //funcion de filtro para proveedor-factura
+
+    /**
+     * Devuelve una cadena JSON con las ramas de los tipos con la identificación proporcionada.
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function listFacturasOfProveedorAction(Request $request)
+    {
+        // Obtener administrador de entidades y repositorio
+        $em = $this->getDoctrine()->getManager();
+        $facturasRepository = $em->getRepository("BienesBundle:Factura");
+        
+        // Busque las facturas que pertenecen al proveedor con el ID dado como parámetro GET "proveedorid"
+        $facturas = $facturasRepository->createQueryBuilder("q")
+            ->where("q.proveedor = :proveedorid")
+            ->setParameter("proveedorid", $request->query->get("proveedorid"))
+            ->getQuery()
+            ->getResult();
+        
+        // Serializar en una matriz los datos que necesitamos, en este caso solo el nombre y la identificación
+        // Nota: también puede usar un serializador, para fines explicativos, lo haremos manualmente
+        $responseArray = array();
+        foreach($facturas as $factura){
+            $responseArray[] = array(
+                "id" => $factura->getId(),
+                "name" => $factura->getNumeroFactura()
+            );
+        }
+        
+        // Matriz de retorno con estructura de las facturas de la identificación de proveedor proporcionada
+        return new JsonResponse($responseArray);
+
+       
+    }
+
     /**
      * Lists all bien entities.
      *
@@ -451,7 +489,8 @@ class BienController extends Controller
         $txt3="\nAgente: ".$responsable->getNombre();
         $txt4="\n\nDatos de adquisición";
         $txt5="\nFecha adquisición: ".$fecha;
-        $txt6="\nProveedor ".$bien->getProveedor();
+        $txt5b="\nTipo de adquisición: ".$factura->getTipoAdquisicion();
+        $txt6="\nProveedor: ".$bien->getProveedor();
         if ($factura) {
             $txt7="\nNº de Factura: ".$factura->getNumeroFactura();
             $txt9="\nImporte unitario: $".$factura->getMontoUnitario();
@@ -471,7 +510,7 @@ class BienController extends Controller
         $txt16="\nCaracteristica: ".$bien->getTipo()." ".$bien->getRama();
 
         //cuerpo del texto
-        $pdf->Write(0, $txt.$txt2.$txt3.$txt4.$txt5.$txt6.$txt7.$txt9.$txt10.$txt11.$txt12.$txt12b.$txt13.$txt14.$txt15.$txt16, '', 0, '', true, 0, false, false, 0);
+        $pdf->Write(0, $txt.$txt2.$txt3.$txt4.$txt5.$txt5b.$txt6.$txt7.$txt9.$txt10.$txt11.$txt12.$txt12b.$txt13.$txt14.$txt15.$txt16, '', 0, '', true, 0, false, false, 0);
 
         //firmas
         if($responsable->getFuncionario()){ //si es funcionario solo aparece el mismo, no necesita autorizacion

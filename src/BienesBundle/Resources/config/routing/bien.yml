@@ -43,6 +43,11 @@ bien_list_ramas:
   defaults: { _controller: "BienesBundle:Bien:listRamasOfTipo" }
   methods: GET
 
+bien_list_facturas:
+  path: /get-facturas-from-proveedor
+  defaults: { _controller: "BienesBundle:Bien:listFacturasOfProveedor" }
+  methods: GET
+
 bien_buscarDireccion:
   path: /{palabra}/direccion
   defaults: { _controller: "BienesBundle:Bien:buscarPorDireccion" }
