@@ -1,14 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_new.html.twig' %}
 
 {% block body %}
-    <h1>Tipos list</h1>
+    <h1>Tipos listado</h1>
     <h2>
     <table>
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Tipo</th>
-                <th>Nombretipo</th>
+                <th>Nombre tipo</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,24 +19,19 @@
                 <td>{{ tipo.tipo }}</td>
                 <td>{{ tipo.nombreTipo }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('tipo_show', { 'id': tipo.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('tipo_edit', { 'id': tipo.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="{{ path('tipo_show', { 'id': tipo.id }) }}" button type="button" class="btn btn-primary" >Ver</a>
+                    <a href="{{ path('tipo_edit', { 'id': tipo.id }) }}" button type="button" class="btn btn-primary">Editar</a>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('tipo_new') }}">Create a new tipo</a>
-        </li>
-    </ul>
+   
+        <a href="{{ path('tipo_new') }}" button type="button" class="btn btn-outline-primary">Crear nuevo tipo</a>
+      
+   
 </h2>
 {% endblock %}

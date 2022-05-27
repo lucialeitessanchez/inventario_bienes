@@ -1,17 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_new.html.twig' %}
 
 {% block body %}
 
-    <h1>Tipo creation</h1>
+    <h1>Crear un nuevo tipo</h1>
     <h2>
-    {% with {'form': edit_form, 'btnTxt': 'Crear'}%}
+    {% with { 'btnTxt': 'Crear'}%}
   {{ block("formBlock", "./blocks/formBlock.twig") }}
   {% endwith %}
 
-    <ul>
-        <li>
-            <a href="{{ path('tipo_index') }}">Back to the list</a>
-        </li>
-    </ul>
+
+       
+            <a href="{{ path('tipo_index') }}" button type="button" class="btn btn-outline-primary">Volver</a>
+    
+    
 </h2>
 {% endblock %}
