@@ -579,6 +579,69 @@ class BienController extends Controller
         ));
     }
     
+    //seccion consumible
+    public function newconsumibleAction(Request $request)
+    {
+        $bien = new Bien();
+        $form = $this->createForm('BienesBundle\Form\BienconsumibleType', $bien);
+        $form->handleRequest($request);
+        $bien->setCodigo(0);
+        //$user=$this->getUser();
+       
+    
 
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $bien->setCodigo(0);
+
+            //le pido a la base de datos los objetos tipo
+            $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo
+            $tipe=($repository->find($bien->getTipo()));//esto no se que me devuelve
+            $tipo=intval($tipe->getId());//me devuelve el objeto que coincide con el nombre de la rama que es el que obtengo en el toString de tipo
+
+           // $repository = $this->getDoctrine()->getRepository(User::class);
+           // $usuario=$repository->findBy();
+           // $bien->setUsuario($user);
+
+            $em->persist($bien);
+            $em->flush();
+
+
+            //le pido a la base de datos los objetos rama
+            $repository2 = $this->getDoctrine()->getRepository(Rama::class);
+            $rame=($repository2->find($bien->getRama())); //me devuelve el objeto que coincide con el nombre de la rama que es el que obtengo en el toString de rama
+
+
+            $rama=intval($rame->getId());// transformo el id de la rama en un entero
+
+
+           $bienId=intval($bien->getId());
+
+            $codigo = ($tipo."-".$rama."-".$bienId);
+            $bien->setCodigo($codigo);
+
+            $bienId=intval($bien->getId());
+
+            $codigo = ($tipo."-".$rama."-".$bienId);
+            $bien->setCodigo($codigo);
+
+            //aca iria lo del usuario
+
+            //por las dudas para actualizar el id de bien
+            $em->persist($bien);
+            $em->flush();
+
+
+            return $this->redirectToRoute('bien_index');
+        }
+
+
+        return $this->render('bien/newconsumible.html.twig', array(
+            'bien' => $bien,
+            'form' => $form->createView(),
+        ));
+    }
     
 }

@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use Symfony\Component\Form\FormEvent;
@@ -20,9 +20,10 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityManagerInterface;
 
 use BienesBundle\Entity\Tipo;
+//use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 
-class BienType extends AbstractType
+class BienconsumibleType extends AbstractType
 {
     
 
@@ -46,16 +47,10 @@ class BienType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $builder->add('fechaAlta', DateType::class, [
-            'label' => 'Fecha de Alta',
-            'widget' => 'single_text',
-            'html5' => true
-        ])->add('descripcion')->add('estado')->add('proveedor')->add(('responsable'))->add('ubicacion')
+        $builder->add('descripcion',TextType::class,['label'=> 'Producto: '])->add('estado',IntegerType::class, ['label'=>'Cantidad: '])->add('proveedor')->add(('responsable'))->add('ubicacion')
             ->add('factura')->add('tipo')->add('rama');
 
     
-      
-       // $builder->add('consumible',CheckboxType::class);
 
         // Agregue 2 detectores de eventos para el formulario
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
