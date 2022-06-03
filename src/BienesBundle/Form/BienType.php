@@ -51,7 +51,10 @@ class BienType extends AbstractType
             'widget' => 'single_text',
             'html5' => true
         ])->add('descripcion')->add('estado')->add('proveedor')->add(('responsable'))->add('ubicacion')
-            ->add('factura');
+            ->add('factura')->add('tipo')->add('rama')->add('consumible', CheckboxType::class, [
+                'label'    => '¿Es consumible? ',
+                'required' => false,
+            ]);
 
     
       
@@ -75,7 +78,7 @@ class BienType extends AbstractType
         $form->add('tipo', EntityType::class, array(
             'required' => true,
             'data' => $tipo,
-            'placeholder' => 'Seleccionar Tipo..',
+            'placeholder' => 'Seleccionar Tipo',
             'class' => 'BienesBundle:Tipo'
         ));
         
@@ -106,7 +109,7 @@ class BienType extends AbstractType
         $form->add('proveedor', EntityType::class, array(
             'required' => true,
             'data' => $proveedor,
-            'placeholder' => 'Seleccionar Proveedor..',
+            'placeholder' => 'Seleccionar Proveedor',
             'class' => 'BienesBundle:Proveedor'
         ));
         
