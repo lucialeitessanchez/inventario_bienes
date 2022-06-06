@@ -42,7 +42,13 @@ class UserProvider implements UserProviderInterface {
             $email = $usuario->getEmail();
             $salt = null;
             
-            $roles[] = 'ROLE_USUARIO';
+            if($usuario->getUsername() == 'admin'){ //especifico que el user admin le ponga el rol de administrador
+                $roles[] = 'ROLE_ADMIN';
+            }
+            else{
+                $roles[] = 'ROLE_USUARIO';
+            }
+            
             //throw new UnsupportedUserException(sprintf('"%s" No tiene permisos para acceder al sistema "$s".', print_r($roles,1),$sistema->getSistemaNombre()));
             $user = new User($id,$username, $password, $email, $roles,1);
             return $user;

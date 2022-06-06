@@ -151,9 +151,10 @@ class BienController extends Controller
         $form = $this->createForm('BienesBundle\Form\BienType', $bien);
         $form->handleRequest($request);
         $bien->setCodigo(0);
-        //$user=$this->getUser();
+        
        
-    
+        $user=$this->getUser();
+        $usuario = $repository = $this->getDoctrine()->getRepository(User::class)->find($user->getId());
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -169,7 +170,8 @@ class BienController extends Controller
            // $repository = $this->getDoctrine()->getRepository(User::class);
            // $usuario=$repository->findBy();
            // $bien->setUsuario($user);
-
+            $bien->setUsuario($usuario);
+            
             $em->persist($bien);
             $em->flush();
 
@@ -219,6 +221,7 @@ class BienController extends Controller
         $deleteForm = $this->createDeleteForm($bien);
         $em = $this->getDoctrine()->getManager(); // de aca para abajo hago todo para que se actualice el codigo
 
+       
 
         //le pido a la base de datos los objetos tipo
         $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo
@@ -244,6 +247,7 @@ class BienController extends Controller
         $codigo = ($tipo."-".$rama."-".$bienId);
         $bien->setCodigo($codigo);
 
+       
         $em->persist($bien);
         $em->flush();
 

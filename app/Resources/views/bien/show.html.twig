@@ -33,7 +33,7 @@
 				</tr>
 				<tr>
 					<th>Persona que cargo:</th>
-					<td>{{ bien.usuario }}</td>
+					<td> {{ bien.usuario.username|default('Informatica/Jimena') }}</td>
 				</tr>
 			</tbody>
 		</table>
