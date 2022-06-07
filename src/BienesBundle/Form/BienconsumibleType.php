@@ -47,8 +47,13 @@ class BienconsumibleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $builder->add('descripcion',TextType::class,['label'=> 'Producto: '])->add('estado',IntegerType::class, ['label'=>'Cantidad: '])->add('proveedor')->add(('responsable'))->add('ubicacion')
-            ->add('factura')->add('tipo')->add('rama');
+        $builder->add('descripcion',TextType::class,
+        ['label'=> 'Producto: '
+        ])
+        ->add('estado',IntegerType::class, 
+        ['label'=>'Cantidad: '
+        ])
+        ->add('proveedor')->add(('responsable'))->add('ubicacion')->add('factura')->add('tipo')->add('rama');
 
     
 

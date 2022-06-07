@@ -42,7 +42,7 @@ class UserProvider implements UserProviderInterface {
             $email = $usuario->getEmail();
             $salt = null;
             
-            if($usuario->getUsername() == 'admin'){ //especifico que el user admin le ponga el rol de administrador
+            if($usuario->getUsername() == 'jimena'){ //especifico que el user admin le ponga el rol de administrador
                 $roles[] = 'ROLE_ADMIN';
             }
             else{
