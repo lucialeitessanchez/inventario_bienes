@@ -62,11 +62,11 @@ class UserProvider implements UserProviderInterface {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
         }
         
-        /*$c = $this->em->getConnection();
+        $c = $this->em->getConnection();
         $sql = 'SET @user_name = :username;';
         $c->executeQuery($sql,array('username' => $user->getUsername()));
         $sql = 'SET @dir_ip_cliente= :client_ip;';
-        $c->executeQuery($sql,array('client_ip' => $this->request->getClientIp()));*/
+        $c->executeQuery($sql,array('client_ip' => $this->request->getClientIp()));
 
         return $user;
     }

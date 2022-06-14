@@ -401,7 +401,7 @@ class BienController extends Controller
      * @return JsonResponse
      */
 
-   
+    //PDF DE IMPRESIONES TOTALES
     public function returnPDFResponseFromHTMLAction($filtro, $campo){
       
         // set_time_limit (30); descomenta esta línea según tus necesidades
@@ -409,15 +409,15 @@ class BienController extends Controller
         //$pdf = $this->container->get("white_october.tcpdf")->create('vertical', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         // si estás en un controlador, usa:
         $pdf = $this->get("white_october.tcpdf")->create('vertical', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->SetAuthor('Our Code World');
-        $pdf->SetTitle(('Our Code World Title'));
-        $pdf->SetSubject('Our Code World Subject');
+        $pdf->SetAuthor('Bienes');
+        $pdf->SetTitle(('Listado de bienes'));
+        $pdf->SetSubject('');
         $pdf->setFontSubsetting(true);
         $pdf->SetFont('helvetica', '', 11, '', true);
         //$pdf->SetMargins(20,20,40, true);
         $pdf->AddPage();
 
-        $filename = 'ourcodeworld_pdf_demo';
+        $filename = 'bienes'.$filtro;
         $em = $this->getDoctrine()->getManager();
         $biens = $em->getRepository('BienesBundle:Bien')->findAll();
         
