@@ -77,6 +77,7 @@ class DefaultController extends Controller
         $txt="\n\n\nResponsable de la tenencia, guarda y conservación";
         $txt2="\nOficina: ".$responsable->getCargo();
         $txt3="\nAgente: ".$responsable->getNombre();
+        $txt31="\nUbicación: ".$bien->getUbicacion();
         $txt4="\n\nDatos de adquisición";
         $txt5="\nFecha adquisición: ".$fecha;
         $txt5b="\nTipo de adquisición: ".$factura->getTipoAdquisicion();
@@ -99,7 +100,7 @@ class DefaultController extends Controller
         $txt16="\nCaracteristica: ".$bien->getTipo()." ".$bien->getRama();
 
         //cuerpo del texto
-        $pdf->Write(0, $txt.$txt2.$txt3.$txt4.$txt5.$txt5b.$txt6.$txt7.$txt9.$txt10.$txt11.$txt12.$txt13.$txt14.$txt15.$txt16, '', 0, '', true, 0, false, false, 0);
+        $pdf->Write(0, $txt.$txt2.$txt3.$txt31.$txt4.$txt5.$txt5b.$txt6.$txt7.$txt9.$txt10.$txt11.$txt12.$txt13.$txt14.$txt15.$txt16, '', 0, '', true, 0, false, false, 0);
 
         //firmas
         if($responsable->getFuncionario()){ //si es funcionario solo aparece el mismo, no necesita autorizacion
