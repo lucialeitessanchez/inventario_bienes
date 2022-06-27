@@ -10,4 +10,8 @@ namespace BienesBundle\Repository;
  */
 class ResponsableRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function _findAllOrderedByNombre()
+    {
+        return $this->buildQuery()->orderBy('q.nombre', 'ASC');
+    }
 }

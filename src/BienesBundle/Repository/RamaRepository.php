@@ -10,4 +10,8 @@ namespace BienesBundle\Repository;
  */
 class RamaRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function _findAllOrderedByNombre()
+    {
+        return $this->buildQuery()->orderBy('u.nombreRama', 'ASC');
+    }
 }

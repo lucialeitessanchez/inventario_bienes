@@ -4,6 +4,11 @@ namespace BienesBundle\Form;
 
 use BienesBundle\BienesBundle;
 use BienesBundle\Entity\Proveedor;
+use BienesBundle\Repository\ProveedorRepository;
+use BienesBundle\Repository\ResponsableRepository;
+use BienesBundle\Repository\TipoRepository;
+use BienesBundle\Repository\RamaRepository;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -50,11 +55,12 @@ class BienType extends AbstractType
             'label' => 'Fecha de Alta',
             'widget' => 'single_text',
             'html5' => true
-        ])->add('descripcion')->add('estado')->add('proveedor')->add(('responsable'))->add('ubicacion')
+        ])->add('descripcion')->add('estado')->add('proveedor')
+        ->add(('responsable'))
+        ->add('ubicacion')
             ->add('factura')->add('tipo')->add('rama');
 
-    
-      
+            
        // $builder->add('consumible',CheckboxType::class);
 
         // Agregue 2 detectores de eventos para el formulario
@@ -70,13 +76,28 @@ class BienType extends AbstractType
         
     }
  
-    protected function addElements(FormInterface $form, Tipo $tipo = null,Proveedor $proveedor = null) {
+    protected function addElements(FormInterface $form, Tipo $tipo = null,Proveedor $proveedor = null,Responsable $responsable =null) {
+       
+       //para ordenar a los resopnsables por orden alfabetico, previo defini en responsable repository la consulta
+        $form->add('responsable', EntityType::class, array(
+            'required' => true,
+            'data' => $responsable,
+            'placeholder' => 'Seleccionar Responsable',
+            'class' => 'BienesBundle:Responsable',
+            'query_builder' => function (ResponsableRepository $er) {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.nombre', 'ASC');}
+        
+        ));
         // 4. Agregar el elemento de rama
         $form->add('tipo', EntityType::class, array(
             'required' => true,
             'data' => $tipo,
             'placeholder' => 'Seleccionar Tipo',
-            'class' => 'BienesBundle:Tipo'
+            'class' => 'BienesBundle:Tipo',
+            'query_builder' => function (TipoRepository $er) {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.nombreTipo', 'ASC');}
         ));
         
         // ramas vacías, a menos que haya un tipo seleccionado (Editar vista)
@@ -99,7 +120,11 @@ class BienType extends AbstractType
             'required' => true,
             'placeholder' => 'Seleccione tipo primero ...',
             'class' => 'BienesBundle:Rama',
+            'query_builder' => function (RamaRepository $er) {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.nombreRama', 'ASC');},
             'choices' => $ramas
+            
         ));
    
         //logica de proveedor y factura
@@ -107,8 +132,13 @@ class BienType extends AbstractType
             'required' => true,
             'data' => $proveedor,
             'placeholder' => 'Seleccionar Proveedor',
-            'class' => 'BienesBundle:Proveedor'
+            'class' => 'BienesBundle:Proveedor',
+            'query_builder' => function (ProveedorRepository $er) {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.nombre', 'ASC');}
+        
         ));
+        
         
         $facturas = array();
 
