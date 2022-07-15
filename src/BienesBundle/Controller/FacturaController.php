@@ -42,7 +42,7 @@ class FacturaController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($factura);
             $em->flush();
-
+              
             return $this->redirectToRoute('factura_show', array('id' => $factura->getId()));
         }
 

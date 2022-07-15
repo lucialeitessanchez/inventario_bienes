@@ -5,6 +5,8 @@ namespace BienesBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class ProveedorType extends AbstractType
 {
@@ -19,7 +21,16 @@ class ProveedorType extends AbstractType
         add('direccion')->
         add('localidad')->
         add('provincia')->
-        add('email');
+        add('email')->
+        add('organismo_publico', ChoiceType::class, 
+        ['label' => '¿Es un organismo publico?',
+            'choices'  => [
+                'Si' => true,
+                'No' => false,
+            ],
+        ]);
+
+    
     }/**
      * {@inheritdoc}
      */

@@ -37,6 +37,13 @@ class Tipo
     private $nombreTipo;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="idClasificacion", type="string")
+     */
+    private $idClasificacion;
+
+    /**
      * @ORM\OneToMany(targetEntity="Bien", mappedBy="bien")
      */
     private $bienes;

@@ -64,6 +64,13 @@ class Proveedor
      */
     private $email;
 
+        /**
+     * @var bool
+     *
+     * @ORM\Column(name="organismo_publico", type="boolean", nullable=true)
+     */
+    private $organismo_publico;
+
 
     /**
      * @ORM\OneToMany(targetEntity="Factura", mappedBy="proveedor")
