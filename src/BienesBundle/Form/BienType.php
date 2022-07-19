@@ -127,39 +127,42 @@ class BienType extends AbstractType
             
         ));
    
-        //logica de proveedor y factura
-        $form->add('proveedor', EntityType::class, array(
-            'required' => true,
-            'data' => $proveedor,
-            'placeholder' => 'Seleccionar Proveedor',
-            'class' => 'BienesBundle:Proveedor',
-            'query_builder' => function (ProveedorRepository $er) {
-                return $er->createQueryBuilder('u')
-                    ->orderBy('u.nombre', 'ASC');}
-        
-        ));
-        
-        
-        $facturas = array();
+      //logica de proveedor y factura
+      $form->add('proveedor', EntityType::class, array(
+        'required' => true,
+        'data' => $proveedor,
+        'placeholder' => 'Seleccionar Proveedor',
+        'class' => 'BienesBundle:Proveedor',
+        'query_builder' => function (ProveedorRepository $er) {
+            return $er->createQueryBuilder('u')
+                ->orderBy('u.nombre', 'ASC');}
+    
+    ));
+    
+    
+    $facturas = array();
 
-        if ($proveedor) {
-            // Obtener ramas del tipo si hay un tipo seleccionada
-            $repoFactura = $this->em->getRepository('BienesBundle:Factura');
-            
-            $facturas = $repoFactura->createQueryBuilder("q")
-                ->where("q.proveedor = :proveedorid")
-                ->setParameter("proveedorid", $proveedor->getId())
-                ->getQuery()
-                ->getResult();
-        }
+    if ($proveedor) {
+        // Obtener ramas del tipo si hay un tipo seleccionada
+        $repoFactura = $this->em->getRepository('BienesBundle:Factura');
         
-        // Agregue el campo rama con los datos adecuados
-        $form->add('factura', EntityType::class, array(
-            'required' => true,
-            'placeholder' => 'Seleccione proveedor primero ...',
-            'class' => 'BienesBundle:Factura',
-            'choices' => $facturas
-        ));
+        $facturas = $repoFactura->createQueryBuilder("q")
+            ->where("q.proveedor = :proveedorid")
+            ->setParameter("proveedorid", $proveedor->getId())
+            ->getQuery()
+            ->getResult();
+    }
+    
+    // Agregue el campo rama con los datos adecuados
+    $form->add('factura', EntityType::class, array(
+        'required' => true,
+        'placeholder' => 'Seleccione proveedor primero ...',
+        'class' => 'BienesBundle:Factura',
+        'choices' => $facturas
+    ));
+
+        
+        
    
     }
 

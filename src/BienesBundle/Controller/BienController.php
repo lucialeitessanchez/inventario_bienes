@@ -77,21 +77,26 @@ class BienController extends Controller
         // Obtener administrador de entidades y repositorio
         $em = $this->getDoctrine()->getManager();
         $facturasRepository = $em->getRepository("BienesBundle:Factura");
+        $facturasProveedor = $em->getRepository("BienesBundle:Proveedor"); //tengo todos los objetos proveedor
         
         // Busque las facturas que pertenecen al proveedor con el ID dado como parámetro GET "proveedorid"
         $facturas = $facturasRepository->createQueryBuilder("q")
-            ->where("q.proveedor = :proveedorid")
+            ->where("q.proveedor = :proveedorid ")
             ->setParameter("proveedorid", $request->query->get("proveedorid"))
             ->getQuery()
             ->getResult();
-        
+      
         // Serializar en una matriz los datos que necesitamos, en este caso solo el nombre y la identificación
         // Nota: también puede usar un serializador, para fines explicativos, lo haremos manualmente
         $responseArray = array();
         foreach($facturas as $factura){
+           $proveedor=$facturasProveedor->find($factura->getProveedor()); //buscos dentro de los objetos proveedor el que me coincide con el proveedor que tiene la factura
+
             $responseArray[] = array(
+                "esOrganismoPublico" => $proveedor->getOrganismoPublico(), 
                 "id" => $factura->getId(),
-                "name" => $factura->getNumeroFactura()
+                "name" => $factura->getNumeroFactura(),
+                
             );
         }
         
