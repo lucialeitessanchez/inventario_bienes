@@ -4,8 +4,19 @@
 
     <h1>Crear un nuevo tipo</h1>
     <h2>
+    Clasificacion de bien
+      <form action="{{ path('tipo_new')}}">
+  <br>  <select name="select">
+        <option value="BI">Bien Informatico</option>
+        <option value="BU">Bien de Uso</option>
+    </select>
+</form>  <br>
     {% with { 'btnTxt': 'Crear'}%}
   {{ block("formBlock", "./blocks/formBlock.twig") }}
+
+       
+
+
   {% endwith %}
 
 

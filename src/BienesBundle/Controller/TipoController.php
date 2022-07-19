@@ -39,6 +39,8 @@ class TipoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $tipoB=$request->get('select'); //obtengo lo que seleccion como BI o BU
+            $tipo->setIdClasificacion($tipoB);
             $em->persist($tipo);
             $em->flush();
 

@@ -78,10 +78,8 @@
                     
                 
                     $.each(facturas, function (key, factura) {
-                        console.log(factura.esOrganismoPublico);
-                        if(factura.esOrganismoPublico){
-        
-                            $("#bienesbundle_bien_factura").attr("disabled",true);
+                        if(factura.esOrganismoPublico){ //si es organismo publico
+                            $("#bienesbundle_bien_factura").attr("disabled",true); //desabilito la funcion de seleccionar factura
                         }
                         else{
                         $("#bienesbundle_bien_factura").attr("enabled",true);
