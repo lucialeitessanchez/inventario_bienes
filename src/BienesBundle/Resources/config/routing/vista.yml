@@ -1,0 +1,3 @@
+vista_index:
+    path:     /index
+    defaults: { _controller: "BienesBundle:Vista:index" }
