@@ -1,5 +1,44 @@
 {% extends 'base_new.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('css/estilos_vista.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block javascripts %}
 
+{% endblock %}
 {% block body %}
+
     <h1>Vista</h1>
+  
+            <nav id="menu">
+                <ul>
+                    <li><a href="#">Factura</a>
+                    <ul>
+                            <li><a href="{{ path('vista_factura_alta') }}">Alta Factura</a></li>
+                    </ul>
+                    </li>
+                    
+                    <li><a href="#">Compra/Adquisición</a>
+                    <ul>
+                            <li><a href="">Alta adquisición bien</a></li>
+                    </ul>
+                    </li>
+                    <li ><a href="#">Movimientos</a>
+                        <ul>
+                            <li><a href="#">Asignación</a></li>
+                            <li><a href="#">Préstamo</a></li>
+                            <li><a href="#">Devolución</a></li>
+                            <li><a href="#">....</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Administración</a>
+                        <ul>
+                            <li><a href="#">ABM Bien</a></li>
+                            <li><a href="#">ABM Proveedor</a></li>
+                            <li><a href="#">ABM Responsable</a></li>
+                            <li><a href="#">ABM Tipo Adquisición</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </nav>
 {% endblock %}

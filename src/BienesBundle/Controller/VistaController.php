@@ -22,4 +22,10 @@ class VistaController extends Controller
         return $this->render('vista/index.html.twig');
     }
 
+    
+    public function altaAction()
+    {
+
+        return $this->render('vista/vista_factura_alta.html.twig');
+    }
 }
