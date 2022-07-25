@@ -7,38 +7,41 @@
 {% endblock %}
 {% block body %}
 
-    <h1>Vista</h1>
-  
-            <nav id="menu">
-                <ul>
-                    <li><a href="#">Factura</a>
+    <h1>Vistas</h1>
+    <div class="container">
+        <div class="form-row"><div class="col-md-12">
+                <nav id="menu" class="navbar">
                     <ul>
-                            <li><a href="{{ path('vista_factura_alta') }}">Alta Factura</a></li>
-                    </ul>
-                    </li>
-                    
-                    <li><a href="#">Compra/Adquisición</a>
-                    <ul>
-                            <li><a href="">Alta adquisición bien</a></li>
-                    </ul>
-                    </li>
-                    <li ><a href="#">Movimientos</a>
-                        <ul>
-                            <li><a href="#">Asignación</a></li>
-                            <li><a href="#">Préstamo</a></li>
-                            <li><a href="#">Devolución</a></li>
-                            <li><a href="#">....</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Administración</a>
-                        <ul>
-                            <li><a href="#">ABM Bien</a></li>
-                            <li><a href="#">ABM Proveedor</a></li>
-                            <li><a href="#">ABM Responsable</a></li>
-                            <li><a href="#">ABM Tipo Adquisición</a></li>
-                        </ul>
-                    </li>
+                        <li><a href="#">Factura</a>
+                            <ul>
+                                <li><a href="{{ path('vista_factura_alta') }}">Alta Factura</a></li>
+                            </ul>
+                        </li>
 
-                </ul>
-            </nav>
+                        <li><a href="#">Compra/Adquisición</a>
+                            <ul>
+                                <li><a href="{{ path('vista_bien_alta') }}">Alta adquisición bien</a></li>
+                            </ul>
+                        </li>
+                        <li ><a href="#">Movimientos</a>
+                            <ul>
+                                <li><a href="{{ path('vista_01_asignacion') }}">Asignación</a></li>
+                                <li><a href="#">Préstamo</a></li>
+                                <li><a href="#">Devolución</a></li>
+                                <li><a href="#">....</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Administración</a>
+                            <ul>
+                                <li><a href="#">ABM Bien</a></li>
+                                <li><a href="#">ABM Proveedor</a></li>
+                                <li><a href="#">ABM Responsable</a></li>
+                                <li><a href="#">ABM Tipo Adquisición</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+            </div></div>
+    </div>
+</nav>
 {% endblock %}

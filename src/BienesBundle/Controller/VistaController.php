@@ -10,22 +10,30 @@ use Symfony\Component\HttpFoundation\Request;
  * Rama controller.
  *
  */
-class VistaController extends Controller
-{
+class VistaController extends Controller {
+
     /**
      * Lists all rama entities.
      *
      */
-    public function indexAction()
-    {
+    public function indexAction() {
 
         return $this->render('vista/index.html.twig');
     }
 
-    
-    public function altaAction()
-    {
+    public function altaFacturaAction() {
 
         return $this->render('vista/vista_factura_alta.html.twig');
     }
+
+    public function altaBienAction() {
+
+        return $this->render('vista/vista_01_ingreso.html.twig');
+    }
+    
+    public function asignacionBienAction() {
+
+        return $this->render('vista/vista_02_asignacion.html.twig');
+    }
+
 }

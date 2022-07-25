@@ -3,6 +3,14 @@ vista_index:
     defaults: { _controller: "BienesBundle:Vista:index" }
     
 vista_factura_alta:
-    path:     /alta
-    defaults: { _controller: "BienesBundle:Vista:alta" }
+    path:     /altaFactura
+    defaults: { _controller: "BienesBundle:Vista:altaFactura" }
+    
+vista_bien_alta:
+    path:     /altaBien
+    defaults: { _controller: "BienesBundle:Vista:altaBien" }
+    
+vista_01_asignacion:
+    path:     /asignacionBien
+    defaults: { _controller: "BienesBundle:Vista:asignacionBien" }
     
