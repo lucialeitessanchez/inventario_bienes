@@ -16,7 +16,7 @@
                         <label>Código identificación</label>
                         <input class="form-control" type="text" id="" name="" size="15" disabled="true">
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label>Nro comprobante Devolucion Reparador</label>
                         <input class="form-control" type="text" id="" name="" size="15" disabled="true">
                     </div>
@@ -92,41 +92,43 @@
                                     <input class="form-control" type="text" id="" name="" disabled="true">
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label>Tipo de Reparación</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label>Reparador</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label>Fecha envio</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true" >
+                                </div>
+
+                            </div>
                         </div>
                     </div></div>
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label>Tipo de Reparación</label>
-                       <select class="form-control">
-                            <option value="">Reparación directa</option>
-                            <option value="">Reparación por garantía</option>
-                        </select>
+                        <label>Fecha devolución</label>
+                        <input class="form-control" type="text" id="" name=""  >
                     </div>
-                    <div class="form-group col-md-5">
-                        <label>Reparador</label>
-                       <select class="form-control">
-                            <option value="">Reparador 1</option>
-                            <option value="">Reparador 2</option>
-                            <option value="">Reparador 3</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label>Fecha envio</label>
-                        <input class="form-control" type="text" id="" name="" >
-                    </div>
-                    
-                    <div class="form-group col-md-3">
-                        <label>Fecha estimada devolución</label>
-                        <input class="form-control" type="text" id="" name="" >
+                    <div class="form-group col-md-1"></div>
+                    <div class="form-group col-md-6" >
+                        <label>Condición</label><br>
+                        <input type="radio" id="reparado" name="" value="1">
+                        <label for="html">REPARADO</label><br>
+                        <input type="radio" id="no_reparado" name="" value="0">
+                        <label for="css">NO REPARADO</label><br>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-5">
-                        <label>Apellido y Nombre quien retira</label>
-                        <input class="form-control" type="text" id="" name="" placeholder="Quién firmó el retiro">
+                <div class="form-row" >
+                    <div class="form-group col-md-5" >
+                        <label>Apellido y Nombre quien recibe</label>
+                        <input class="form-control" type="text" id="" name="" placeholder="Quién firmó la recepción del BI">
                     </div>
                     <div class="form-group col-md-4">
                         <label>Apellido y Nombre quien entrega</label>
