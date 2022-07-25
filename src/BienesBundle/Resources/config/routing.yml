@@ -34,6 +34,10 @@ bienes_user:
     resource: "@BienesBundle/Resources/config/routing/user.yml"
     prefix:   /user
 
+bienes_vista:
+    resource: "@BienesBundle/Resources/config/routing/vista.yml"
+    prefix:   /vista
+
 bienes_homepage:
     path:     /
     defaults: { _controller: BienesBundle:Default:index }
