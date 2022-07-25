@@ -2,19 +2,22 @@
 
 {% block body %}
 
-    <h1>VISTA - Asignación Bien</h1>
+    <h1>VISTA - Devolución Bien prestado</h1>
 
     <form action= "#"  method="post" enctype="multipart/form-data">  
         <div class="container">    
             <div class="card-body">
                 <div class="form-row" >
-                    <div class="form-group col-md-2">
-                        <label>Código Identificación</label>
+                    <div class="form-group col-md-3">
+                        <label>Nro comprobante préstamo</label>
                         <input class="form-control" type="text" id="" name="" size="15" >
                     </div>
-                    <div class="form-group col-md-2"></div>
-                    <div class="form-group col-md-4">
-                        <label>Nro Comprobante</label>
+                    <div class="form-group col-md-2">
+                        <label>Código identificación</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Nro comprobante devolución</label>
                         <input class="form-control" type="text" id="" name="" size="15" disabled="true">
                     </div>
                 </div>
@@ -59,25 +62,49 @@
                                     <input class="form-control" type="text" id="" name="" disabled="true">
                                 </div>
                             </div>
-
                             <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label>Descripción Complementaria</label>
+                                <div class="form-group col-md-3">
+                                    <label>Fecha préstamo</label>
                                     <input class="form-control" type="text" id="" name="" disabled="true">
                                 </div>
+                                <div class="form-group col-md-4">
+                                    <label>Fecha estimada de devolución</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label>Oficina</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Agente Responsable</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                    </select>
+                                </div>
 
+                                <div class="form-group col-md-6">
+                                    <label>Superior responsable</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Condición del BI al prestar</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
                             </div>
                         </div>
                     </div></div>
                 <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label>Fecha asignación</label>
+                    <div class="form-group col-md-9">
+                        <label>Condición del BI al ser devuelto</label>
                         <input class="form-control" type="text" id="" name="" >
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Agente Responsable</label>
+                        <label>Agente Responsable devolución</label>
                         <select class="form-control">
                             <option value="">Agente 1</option>
                             <option value="">Agente 2</option>
@@ -105,7 +132,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-9">
-                        <label>Superior responsable</label>
+                        <label>Superior responsable devolución</label>
                         <select class="form-control">
                             <option value="">Funcionario 1</option>
                             <option value="">Funcionario 2</option>
@@ -115,12 +142,12 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-5">
-                        <label>Apellido y Nombre quien entrega</label>
-                        <input class="form-control" type="text" id="" name="" placeholder="Quién firmó la entrega">
-                    </div>
-                    <div class="form-group col-md-4">
                         <label>Apellido y Nombre quien recibe</label>
                         <input class="form-control" type="text" id="" name="" placeholder="Quién firmó la recepción">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Apellido y Nombre quien devuelve</label>
+                        <input class="form-control" type="text" id="" name="" placeholder="Quién firmó la devolución">
                     </div>
                 </div>
                 <div class="form-row">
