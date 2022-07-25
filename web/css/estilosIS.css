@@ -7,7 +7,9 @@
     color: whitesmoke !important;
 }
 
-
+.bienesbundle_user[roles]{
+    visibility: hidden;
+}
 
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)

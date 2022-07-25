@@ -18,6 +18,10 @@
 
 }
 
+#bienesbundle_user[roles]{
+    visibility: hidden;
+}
+
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -262,7 +266,7 @@ button::-moz-focus-inner,
 input[type="radio"],
 input[type="checkbox"] {
     margin: 8px;
-    box-shadow: 0 0 0 3px hotpink;
+    box-shadow: 0 0 0 3px;
     padding: 0; }
 
 input[type="date"],
