@@ -4,18 +4,17 @@ namespace BienesBundle\Controller;
 
 use BienesBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 /**
  * User controller.
+ *
  */
 class UserController extends Controller
 {
     /**
      * Lists all user entities.
+     *
      */
     public function indexAction()
     {
@@ -30,32 +29,20 @@ class UserController extends Controller
 
     /**
      * Creates a new user entity.
+     *
      */
-    public function newAction(Request $request,EncoderFactoryInterface $encoderFactory)
+    public function newAction(Request $request)
     {
         $user = new User();
         $form = $this->createForm('BienesBundle\Form\UserType', $user);
         $form->handleRequest($request);
 
-        try {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                // Obtengo el encoder que utiliza para hashear la contraseña
-                $encoder = $encoderFactory->getEncoder(User::class);
-                // aplico el hash a la contraseña
-                $passwordEncode = $encoder->encodePassword($user->getPassword(),'');
-                // guardo la contraseña hash en la db
-                $user->setPassword($passwordEncode);
-                $em->persist($user);
-                $em->flush();
-                $this->addFlash('mensaje_success','El usuario se creo correctamente!');
-
-                return $this->redirectToRoute('user_show', array('id' => $user->getId()));
-            }
-
-        } catch (UniqueConstraintViolationException $e) {
-            $this->addFlash('mensaje_notice','Ya existe un usuario registrado con el mismo nombre');
+            return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
 
         return $this->render('user/new.html.twig', array(
@@ -66,6 +53,7 @@ class UserController extends Controller
 
     /**
      * Finds and displays a user entity.
+     *
      */
     public function showAction(User $user)
     {
@@ -79,24 +67,15 @@ class UserController extends Controller
 
     /**
      * Displays a form to edit an existing user entity.
+     *
      */
-    public function editAction(Request $request, User $user,EncoderFactoryInterface $encoderFactory)
+    public function editAction(Request $request, User $user)
     {
-        $originalPassword = $user->getPassword();
-        
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('BienesBundle\Form\UserType', $user);
-         
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-
-            if ($user->getPassword()) {
-                $encoder = $encoderFactory->getEncoder(User::class);
-                $passwordEncode = $encoder->encodePassword($user->getPassword(),'');
-                $user->setPassword($passwordEncode);
-            } else $user->setPassword($originalPassword);
-
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_edit', array('id' => $user->getId()));

@@ -70,41 +70,4 @@ class Rol
     {
         return $this->user;
     }
-
-    /**
-     * Get idRol
-     *
-     * @return string
-     */
-    public function getIdRol()
-    {
-        return $this->idRol;
-    }
-
-    /**
-     * Set rolDescripcion
-     *
-     * @param string $rolDescripcion
-     *
-     * @return Rol
-     */
-    public function setRolDescripcion($rolDescripcion)
-    {
-        $this->rolDescripcion = $rolDescripcion;
-
-        return $this;
-    }
-
-    /**
-     * Get rolDescripcion
-     *
-     * @return string
-     */
-    public function getRolDescripcion()
-    {
-        return $this->rolDescripcion;
-    }
-
-    public function __toString() {
-        return strval($this->getIdRol()); }
 }

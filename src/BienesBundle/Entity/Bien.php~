@@ -422,4 +422,28 @@ class Bien
     {
         return $this->fechaBaja;
     }
+
+    /**
+     * Set usuario
+     *
+     * @param \BienesBundle\Entity\User $usuario
+     *
+     * @return Bien
+     */
+    public function setUsuario(\BienesBundle\Entity\User $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \BienesBundle\Entity\User
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
 }

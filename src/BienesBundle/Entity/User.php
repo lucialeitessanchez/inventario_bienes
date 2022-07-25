@@ -54,7 +54,10 @@ class User implements AdvancedUserInterface, \Serializable
     */
     private $bienes;
 
-
+     /**
+     * @ORM\ManyToMany(targetEntity="Rol", mappedBy="user", cascade={"all"}, orphanRemoval=true)
+     */
+    private $roles;
 
 
     /**
@@ -235,8 +238,6 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
 
-
-
     /**
      * Add biene
      *
@@ -270,4 +271,31 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return $this->bienes;
     }
+
+    /**
+     * Add role
+     *
+     * @param \BienesBundle\Entity\Rol $role
+     *
+     * @return User
+     */
+    public function addRole(\BienesBundle\Entity\Rol $role)
+    {
+        $this->roles[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role
+     *
+     * @param \BienesBundle\Entity\Rol $role
+     */
+    public function removeRole(\BienesBundle\Entity\Rol $role)
+    {
+        $this->roles->removeElement($role);
+    }
+
+    public function __toString() {
+        return strval($this->getId()); }
 }

@@ -1,0 +1,24 @@
+rol_index:
+    path:     /
+    defaults: { _controller: "BienesBundle:Rol:index" }
+    methods:  GET
+
+rol_show:
+    path:     /{idRol}/show
+    defaults: { _controller: "BienesBundle:Rol:show" }
+    methods:  GET
+
+rol_new:
+    path:     /new
+    defaults: { _controller: "BienesBundle:Rol:new" }
+    methods:  [GET, POST]
+
+rol_edit:
+    path:     /{idRol}/edit
+    defaults: { _controller: "BienesBundle:Rol:edit" }
+    methods:  [GET, POST]
+
+rol_delete:
+    path:     /{idRol}/delete
+    defaults: { _controller: "BienesBundle:Rol:delete" }
+    methods:  DELETE

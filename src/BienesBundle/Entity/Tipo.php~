@@ -194,4 +194,28 @@ class Tipo
         return strval($this->getNombreTipo());
     }
 
+
+    /**
+     * Set idClasificacion
+     *
+     * @param string $idClasificacion
+     *
+     * @return Tipo
+     */
+    public function setIdClasificacion($idClasificacion)
+    {
+        $this->idClasificacion = $idClasificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get idClasificacion
+     *
+     * @return string
+     */
+    public function getIdClasificacion()
+    {
+        return $this->idClasificacion;
+    }
 }
