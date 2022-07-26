@@ -37,3 +37,7 @@ vista_07_devolucion_reparador:
 vista_08_retorno_bi_reparado:
     path:     /retornoBienReparado
     defaults: { _controller: "BienesBundle:Vista:retornoBienReparado" }
+    
+vista_09_bi_desuso:
+    path:     /bienEnDesuso
+    defaults: { _controller: "BienesBundle:Vista:bienEnDesuso" }
