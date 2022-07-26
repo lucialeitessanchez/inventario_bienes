@@ -61,4 +61,9 @@ class VistaController extends Controller {
         return $this->render('vista/vista_07_devolucion_reparador.html.twig');
     }
 
+    public function retornoBienReparadoAction() {
+
+        return $this->render('vista/vista_08_retorno_bi_reparado.html.twig');
+    }
+
 }

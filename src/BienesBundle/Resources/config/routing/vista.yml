@@ -33,3 +33,7 @@ vista_06_envio_reparacion:
 vista_07_devolucion_reparador:
     path:     /devolucionReparadorBien
     defaults: { _controller: "BienesBundle:Vista:devolucionReparadorBien" }
+    
+vista_08_retorno_bi_reparado:
+    path:     /retornoBienReparado
+    defaults: { _controller: "BienesBundle:Vista:retornoBienReparado" }
