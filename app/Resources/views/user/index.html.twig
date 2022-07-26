@@ -1,8 +1,9 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-    <h1>Users list</h1>
-
+<div orientation="horizontal">
+    <h1>Usuarios</h1>
+  <a href="{{ path('user_new') }}">Nuevo User</a></div>
     <table>
         <thead>
             <tr>
@@ -10,8 +11,8 @@
                 <th>Username</th>
                 <th>Password</th>
                 <th>Email</th>
-                <th>Isactive</th>
-                <th>Actions</th>
+                <th>Activo</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -21,25 +22,16 @@
                 <td>{{ user.username }}</td>
                 <td>{{ user.password }}</td>
                 <td>{{ user.email }}</td>
-                <td>{% if user.isActive %}Yes{% else %}No{% endif %}</td>
+                <td>{% if user.isActive %}Si{% else %}No{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('user_show', { 'id': user.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                 <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <a href="{{ path('user_edit', { 'id': user.id }) }}" type="button" class="btn btn-outline-primary">Editar</a>
+                <a href="{{ path('user_show', { 'id': user.id }) }}"type="button" class="btn btn-outline-primary">Ver</a>
+                </div>    
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('user_new') }}">Create a new user</a>
-        </li>
-    </ul>
 {% endblock %}

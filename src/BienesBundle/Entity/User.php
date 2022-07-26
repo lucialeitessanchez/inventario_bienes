@@ -54,9 +54,15 @@ class User implements AdvancedUserInterface, \Serializable
     */
     private $bienes;
 
-     /**
-     * @ORM\ManyToMany(targetEntity="Rol", mappedBy="user", cascade={"all"}, orphanRemoval=true)
-     */
+     
+    /**
+     * @ORM\ManyToMany(targetEntity="Rol", inversedBy="user", orphanRemoval=true)
+     * @ORM\JoinTable(name="user_rol",
+     *      joinColumns={@ORM\JoinColumn(name="user", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="rol", referencedColumnName="idrol")}
+     *      )
+    */
+    
     private $roles;
 
 
@@ -162,7 +168,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return $this->roles;
     }
 
     public function eraseCredentials()

@@ -28,6 +28,12 @@ class Rol
     private $rolDescripcion;
 
 
+
+
+       /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="roles", cascade={"all"}, orphanRemoval=true)
+     */
+    private $user;
    
     /**
      * Constructor

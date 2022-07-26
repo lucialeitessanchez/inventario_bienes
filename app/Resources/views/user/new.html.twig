@@ -1,47 +1,20 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-    <h1>User creation</h1>
+    <h1>Creacion de usuario</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
 
-    {% for campo,obj in form %}
-        {% if campo == "roles" %}
-        Roles
-             {% for val in obj.vars.choices %}
-        <div class="form-check">
-              <input name="checkboxSelec" value={{loop.index}} class="form-check-input" type="checkbox" id="gridRadio{{loop.index}}" >
-              <label class="form-check-label">
-              {{val.label}}
-              </label>
-            </div>
-             {% endfor %}
-          {% endif %}
-    {% endfor %}
-      <input type="submit" value="Create" />
+  
+  <div class="btn-group" role="group" aria-label="Basic outlined example">
+  <button type="submit" class="btn btn-outline-primary">Alta usuario</button>
+  <a href="{{ path('user_index') }}" type="button" class="btn btn-outline-primary">Volver</a>
+
+</div>
+     
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('user_index') }}">Back to the list</a>
-        </li>
-    </ul>
 
-    <script>
-    let formSelect = document.getElementById('bienesbundle_user_roles');
-    let customCheck = document.querySelectorAll('input[name="checkboxSelec"]');
-
-    let formArr = Array.prototype.slice.call(formSelect.childNodes);
-  
-
-    customCheck.forEach((elem, i) => {
-        elem.addEventListener("change", (e)=> {  
-            if(e.target.checked) formSelect[i].selected = true
-            else formArr[i].selected = false
-        })
-    })
-
-</script>
 {% endblock %}
 

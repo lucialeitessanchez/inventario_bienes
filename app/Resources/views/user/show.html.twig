@@ -22,23 +22,15 @@
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Isactive</th>
-                <td>{% if user.isActive %}Yes{% else %}No{% endif %}</td>
+                <th>Activo</th>
+                <td>{% if user.isActive %}Si{% else %}No{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('user_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+      
+  <div class="btn-group" role="group" aria-label="Basic outlined example">
+  <a href="{{ path('user_edit', { 'id': user.id }) }}" type="button" class="btn btn-outline-primary">Editar</a>
+  <a href="{{ path('user_index') }}" type="button" class="btn btn-outline-primary">Volver</a>
+
 {% endblock %}
