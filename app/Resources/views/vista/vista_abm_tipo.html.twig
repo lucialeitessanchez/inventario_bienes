@@ -1,0 +1,84 @@
+{% extends 'base_new.html.twig' %}
+
+{% block body %}
+
+    <h1>VISTA - ABM Tipo</h1>
+
+    <form action= "#"  method="post" enctype="multipart/form-data">  
+        <div class="container">    
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Clasificación</label>
+                        <select class="form-control">
+                            <option value="">BI</option>
+                            <option value="">BU </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Descripcion Tipo</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label> &nbsp;&nbsp;</label>
+                        <a href="#" class="btn btn-outline-primary"> Agregar </a>
+
+                    </div>
+
+                </div>
+                <div class="card-title">
+                    <fieldset><legend><h3>Tipos registrados</h3></legend>
+                        <div class="table-responsive borderRad dataTable gg" id="full_table" style="max-height: 62vh">
+                            <table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+                                <thead class="table-tr-bg" style="position: sticky; top: 0; z-index: 1">
+                                    <tr>
+                                        <th>
+                                            Clasificacion
+                                        </th>
+                                        <th >
+                                            Tipo
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>BI </td>
+                                        <td>Computadora</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BI</td>
+                                        <td>Auricular</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BI</td>
+                                        <td>Monitor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BU</td>
+                                        <td>Muebles de oficina</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BU</td>
+                                        <td>Elementos de Limpieza</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <br>
+
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+
+                    <a href="#" class="btn btn-outline-primary"> Volver al menú principal </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}

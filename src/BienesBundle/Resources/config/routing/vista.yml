@@ -53,3 +53,11 @@ vista_11_bi_activo:
 vista_12_bi_baja:
     path:     /bienBaja
     defaults: { _controller: "BienesBundle:Vista:bienBaja" }
+    
+vista_abm_bien:
+    path:     /abmBien
+    defaults: { _controller: "BienesBundle:Vista:abmBien" }
+    
+vista_abm_tipo:
+    path:     /abmTipo
+    defaults: { _controller: "BienesBundle:Vista:abmTipo" }
