@@ -8,62 +8,59 @@
 {% block body %}
 
     <h1>Vistas</h1>
-    <div class="container">
-        <div class="form-row">
-            <!--<div class="col-md-12">-->
-            <nav id="menu" class="navbar navbar-expand-lg">
+    <!--<div class="container">-->
+    <!--<div class="form-row">-->
+    <!--<div class="col-md-12">-->
+    <nav id="menu" class="navbar navbar-expand-md navbar-light navClass ">
+        <ul>
+            <li><a class="nav-link dropdown-toggle" href="#">Factura</a>
                 <ul>
-                    <li><a class="nav-link dropdown-toggle" href="#">Factura</a>
-                        <ul>
-                            <li><a  href="{{ path('vista_factura_alta') }}">Alta Factura</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="nav-link dropdown-toggle" href="#">Adquisición de Bien</a>
-                        <ul>
-                            <li><a href="{{ path('vista_01_ingreso') }}">Alta adquisición bien</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#">Movimientos</a>
-                        <ul>
-                            <li><a href="{{ path('vista_02_asignacion') }}">Asignación</a></li>
-                            <li><a href="{{ path('vista_03_prestamo') }}">Préstamo</a></li>
-                            <li><a href="{{ path('vista_04_devolucion') }}">Devolución</a></li>
-                            <li><a href="{{ path('vista_05_daniado') }}">BI Dañado</a></li>
-                            <li><a href="{{ path('vista_06_envio_reparacion') }}">Envio a Reparación</a></li>
-                            <li><a href="{{ path('vista_07_devolucion_reparador') }}">Devolución Reparador</a></li>
-                            <li><a href="{{ path('vista_08_retorno_bi_reparado') }}">Retorno BI reparado</a></li>
-                            <li><a href="{{ path('vista_09_bi_desuso') }}">BI en Desuso</a></li>
-                            <li ><a class="nav-link dropdown-toggle" href="#">Inactivo/Activo</a>
-                                <ul>
-                                    <li><a href="{{ path('vista_10_bi_inactivo') }}">BI Inactivo</a></li>
-
-                                    <li><a href="{{ path('vista_11_bi_activo') }}">BI Activo</a></li>
-                                </ul>
-                            <li><a href="#">....</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="nav-link dropdown-toggle" href="#">Administración</a>
-                        <ul>
-                            <!-- <li><a href="#">ABM Bien</a></li>-->
-                            <li><a href="#">ABM Proveedor</a></li>
-                            <!-- <li><a href="#">ABM Responsable</a></li>-->
-                            <li><a href="#">ABM Tipo Adquisición</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="nav-link dropdown-toggle" href="#">Utilidades</a>
-                        <ul>
-                            <li><a href="#">ABM Tipo</a></li>
-                            <li><a href="#">ABM Bien</a></li>
-                            <li><a href="#">ABM Ubicación</a></li>
-                            <li><a href="#">ABM Oficina</a></li>
-                            <li><a href="#">ABM Responsable</a></li>
-                            <li><a href="#">ABM Reparador</a></li>
-
-                        </ul>
-                    </li>
+                    <li><a  href="{{ path('vista_factura_alta') }}">Alta Factura</a></li>
                 </ul>
-                <!--</div>-->
-        </div>
-    </div>
-</nav>
+            </li>
+            <li><a class="nav-link dropdown-toggle" href="#">Adquisición de Bien</a>
+                <ul>
+                    <li><a href="{{ path('vista_01_ingreso') }}">Alta adquisición bien</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#">Movimientos</a>
+                <ul>
+                    <li><a href="{{ path('vista_02_asignacion') }}">Asignación</a></li>
+                    <li><a href="{{ path('vista_03_prestamo') }}">Préstamo</a></li>
+                    <li><a href="{{ path('vista_04_devolucion') }}">Devolución</a></li>
+                    <li><a href="{{ path('vista_05_daniado') }}">BI Dañado</a></li>
+                    <li><a href="{{ path('vista_06_envio_reparacion') }}">Envio a Reparación</a></li>
+                    <li><a href="{{ path('vista_07_devolucion_reparador') }}">Devolución Reparador</a></li>
+                    <li><a href="{{ path('vista_08_retorno_bi_reparado') }}">Retorno BI reparado</a></li>
+                    <li><a href="{{ path('vista_09_bi_desuso') }}">BI en Desuso</a></li>
+                    <li><a href="{{ path('vista_10_bi_inactivo') }}">BI Inactivo</a></li>
+                    <li><a href="{{ path('vista_11_bi_activo') }}">BI Activo</a></li>
+                    <li><a href="{{ path('vista_12_bi_baja') }}">BI Baja</a></li>
+                    <li><a href="#">---</a></li>
+                </ul>
+            </li>
+            <li><a class="nav-link dropdown-toggle" href="#">Administración</a>
+                <ul>
+                    <!-- <li><a href="#">ABM Bien</a></li>-->
+                    <li><a href="#">ABM Proveedor</a></li>
+                    <!-- <li><a href="#">ABM Responsable</a></li>-->
+                    <li><a href="#">ABM Tipo Adquisición</a></li>
+                </ul>
+            </li>
+            <li><a class="nav-link dropdown-toggle" href="#">Utilidades</a>
+                <ul>
+                    <li><a href="#">ABM Tipo</a></li>
+                    <li><a href="#">ABM Bien</a></li>
+                    <li><a href="#">ABM Ubicación</a></li>
+                    <li><a href="#">ABM Oficina</a></li>
+                    <li><a href="#">ABM Responsable</a></li>
+                    <li><a href="#">ABM Reparador</a></li>
+
+                </ul>
+            </li>
+        </ul>
+        <!--</div>-->
+    </nav>
+    <!--</div>-->
+    <!--</div>-->
 {% endblock %}

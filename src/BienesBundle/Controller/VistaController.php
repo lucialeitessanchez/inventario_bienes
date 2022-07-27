@@ -75,10 +75,15 @@ class VistaController extends Controller {
 
         return $this->render('vista/vista_10_bi_inactivo.html.twig');
     }
-    
+
     public function bienActivoAction() {
 
         return $this->render('vista/vista_11_bi_activo.html.twig');
+    }
+
+    public function bienBajaAction() {
+
+        return $this->render('vista/vista_12_bi_baja.html.twig');
     }
 
 }

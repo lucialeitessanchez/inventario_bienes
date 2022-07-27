@@ -2,34 +2,20 @@
 
 {% block body %}
 
-    <h1>VISTA - Retorno BI reparado</h1>
+    <h1>VISTA - BI Baja </h1>
 
     <form action= "#"  method="post" enctype="multipart/form-data">  
         <div class="container">    
             <div class="card-body">
                 <div class="form-row" >
                     <div class="form-group col-md-3">
-                        <label>Nro comprobante BI Dañado</label>
+                        <label>Código identificación</label>
                         <input class="form-control" type="text" id="" name="" size="15" >
                     </div>
-                    <div class="form-group col-md-2">
-                        <label>Código identificación</label>
-                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
-                    </div>
+                    <div class="form-group col-md-2"></div>
                     <div class="form-group col-md-3">
-                        <label>Nro comprobante Retorno</label>
-                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
-                    </div>
-                </div>
-                <div class="form-row" >
-                    <div class="form-group col-md-3">
-                        <label>Nro comprobante Envío Reparación</label>
-                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
-                    </div>
-                    <div class="form-group col-md-1"></div>
-                    <div class="form-group col-md-4">
-                        <label>Nro comprobante Devolucion Reparador</label>
-                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                        <label>Nro comprobante BI Baja</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true" >
                     </div>
                 </div>
                 <div class="form-row" >
@@ -76,82 +62,65 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>Estado del bien</label>
-                                    <input class="form-control" type="text" id="" name="" disabled="true" placeholder="Asignado / Prestado">
+                                    <input class="form-control" type="text" id="" name="" disabled="true" placeholder="Activo - Asignado / Prestado / En desuso">
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Oficina</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                    </select>
                                 </div>
                             </div>
-
                             <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label>Daño detectado</label>
+                                <div class="form-group col-md-6">
+                                    <label>Agente Responsable</label>
                                     <input class="form-control" type="text" id="" name="" disabled="true">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label>Tipo de Reparación</label>
-                                    <input class="form-control" type="text" id="" name="" disabled="true">
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label>Reparador</label>
-                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                    </select>
                                 </div>
 
-                                <div class="form-group col-md-3">
-                                    <label>Fecha envio</label>
-                                    <input class="form-control" type="text" id="" name="" disabled="true" >
-                                </div>
-
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label>Fecha devolución</label>
-                                    <input class="form-control" type="text" id="" name="" disabled="true" >
-                                </div>
-                                <div class="form-group col-md-8" >
-                                    <label>Condición</label><br>
-                                    <input class="form-control" type="text" id="" name="" disabled="true" >
+                                <div class="form-group col-md-6">
+                                    <label>Superior responsable</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
                                 </div>
                             </div>
                         </div>
                     </div></div>
-        
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label>Fecha retorno a la oficina</label>
-                        <input class="form-control" type="text" id="" name="" >
+                        <label>Fecha de Baja</label>
+                        <input class="form-control" type="text" id="" name=""  >
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Oficina a la que retorna</label>
-                        <input class="form-control" type="text" id="" name="" disabled="true" placeholder="<oficina asignada antes del reporte como dañado>">
-                        </select>
+                        <label>Responsable que lo indica </label>
+                        <input class="form-control" type="text" id="" name=""  >
                     </div>
+                    
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-5">
-                        <label>Agente Responsable</label>
-                        <input class="form-control" type="text" id="" name="" disabled="true" placeholder="<ultimo responsable asignado>">
+                    <div class="form-group col-md-6">
+                        <label>Motivo</label>
+                        <select class="form-control">
+                            <option value="">BI en Desuso</option>
+                            <option value="">Error de carga</option>
                         </select>
                     </div>
-
-                    <div class="form-group col-md-4">
-                        <label>Superior responsable</label>
-                        <input class="form-control" type="text" id="" name="" disabled="true" placeholder="<ultimo superior asignado>">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-9">
-                        <label>Observación retorno de BI reparado</label>
+                    <div class="form-group col-md-3">
+                        <label>Fecha formulario STG</label>
                         <input class="form-control" type="text" id="" name=""  >
                     </div>
                 </div>
-                <div class="form-row" >
-                    <div class="form-group col-md-5" >
-                        <label>Apellido y Nombre quien recibe</label>
-                        <input class="form-control" type="text" id="" name="" placeholder="Quién firmó la recepción del BI">
+                 <div class="form-row">
+                    <div class="form-group col-md-9">
+                        <label>Observación motivo baja</label>
+                        <input class="form-control" type="text" id="" name=""  >
                     </div>
-                    <div class="form-group col-md-4">
-                        <label>Apellido y Nombre quien entrega</label>
-                        <input class="form-control" type="text" id="" name="" placeholder="Quién firmó la entrega">
+                </div>
+                
+                <div class="form-row" >
+                    
+                    <div class="form-group col-md-9">
+                        <label>Apellido y Nombre responsable baja</label>
+                        <input class="form-control" type="text" id="" name="" >
                     </div>
                 </div>
                 <div class="form-row">
@@ -168,13 +137,11 @@
 
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
 
-                    <input type="submit" class="btn btn-outline-primary" value="Nuevo Retorno">
-                    <a href="#" class="btn btn-outline-primary"> Volver al listado de bienes retornados</a>
+                    <input type="submit" class="btn btn-outline-primary" value="Nueva Baja">
+                    <a href="#" class="btn btn-outline-primary"> Volver al listado de bajas </a>
                     <a href="#" class="btn btn-outline-primary"> Volver al menú principal </a>
                 </div>
             </div>
         </div>
     </form>
-
-
 {% endblock %}

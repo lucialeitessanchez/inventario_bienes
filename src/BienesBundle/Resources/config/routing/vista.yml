@@ -49,3 +49,7 @@ vista_10_bi_inactivo:
 vista_11_bi_activo:
     path:     /bienActivo
     defaults: { _controller: "BienesBundle:Vista:bienActivo" }
+    
+vista_12_bi_baja:
+    path:     /bienBaja
+    defaults: { _controller: "BienesBundle:Vista:bienBaja" }
