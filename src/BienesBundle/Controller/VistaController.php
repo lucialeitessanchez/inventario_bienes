@@ -66,8 +66,19 @@ class VistaController extends Controller {
         return $this->render('vista/vista_08_retorno_bi_reparado.html.twig');
     }
 
-      public function bienEnDesusoAction() {
+    public function bienEnDesusoAction() {
 
         return $this->render('vista/vista_09_bi_desuso.html.twig');
     }
+
+    public function bienInactivoAction() {
+
+        return $this->render('vista/vista_10_bi_inactivo.html.twig');
+    }
+    
+    public function bienActivoAction() {
+
+        return $this->render('vista/vista_11_bi_activo.html.twig');
+    }
+
 }

@@ -41,3 +41,11 @@ vista_08_retorno_bi_reparado:
 vista_09_bi_desuso:
     path:     /bienEnDesuso
     defaults: { _controller: "BienesBundle:Vista:bienEnDesuso" }
+    
+vista_10_bi_inactivo:
+    path:     /bienInactivo
+    defaults: { _controller: "BienesBundle:Vista:bienInactivo" }
+    
+vista_11_bi_activo:
+    path:     /bienActivo
+    defaults: { _controller: "BienesBundle:Vista:bienActivo" }
