@@ -5,6 +5,7 @@ namespace BienesBundle\Controller;
 use BienesBundle\Entity\ResponsableArea;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Responsablearea controller.

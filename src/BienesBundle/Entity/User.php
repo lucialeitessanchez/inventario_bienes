@@ -285,12 +285,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return User
      */
-    public function addRole(\BienesBundle\Entity\Rol $role)
-    {
-        $this->roles[] = $role;
-
-        return $this;
-    }
+   
 
     /**
      * Remove role
@@ -304,4 +299,18 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function __toString() {
         return strval($this->getId()); }
+
+    /**
+     * Add role
+     *
+     * @param \BienesBundle\Entity\Rol $role
+     *
+     * @return User
+     */
+    public function addRole(\BienesBundle\Entity\Rol $role)
+    {
+        $this->roles[] = $role;
+
+        return $this;
+    }
 }

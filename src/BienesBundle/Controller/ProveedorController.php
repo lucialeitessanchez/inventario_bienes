@@ -5,11 +5,15 @@ namespace BienesBundle\Controller;
 use BienesBundle\Entity\Proveedor;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Proveedor controller.
  *
  */
+   /**
+    * @IsGranted("ROLE_JERARQUICO")
+    */
 class ProveedorController extends Controller
 {
     /**

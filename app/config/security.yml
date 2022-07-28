@@ -68,8 +68,11 @@ security:
 
     role_hierarchy:
     #    ROLE_SUPERADMIN: ROLE_ADMIN
-        ROLE_ADMIN: ROLE_USUARIO
-
+        ROLE_CONSULTA: ROLE_USUARIO
+        ROLE_ALTA: ROLE_CONSULTA
+        ROLE_JERARQUICO: ROLE_ALTA
+        ROLE_ADMIN: [ROLE_JERARQUICO,ROLE_ALTA,ROLE_CONSULTA]
+            
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/denegado, roles: IS_AUTHENTICATED_ANONYMOUSLY }

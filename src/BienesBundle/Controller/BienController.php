@@ -21,6 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use BienesBundle\Reporte\BienPDF;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 /**
  * Bien controller.
  *
@@ -150,6 +152,9 @@ class BienController extends Controller
      * Creates a new bien entity.
      *
      */
+      /**
+    * @IsGranted("ROLE_ALTA")
+    */
     public function newAction(Request $request)
     {
         $bien = new Bien();
@@ -176,10 +181,10 @@ class BienController extends Controller
            // $usuario=$repository->findBy();
            // $bien->setUsuario($user);
             $bien->setUsuario($usuario);
-            
+        //    if($tipe->getIdClasificacion() == "BI" && $user->getRoles() == 'ROLE_ADMIN'){
             $em->persist($bien);
             $em->flush();
-
+          //  }
 
             //le pido a la base de datos los objetos rama
             $repository2 = $this->getDoctrine()->getRepository(Rama::class);
@@ -267,6 +272,9 @@ class BienController extends Controller
      * Displays a form to edit an existing bien entity.
      *
      */
+    /**
+    * @IsGranted("ROLE_JERARQUICO")
+    */
     public function editAction(Request $request, Bien $bien)
     {
         $deleteForm = $this->createDeleteForm($bien);
@@ -290,6 +298,9 @@ class BienController extends Controller
      * Deletes a bien entity.
      *
      */
+    /**
+    * @IsGranted("ROLE_ADMIN")
+    */
     public function deleteAction(Request $request, Bien $bien)
     {
         $form = $this->createDeleteForm($bien);

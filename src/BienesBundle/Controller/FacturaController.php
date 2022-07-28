@@ -6,11 +6,17 @@ use BienesBundle\Entity\Factura;
 use BienesBundle\Entity\Proveedor;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+
 
 /**
  * Factura controller.
  *
  */
+  /**
+    * @IsGranted("ROLE_JERARQUICO")
+    */
 class FacturaController extends Controller
 {
     /**

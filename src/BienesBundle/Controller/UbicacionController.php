@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
  * Ubicacion controller.
  *
  */
+ /**
+    * @IsGranted("ROLE_ADMIN")
+    */
 class UbicacionController extends Controller
 {
     /**

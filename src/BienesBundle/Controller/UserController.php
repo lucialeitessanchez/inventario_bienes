@@ -12,12 +12,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+
 
 /**
  * User controller.
  *
  */
-class UserController extends Controller
+/**
+    * @IsGranted("ROLE_ADMIN")
+    */
+ class UserController extends Controller
 {
         /**
      * Lists all user entities.
@@ -91,7 +98,6 @@ class UserController extends Controller
     public function editAction(Request $request, User $user,EncoderFactoryInterface $encoderFactory)
     {
         $originalPassword = $user->getPassword();
-        $oldRoles = $user->getRoles();
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('BienesBundle\Form\UserType', $user);
         $editForm->handleRequest($request);

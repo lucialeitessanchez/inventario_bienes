@@ -5,11 +5,15 @@ namespace BienesBundle\Controller;
 use BienesBundle\Entity\Tipo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Tipo controller.
  *
  */
+  /**
+    * @IsGranted("ROLE_ADMIN")
+    */
 class TipoController extends Controller
 {
     /**
