@@ -508,19 +508,21 @@ class BienController extends Controller
         $txt2="\nOficina: ".$responsable->getCargo();
         $txt3="\nAgente: ".$responsable->getNombre();
         $txt4="\n\nDatos de adquisición";
-        $txt5="\nFecha adquisición: ".$fecha;
-        $txt5b="\nTipo de adquisición: ".$factura->getTipoAdquisicion();
+       
         $txt6="\nProveedor: ".$bien->getProveedor();
         if ($factura) {
+            $txt5="\nFecha adquisición: ".$fecha;
+            $txt5b="\nTipo de adquisición: ".$factura->getTipoAdquisicion();
             $txt7="\nNº de Factura: ".$factura->getNumeroFactura();
             $txt9="\nImporte unitario: $".$factura->getMontoUnitario();
             $txt10="\nImporte total: $".$factura->getMontoTotal();
         } else {
             $txt7 = '';
             $txt9 = '';
-            $txt10="\nFactura: Sin Datos de Factura.";
+            $txt10=" ";
+            $txt5="\nFecha adquisicion: No posee por ser organismo público";
+            $txt5b="\nEs Organismo público";
         }
-
         $txt11="\n\nBien adquirido";
         $txt12="\nDetalle: ".$bien->getEstado();
         $txt12b="\nMotivo de la baja: ".$bien->getMotivobaja();
