@@ -5,11 +5,14 @@ namespace BienesBundle\Controller;
 use BienesBundle\Entity\Ubicacion;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * Ubicacion controller.
  *
  */
+ /**
+    * @IsGranted("ROLE_ADMIN")
+    */
 class UbicacionController extends Controller
 {
     /**

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_new.html.twig' %}
 
 {% block body %}
     <h1>Rama</h1>
@@ -10,24 +10,16 @@
                 <td>{{ rama.id }}</td>
             </tr>
             <tr>
-                <th>Nombrerama</th>
+                <th>Nombre de la rama</th>
                 <td>{{ rama.nombreRama }}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('rama_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('rama_edit', { 'id': rama.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="{{ path('rama_index') }}" button type="button" class="btn btn-outline-primary">Volver</a>
+            <a href="{{ path('rama_edit', { 'id': rama.id }) }}" button type="button" class="btn btn-outline-primary">Editar</a>
+            </div>
+
 </h3>
 {% endblock %}

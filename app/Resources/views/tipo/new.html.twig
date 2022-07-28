@@ -1,22 +1,28 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_new.html.twig' %}
 
 {% block body %}
 
-    <h1>Tipo creation</h1>
+    <h1>Crear un nuevo tipo</h1>
     <h2>
-  
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Crear" />
-    {{ form_end(form) }}
+    Clasificacion de bien
+      <form action="{{ path('tipo_new')}}">
+  <br>  <select name="select">
+        <option value="BI">Bien Informatico</option>
+        <option value="BU">Bien de Uso</option>
+    </select>
+</form>  <br>
+    {% with { 'btnTxt': 'Crear'}%}
+  {{ block("formBlock", "./blocks/formBlock.twig") }}
+
+       
 
 
-    <ul>
-        <li>
-            <a href="{{ path('tipo_index') }}">Volver al listado</a>
-        </li>
-         <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
-            Volver al menú principal</a>
-    </ul>
+  {% endwith %}
+
+
+       
+            <a href="{{ path('tipo_index') }}" button type="button" class="btn btn-outline-primary">Volver</a>
+    
+    
 </h2>
 {% endblock %}

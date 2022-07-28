@@ -24,7 +24,7 @@
 			<tbody id="tableData">
 
 				{% for bien in biens %}
-
+					{% if not bien.consumible %}	
 					<tr id="data{{loop.index}}">
 						<td>
 
@@ -79,6 +79,7 @@
 								</div>
 							</td>
 						</tr>
+					{% endif %}
 					{% endif %}
 				{% endfor %}
 

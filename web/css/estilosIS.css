@@ -7,7 +7,9 @@
     color: whitesmoke !important;
 }
 
-
+.bienesbundle_user[roles]{
+    visibility: hidden;
+}
 
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
@@ -252,6 +254,7 @@ button::-moz-focus-inner,
 
 input[type="radio"],
 input[type="checkbox"] {
+    box-shadow: 0 0 0 3px hotpink;
     box-sizing: border-box;
     padding: 0; }
 

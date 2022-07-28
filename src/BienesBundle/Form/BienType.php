@@ -3,6 +3,12 @@
 namespace BienesBundle\Form;
 
 use BienesBundle\BienesBundle;
+use BienesBundle\Entity\Proveedor;
+use BienesBundle\Repository\ProveedorRepository;
+use BienesBundle\Repository\ResponsableRepository;
+use BienesBundle\Repository\TipoRepository;
+use BienesBundle\Repository\RamaRepository;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -10,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormInterface;
@@ -48,32 +55,49 @@ class BienType extends AbstractType
             'label' => 'Fecha de Alta',
             'widget' => 'single_text',
             'html5' => true
-        ])->add('descripcion')->add('estado')->add('proveedor')->add(('responsable'))->add('ubicacion')
-            ->add('factura');
+        ])->add('descripcion')->add('estado')->add('proveedor')
+        ->add(('responsable'))
+        ->add('ubicacion')
+            ->add('factura')->add('tipo')->add('rama');
 
-    
-      
-        $builder->add('consumible',CheckboxType::class,['label'=>'Es Consumible? ','required' => false,'empty_data'=>'0','value'=>1]);
+            
+       // $builder->add('consumible',CheckboxType::class);
 
         // Agregue 2 detectores de eventos para el formulario
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
         $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
 
-        $builder->add('motivoBaja')->add('fechaBaja', DateType::class, [
-            'label' => 'Fecha de baja',
-            'widget' => 'single_text',
-            'html5' => true
-        ]);    
+        $builder->add('motivoBaja',TextType::class,['required' => false])
+                ->add('fechaBaja', DateType::class, [
+                        'label' => 'Fecha de baja',
+                        'widget' => 'single_text',
+                        'html5' => true,'required' =>false
+                    ]);    
         
     }
  
-    protected function addElements(FormInterface $form, Tipo $tipo = null) {
+    protected function addElements(FormInterface $form, Tipo $tipo = null,Proveedor $proveedor = null,Responsable $responsable =null) {
+       
+       //para ordenar a los resopnsables por orden alfabetico, previo defini en responsable repository la consulta
+        $form->add('responsable', EntityType::class, array(
+            'required' => true,
+            'data' => $responsable,
+            'placeholder' => 'Seleccionar Responsable',
+            'class' => 'BienesBundle:Responsable',
+            'query_builder' => function (ResponsableRepository $er) {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.nombre', 'ASC');}
+        
+        ));
         // 4. Agregar el elemento de rama
         $form->add('tipo', EntityType::class, array(
             'required' => true,
             'data' => $tipo,
-            'placeholder' => 'Seleccionar Tipo..',
-            'class' => 'BienesBundle:Tipo'
+            'placeholder' => 'Seleccionar Tipo',
+            'class' => 'BienesBundle:Tipo',
+            'query_builder' => function (TipoRepository $er) {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.nombreTipo', 'ASC');}
         ));
         
         // ramas vacías, a menos que haya un tipo seleccionado (Editar vista)
@@ -96,8 +120,50 @@ class BienType extends AbstractType
             'required' => true,
             'placeholder' => 'Seleccione tipo primero ...',
             'class' => 'BienesBundle:Rama',
+            'query_builder' => function (RamaRepository $er) {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.nombreRama', 'ASC');},
             'choices' => $ramas
+            
         ));
+   
+      //logica de proveedor y factura
+      $form->add('proveedor', EntityType::class, array(
+        'required' => true,
+        'data' => $proveedor,
+        'placeholder' => 'Seleccionar Proveedor',
+        'class' => 'BienesBundle:Proveedor',
+        'query_builder' => function (ProveedorRepository $er) {
+            return $er->createQueryBuilder('u')
+                ->orderBy('u.nombre', 'ASC');}
+    
+    ));
+    
+    
+    $facturas = array();
+
+    if ($proveedor) {
+        // Obtener ramas del tipo si hay un tipo seleccionada
+        $repoFactura = $this->em->getRepository('BienesBundle:Factura');
+        
+        $facturas = $repoFactura->createQueryBuilder("q")
+            ->where("q.proveedor = :proveedorid")
+            ->setParameter("proveedorid", $proveedor->getId())
+            ->getQuery()
+            ->getResult();
+    }
+    
+    // Agregue el campo rama con los datos adecuados
+    $form->add('factura', EntityType::class, array(
+        'required' => true,
+        'placeholder' => 'Seleccione proveedor primero ...',
+        'class' => 'BienesBundle:Factura',
+        'choices' => $facturas
+    ));
+
+        
+        
+   
     }
 
     function onPreSubmit(FormEvent $event) {
@@ -107,7 +173,11 @@ class BienType extends AbstractType
         // Busque la ciudad seleccionada y conviértala en una entidad
         $city = $this->em->getRepository('BienesBundle:Tipo')->find($data['tipo']);
         
-        $this->addElements($form, $city);
+       
+
+        $prov = $this->em->getRepository('BienesBundle:Proveedor')->find($data['proveedor']);
+        
+        $this->addElements($form, $city, $prov);
     }
 
     function onPreSetData(FormEvent $event) {
@@ -116,8 +186,8 @@ class BienType extends AbstractType
 
         // Cuando creas una nueva persona, la ciudad siempre está vacía
         $tipo = $bien->getTipo() ? $bien->getTipo() : null;
-        
-        $this->addElements($form, $tipo);
+        $proveedor = $bien->getProveedor() ? $bien->getProveedor() : null;
+        $this->addElements($form, $tipo, $proveedor);
     }
 
     /**

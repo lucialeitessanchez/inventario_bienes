@@ -5,11 +5,15 @@ namespace BienesBundle\Controller;
 use BienesBundle\Entity\Tipo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Tipo controller.
  *
  */
+  /**
+    * @IsGranted("ROLE_ADMIN")
+    */
 class TipoController extends Controller
 {
     /**
@@ -39,6 +43,8 @@ class TipoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $tipoB=$request->get('select'); //obtengo lo que seleccion como BI o BU
+            $tipo->setIdClasificacion($tipoB);
             $em->persist($tipo);
             $em->flush();
 

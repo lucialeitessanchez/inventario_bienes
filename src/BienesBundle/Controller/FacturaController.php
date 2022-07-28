@@ -6,11 +6,17 @@ use BienesBundle\Entity\Factura;
 use BienesBundle\Entity\Proveedor;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+
 
 /**
  * Factura controller.
  *
  */
+  /**
+    * @IsGranted("ROLE_JERARQUICO")
+    */
 class FacturaController extends Controller
 {
     /**
@@ -42,7 +48,7 @@ class FacturaController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($factura);
             $em->flush();
-
+              
             return $this->redirectToRoute('factura_show', array('id' => $factura->getId()));
         }
 

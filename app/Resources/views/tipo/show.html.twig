@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_new.html.twig' %}
 
 {% block body %}
     <h1>Tipo</h1>
@@ -14,24 +14,18 @@
                 <td>{{ tipo.tipo }}</td>
             </tr>
             <tr>
-                <th>Nombretipo</th>
-                <td>{{ tipo.nombreTipo }}</td>
+                <th>Nombre del tipo  </th>
+                <td> {{ tipo.nombreTipo }}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('tipo_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('tipo_edit', { 'id': tipo.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
+           <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="{{ path('tipo_index') }}" button type="button" class="btn btn-outline-primary">Volver al listado</a>
+                   <a href="{{ path('tipo_edit', { 'id': tipo.id }) }}" button type="button" class="btn btn-outline-primary">Editar</a>
+                   
+                    </div>
+
 </h2>
 {% endblock %}

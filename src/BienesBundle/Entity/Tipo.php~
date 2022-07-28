@@ -37,6 +37,13 @@ class Tipo
     private $nombreTipo;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="idClasificacion", type="string")
+     */
+    private $idClasificacion;
+
+    /**
      * @ORM\OneToMany(targetEntity="Bien", mappedBy="bien")
      */
     private $bienes;
@@ -187,4 +194,28 @@ class Tipo
         return strval($this->getNombreTipo());
     }
 
+
+    /**
+     * Set idClasificacion
+     *
+     * @param string $idClasificacion
+     *
+     * @return Tipo
+     */
+    public function setIdClasificacion($idClasificacion)
+    {
+        $this->idClasificacion = $idClasificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get idClasificacion
+     *
+     * @return string
+     */
+    public function getIdClasificacion()
+    {
+        return $this->idClasificacion;
+    }
 }

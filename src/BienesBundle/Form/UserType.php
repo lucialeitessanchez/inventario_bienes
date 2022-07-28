@@ -3,42 +3,45 @@
 namespace BienesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use BienesBundle\Entity\Rol;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 
 class UserType extends AbstractType
 {
+    private $em;
+    
+    public function __construct(EntityManagerInterface $em)
+  {
+      $this->em = $em;
+  }
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('username', TextType::class)
-            ->add('password', RepeatedType::class, array('type'=>PasswordType::class, 'required' => false, 'first_options' => array('label'=>'Password'),
-                                                                                                    'second_options'=>array('label'=>'Repetir Password'),
-                )
-            )
-            ->add('email', EmailType::class)
-            ->add('isActive', CheckboxType::class, ['label' => 'Activo', 'required' => false])
-            ;
-    }
-    
-    /**
+        $builder->add('username')->add('password')->add('email')->add('isActive')
+        ->add('roles', EntityType::class, [
+            'class'     => Rol::class,
+            'choice_label'=>'idRol',
+            'expanded'  => true,
+            'multiple'  => true,
+            'required' => true
+        ]);;
+    }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'BienesBundle\Entity\User',
-        ]);
+        $resolver->setDefaults(array(
+            'data_class' => 'BienesBundle\Entity\User'
+        ));
     }
 
     /**
@@ -48,4 +51,6 @@ class UserType extends AbstractType
     {
         return 'bienesbundle_user';
     }
+
+
 }

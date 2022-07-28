@@ -9,6 +9,7 @@ use BienesBundle\Entity\Rama;
 use BienesBundle\Entity\Responsable;
 use BienesBundle\Entity\ResponsableArea;
 use BienesBundle\Entity\Tipo;
+use BienesBundle\Entity\User;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,6 +20,8 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Validator\Constraints as Assert;
 use BienesBundle\Reporte\BienPDF;
 use Symfony\Component\Security\Core\User\UserInterface;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Bien controller.
@@ -57,6 +60,49 @@ class BienController extends Controller
         }
         
         // Matriz de retorno con estructura de las ramas de la identificación de tipo proporcionada
+        return new JsonResponse($responseArray);
+
+       
+    }
+
+
+    //funcion de filtro para proveedor-factura
+
+    /**
+     * Devuelve una cadena JSON con las ramas de los tipos con la identificación proporcionada.
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function listFacturasOfProveedorAction(Request $request)
+    {
+        // Obtener administrador de entidades y repositorio
+        $em = $this->getDoctrine()->getManager();
+        $facturasRepository = $em->getRepository("BienesBundle:Factura");
+        $facturasProveedor = $em->getRepository("BienesBundle:Proveedor"); //tengo todos los objetos proveedor
+        
+        // Busque las facturas que pertenecen al proveedor con el ID dado como parámetro GET "proveedorid"
+        $facturas = $facturasRepository->createQueryBuilder("q")
+            ->where("q.proveedor = :proveedorid ")
+            ->setParameter("proveedorid", $request->query->get("proveedorid"))
+            ->getQuery()
+            ->getResult();
+      
+        // Serializar en una matriz los datos que necesitamos, en este caso solo el nombre y la identificación
+        // Nota: también puede usar un serializador, para fines explicativos, lo haremos manualmente
+        $responseArray = array();
+        foreach($facturas as $factura){
+           $proveedor=$facturasProveedor->find($factura->getProveedor()); //buscos dentro de los objetos proveedor el que me coincide con el proveedor que tiene la factura
+
+            $responseArray[] = array(
+                "esOrganismoPublico" => $proveedor->getOrganismoPublico(), 
+                "id" => $factura->getId(),
+                "name" => $factura->getNumeroFactura(),
+                
+            );
+        }
+        
+        // Matriz de retorno con estructura de las facturas de la identificación de proveedor proporcionada
         return new JsonResponse($responseArray);
 
        
@@ -106,14 +152,19 @@ class BienController extends Controller
      * Creates a new bien entity.
      *
      */
+      /**
+    * @IsGranted("ROLE_ALTA")
+    */
     public function newAction(Request $request)
     {
         $bien = new Bien();
         $form = $this->createForm('BienesBundle\Form\BienType', $bien);
         $form->handleRequest($request);
         $bien->setCodigo(0);
+        
+       
         $user=$this->getUser();
-    
+        $usuario = $repository = $this->getDoctrine()->getRepository(User::class)->find($user->getId());
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -126,11 +177,14 @@ class BienController extends Controller
             $tipe=($repository->find($bien->getTipo()));//esto no se que me devuelve
             $tipo=intval($tipe->getId());//me devuelve el objeto que coincide con el nombre de la rama que es el que obtengo en el toString de tipo
 
-            $bien->setUsuario($user);
-
+           // $repository = $this->getDoctrine()->getRepository(User::class);
+           // $usuario=$repository->findBy();
+           // $bien->setUsuario($user);
+            $bien->setUsuario($usuario);
+        //    if($tipe->getIdClasificacion() == "BI" && $user->getRoles() == 'ROLE_ADMIN'){
             $em->persist($bien);
             $em->flush();
-
+          //  }
 
             //le pido a la base de datos los objetos rama
             $repository2 = $this->getDoctrine()->getRepository(Rama::class);
@@ -177,6 +231,7 @@ class BienController extends Controller
         $deleteForm = $this->createDeleteForm($bien);
         $em = $this->getDoctrine()->getManager(); // de aca para abajo hago todo para que se actualice el codigo
 
+       
 
         //le pido a la base de datos los objetos tipo
         $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo
@@ -202,6 +257,7 @@ class BienController extends Controller
         $codigo = ($tipo."-".$rama."-".$bienId);
         $bien->setCodigo($codigo);
 
+       
         $em->persist($bien);
         $em->flush();
 
@@ -216,6 +272,9 @@ class BienController extends Controller
      * Displays a form to edit an existing bien entity.
      *
      */
+    /**
+    * @IsGranted("ROLE_JERARQUICO")
+    */
     public function editAction(Request $request, Bien $bien)
     {
         $deleteForm = $this->createDeleteForm($bien);
@@ -239,6 +298,9 @@ class BienController extends Controller
      * Deletes a bien entity.
      *
      */
+    /**
+    * @IsGranted("ROLE_ADMIN")
+    */
     public function deleteAction(Request $request, Bien $bien)
     {
         $form = $this->createDeleteForm($bien);
@@ -355,7 +417,7 @@ class BienController extends Controller
      * @return JsonResponse
      */
 
-   
+    //PDF DE IMPRESIONES TOTALES
     public function returnPDFResponseFromHTMLAction($filtro, $campo){
       
         // set_time_limit (30); descomenta esta línea según tus necesidades
@@ -363,15 +425,15 @@ class BienController extends Controller
         //$pdf = $this->container->get("white_october.tcpdf")->create('vertical', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         // si estás en un controlador, usa:
         $pdf = $this->get("white_october.tcpdf")->create('vertical', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->SetAuthor('Informatica MIGyD');
-        $pdf->SetTitle(('Listado Bienes'));
-        $pdf->SetSubject('Listado Bienes');
+        $pdf->SetAuthor('Bienes');
+        $pdf->SetTitle(('Listado de bienes'));
+        $pdf->SetSubject('');
         $pdf->setFontSubsetting(true);
         $pdf->SetFont('helvetica', '', 11, '', true);
         //$pdf->SetMargins(20,20,40, true);
         $pdf->AddPage();
 
-        $filename = $campo.'Listado_Bienes';
+        $filename = 'bienes'.$filtro;
         $em = $this->getDoctrine()->getManager();
         $biens = $em->getRepository('BienesBundle:Bien')->findAll();
         
@@ -446,18 +508,21 @@ class BienController extends Controller
         $txt2="\nOficina: ".$responsable->getCargo();
         $txt3="\nAgente: ".$responsable->getNombre();
         $txt4="\n\nDatos de adquisición";
-        $txt5="\nFecha adquisición: ".$fecha;
-        $txt6="\nProveedor ".$bien->getProveedor();
+       
+        $txt6="\nProveedor: ".$bien->getProveedor();
         if ($factura) {
+            $txt5="\nFecha adquisición: ".$fecha;
+            $txt5b="\nTipo de adquisición: ".$factura->getTipoAdquisicion();
             $txt7="\nNº de Factura: ".$factura->getNumeroFactura();
             $txt9="\nImporte unitario: $".$factura->getMontoUnitario();
             $txt10="\nImporte total: $".$factura->getMontoTotal();
         } else {
             $txt7 = '';
             $txt9 = '';
-            $txt10="\nFactura: Sin Datos de Factura.";
+            $txt10=" ";
+            $txt5="\nFecha adquisicion: No posee por ser organismo público";
+            $txt5b="\nEs Organismo público";
         }
-
         $txt11="\n\nBien adquirido";
         $txt12="\nDetalle: ".$bien->getEstado();
         $txt12b="\nMotivo de la baja: ".$bien->getMotivobaja();
@@ -467,7 +532,7 @@ class BienController extends Controller
         $txt16="\nCaracteristica: ".$bien->getTipo()." ".$bien->getRama();
 
         //cuerpo del texto
-        $pdf->Write(0, $txt.$txt2.$txt3.$txt4.$txt5.$txt6.$txt7.$txt9.$txt10.$txt11.$txt12.$txt12b.$txt13.$txt14.$txt15.$txt16, '', 0, '', true, 0, false, false, 0);
+        $pdf->Write(0, $txt.$txt2.$txt3.$txt4.$txt5.$txt5b.$txt6.$txt7.$txt9.$txt10.$txt11.$txt12.$txt12b.$txt13.$txt14.$txt15.$txt16, '', 0, '', true, 0, false, false, 0);
 
         //firmas
         if($responsable->getFuncionario()){ //si es funcionario solo aparece el mismo, no necesita autorizacion
@@ -515,7 +580,7 @@ class BienController extends Controller
     public function bajaAction(Request $request, Bien $bien)
     {
         $deleteForm = $this->createDeleteForm($bien);
-        $editForm = $this->createForm('BienesBundle\Form\BienType', $bien);
+        $editForm = $this->createForm('BienesBundle\Form\BienBajaType', $bien);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -536,6 +601,69 @@ class BienController extends Controller
         ));
     }
     
+    //seccion consumible
+    public function newconsumibleAction(Request $request)
+    {
+        $bien = new Bien();
+        $form = $this->createForm('BienesBundle\Form\BienconsumibleType', $bien);
+        $form->handleRequest($request);
+        $bien->setCodigo(0);
+        //$user=$this->getUser();
+       
+    
 
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $bien->setCodigo(0);
+
+            //le pido a la base de datos los objetos tipo
+            $repository = $this->getDoctrine()->getRepository(Tipo::class);//le pido a la base de datos los objetos tipo
+            $tipe=($repository->find($bien->getTipo()));//esto no se que me devuelve
+            $tipo=intval($tipe->getId());//me devuelve el objeto que coincide con el nombre de la rama que es el que obtengo en el toString de tipo
+
+           // $repository = $this->getDoctrine()->getRepository(User::class);
+           // $usuario=$repository->findBy();
+           // $bien->setUsuario($user);
+
+            $em->persist($bien);
+            $em->flush();
+
+
+            //le pido a la base de datos los objetos rama
+            $repository2 = $this->getDoctrine()->getRepository(Rama::class);
+            $rame=($repository2->find($bien->getRama())); //me devuelve el objeto que coincide con el nombre de la rama que es el que obtengo en el toString de rama
+
+
+            $rama=intval($rame->getId());// transformo el id de la rama en un entero
+
+
+           $bienId=intval($bien->getId());
+
+            $codigo = ($tipo."-".$rama."-".$bienId);
+            $bien->setCodigo($codigo);
+
+            $bienId=intval($bien->getId());
+
+            $codigo = ($tipo."-".$rama."-".$bienId);
+            $bien->setCodigo($codigo);
+
+            //aca iria lo del usuario
+
+            //por las dudas para actualizar el id de bien
+            $em->persist($bien);
+            $em->flush();
+
+
+            return $this->redirectToRoute('bien_index');
+        }
+
+
+        return $this->render('bien/newconsumible.html.twig', array(
+            'bien' => $bien,
+            'form' => $form->createView(),
+        ));
+    }
     
 }

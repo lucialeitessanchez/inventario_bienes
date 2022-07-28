@@ -64,6 +64,13 @@ class Proveedor
      */
     private $email;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="organismo_publico", type="boolean", nullable=true)
+     */
+    private $organismo_publico;
+
 
     /**
      * @ORM\OneToMany(targetEntity="Factura", mappedBy="proveedor")
@@ -305,4 +312,28 @@ class Proveedor
 
     public function __toString() {
         return strval($this->getNombre()); }
+
+    /**
+     * Set organismoPublico
+     *
+     * @param boolean $organismoPublico
+     *
+     * @return Proveedor
+     */
+    public function setOrganismoPublico($organismoPublico)
+    {
+        $this->organismo_publico = $organismoPublico;
+
+        return $this;
+    }
+
+    /**
+     * Get organismoPublico
+     *
+     * @return boolean
+     */
+    public function getOrganismoPublico()
+    {
+        return $this->organismo_publico;
+    }
 }

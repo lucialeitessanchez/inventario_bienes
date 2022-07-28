@@ -2,19 +2,31 @@
 
 namespace BienesBundle\Controller;
 
+use BienesBundle\Entity\Rol;
 use BienesBundle\Entity\User;
+use BienesBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+
 
 /**
  * User controller.
+ *
  */
-class UserController extends Controller
+/**
+    * @IsGranted("ROLE_ADMIN")
+    */
+ class UserController extends Controller
 {
-    /**
+        /**
      * Lists all user entities.
      */
     public function indexAction()
@@ -37,6 +49,7 @@ class UserController extends Controller
         $form = $this->createForm('BienesBundle\Form\UserType', $user);
         $form->handleRequest($request);
 
+
         try {
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -47,6 +60,8 @@ class UserController extends Controller
                 $passwordEncode = $encoder->encodePassword($user->getPassword(),'');
                 // guardo la contraseña hash en la db
                 $user->setPassword($passwordEncode);
+               
+
                 $em->persist($user);
                 $em->flush();
                 $this->addFlash('mensaje_success','El usuario se creo correctamente!');
@@ -54,7 +69,7 @@ class UserController extends Controller
                 return $this->redirectToRoute('user_show', array('id' => $user->getId()));
             }
 
-        } catch (UniqueConstraintViolationException $e) {
+        } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
             $this->addFlash('mensaje_notice','Ya existe un usuario registrado con el mismo nombre');
         }
 
@@ -83,10 +98,8 @@ class UserController extends Controller
     public function editAction(Request $request, User $user,EncoderFactoryInterface $encoderFactory)
     {
         $originalPassword = $user->getPassword();
-        
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('BienesBundle\Form\UserType', $user);
-         
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -99,7 +112,7 @@ class UserController extends Controller
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
+            return $this->redirectToRoute('user_index');
         }
 
         return $this->render('user/edit.html.twig', array(
@@ -142,4 +155,5 @@ class UserController extends Controller
             ->getForm()
         ;
     }
+
 }

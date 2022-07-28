@@ -5,11 +5,15 @@ namespace BienesBundle\Controller;
 use BienesBundle\Entity\Rama;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Rama controller.
  *
  */
+  /**
+    * @IsGranted("ROLE_ADMIN")
+    */
 class RamaController extends Controller
 {
     /**

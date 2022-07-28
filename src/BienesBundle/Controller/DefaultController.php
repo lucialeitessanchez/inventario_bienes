@@ -59,7 +59,7 @@ class DefaultController extends Controller
         $responsable= $bien->getResponsable();
         $factura = $bien->getFactura();
         $codigo = $bien->getCodigo();
-        $fecha = '';
+        $fecha = date("d/m/Y");
 
         if ($factura)
             $fecha=date_format($factura->getFecha(), 'd/m/Y'); //transformo la fecha con ese formato porque no esta en string
@@ -77,17 +77,21 @@ class DefaultController extends Controller
         $txt="\n\n\nResponsable de la tenencia, guarda y conservación";
         $txt2="\nOficina: ".$responsable->getCargo();
         $txt3="\nAgente: ".$responsable->getNombre();
+        $txt31="\nUbicación: ".$bien->getUbicacion();
         $txt4="\n\nDatos de adquisición";
         $txt5="\nFecha adquisición: ".$fecha;
-        $txt6="\nProveedor ".$bien->getProveedor();
+      
+        $txt6="\nProveedor: ".$bien->getProveedor();
         if ($factura) {
+            $txt5b="\nTipo de adquisición: ".$factura->getTipoAdquisicion();
             $txt7="\nNº de Factura: ".$factura->getNumeroFactura();
             $txt9="\nImporte unitario: $".$factura->getMontoUnitario();
             $txt10="\nImporte total: $".$factura->getMontoTotal();
         } else {
             $txt7 = '';
             $txt9 = '';
-            $txt10="\nFactura: Sin Datos de Factura.";
+            $txt10="\nEs Organismo Publico";
+            $txt5b="\nTipo de adquisición: no posee por ser organismo público";
         }
 
         $txt11="\n\nBien adquirido";
@@ -97,8 +101,12 @@ class DefaultController extends Controller
         $txt15="\nNº codigo de sistema: ".$codigo;
         $txt16="\nCaracteristica: ".$bien->getTipo()." ".$bien->getRama();
 
+       
+
         //cuerpo del texto
-        $pdf->Write(0, $txt.$txt2.$txt3.$txt4.$txt5.$txt6.$txt7.$txt9.$txt10.$txt11.$txt12.$txt13.$txt14.$txt15.$txt16, '', 0, '', true, 0, false, false, 0);
+        $pdf->Write(0, $txt.$txt2.$txt3.$txt31.$txt4.$txt5.$txt5b.$txt6.$txt7.$txt9.$txt10.$txt11.$txt12.$txt13.$txt14.$txt15.$txt16, '', 0, '', true, 0, false, false, 0);
+        
+
 
         //firmas
         if($responsable->getFuncionario()){ //si es funcionario solo aparece el mismo, no necesita autorizacion
@@ -201,7 +209,8 @@ class DefaultController extends Controller
 
         if ($factura)
             $fecha=date_format($factura->getFecha(), 'd/m/Y'); //transformo la fecha con ese formato porque no esta en string
-
+        else 
+        $fecha = date("d/m/Y");
         $pdf = new BienPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
         //$pdf = $this->get("white_october.tcpdf")->create();
@@ -216,16 +225,18 @@ class DefaultController extends Controller
         $txt2="\nOficina: ".$responsable->getCargo();
         $txt3="\nAgente: ".$responsable->getNombre();
         $txt4="\n\nDatos de adquisición";
-        $txt5="\nFecha adquisición: ".$fecha;
+       
         $txt6="\nProveedor ".$bien->getProveedor();
         if ($factura) {
+            $txt5="\nFecha adquisición: ".$fecha;
             $txt7="\nNº de Factura: ".$factura->getNumeroFactura();
             $txt9="\nImporte unitario: $".$factura->getMontoUnitario();
             $txt10="\nImporte total: $".$factura->getMontoTotal();
         } else {
             $txt7 = '';
             $txt9 = '';
-            $txt10="\nFactura: Sin Datos de Factura.";
+            $txt10="\nEs Organismo Publico";
+            $txt5="\nFecha adquisicion: No posee por ser organismo público";
         }
 
         $txt11="\n\nBien adquirido";

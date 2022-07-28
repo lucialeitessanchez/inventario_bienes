@@ -15,7 +15,7 @@ class FacturaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('numeroFactura')->add('fecha', DateType::class, [
-            'label' => 'Fecha de Vencimiento'
+            'label' => 'Fecha de emision factura'
             ,'widget' => 'single_text'
             ,'html5' => true
         ])->add('montoUnitario')->add('montoTotal')->add('descripcion')->add('tipoAdquisicion')->add('proveedor');

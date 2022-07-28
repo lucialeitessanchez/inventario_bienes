@@ -1,5 +1,7 @@
 /* table */
-
+.bienesbundle_user[roles]{
+    visibility: hidden;
+}
 .dataTable {
     display: block;
     overflow-y: scroll;

@@ -14,7 +14,7 @@ security:
     providers:
         users:
             chain:
-                providers: [users_in_memory , proveedor_usuario ]
+                providers: [ proveedor_usuario ]
         proveedor_usuario: 
             id: BienesBundle\Security\UserProvider
         users_in_memory:
@@ -68,8 +68,11 @@ security:
 
     role_hierarchy:
     #    ROLE_SUPERADMIN: ROLE_ADMIN
-        ROLE_ADMIN: ROLE_USUARIO
-
+        ROLE_CONSULTA: ROLE_USUARIO
+        ROLE_ALTA: ROLE_CONSULTA
+        ROLE_JERARQUICO: ROLE_ALTA
+        ROLE_ADMIN: [ROLE_JERARQUICO,ROLE_ALTA,ROLE_CONSULTA]
+            
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/denegado, roles: IS_AUTHENTICATED_ANONYMOUSLY }

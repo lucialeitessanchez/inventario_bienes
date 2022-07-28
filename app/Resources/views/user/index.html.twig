@@ -1,14 +1,37 @@
 {% extends 'base_new.html.twig' %}
 
-
 {% block body %}
-	<h1>
-		Listado de Usuarios
-	</h1>
+<div orientation="horizontal">
+    <h1>Usuarios</h1>
+  <a href="{{ path('user_new') }}">Nuevo User</a></div>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Activo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.email }}</td>
+                <td>{% if user.isActive %}Si{% else %}No{% endif %}</td>
+                <td>
+                 <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <a href="{{ path('user_edit', { 'id': user.id }) }}" type="button" class="btn btn-outline-primary">Editar</a>
+                <a href="{{ path('user_show', { 'id': user.id }) }}"type="button" class="btn btn-outline-primary">Ver</a>
+                </div>    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-	{{ block("tableUser", "./user/tableUser.twig") }}
-
-	<a class="btn btn-sm btn-primary mb-3" href="{{ path('user_new') }}">
-		Crear Nuevo Usuario
-	</a>
 {% endblock %}

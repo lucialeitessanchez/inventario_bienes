@@ -1,21 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_new.html.twig' %}
 
 {% block body %}
-    <h1>Tipo edit</h1>
+<ul>   
+    <h1>Editar tipo</h1>
 <h3>
-   {% with {'edit_form': edit_form, 'btnTxt': 'Guardar'}%}
-    {{ block("formBlock", "./blocks/formBlock.twig") }}
-  {% endwith %}
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+      <br>
+         <div class="btn-group" role="group" aria-label="Basic example">
+                   <a href="{{ path('tipo_edit', { 'id': tipo.id }) }}" button type="button" class="btn btn-primary">Editar</a>
+                    <a href="{{ path('tipo_index') }}" button type="button" class="btn btn-primary">Volver al listado</a>
+                    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('tipo_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    {{ form_end(edit_form) }}
+
+    
 </h3>
+</ul>
 {% endblock %}
+

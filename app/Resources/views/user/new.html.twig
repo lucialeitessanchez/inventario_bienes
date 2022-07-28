@@ -1,21 +1,20 @@
 {% extends 'base_new.html.twig' %}
 
 {% block body %}
-  <h1>
-    User creation
-  </h1>
+    <h1>Creacion de usuario</h1>
 
-  {% with {
-    form: form,
-    btnTxt: 'Crear'
-  }
-  %}
-  {{ block('formBlock', './blocks/formBlock.twig') }}
-  {% endwith %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
 
-  <div>
-    <a class="btn btn-primary mb-2" href="{{ path('user_index') }}">
-      Listado de Usuarios
-    </a>
-  </div>
+  
+  <div class="btn-group" role="group" aria-label="Basic outlined example">
+  <button type="submit" class="btn btn-outline-primary">Alta usuario</button>
+  <a href="{{ path('user_index') }}" type="button" class="btn btn-outline-primary">Volver</a>
+
+</div>
+     
+    {{ form_end(form) }}
+
+
 {% endblock %}
+

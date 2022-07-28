@@ -54,7 +54,16 @@ class User implements AdvancedUserInterface, \Serializable
     */
     private $bienes;
 
-
+     
+    /**
+     * @ORM\ManyToMany(targetEntity="Rol", inversedBy="user", orphanRemoval=true)
+     * @ORM\JoinTable(name="user_rol",
+     *      joinColumns={@ORM\JoinColumn(name="user", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="rol", referencedColumnName="idrol")}
+     *      )
+    */
+    
+    private $roles;
 
 
     /**
@@ -159,7 +168,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return $this->roles;
     }
 
     public function eraseCredentials()
@@ -235,8 +244,6 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
 
-
-
     /**
      * Add biene
      *
@@ -269,5 +276,41 @@ class User implements AdvancedUserInterface, \Serializable
     public function getBienes()
     {
         return $this->bienes;
+    }
+
+    /**
+     * Add role
+     *
+     * @param \BienesBundle\Entity\Rol $role
+     *
+     * @return User
+     */
+   
+
+    /**
+     * Remove role
+     *
+     * @param \BienesBundle\Entity\Rol $role
+     */
+    public function removeRole(\BienesBundle\Entity\Rol $role)
+    {
+        $this->roles->removeElement($role);
+    }
+
+    public function __toString() {
+        return strval($this->getId()); }
+
+    /**
+     * Add role
+     *
+     * @param \BienesBundle\Entity\Rol $role
+     *
+     * @return User
+     */
+    public function addRole(\BienesBundle\Entity\Rol $role)
+    {
+        $this->roles[] = $role;
+
+        return $this;
     }
 }
