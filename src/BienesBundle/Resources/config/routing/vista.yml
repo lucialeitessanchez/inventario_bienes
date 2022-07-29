@@ -61,3 +61,7 @@ vista_abm_bien:
 vista_abm_tipo:
     path:     /abmTipo
     defaults: { _controller: "BienesBundle:Vista:abmTipo" }
+    
+vista_edicion_bien:
+    path:     /edicionBien
+    defaults: { _controller: "BienesBundle:Vista:edicionBien" }
