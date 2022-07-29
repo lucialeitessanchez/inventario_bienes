@@ -8,37 +8,50 @@
         <div class="container">    
             <div class="card-body">
                 <div class="form-group col-md-8">
-                <div class="card-block" style="background-color: #F5F5F5; border-radius: 12px; padding: 8px;">
-                    <div class="form-row" >
-                        <div class="form-group col-md-4">
-                            <label>Código Identificación</label>
-                            <input class="form-control" type="text" id="" name="" size="15" >
+                    <div class="card-block" style="background-color: #F5F5F5; border-radius: 12px; padding: 8px;">
+                        <div class="form-row" >
+                            <div class="form-group col-md-4">
+                                <label>Código Identificación</label>
+                                <input class="form-control" type="text" id="" name="" size="15" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Nro Comprobante Ingreso</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Nro Comprobante Edición</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                            </div>
                         </div>
-                        <div class="form-group col-md-3"></div>
-                        <div class="form-group col-md-4">
-                            <label>Nro Comprobante</label>
-                            <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                        <div class="form-row" >
+                            <div class="form-group col-md-8">
+                                <label>Estado</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true" placeholder="Activo-Asignado/Prestado/En desuso...">
+                            </div>
+                            
+                            <div class="form-group col-md-4">
+                                <label>Nro Comprobante</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                            </div>
+                        </div>
+                        <div class="form-row" >
+                            <div class="form-group col-md-6">
+                                <label>Oficina</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true" placeholder="">
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                                <label>Responsable</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                            </div>
                         </div>
                     </div>
-                      <div class="form-row" >
-                        <div class="form-group col-md-4">
-                            <label>Estado</label>
-                            <input class="form-control" type="text" id="" name="" size="15" disabled="true" placeholder="Activo-Asignado/Prestado/En desuso...">
-                        </div>
-                        <div class="form-group col-md-3"></div>
-                        <div class="form-group col-md-4">
-                            <label>Nro Comprobante</label>
-                            <input class="form-control" type="text" id="" name="" size="15" disabled="true">
-                        </div>
-                    </div>
-                </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         <label>Fecha adquisición</label>
                         <input class="form-control" type="text" id="" name="" size="15">
                     </div>
-
                     <div class="form-group col-md-6">
                         <label>Tipo adquisición</label>
                         <select class="form-control">
@@ -108,7 +121,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Tipo de Bien</label>
@@ -135,7 +147,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label>Marca</label>
@@ -175,7 +186,6 @@
                         <label>Cantidad</label>
                         <input class="form-control" type="text" id="" name="" disabled="true">
                     </div>
-
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-8">
@@ -191,17 +201,14 @@
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
                             <a href="#" class="btn btn-outline-primary"> Imprimir Comprobante </a>
                         </div>
-                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
-                            <a href="#" class="btn btn-outline-primary"> Imprimir Etiqueta </a>
-                        </div>
                     </div>
                 </div>
                 <br>
 
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
 
-                    <input type="submit" class="btn btn-outline-primary" value="Nueva Adquisición">
-                    <a href="#" class="btn btn-outline-primary"> Volver al listado de bienes adquiridos </a>
+                    <input type="submit" class="btn btn-outline-primary" value="Nueva Edición">
+                    <a href="#" class="btn btn-outline-primary"> Volver al listado de bienes editados </a>
                     <a href="#" class="btn btn-outline-primary"> Volver al menú principal </a>
                 </div>
             </div>
