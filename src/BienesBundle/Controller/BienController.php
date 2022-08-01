@@ -81,6 +81,10 @@ class BienController extends Controller
         $facturasRepository = $em->getRepository("BienesBundle:Factura");
         $facturasProveedor = $em->getRepository("BienesBundle:Proveedor"); //tengo todos los objetos proveedor
         
+     
+       
+
+        
         // Busque las facturas que pertenecen al proveedor con el ID dado como parámetro GET "proveedorid"
         $facturas = $facturasRepository->createQueryBuilder("q")
             ->where("q.proveedor = :proveedorid ")
@@ -99,9 +103,10 @@ class BienController extends Controller
                 "id" => $factura->getId(),
                 "name" => $factura->getNumeroFactura(),
                 
+                
             );
         }
-        
+    
         // Matriz de retorno con estructura de las facturas de la identificación de proveedor proporcionada
         return new JsonResponse($responseArray);
 

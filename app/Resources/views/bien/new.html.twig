@@ -57,8 +57,7 @@
 //filtro de proveedor-factura
         $('#bienesbundle_bien_proveedor').change(function () {
             var proveedorSelector = $(this);
-            
-           
+
             // Solicite las facturas del proveedor seleccionado.
             $.ajax({
                 url: "{{ path('bien_list_facturas') }}",
@@ -69,7 +68,7 @@
                 },
                 success: function (facturas) {
                     var facturaSelect = $("#bienesbundle_bien_factura");
-                     
+                  
                     // Eliminar opciones actuales
                     facturaSelect.html('');
                     
@@ -78,17 +77,18 @@
                     
                 
                     $.each(facturas, function (key, factura) {
+                        factura.ver;
                         if(factura.esOrganismoPublico){ //si es organismo publico
                             $("#bienesbundle_bien_factura").attr("disabled",true); //desabilito la funcion de seleccionar factura
                         }
                         else{
-                        $("#bienesbundle_bien_factura").attr("enabled",true);
+                       $("#bienesbundle_bien_factura").attr("disabled",false);
                         facturaSelect.append('<option value="' + factura.id + '">' + factura.name + '</option>'); 
                         }
                     });
                 },
                 error: function (err) {
-                    alert("No debe ingresar factura ");
+                    alert("Hay un error");
                 }
             });
             

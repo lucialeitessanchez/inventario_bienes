@@ -62,6 +62,16 @@
 					<td>
 						{{ proveedor.email }}
 					</td>
+					<th>
+						Organismo Publico
+					</th>
+						<td>
+							{% if proveedor.organismoPublico %}
+							Si
+							{% else %}
+							No
+							{% endif %}
+						</td>
 				</tr>
 			</tbody>
 		</table>
