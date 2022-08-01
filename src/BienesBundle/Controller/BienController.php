@@ -187,6 +187,7 @@ class BienController extends Controller
            // $bien->setUsuario($user);
             $bien->setUsuario($usuario);
         //    if($tipe->getIdClasificacion() == "BI" && $user->getRoles() == 'ROLE_ADMIN'){
+            
             $em->persist($bien);
             $em->flush();
           //  }
@@ -286,8 +287,18 @@ class BienController extends Controller
         $editForm = $this->createForm('BienesBundle\Form\BienType', $bien);
         $editForm->handleRequest($request);
 
+        
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            if(($bien->getTipo())->getIdClasificacion() == "BI" && ($this->getUser())->getRoles() == ['ROLE_ADMIN']){ //verifica que si es Bi solo lo editen admins
+                $this->getDoctrine()->getManager()->flush();
+            }
+            else if(($bien->getTipo())->getIdClasificacion() == "BU"){ //si es bu si puede editar, antes se verifico que sea rol jerarquico
+                $this->getDoctrine()->getManager()->flush();
+            }
+            else{
+                return $this->render('security/denegado.html.twig');
+            }
+            
 
             return $this->redirectToRoute('bien_edit', array('id' => $bien->getId()));
         }
