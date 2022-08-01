@@ -95,10 +95,25 @@ class VistaController extends Controller {
 
         return $this->render('vista/vista_abm_tipo.html.twig');
     }
-    
-      public function edicionBienAction() {
+
+    public function edicionBienAction() {
 
         return $this->render('vista/vista_edicionBien.html.twig');
+    }
+
+    public function abmUbicacionAction() {
+
+        return $this->render('vista/vista_abm_ubicacion.html.twig');
+    }
+
+    public function abmOficinaAction() {
+
+        return $this->render('vista/vista_abm_oficina.html.twig');
+    }
+
+    public function abmRespoAreaAction() {
+
+        return $this->render('vista/vista_abm_respoArea.html.twig');
     }
 
 }

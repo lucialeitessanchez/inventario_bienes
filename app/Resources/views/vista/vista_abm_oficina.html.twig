@@ -1,0 +1,97 @@
+{% extends 'base_new.html.twig' %}
+
+{% block body %}
+
+    <h1>VISTA - ABM Oficina</h1>
+
+    <form action= "#"  method="post" enctype="multipart/form-data">  
+        <div class="container">    
+            <div class="card-body">
+
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Oficina  </label>
+                        <input class="form-control" type="text" id="" name="" size="15" placeholder="">
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Ubicación  </label>
+                        <select class="form-control">
+                            <option value="">Corrientes 2879 - Santa Fe</option>
+                            <option value="">Juan de Garay 2967 - Santa Fe</option>
+                            <option value="">Patricio Diez (calle 15) - Reconquista</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Localidad</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-7"></div>
+                    <div class="form-group col-md-1">
+                        <a href="#" class="btn btn-outline-primary"> Agregar </a>
+                    </div>
+                </div>
+                <div class="card-title">
+                    <fieldset><legend><h3>Oficinas registradas</h3></legend>
+                        <div class="table-responsive borderRad dataTable gg" id="full_table" style="max-height: 62vh">
+                            <table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+                                <thead class="table-tr-bg" style="position: sticky; top: 0; z-index: 1">
+                                    <tr>
+                                        <th>
+                                            Oficina
+                                        </th>
+                                        <th >
+                                            Ubicación
+                                        </th>
+                                        <th >
+                                            Localidad
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td align="left">SubSec de Políticas contra la Violencia por razones de Género</td>
+                                        <td align="left">Corrientes 2879</td>
+                                        <td align="left">Santa Fe</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">Secretaría de Formación y Capacitación para la Igualdad</td>
+                                        <td align="left">Corrientes 2879</td>
+                                        <td align="left">Santa Fe</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">Sectorial Informática - Anexo</td>
+                                        <td align="left">Juan de Garay 2967</td>
+                                        <td align="left">Santa Fe</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">DGA Reconquista - Mesa de Entradas</td>
+                                        <td align="left">Patricio Diez (calle 15)</td>
+                                        <td align="left">Reconquista</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <br>
+
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+
+                    <a href="#" class="btn btn-outline-primary"> Volver al menú principal </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}

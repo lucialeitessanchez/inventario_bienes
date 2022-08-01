@@ -65,3 +65,15 @@ vista_abm_tipo:
 vista_edicion_bien:
     path:     /edicionBien
     defaults: { _controller: "BienesBundle:Vista:edicionBien" }
+    
+vista_abm_ubicacion:
+    path:     /abmUbicacion
+    defaults: { _controller: "BienesBundle:Vista:abmUbicacion" }
+    
+vista_abm_oficina:
+    path:     /abmOficina
+    defaults: { _controller: "BienesBundle:Vista:abmOficina" }
+    
+vista_abm_respoArea:
+    path:     /abmRespoArea
+    defaults: { _controller: "BienesBundle:Vista:abmRespoArea" }
