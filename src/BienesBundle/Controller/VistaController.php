@@ -116,4 +116,9 @@ class VistaController extends Controller {
         return $this->render('vista/vista_abm_respoArea.html.twig');
     }
 
+    public function egresoStockAction() {
+
+        return $this->render('vista/vista_egreso_stock.html.twig');
+    }
+
 }

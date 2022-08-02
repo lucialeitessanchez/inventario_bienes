@@ -1,0 +1,112 @@
+{% extends 'base_new.html.twig' %}
+
+{% block body %}
+
+    <h1>VISTA - Egreso de Stock</h1>
+
+    <form action= "#"  method="post" enctype="multipart/form-data">  
+        <div class="container">    
+            <div class="card-body">
+                <div class="form-group col-md-8">
+                    <div class="card-block" style="background-color: #F5F5F5; border-radius: 12px; padding: 8px;">
+                        <div class="form-row" >
+                            <div class="form-group col-md-4">
+                                <label>Código Identificación</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                            </div>
+                            <div class="form-group col-md-3"></div>
+                            <div class="form-group col-md-4">
+                                <label>Nro Comprobante</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Fecha Egreso</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Tipo de Bien solicitado</label>
+                        <select class="form-control">
+                            <option value="">Viveres</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Bien solicitado</label>
+                        <select class="form-control">
+                            <option value="">Yerba</option>
+                            <option value="">Azucar</option>
+                            <option value="">Te</option>
+                            <option value="">Cafe</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Motivo Egreso</label>
+                        <select class="form-control">
+                            <option value="">Entrega para consumo/uso</option>
+                            <option value="">Producto vencido</option>
+                            <option value="">Rotura</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Agente solicitante</label>
+                        <select class="form-control">
+                            <option value="">Agente 1</option>
+                            <option value="">Agente 2</option>
+                            <option value="">Agente 3</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Oficina - Ubicación</label>
+                        <input class="form-control" type="text" id="" name="" disabled="true" placeholder="Oficina del agente - ubicacion ">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Cantidad</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Unidad de Medida</label>
+                        <input class="form-control" type="text" id="" name="" placeholder="Kg" disabled="true">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Observaciones</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-8"  align="right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                            <a href="#" class="btn btn-outline-primary"> Guardar </a>
+                        </div>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                            <a href="#" class="btn btn-outline-primary"> Imprimir Comprobante </a>
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+
+                    <input type="submit" class="btn btn-outline-primary" value="Nueva Egreso">
+                    <a href="#" class="btn btn-outline-primary"> Volver al listado de bienes egresados </a>
+                    <a href="#" class="btn btn-outline-primary"> Volver al menú principal </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}
