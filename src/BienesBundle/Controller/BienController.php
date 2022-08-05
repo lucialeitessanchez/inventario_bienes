@@ -289,18 +289,25 @@ class BienController extends Controller
 
         
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            if(($bien->getTipo())->getIdClasificacion() == "BI" && ($this->getUser())->getRoles() == ['ROLE_ADMIN']){ //verifica que si es Bi solo lo editen admins
-                $this->getDoctrine()->getManager()->flush();
-            }
-            else if(($bien->getTipo())->getIdClasificacion() == "BU"){ //si es bu si puede editar, antes se verifico que sea rol jerarquico
-                $this->getDoctrine()->getManager()->flush();
+         
+            if(($this->getUser())->getRoles() == ['ROLE_ADMIN']){
+                if(($bien->getTipo())->getIdClasificacion() == "BI"){
+                    $this->getDoctrine()->getManager()->flush();
+                }
             }
             else{
-                return $this->render('security/denegado.html.twig');
-            }
-            
 
-            return $this->redirectToRoute('bien_edit', array('id' => $bien->getId()));
+             if(($bien->getTipo())->getIdClasificacion() == "BU"){
+                $this->getDoctrine()->getManager()->flush();
+            }}
+            // if(($bien->getTipo())->getIdClasificacion() == "BI" && ($this->getUser())->getRoles() == ['ROLE_ADMIN']){ //verifica que si es Bi solo lo editen admins
+              //  $this->getDoctrine()->getManager()->flush();
+            //}
+            //else if(($bien->getTipo())->getIdClasificacion() == "BU" && ($this->getUser())->getRoles() == ['ROLE_JERARQUICO']){ //si es bu si puede editar, antes se verifico que sea rol jerarquico
+                //$this->getDoctrine()->getManager()->flush();
+            //}
+            
+            return $this->redirectToRoute('bien_index');
         }
 
         return $this->render('bien/edit.html.twig', array(

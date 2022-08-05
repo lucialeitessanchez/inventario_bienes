@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class TipoType extends AbstractType
 {
@@ -15,8 +16,15 @@ class TipoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('tipo')->add('nombreTipo');
-    }/**
+        $builder->add('tipo')->add('nombreTipo')->add('idClasificacion',ChoiceType::class, 
+        ['label' => '¿Que tipo de bien es?',
+            'choices'  => [
+                'Bien de uso' => 'BU',
+                'Bien informatico' => 'BI',
+            ],
+        ]);
+    }
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
