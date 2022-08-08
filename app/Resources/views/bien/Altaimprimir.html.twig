@@ -27,6 +27,7 @@
 			{{ responsable.nombre }}
 		</ul>
 		Datos de adquisicion
+		{% if factura is not null %}
 		<ul>Fecha adquisicion:
 			{{ factura.fecha|date("m/d/Y") }}
 			<br>Proveedor:
@@ -38,7 +39,11 @@
 		<br>Importe total: $
 		{{ factura.montoTotal }}
 	</ul>
-	Bien Adquirido
+		{% else %}
+		<br>Proveedor:
+			{{ proveedor.nombre }}
+		{% endif %}		
+	<br>Bien Adquirido
 	<ul>Detalle:
 		{{ bien.estado }}
 		<br>Descripcion/SARI/N° de Serie:

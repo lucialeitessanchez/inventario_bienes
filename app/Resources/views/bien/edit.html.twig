@@ -79,7 +79,13 @@
                     
                     
                     $.each(facturas, function (key, factura) {
+                      if(factura.esOrganismoPublico){ //si es organismo publico
+                            $("#bienesbundle_bien_factura").attr("disabled",true); //desabilito la funcion de seleccionar factura
+                        }
+                        else{
+                        $("#bienesbundle_bien_factura").attr("enabled",true);
                         facturaSelect.append('<option value="' + factura.id + '">' + factura.name + '</option>'); 
+                        }
                     });
                 },
                 error: function (err) {
