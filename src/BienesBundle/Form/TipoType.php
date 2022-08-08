@@ -16,13 +16,16 @@ class TipoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('tipo')->add('nombreTipo')->add('idClasificacion',ChoiceType::class, 
-        ['label' => '¿Que tipo de bien es?',
-            'choices'  => [
-                'Bien de uso' => 'BU',
+        $builder->add('tipo')->add('nombreTipo');
+       
+       $builder->add('idClasificacion', ChoiceType::class, [
+            'choices' => [
+                'Bien de Uso' => 'BU',
                 'Bien informatico' => 'BI',
             ],
+            'preferred_choices' => ['muppets', 'arr'],
         ]);
+        
     }
     /**
      * {@inheritdoc}
