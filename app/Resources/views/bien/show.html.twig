@@ -32,9 +32,22 @@
 					<td>{{ bien.estado }}</td>
 				</tr>
 				<tr>
-					<th>Persona que cargo:</th>
+					<th>Persona que cargo</th>
 					<td> {{ bien.usuario.username|default('Informatica/Jimena') }}</td>
 				</tr>
+				<tr>
+					<th>Tipo de bien</th>
+					{% if bien.tipo.idClasificacion == "BI" %}
+					<td>{{ bien.tipo }} {{ bien.rama }} - Bien informatico </td>
+					{% else %}
+					<td>{{ bien.tipo }} {{ bien.rama }}- Bien de uso </td>
+				{% endif %}
+				</tr>
+					<tr>
+					<th>Ubicación</th>
+					<td>{{ bien.ubicacion }}</td>
+				</tr>
+				
 			</tbody>
 		</table>
 	</div>
@@ -52,7 +65,5 @@
 			Editar
 		</a>
 		{% endif %}
-		{{ form_start(delete_form) }}
-		<input type="submit" class="btn btn-sm btn-outline-danger" value="Borrar"></a>
-	{{ form_end(delete_form) }}
+	
 </div>{% endblock %}

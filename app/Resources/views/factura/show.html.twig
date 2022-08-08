@@ -16,6 +16,10 @@
 					<th>Numero de factura</th>
 					<td>{{ factura.numeroFactura }}</td>
 				</tr>
+					<tr>
+					<th>Proveedor</th>
+					<td>{{ factura.proveedor }}</td>
+				</tr>
 				<tr>
 					<th>Fecha de facturación</th>
 					<td>
@@ -55,7 +59,5 @@
 		<a href="{{ path('factura_edit', { 'id': factura.id }) }}" class="btn btn-sm btn-outline-primary">
 			Editar
 		</a>
-		{{ form_start(delete_form) }}
-		<input type="submit" class="btn btn-sm btn-outline-danger" value="Borrar"></a>
-	{{ form_end(delete_form) }}
+		
 </div>{% endblock %}

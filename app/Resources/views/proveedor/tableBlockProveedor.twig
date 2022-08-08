@@ -27,6 +27,9 @@
 						Email
 					</th>
 					<th>
+						Organismo Público
+					</th>
+					<th>
 						Acciones
 					</th>
 				</tr>
@@ -56,6 +59,13 @@
 						</td>
 						<td>
 							{{ proveedor.email }}
+						</td>
+						<td>
+							{% if proveedor.organismoPublico %}
+							Si
+							{% else %}
+							No
+							{% endif %}
 						</td>
 						<td>
 							<div class="btn-group" role="group" aria-label="Basic outlined example">

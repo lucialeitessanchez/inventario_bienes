@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Responsable creation</h1>
+    <h1>Responsables alta</h1>
 <h3>
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -10,8 +10,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('responsable_index') }}">Back to the list</a>
+            <a href="{{ path('responsable_index') }}">Volver al listado</a>
         </li>
+         <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
+            Volver al menú principal</a>
     </ul>
 </h3>
 {% endblock %}

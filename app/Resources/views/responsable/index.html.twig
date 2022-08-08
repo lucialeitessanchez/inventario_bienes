@@ -1,7 +1,7 @@
 {% extends 'baseVer.html.twig' %}
 
 {% block body %}
-    <h1>Responsables list</h1>
+    <h1>Responsables listado</h1>
 <h3>
     <table>
         <thead>
@@ -40,7 +40,9 @@
 
     <ul>
         <li>
-            <a href="{{ path('responsable_new') }}">Create a new responsable</a>
+            <a href="{{ path('responsable_new') }}">Crear nuevo responsable</a>
+             <a href="{{ path('bienes_homepage') }}" class="btn btn-outline-primary">
+            Volver al menú principal</a>
         </li>
     </ul>
 </h3>

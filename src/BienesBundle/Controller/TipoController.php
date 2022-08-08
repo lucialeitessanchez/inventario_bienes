@@ -83,14 +83,13 @@ class TipoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('tipo_edit', array('id' => $tipo->getId()));
+            return $this->redirectToRoute('tipo_index');
         }
 
         return $this->render('tipo/edit.html.twig', array(
             'tipo' => $tipo,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView()
         ));
     }
 

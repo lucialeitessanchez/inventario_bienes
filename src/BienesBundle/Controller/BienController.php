@@ -81,6 +81,10 @@ class BienController extends Controller
         $facturasRepository = $em->getRepository("BienesBundle:Factura");
         $facturasProveedor = $em->getRepository("BienesBundle:Proveedor"); //tengo todos los objetos proveedor
         
+     
+       
+
+        
         // Busque las facturas que pertenecen al proveedor con el ID dado como parámetro GET "proveedorid"
         $facturas = $facturasRepository->createQueryBuilder("q")
             ->where("q.proveedor = :proveedorid ")
@@ -99,9 +103,10 @@ class BienController extends Controller
                 "id" => $factura->getId(),
                 "name" => $factura->getNumeroFactura(),
                 
+                
             );
         }
-        
+    
         // Matriz de retorno con estructura de las facturas de la identificación de proveedor proporcionada
         return new JsonResponse($responseArray);
 
@@ -182,6 +187,7 @@ class BienController extends Controller
            // $bien->setUsuario($user);
             $bien->setUsuario($usuario);
         //    if($tipe->getIdClasificacion() == "BI" && $user->getRoles() == 'ROLE_ADMIN'){
+            
             $em->persist($bien);
             $em->flush();
           //  }
@@ -281,10 +287,18 @@ class BienController extends Controller
         $editForm = $this->createForm('BienesBundle\Form\BienType', $bien);
         $editForm->handleRequest($request);
 
+        
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('bien_edit', array('id' => $bien->getId()));
+         
+            if(($this->getUser())->getRoles() == ['ROLE_ADMIN']){
+                    $this->getDoctrine()->getManager()->flush();
+            }
+            else{
+             if(($bien->getTipo())->getIdClasificacion() == "BU"){
+                $this->getDoctrine()->getManager()->flush();
+            }}
+            
+            return $this->redirectToRoute('bien_index');
         }
 
         return $this->render('bien/edit.html.twig', array(

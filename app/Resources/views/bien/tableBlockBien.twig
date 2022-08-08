@@ -9,9 +9,9 @@
 					<th>Codigo</th>
 					<th>Usuario</th>
 					<th>Descripcion</th>
-					<th>Tipo</th>
 					<th id="ordeninput">Ubicacion
 					</th>
+					<th>Tipo</th>
 					<th>Estado</th>
 					<th>Fecha de alta</th>
 					{% if not pdfp  %}
@@ -34,8 +34,8 @@
 						<td name="tdResp" id="resp{{loop.index}}" style="cursor: pointer" data-toggle="collapse" href="#collapsediv{{loop.index}}">{{ bien.responsable }}</td>
 
 						<td>{{ bien.descripcion }}</td>
-						<td>{{ bien.tipo }}</td>
 						<td>{{ bien.ubicacion }}</td>
+						<td>{{ bien.tipo }}</td>
 						<td>{{ bien.estado }}</td>
 						<td>
 							{% if bien.fechaAlta %}
@@ -47,18 +47,22 @@
 								<ul>
 									<div class="btn-group" role="group" aria-label="Basic outlined example">
 										<a href="{{ path('bien_show', { 'id': bien.id }) }}" class="btn btn-sm btn-outline-primary">ver</a>
+										
+
 										{% if bien.estado == "Baja" %} {# si el bien esta dado de baja no puede editar ni imprimir prestamo/alta#}
 
 										<a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary disabled" >editar</a>
 										<a href="{{ path('prestamo_imprimir', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary disabled">imprimir alta</a>
+										{% if is_granted('ROLE_ADMIN') %}
 										<a href="{{ path('prestamo_bien', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary disabled">imprimir prestamo</a>
-										
+										{% endif %}
 										{% else %}
 										<a href="{{ path('bien_edit', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">editar</a>
 										
 										<a href="{{ path('prestamo_imprimir', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir alta</a>
-
+										{% if is_granted('ROLE_ADMIN') %}
 										<a href="{{ path('prestamo_bien', { 'id': bien.id }) }}" class="btn btn-sm  btn-outline-primary">imprimir prestamo</a>
+										{% endif %}
 										{% endif %}
 									</div>
 								</ul>

@@ -13,10 +13,21 @@
                 <th>Tipo</th>
                 <td>{{ tipo.tipo }}</td>
             </tr>
+                   <tr>
+                <th>Tipo de bien  </th>
+                {% if tipo.idClasificacion == "BI" %}
+                <td> Bien informatico</td>
+                {% elseif tipo.idClasificacion == "BU" %}
+                <td> Bien de uso</td>
+                {% else %}
+
+                {% endif %}{% endif %}
+            </tr>
             <tr>
                 <th>Nombre del tipo  </th>
                 <td> {{ tipo.nombreTipo }}</td>
             </tr>
+       
         </tbody>
     </table>
 
