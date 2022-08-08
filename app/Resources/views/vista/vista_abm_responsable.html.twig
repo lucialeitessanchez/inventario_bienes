@@ -1,0 +1,107 @@
+{% extends 'base_new.html.twig' %}
+
+{% block body %}
+
+    <h1>VISTA - ABM Responsable Area</h1>
+
+    <form action= "#"  method="post" enctype="multipart/form-data">  
+        <div class="container">    
+            <div class="card-body">
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Apellido y Nombre Responsable  </label>
+                        <input class="form-control" type="text" id="" name="" size="15" placeholder="">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>DNI </label>
+                        <input class="form-control" type="text" id="" name="" size="15" placeholder="">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Oficina </label>
+                        <select class="form-control">
+                            <option value="">DGA - Dpto Presupuesto Contable</option>
+                            <option value="">DGA - Revisiva</option>
+                            <option value="">DGA - Dto Personal y Sueldos</option>
+                            <option value="">Secretaría Privada</option>
+                            <option value="">Dir. Gral. Asuntos Jurídicos y Despacho</option>
+                            <option value="">Dir. Gral. Asuntos Jurídicos - Dictamen</option>
+                            <option value="">Sectorial Informática</option>
+                             <option value="">Sectorial Informática - Anexo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Area</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Ubicacion</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Localidad</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-7"></div>
+                    <div class="form-group col-md-1">
+                        <a href="#" class="btn btn-outline-primary"> Agregar </a>
+                    </div>
+                </div>
+                <div class="card-title">
+                    <fieldset><legend><h3>Responsables registradas</h3></legend>
+                        <div class="table-responsive borderRad dataTable gg" id="full_table" style="max-height: 62vh">
+                            <table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+                                <thead class="table-tr-bg" style="position: sticky; top: 0; z-index: 1">
+                                    <tr>
+                                        <th>
+                                            Responsable 
+                                        </th>
+                                        <th >
+                                            Oficina
+                                        </th>
+                                        <th >
+                                            Localidad
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td align="left">Carolina Tarre - 26120724</td>
+                                        <td align="left">Dir. Gral. Asuntos Jurídicos y Despacho</td>
+                                        <td align="left">Santa Fe</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">Robledo Alejandra - 28241492</td>
+                                        <td align="left">Dir. Gral. Asuntos Jurídicos y Despacho – Redacción</td>
+                                        <td align="left">Santa Fe</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">Delvo Marcela - 31879117</td>
+                                        <td align="left">Secretaría Privada</td>
+                                        <td align="left">Santa Fe</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <br>
+
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+
+                    <a href="#" class="btn btn-outline-primary"> Volver al menú principal </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}

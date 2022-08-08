@@ -77,6 +77,10 @@ vista_abm_oficina:
 vista_abm_respoArea:
     path:     /abmRespoArea
     defaults: { _controller: "BienesBundle:Vista:abmRespoArea" }
+
+vista_abm_responsable:
+    path:     /abmResponsable
+    defaults: { _controller: "BienesBundle:Vista:abmResponsable" }
     
 vista_egreso_stock:
     path:     /egresoStock
