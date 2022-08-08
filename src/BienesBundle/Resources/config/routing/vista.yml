@@ -1,3 +1,83 @@
 vista_index:
     path:     /index
     defaults: { _controller: "BienesBundle:Vista:index" }
+    
+vista_factura_alta:
+    path:     /altaFactura
+    defaults: { _controller: "BienesBundle:Vista:altaFactura" }
+    
+vista_01_ingreso:
+    path:     /ingresoBien
+    defaults: { _controller: "BienesBundle:Vista:ingresoBien" }
+    
+vista_02_asignacion:
+    path:     /asignacionBien
+    defaults: { _controller: "BienesBundle:Vista:asignacionBien" }
+    
+vista_03_prestamo:
+    path:     /prestamoBien
+    defaults: { _controller: "BienesBundle:Vista:prestamoBien" }
+    
+vista_04_devolucion:
+    path:     /devolucionBien
+    defaults: { _controller: "BienesBundle:Vista:devolucionBien" }
+    
+vista_05_daniado:
+    path:     /daniadoBien
+    defaults: { _controller: "BienesBundle:Vista:daniadoBien" }
+    
+vista_06_envio_reparacion:
+    path:     /envioReparacionBien
+    defaults: { _controller: "BienesBundle:Vista:envioReparacionBien" }
+    
+vista_07_devolucion_reparador:
+    path:     /devolucionReparadorBien
+    defaults: { _controller: "BienesBundle:Vista:devolucionReparadorBien" }
+    
+vista_08_retorno_bi_reparado:
+    path:     /retornoBienReparado
+    defaults: { _controller: "BienesBundle:Vista:retornoBienReparado" }
+    
+vista_09_bi_desuso:
+    path:     /bienEnDesuso
+    defaults: { _controller: "BienesBundle:Vista:bienEnDesuso" }
+    
+vista_10_bi_inactivo:
+    path:     /bienInactivo
+    defaults: { _controller: "BienesBundle:Vista:bienInactivo" }
+    
+vista_11_bi_activo:
+    path:     /bienActivo
+    defaults: { _controller: "BienesBundle:Vista:bienActivo" }
+    
+vista_12_bi_baja:
+    path:     /bienBaja
+    defaults: { _controller: "BienesBundle:Vista:bienBaja" }
+    
+vista_abm_bien:
+    path:     /abmBien
+    defaults: { _controller: "BienesBundle:Vista:abmBien" }
+    
+vista_abm_tipo:
+    path:     /abmTipo
+    defaults: { _controller: "BienesBundle:Vista:abmTipo" }
+    
+vista_edicion_bien:
+    path:     /edicionBien
+    defaults: { _controller: "BienesBundle:Vista:edicionBien" }
+    
+vista_abm_ubicacion:
+    path:     /abmUbicacion
+    defaults: { _controller: "BienesBundle:Vista:abmUbicacion" }
+    
+vista_abm_oficina:
+    path:     /abmOficina
+    defaults: { _controller: "BienesBundle:Vista:abmOficina" }
+    
+vista_abm_respoArea:
+    path:     /abmRespoArea
+    defaults: { _controller: "BienesBundle:Vista:abmRespoArea" }
+    
+vista_egreso_stock:
+    path:     /egresoStock
+    defaults: { _controller: "BienesBundle:Vista:egresoStock" }

@@ -1,0 +1,219 @@
+{% extends 'base_new.html.twig' %}
+
+{% block body %}
+
+    <h1>VISTA - Edición Bien adquirido</h1>
+
+    <form action= "#"  method="post" enctype="multipart/form-data">  
+        <div class="container">    
+            <div class="card-body">
+                <div class="form-group col-md-8">
+                    <div class="card-block" style="background-color: #F5F5F5; border-radius: 12px; padding: 8px;">
+                        <div class="form-row" >
+                            <div class="form-group col-md-4">
+                                <label>Código Identificación</label>
+                                <input class="form-control" type="text" id="" name="" size="15" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Nro Comprobante Ingreso</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Nro Comprobante Edición</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                            </div>
+                        </div>
+                        <div class="form-row" >
+                            <div class="form-group col-md-8">
+                                <label>Estado</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true" placeholder="Activo-Asignado/Prestado/En desuso...">
+                            </div>
+                            
+                            <div class="form-group col-md-4">
+                                <label>Nro Comprobante</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                            </div>
+                        </div>
+                        <div class="form-row" >
+                            <div class="form-group col-md-6">
+                                <label>Oficina</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true" placeholder="">
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                                <label>Responsable</label>
+                                <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Fecha adquisición</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Tipo adquisición</label>
+                        <select class="form-control">
+                            <option value="">Compra por Licitación</option>
+                            <option value="">Compra directa</option>
+                            <option value="">Préstamo</option>
+                            <option value="">Herencia</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Nro Licitación</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Fecha Licitación</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Nro Expediente</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Iniciador</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Nro Gestión Directa</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Fecha Gestión</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Nro Expediente</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Iniciador</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Proveedor / Abastecedor</label>
+                        <select class="form-control">
+                            <option value="">Proveedor 1</option>
+                            <option value="">Proveedor 2</option>
+                            <option value="">Proveedor 3</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Nro Factura</label>
+                        <select class="form-control">
+                            <option value="">Factura 1</option>
+                            <option value="">Factura 2</option>
+                            <option value="">Factura 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Tipo de Bien</label>
+                        <select class="form-control">
+                            <option value="">Auricular</option>
+                            <option value="">Computadora</option>
+                            <option value="">Muebles para Oficina</option>
+                            <option value="">Teléfono</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Rama Bien</label>
+                        <select class="form-control">
+                            <option value="">Vincha con micrófono USB</option>
+                            <option value="">Vincha con micrófono + adaptador</option>
+                            <option value="">All in one</option>
+                            <option value="">Escritorio</option>
+                            <option value="">Tablet</option>
+                            <option value="">Escritorio</option>
+                            <option value="">Silla Fija</option>
+                            <option value="">IP-Fijo</option>
+                            <option value="">IP-Inalámbrico</option>
+                            <option value="">Línea Común</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Marca</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Modelo</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Color</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Nro Serie/Licencia</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Nro Imei</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Nro Sari</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label>Descripción Complementaria / Condición</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Cantidad</label>
+                        <input class="form-control" type="text" id="" name="" disabled="true">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Observaciones</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-8"  align="right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                            <a href="#" class="btn btn-outline-primary"> Guardar </a>
+                        </div>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                            <a href="#" class="btn btn-outline-primary"> Imprimir Comprobante </a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+
+                    <input type="submit" class="btn btn-outline-primary" value="Nueva Edición">
+                    <a href="#" class="btn btn-outline-primary"> Volver al listado de bienes editados </a>
+                    <a href="#" class="btn btn-outline-primary"> Volver al menú principal </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}

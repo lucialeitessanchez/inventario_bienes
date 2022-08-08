@@ -1,0 +1,106 @@
+{% extends 'base_new.html.twig' %}
+
+{% block body %}
+
+    <h1>VISTA - Nueva factura</h1>
+
+    <form action= "#"  method="post" enctype="multipart/form-data">  
+        <div class="container">   
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Nro Factura</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label>Fecha Factura</label>
+                        <input class="form-control" type="text" id="" name="" size="15">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Proveedor</label>
+                        <select class="form-control">
+                            <option value="">Proveedor 1</option>
+                            <option value="">Proveedor 2</option>
+                            <option value="">Proveedor 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label>Importe total</label>
+                        <input class="form-control" type="text" id="" name="" size="10">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 " style="border-left-style: solid;border-top-style: solid;border-color: #c5d4de">
+                        <label >Items Factura</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Descripción</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Importe unitario</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label> &nbsp;&nbsp;</label>
+                        <a href="#" class="btn btn-outline-primary"> Agregar </a>
+
+                    </div>
+                </div>
+
+                <br>
+                <div class="card-title">
+                    <fieldset><legend><h3>Detalle Factura</h3></legend>
+                        <div class="table-responsive borderRad dataTable gg" id="full_table" style="max-height: 62vh">
+                            <table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
+                                <thead class="table-tr-bg" style="position: sticky; top: 0; z-index: 1">
+                                    <tr>
+                                        <th>
+                                            Descripcion
+                                        </th>
+                                        <th >
+                                            Monto unitario
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AURICULAR NAXIDO ty-750 C/M Y ADAPTADOR </td>
+                                        <td>$1250.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>descripcion2</td>
+                                        <td>$1000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>descripcion3</td>
+                                        <td>$850.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+
+
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                    <input type="submit" class="btn btn-outline-primary" value="Nueva factura"></a>
+
+                    <a href="#" class="btn btn-outline-primary"> Volver al listado de facturas </a>
+                    <a href="#" class="btn btn-outline-primary"> Volver al menú principal </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}

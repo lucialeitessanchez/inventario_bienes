@@ -1,0 +1,180 @@
+{% extends 'base_new.html.twig' %}
+
+{% block body %}
+
+    <h1>VISTA - Retorno BI reparado</h1>
+
+    <form action= "#"  method="post" enctype="multipart/form-data">  
+        <div class="container">    
+            <div class="card-body">
+                <div class="form-row" >
+                    <div class="form-group col-md-3">
+                        <label>Nro comprobante BI Dañado</label>
+                        <input class="form-control" type="text" id="" name="" size="15" >
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Código identificación</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Nro comprobante Retorno</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                    </div>
+                </div>
+                <div class="form-row" >
+                    <div class="form-group col-md-3">
+                        <label>Nro comprobante Envío Reparación</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                    </div>
+                    <div class="form-group col-md-1"></div>
+                    <div class="form-group col-md-4">
+                        <label>Nro comprobante Devolucion Reparador</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                    </div>
+                </div>
+                <div class="form-row" >
+                    <div class="form-group col-md-8">
+                        <div class="card-block" style="background-color: #F5F5F5; border-radius: 12px; padding: 8px;">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Tipo de Bien</label>
+                                    <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label>Rama Bien</label>
+                                    <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Marca</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Modelo</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true" >
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Color</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Nro Serie/Licencia</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Nro Imei</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Nro Sari</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Estado del bien</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true" placeholder="Asignado / Prestado">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Daño detectado</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label>Tipo de Reparación</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label>Reparador</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label>Fecha envio</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true" >
+                                </div>
+
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label>Fecha devolución</label>
+                                    <input class="form-control" type="text" id="" name="" disabled="true" >
+                                </div>
+                                <div class="form-group col-md-8" >
+                                    <label>Condición</label><br>
+                                    <input class="form-control" type="text" id="" name="" disabled="true" >
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+        
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Fecha retorno a la oficina</label>
+                        <input class="form-control" type="text" id="" name="" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Oficina a la que retorna</label>
+                        <input class="form-control" type="text" id="" name="" disabled="true" placeholder="<oficina asignada antes del reporte como dañado>">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label>Agente Responsable</label>
+                        <input class="form-control" type="text" id="" name="" disabled="true" placeholder="<ultimo responsable asignado>">
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Superior responsable</label>
+                        <input class="form-control" type="text" id="" name="" disabled="true" placeholder="<ultimo superior asignado>">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-9">
+                        <label>Observación retorno de BI reparado</label>
+                        <input class="form-control" type="text" id="" name=""  >
+                    </div>
+                </div>
+                <div class="form-row" >
+                    <div class="form-group col-md-5" >
+                        <label>Apellido y Nombre quien recibe</label>
+                        <input class="form-control" type="text" id="" name="" placeholder="Quién firmó la recepción del BI">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Apellido y Nombre quien entrega</label>
+                        <input class="form-control" type="text" id="" name="" placeholder="Quién firmó la entrega">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-9"  align="right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                            <a href="#" class="btn btn-outline-primary"> Guardar </a>
+                        </div>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                            <a href="#" class="btn btn-outline-primary"> Imprimir comprobante </a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+
+                    <input type="submit" class="btn btn-outline-primary" value="Nuevo Retorno">
+                    <a href="#" class="btn btn-outline-primary"> Volver al listado de bienes retornados</a>
+                    <a href="#" class="btn btn-outline-primary"> Volver al menú principal </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}
