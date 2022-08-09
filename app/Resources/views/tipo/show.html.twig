@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>Tipo</h1>
-    <h2>
+
     <table>
         <tbody>
             <tr>
@@ -13,7 +13,11 @@
                 <th>Tipo</th>
                 <td>{{ tipo.tipo }}</td>
             </tr>
-                   <tr>
+            <tr>
+                <th>Nombre tipo</th>
+                <td>{{ tipo.nombreTipo }}</td>
+            </tr>
+            <tr>
                 <th>Tipo de bien  </th>
                 {% if tipo.idClasificacion == "BI" %}
                 <td> Bien informatico</td>
@@ -21,22 +25,15 @@
                 <td> Bien de uso</td>
                 {% else %}
 
-                {% endif %}{% endif %}
+                {% endif %}
+
             </tr>
-            <tr>
-                <th>Nombre del tipo  </th>
-                <td> {{ tipo.nombreTipo }}</td>
-            </tr>
-       
         </tbody>
     </table>
 
+            <a href="{{ path('tipo_index') }}">Volver</a>
 
-           <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href="{{ path('tipo_index') }}" button type="button" class="btn btn-outline-primary">Volver al listado</a>
-                   <a href="{{ path('tipo_edit', { 'id': tipo.id }) }}" button type="button" class="btn btn-outline-primary">Editar</a>
-                   
-                    </div>
-
-</h2>
+            <a href="{{ path('tipo_edit', { 'id': tipo.id }) }}">Editar</a>
+    
+        
 {% endblock %}
