@@ -94,15 +94,13 @@ class TipoController extends Controller
         $editForm->handleRequest($request);
            
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-<<<<<<< HEAD
-           
-            $this->getDoctrine()->getManager()->flush();
-            
-=======
-            $tipo->setIdClasificacion($request->get('select')); //toma la seleccion del select
-            $this->getDoctrine()->getManager()->flush();
 
->>>>>>> bc43340ee47fd5a45664ab9b376847d68f7a2423
+  /*****/         
+            $this->getDoctrine()->getManager()->flush();
+                        $tipo->setIdClasificacion($request->get('select')); //toma la seleccion del select
+            $this->getDoctrine()->getManager()->flush();
+/**/
+
             return $this->redirectToRoute('tipo_index');
         }
 
