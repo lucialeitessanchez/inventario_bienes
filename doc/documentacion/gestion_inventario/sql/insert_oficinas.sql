@@ -1,3 +1,8 @@
+/*INSERTAR OFICINAS EN inventario_bienesv2*/
+SELECT idOficina,oficina nombre_oficina,idArea id_area,idUbicacion ubicacion_id_ubicacion 
+FROM `oficina` WHERE 1 
+/*------------------------------------------------*/
+
 
 /*armar COMBO DE AREAS*/
 SELECT idArea,cargo 
