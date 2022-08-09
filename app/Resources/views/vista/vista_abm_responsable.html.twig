@@ -2,49 +2,60 @@
 
 {% block body %}
 
-    <h1>VISTA - ABM Responsable Area</h1>
+    <h1>VISTA - ABM Responsable</h1>
 
     <form action= "#"  method="post" enctype="multipart/form-data">  
         <div class="container">    
             <div class="card-body">
 
                 <div class="form-row">
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-6">
                         <label>Apellido y Nombre Responsable  </label>
-                        <select class="form-control">
-                            <option value="">Marinaro Florencia </option>
-                            <option value="">Mantaras Victoria</option>
-                            <option value="">Bode Gustavo</option>
-                            <option value="">Delvo Marcela</option>
-                            <option value="">Fabbri Lucinao</option>
-                            <option value="">Tacari Nerea</option>
-                        </select>
+                        <input class="form-control" type="text" id="" name="" size="15" placeholder="">
                     </div>
-
+                    <div class="form-group col-md-2">
+                        <label>DNI </label>
+                        <input class="form-control" type="text" id="" name="" size="15" placeholder="">
+                    </div>
+                </div>
+                <div class="form-row">
+                    
+                    <div class="form-group col-md-6">
+                        <label>Es funcionario? </label>
+                        <br>
+                        <input type="radio" id="funcionario" name="" value="1">
+                        <label for="html">SI</label>
+                        <input type="radio" id="no_funcionario" name="" value="0">
+                        <label for="css">NO</label><br>
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <label>Area </label>
+                        <label>Oficina </label>
                         <select class="form-control">
-                            <option value="">Ministerio de Igualdad, Género y Diversidad </option>
-                            <option value="">Secretaría de mujeres, género y diversidad</option>
-                            <option value="">Secretaría de planificación y coordinación legal y técnica</option>
+                            <option value="">DGA - Dpto Presupuesto Contable</option>
+                            <option value="">DGA - Revisiva</option>
+                            <option value="">DGA - Dto Personal y Sueldos</option>
                             <option value="">Secretaría Privada</option>
-                            <option value="">Subsecretaría Legal y Técnica, Gestión de la información</option>
-                            <option value="">Subsecreataría de Políticas de Igualdad y Diversidad</option>
-                            <option value="">Secretaría de Formación y capacitación para la igualdad</option>
+                            <option value="">Dir. Gral. Asuntos Jurídicos y Despacho</option>
+                            <option value="">Dir. Gral. Asuntos Jurídicos - Dictamen</option>
+                            <option value="">Sectorial Informática</option>
+                             <option value="">Sectorial Informática - Anexo</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-4">
+                        <label>Area</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Ubicacion</label>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
+                    </div>
+                    <div class="form-group col-md-4">
                         <label>Localidad</label>
-                        <select class="form-control">
-                            <option value="">Santa Fe </option>
-                            <option value="">Rosario</option>
-                            <option value="">Reconquista</option>
-                            
-                        </select>
+                        <input class="form-control" type="text" id="" name="" size="15" disabled="true">
                     </div>
                 </div>
                 <div class="form-row">
@@ -54,16 +65,16 @@
                     </div>
                 </div>
                 <div class="card-title">
-                    <fieldset><legend><h3>Oficinas registradas</h3></legend>
+                    <fieldset><legend><h3>Responsables registradas</h3></legend>
                         <div class="table-responsive borderRad dataTable gg" id="full_table" style="max-height: 62vh">
                             <table class="table bg-light table-sm table-striped table-bordered table-hover text-center text-dark">
                                 <thead class="table-tr-bg" style="position: sticky; top: 0; z-index: 1">
                                     <tr>
                                         <th>
-                                            Responsable Area
+                                            Responsable 
                                         </th>
                                         <th >
-                                            Area
+                                            Oficina
                                         </th>
                                         <th >
                                             Localidad
@@ -72,26 +83,21 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td align="left"> Bellini María Eva</td>
-                                        <td align="left">Subsecretaría de Planificaciòn Evaluación y Cooperación Estratégica de Políticas de Igualdad</td>
+                                        <td align="left">Carolina Tarre - 26120724</td>
+                                        <td align="left">Dir. Gral. Asuntos Jurídicos y Despacho</td>
                                         <td align="left">Santa Fe</td>
                                     </tr>
                                     <tr>
-                                        <td align="left">Bode Gustavo</td>
-                                        <td align="left">Secretaría de planificación y coordinación legal y técnica</td>
+                                        <td align="left">Robledo Alejandra - 28241492</td>
+                                        <td align="left">Dir. Gral. Asuntos Jurídicos y Despacho – Redacción</td>
                                         <td align="left">Santa Fe</td>
                                     </tr>
                                     <tr>
-                                        <td align="left">Delvo Marcela</td>
+                                        <td align="left">Delvo Marcela - 31879117</td>
                                         <td align="left">Secretaría Privada</td>
                                         <td align="left">Santa Fe</td>
                                     </tr>
-                                    <tr>
-                                        <td align="left">Fabbri Luciano</td>
-                                        <td align="left">Secretaría de Formación y capacitación para la igualdad</td>
-                                        <td align="left">Santa Fe</td>
-                                    </tr>
-
+                                    
                                 </tbody>
                             </table>
                         </div>

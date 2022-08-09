@@ -80,9 +80,11 @@ class TipoController extends Controller
         $deleteForm = $this->createDeleteForm($tipo);
         $editForm = $this->createForm('BienesBundle\Form\TipoType', $tipo);
         $editForm->handleRequest($request);
-
+           
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+           
             $this->getDoctrine()->getManager()->flush();
+            
             return $this->redirectToRoute('tipo_index');
         }
 
