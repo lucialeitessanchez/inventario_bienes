@@ -4,14 +4,19 @@ namespace BienesBundle\Controller;
 
 use BienesBundle\Entity\Tipo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+
+ 
 /**
  * Tipo controller.
  *
+ * @Route("tipo")
  */
-  /**
+ /**
     * @IsGranted("ROLE_ADMIN")
     */
 class TipoController extends Controller
@@ -19,6 +24,8 @@ class TipoController extends Controller
     /**
      * Lists all tipo entities.
      *
+     * @Route("/", name="tipo_index")
+     * @Method("GET")
      */
     public function indexAction()
     {
@@ -34,6 +41,8 @@ class TipoController extends Controller
     /**
      * Creates a new tipo entity.
      *
+     * @Route("/new", name="tipo_new")
+     * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -42,9 +51,8 @@ class TipoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $tipo->setIdClasificacion($request->get('select')); //toma la seleccion del select
             $em = $this->getDoctrine()->getManager();
-            $tipoB=$request->get('select'); //obtengo lo que seleccion como BI o BU
-            $tipo->setIdClasificacion($tipoB);
             $em->persist($tipo);
             $em->flush();
 
@@ -60,6 +68,8 @@ class TipoController extends Controller
     /**
      * Finds and displays a tipo entity.
      *
+     * @Route("/{id}", name="tipo_show")
+     * @Method("GET")
      */
     public function showAction(Tipo $tipo)
     {
@@ -74,6 +84,8 @@ class TipoController extends Controller
     /**
      * Displays a form to edit an existing tipo entity.
      *
+     * @Route("/{id}/edit", name="tipo_edit")
+     * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Tipo $tipo)
     {
@@ -82,22 +94,30 @@ class TipoController extends Controller
         $editForm->handleRequest($request);
            
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+<<<<<<< HEAD
            
             $this->getDoctrine()->getManager()->flush();
             
+=======
+            $tipo->setIdClasificacion($request->get('select')); //toma la seleccion del select
+            $this->getDoctrine()->getManager()->flush();
+
+>>>>>>> bc43340ee47fd5a45664ab9b376847d68f7a2423
             return $this->redirectToRoute('tipo_index');
         }
 
         return $this->render('tipo/edit.html.twig', array(
             'tipo' => $tipo,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView()
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
      * Deletes a tipo entity.
      *
+     * @Route("/{id}", name="tipo_delete")
+     * @Method("DELETE")
      */
     public function deleteAction(Request $request, Tipo $tipo)
     {
