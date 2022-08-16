@@ -1,0 +1,175 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04/11/2020, 12:07:02
+    Author     : Sectorial de Informática - MDS - mfpozzo 
+*/
+@charset "UTF-8";
+
+@font-face {
+    font-family: Poppins-Regular;
+    src: url("../fonts/Poppins/Poppins-Regular.ttf") format('truetype');
+    /* TTF file for CSS3 browsers */
+}
+
+@font-face {
+    font-family: Poppins-Bold;
+    src: url("../fonts/Poppins/Poppins-Bold.ttf") format('truetype');
+    /* TTF file for CSS3 browsers */
+}
+
+@font-face {
+    font-family: Poppins-Medium;
+    src: url("../fonts/Poppins/Poppins-Medium.ttf") format('truetype');
+    /* TTF file for CSS3 browsers */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+
+} 
+
+html
+{
+
+}
+.fixed-top-bp{
+    background-size: 1367px 0px;
+}
+.footer-bp{
+    background: #FFFFFF;
+}
+
+.container-bp{
+    max-width: 1140px;
+    background-color: #FFFFFF;
+
+}
+mostrar-datos{
+
+    border-style: none;    font-weight: bold;    background-color:#deecf2 ;
+}
+body {
+
+    /* background-image: url("../../img/fondo.svg");
+     background-repeat: no-repeat round;
+     
+     background-position: center;*/
+    background-size: auto;
+    background-color: #e4e5e6;
+    font-family: Poppins-Regular;
+
+}
+select_option {
+    padding: 10px 0;
+    height: 30px;
+}
+
+.label-info {
+    background: #ccd8dd;
+    color: #343a40;
+    margin: 2px;
+    border-radius: 3px;
+    padding: 0.5rem 1rem;
+
+
+}
+
+info {
+    border-style: none; 
+    font-weight: bold; 
+    background-color:#deecf2;
+    font-size: 10px;
+
+}
+.card-header-bp{
+    padding: 0.30rem 0rem;
+    border-bottom: 2.5px solid rgba(0, 0, 0, 0.125);
+}
+.btn{
+    font-size: 1.3rem;
+}
+
+.form-control{
+    font-size: 1.3rem;
+}
+
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0; }
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa; }
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #0670b8; }
+.dropdown-item.disabled, .dropdown-item:disabled {
+    color: #6c757d;
+    background-color: transparent; }
+
+
+.breadcrumb{
+
+    height: 40px;
+}
+
+
+/*
+.row-img
+{
+  width: 100%;
+  padding:  10px;
+  margin:  10px;
+  position: center
+    
+}
+*/
+/*
+.content-header-inico {
+  padding: 100px 0.5rem;
+}
+
+
+header{
+    width: 375px;
+    height: 150px;
+    
+}
+
+section#logo_1{
+    width: 85px ;
+    height: 150px;
+    float: left;
+}
+
+
+section#logo_2{
+    width: 85px;
+    height: 150px;
+    float: left;
+}    
+    
+
+section#logo{
+  
+    width: 205px;
+    height: 150px;
+    
+    float: left;
+}*/

@@ -1,0 +1,84 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+
+parameters:
+    app.sistema_id: '%env(APP_SISTEMA_ID)%'
+    url_portal: 'http://10.1.6.7/~florencia/nuevo_portalmds_admin/web/app_dev.php/sistemas'
+    
+    permisos_to_roles: { 1: 'ROLE_ADMINISTRADOR', 2: 'ROLE_USUARIO',  }
+    roles_descripcion: { 'ROLE_USUARIO': 'Permiso para cargar datos','ROLE_ADMINISTRADOR': 'Permiso para la Administracion del Sistemas'}
+   
+    
+    database_name_mdsconsulta: desoc_consulta
+    database_name_ruinstituciones: desoc_ruinstituciones
+    database_name_tablascomunes: desoc_tablascomunes
+    table_from_db:
+        t_persona: "%database_name_mdsconsulta%"
+        Institucion: "%database_name_ruinstituciones%"
+        Tipo_Institucion: "%database_name_ruinstituciones%"
+        Autoridad: "%database_name_ruinstituciones%"
+        Cargo_Autoridad: "%database_name_ruinstituciones%"
+        Estado_Reg: "%database_name_ruinstituciones%"
+        Comision_Directiva: "%database_name_ruinstituciones%"
+        t_loc: "%database_name_tablascomunes%"
+
+    informeFile_directory: '%kernel.project_dir%/upload/'    
+    mysql_register_user.class: 'App\Service\MysqlRegisterUser'
+    service_user.class: 'App\Security\User\ServiceUser'
+    service_user_provider.class: 'App\Security\User\ServiceUserProvider'
+    token_authenticator: 'App\Security\TokenAuthenticator'
+    
+    router.request_context.base_url: '%env(ROUTER_REQUEST_CONTEXT_BASE_URL)%'
+    router.request_context.scheme: '%env(ROUTER_REQUEST_CONTEXT_SCHEME)%'
+       
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            int $sistemaId: '%app.sistema_id%'
+
+    
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    mapping.listener:
+        class: App\EventListener\MappingListener
+        arguments:    [ "%table_from_db%" ]
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }
+            
+       
+    service_user_provider:
+        class: '%service_user_provider.class%'
+        arguments: [ "@request_stack", "%permisos_to_roles%","@doctrine.orm.entity_manager","@logger"]  
+        
+        
+    mysql_register_user:
+      class: '%mysql_register_user.class%'
+      arguments: 
+        $context: '@security.token_storage'
+        $request_stack: '@request_stack'
+      tags:
+          - { name: doctrine.event_listener, event: onFlush }   

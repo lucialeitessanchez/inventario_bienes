@@ -1,0 +1,121 @@
+{# empty Twig template #}
+{% extends 'base_bs.html.twig' %}
+{% block title %}BajaActoAdministrativo{% endblock %}
+{% block body %}
+
+    {% for flashMessage in app.session.flashBag.get('aviso') %}
+        <div class="alert alert-success">                                
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger">
+
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    <div class="card" >   
+        <div class="card-header" style="background-color: #424242; color: white">BAJA DE ACTO ADMINISTRATIVO </div>
+        <div class="card-body">
+
+            <form action= "{{ path('buscarparaBaja_actoAdministrativo') }}"  method="post">  
+                <input type="hidden" id="bajar" name="bajar" value={{baja}}>
+                <div class="card-header" style="background-color: #eae9e9;">Criterios de selección</div>
+                <div class="card-body" style="background-color: #eae9e9 ;">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">  
+                            <label>Nro Nota</label>
+                            <input class="form-control" type="text" id="nroNota" name="nroNota" value="">
+                        </div>
+                        <div class="form-group col-md-4">  
+                            <label>Nro Expediente</label>
+                            <input class="form-control" type="text" id="nroexpediente" name="nroexpediente" value="">
+                        </div>
+                        <div class="form-group col-md-4">  
+                            <label>Nro Acto Administrativo</label>
+                            <input class="form-control" type="text" id="idActoAdministrativo_filtra" name="idActoAdministrativo_filtra" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-10"> </div>
+
+                        <div class="form-group col-md-2">  
+                            {{ form_widget(form.filtrarLista, {'attr': {'class': 'btn btn-dark'}})  }}
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                
+                <div class="card-body">
+                    <div class="card-header" style="background-color: #ccd8dd;"><b>Actos Administrativos Ingresados </b></div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+
+                                <th scope="col" style="text-align: center;">Nro Acto </th>
+                                <th scope="col" style="text-align: center;">Nro Nota</th>
+                                <th scope="col" style="text-align: center;">Fecha Nota</th>
+                                <th scope="col" style="text-align: center;">Institución</th>
+                                <th scope="col" style="text-align: center;">Localidad </th>
+                                <th scope="col" style="text-align: center;">Departamento</th>
+                                <th scope="col" style="text-align: center;">Estado actual</th>
+                                <th scope="col" style="text-align: center;">Area actual</th>
+                                <th scope="col" style="text-align: center;">Fecha movimiento</th>
+                            </tr>
+
+                            {% if array_result|length == 0 %}
+                                <tr>
+                                    <td class="text-center" colspan="5">No se encontraron datos</td>
+                                </tr>
+                            {% endif %}
+
+                            {% for dato in array_result %}
+                                <TR>
+                                    <td class="text-center"style="width: 8%;" >{{ dato.nroacto }}</td>
+                                    <td class="text-center" style="width: 8%;">{{ dato.nronota }}</td>
+
+                                    <td class="text-left" style="width: 10%;" >{{ dato.fechanota }} </td>
+                                    <td class="text-left" >{{ dato.institucion }} </td>
+                                    <td class="text-left" >{{ dato.localidad }}</td>
+                                    <td class="text-left" >{{ dato.departamento }}</td>
+                                    <td class="text-left" >{{ dato.estado_actual }}</td>
+                                    <td class="text-left" >{{ dato.ubicacion_actual }}</td>
+                                    <td class="text-left" style="width: 10%;">{{ dato.fecha_ubi }}</td>
+                                   
+                                    <td style="width: 5%; text-align: center;">   
+                                       <div id="div_btnbaja">
+                                     <a href= "{{ path('baja_actoAdministrativo',{'idactoadministrativo': dato.nroacto}) }}" class="btn btn-dark" role="button" id="darbaja">Dar Baja</a>                                                   
+                                     
+                                       </div>
+                                </TR>     
+                            {% endfor %}
+
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <br>
+
+              
+
+
+
+            </form>
+        </div>
+    </div>
+    {% block javascript %}
+        <script src="{{ asset('js/bajaActo.js') }}"></script>
+
+    {% endblock %}
+
+
+{% endblock %}

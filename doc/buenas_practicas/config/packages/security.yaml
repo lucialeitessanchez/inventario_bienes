@@ -1,0 +1,55 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+     '%service_user_provider.class%': plaintext  
+    providers:
+        #users_in_memory: { memory: null }
+        your_custom_user_provider:
+            id: service_user_provider
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            # anonymous: lazy
+            pattern: ^/
+            anonymous: ~
+            #simple_preauth:
+            #    authenticator: App\Security\ApiKeyAuthenticator
+            guard:
+                authenticator: App\Security\TokenAuthenticator
+                
+            provider: your_custom_user_provider
+            #form_login:
+            #    login_path: /login
+            #    #provider: your_custom_user_provider
+            #    check_path: login_check
+            #    csrf_token_generator: security.csrf.token_manager
+            #    default_target_path: index
+            #    always_use_default_target_path: true
+                
+            #    failure_path: null  
+            logout:
+                path: /logout
+                target: /logout
+            
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+    
+    #role_hierarchy:
+    #    ROLE_PROCESAR: ROLE_USUARIO
+    #    ROLE_ADMINISTRADOR: ROLE_ADMINISTRADOR        
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    # access_control:
+    #     - { path: '^/salir', roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+    #    - { path: '^/', roles: [IS_AUTHENTICATED_FULLY] }

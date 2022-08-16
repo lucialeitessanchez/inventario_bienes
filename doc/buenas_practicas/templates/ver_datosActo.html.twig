@@ -1,0 +1,368 @@
+{# empty Twig template #}
+{% extends 'base_bs.html.twig' %}
+{% block title %}IngresoActoAdministrativo{% endblock %}
+{% block body %}
+
+    {% for flashMessage in app.session.flashBag.get('aviso') %}
+        <div class="alert alert-success">                                
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger">
+
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    <div class="card" >   
+        <div class="card-header" style="background-color: #424242; color: white">SEGUIMIENTO DE TRÁMITE  {% if (idactoadministrativo!='0') %} Acto Administrativo Nro: {{idactoadministrativo}} {% endif %}
+            &nbsp; &nbsp;  &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;  
+            <label id="div_estado" class="label label-info"><b>Estado Actual: {{ estado }}</b></label></div>
+
+        <div class="card-body">
+            <form action= "{{ path('guardar',{'idactoadministrativo':idactoadministrativo}) }}"  method="post" enctype="multipart/form-data">  
+                <input type="hidden" id="idactoadministrativo" name="idactoadministrativo" value="{{idactoadministrativo}}" >
+                <input type="hidden" id="idestadoActual" name="idestadoActual" value="{{idestadoActual}}" >
+                <input type="hidden" id="area" name="area" value="{{area}}" >
+                <div id="div_datosInstitucion">
+                    <div class="card-header" style="background-color: #eae9e9;"><b>Datos encontrados</b></div>
+                    <div class="card-body" style="background-color: #deecf2 ;  border-style: none; ">
+
+                        {% for dato in array_datos %}
+
+                            <div class="card-header card-header-bp"  style="background-color: #deecf2;"><b>Datos de la INSTITUCIÓN</b></div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Nro Rong:</label>
+                                    <b>{{dato.institucion.getInstNroRong()}}</b>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Nro Sipaf:</label>
+                                    <b>{{dato.acto.getNrosipaf()}}</b>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Institución:</label>
+                                    <b>{{dato.acto.getNombreinstitucion()}}</b>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Localidad:</label>
+                                    <b>{{dato.acto.getLocalidadinst()}}</b>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Departamento:</label>
+                                    <b>{{dato.acto.getDepartamentoinst()}}</b>
+                                </div>
+                            </div>
+
+                            <div class="card-header card-header-bp" style="background-color: #deecf2;"><b>Datos PERSONAS DE CONTACTO</b></div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Referente:</label>
+                                    <b>{{dato.acto.getReferente()}}</b>
+                                </div>
+                            </div>  
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Referente 2:</label>
+                                    <b>{{dato.acto.getReferente2()}}</b>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Teléfono:</label>
+                                    <b>{{dato.acto.getReferente2codigoarea()}}-{{dato.acto.getReferente2te()}}</b>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Correo Electrónico:</label>
+                                    <b>{{dato.acto.getReferente2mail()}}</b>
+                                </div>
+                            </div>
+                            <div class="card-header card-header-bp" style="background-color: #deecf2;"><b>Datos del PROYECTO</b></div>    
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Nro Nota:</label>
+                                    <b>{{dato.acto.getNronota()}}</b>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Fecha Nota:</label>
+                                    {% if (dato.acto.getFechanota())%} 
+                                        <b>{{dato.acto.getFechanota().format("d-m-Y")}}</b>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Nro Expediente:</label>
+                                    <b>{{dato.acto.getNroexpediente()}}</b>
+                                    <input type='hidden' id='form_nroexpediente' name='form_nroexpediente' value="{{dato.acto.getNroexpediente()}}" data-url="{{path("ver_sie",{"nroexpediente":"0"})}}" style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Fecha Expediente:</label>
+                                    {% if (dato.acto.getFechaexpediente()) %}<b>{{dato.acto.getFechaexpediente.format("d-m-Y")}}</b>{%endif%}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-8">
+                                    <label>Carátula:</label>
+                                    <b>{{dato.acto.getCaratula()}}</b>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Fecha Carátula:</label>
+                                    {% if (dato.acto.getFechacaratula()) %}<b>{{dato.acto.getFechacaratula().format("d-m-Y")}}</b>{%endif%}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Componente:</label>
+                                    <b>{{dato.componente}}</b>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Monto Solicitado:</label>
+                                    <b>${{dato.acto.getMontosolicitado()}}</b>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Monto Aprobado:</label>
+                                    <b>${{dato.acto.getMontoaprobado()}}</b>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Fecha de aprobación:</label>
+                                    {% if (dato.acto.getFechamontoaprobado()) %}<b>{{dato.acto.getFechamontoaprobado.format("d-m-Y")}}</b>{%endif%}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Fecha Dictamen:</label>
+                                    {% if (dato.acto.getFechadictamen()) %}<b>{{dato.acto.getFechadictamen.format("d-m-Y")}}</b>{%endif%}
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label>Observaciones Dictamen:</label>
+                                    <b>{{dato.acto.getObservaciondictamen()}}</b>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Fecha de pago:</label>
+                                    {% if (dato.acto.getFechapago()) %}<b>{{dato.acto.getFechapago.format("d-m-Y")}}</b>{%endif%}
+                                </div>
+
+
+                                <div class="form-group col-md-4">
+                                    <label>Nro Resolución:</label>
+                                    <b>{{dato.acto.getNroresolucion}}</b>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Fecha Resolución:</label>
+                                    {% if (dato.acto.getFecharesolucion()) %}<b>{{dato.acto.getFecharesolucion.format("d-m-Y")}}</b>{%endif%}
+                                </div>
+                            </div>
+                            <br>
+                            <div id="div_datosSie">
+                                <div class="form-row" >
+
+                                    <div class="form-group col-md-12" >
+                                        <div class="card-header card-header-bp" style="background-color: #deecf2;"><b>Último movimiento SIE</b></div>
+
+                                        <div class="card-body" style="background-color: #deecf2 ;  border-style: none;  ">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-3">
+                                                    <label>Fecha inicio:</label>
+                                                    <input type='text' id='fechaini' name='fechaini'  style=" font-size: 11px;border-style: none; font-weight: bold; background-color:#deecf2 ;  " size="14" readonly="true">
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label>Iniciador:</label>
+                                                    <input type='text' id='iniciador' name='iniciador' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" size="25" readonly="true">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Tema:</label>
+                                                    <input type='text' id='tema' name='tema' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                                                </div>
+                                            </div>    
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label>Concepto:</label>
+                                                    <input type='text' id='concepto' name='concepto' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label>Remitente:</label>
+                                                    <input type='text' id='remitente' name='remitente' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" size="100" readonly="true" >
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Destino:</label>
+                                                    <input type='text' id='destino' name='destino' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" size="100" readonly="true">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-3">
+                                                    <label>Folios:</label>
+                                                    <input type='text' id='folios' name='folios' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" readonly="true">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Agregado a:</label>
+                                                    <input type='text' id='agregadoa' name='agregadoa' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" readonly="true">
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <label>Fecha último pase:</label>
+                                                    <input type='text' id='fechaultpase' name='fechaultpase' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" readonly="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>     
+                            <div class="card-header card-header-bp" style="background-color: #deecf2;"><b>Datos de la DOCUMENTACIÓN PRESENTADA</b></div>    
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Documentación presentada:</label>
+                                    <b>{{dato.documentacion}}</b>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <br>
+                        <div class="card-header card-header-bp" style="background-color: #deecf2;"><b>Observaciones/Novedades del proyecto</b></div>  
+                        <table class="table table-striped">
+                            <thead>
+                                {% if array_observaciones|length == 0 %}
+                                    <tr>
+                                        <td class="text-left" colspan="8">No se ingresaron novedades</td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+
+                                        <th scope="col" style="text-align: center;">Observación </th>
+                                        <th scope="col" style="text-align: center;">Usuario</th>
+                                        <th scope="col" style="text-align: center;">Fecha</th>
+                                    </tr>
+                                    {% for observacion in array_observaciones %}
+                                        <TR>
+                                            <td class="text-left"style="width: 25%;" >{{ observacion.getObservacion() }}</td>
+                                            <td class="text-left" style="width: 10%;" >{{ observacion.getUsuario() }} </td>
+                                            <td class="text-left" style="width: 10%;">{{ observacion.getFechacarga().format("d-m-Y") }} </td>
+                                            <td style="width: 5%; text-align: center;"><a href= "{{ path('eliminar_obp',{'idobservacion': observacion.getIdobservacionactoadministrativo(),'idactoadministrativo':idactoadministrativo }) }}" class="btn btn-dark" role="button">Eliminar</a> </td>                                                    
+
+                                        </TR>     
+                                    {% endfor %}
+                                {% endif %}
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+                <br> 
+
+                <div id="div_area1"  >
+                    {% if (idestadoActual!=10) %}
+                        <div class="form-row">
+                            <div  class="form-group col-md-5" >
+                                {{ form_label(form.fechadictamen) }}
+                                {{ form_errors(form.fechadictamen) }}
+                                {{ form_widget(form.fechadictamen,{'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div  class="form-group col-md-12" >
+                                {{ form_label(form.observaciondictamen) }}
+                                {{ form_errors(form.observaciondictamen) }}
+                                {{ form_widget(form.observaciondictamen,{'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div> 
+                    {% endif %}
+                </div>
+
+                <div id="div_area5">
+                    {% if (idestadoActual!=10) %}
+                        <div class="form-row">
+                            <div  class="form-group col-md-5" >
+                                {{ form_label(form.idestado) }}
+                                {{ form_errors(form.idestado) }}
+                                {{ form_widget(form.idestado,{'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div  class="form-group col-md-4" >
+                                {{ form_label(form.fechapago) }}
+                                {{ form_errors(form.fechapago) }}
+                                {{ form_widget(form.fechapago,{'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div  class="form-group col-md-4" >
+                                {{ form_label(form.nroresolucion) }}
+                                {{ form_errors(form.nroresolucion) }}
+                                {{ form_widget(form.nroresolucion,{'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div  class="form-group col-md-4" >
+                                {{ form_label(form.fecharesolucion) }}
+                                {{ form_errors(form.fecharesolucion) }}
+                                {{ form_widget(form.fecharesolucion,{'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div id="div_area2">
+                    <div class="form-row">
+                     
+                        <div class="form-group col-md-4">
+                            {{ form_errors(form.idtipodocumento) }}
+                            {{ form_row (form.idtipodocumento) }}
+                            {{ form_widget(form.idtipodocumento,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form_errors(form.brochure) }}
+                            {{ form_row (form.brochure) }}
+                        </div>
+                        
+                    </div>
+                </div>
+                        <br>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        {{ form_label(form.observacionbp) }}
+                        {{ form_errors(form.observacionbp) }}
+                        {{ form_widget(form.observacionbp,{'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-8"></div>
+                    {% if (idestadoActual!=10) %}
+                        <div class="form-group col-md-2" style="alignment-adjust: right">
+                            {{ form_widget(form.guardar,{'idactoadministrativo': idactoadministrativo,'attr': {'class': 'btn btn-dark'}})  }}
+                        </div>  
+                        <div class="form-group col-md-2" style="alignment-adjust: right">
+                            <a href="{{ path('seguimiento_actoAdministrativo') }}" class="btn btn-dark" >Cancelar</a>
+                        </div>
+                    {% endif %}
+                    {% if (idestadoActual==10) %}
+                        <div class="form-group col-md-2" style="alignment-adjust: right">
+                            <a href="{{ path('seguimiento_actoAdministrativo') }}" class="btn btn-dark" >Cerrar</a>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    {% block javascript %}
+        <script src="{{ asset('js/seguimientoActo.js') }}"></script>
+        <script src="{{ asset('js/datosActo.js') }}"></script>
+        <script src="{{ asset('js/buscarSIE.js') }}"></script>
+    {% endblock %}                        
+{% endblock %}

@@ -1,0 +1,498 @@
+{# empty Twig template #}
+{% extends 'base_bs.html.twig' %}
+{% block title %}IngresoActoAdministrativo{% endblock %}
+{% block body %}
+
+    {% for flashMessage in app.session.flashBag.get('aviso') %}
+        <div class="alert alert-success">                                
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger">
+
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    <div class="card" >   
+        <div class="card-header" style="background-color: #424242; color: white">MODIFICACIÓN DE NOTA  {% if (idactoadministrativo!='0') %} Acto Administrativo Nro: {{idactoadministrativo}} {% endif %}
+            &nbsp; &nbsp;  &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;  
+            <label id="div_estado" class="label label-info"><b>Estado Actual: {{ estado }}</b></label>&nbsp;&nbsp;
+            <label id="div_estado" class="label">Área de ingreso: {{ areacarga }}</label>
+        </div>
+        <div class="card-body">
+            <form action= "{{ path('modificar_actoAdministrativo',{'idactoadministrativo':0}) }}"  method="post" enctype="multipart/form-data">  
+                <input type="hidden" id="idactoadministrativo" name="idactoadministrativo" value="{{idactoadministrativo}}" >
+                <div class="form-row">
+                    <div class="form-group col-md-2" >  
+                        {{ form_label(form.nroNota) }}
+                        {{ form_errors(form.nroNota) }}
+                        {{ form_widget(form.nroNota,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+
+                    <div class="form-group col-md-4" >  
+                        {{ form_label(form.fechaNota) }}
+                        {{ form_errors(form.fechaNota) }}
+                        {{ form_widget(form.fechaNota,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+
+                    <div id="div_estado_nvo" class="form-group col-md-5" >
+                        {{ form_label(form.idestado) }}
+                        {{ form_errors(form.idestado) }}
+                        {{ form_widget(form.idestado,{'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>   
+                <div class="form-row"> 
+                    <div class="form-group col-md-4" >
+
+                        {{ form_label(form.tiposolicitanteIdtiposolicitante) }}
+
+                        {{ form_errors(form.tiposolicitanteIdtiposolicitante) }}
+                        {{ form_widget(form.tiposolicitanteIdtiposolicitante,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                    <div class="form-group col-md-6" >  
+                        {{ form_label(form.localidad) }}
+                        {{ form_errors(form.localidad) }}
+                        <script> let localidad_id =                    {{ localidad.idLoc }} </script>
+                        {{ form_widget(form.localidad,{'attr': {'class': 'form-control','data-url': path('getInstitucionPorLoc',{'locId':'0'})}})  }}
+                    </div>
+                </div>
+
+                <div class="form-row">     
+                    <div class="form-group col-md-12" >  
+                        {{ form_label(form.instId) }}
+                        {{ form_errors(form.instId) }}
+                        <script> let
+                            institucion_id =                                   {{ instId.getInstId() }} </script>
+                            {{ form_widget(form.instId,{'attr': {'class': 'form-control','data-url': path('getDatosInstitucion',{'idInstitucion':0})}})  }}
+                    </div>
+                </div>
+                <div id="div_datosInstitucion">
+                    <div class="card-header" style="background-color: #eae9e9;"><b>Datos encontrados</b></div>
+                    <div class="card-body" style="background-color: #deecf2 ;  border-style: none; ">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Nro Rong:</label>
+                                <input type='text' id='nrorong' name='nrorong' style="border-style: none; font-weight: bold; background-color:#deecf2 ;  " size="10">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Nro Sipaf:</label>
+                                <input type='text' id='nroSipaf' name='nroSipaf' style="border-style: none; font-weight: bold; background-color:#deecf2 ;  " size="10">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label>Domicilio:</label>
+                                <input type='text' id='domicilio' name='domicilio' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Teléfono:</label>
+                                <input type='text' id='instTelefono' name='instTelefono' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                        </div>    
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>COMISIÓN DIRECTIVA</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Fecha inicio:</label>
+                                <input type='text' id='comdirFecIni' name='comdirFecIni' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Fecha fin:</label>
+                                <input type='text' id='comdirFecFin' name='comdirFecFin' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>AUTORIDADES</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <table id="tabla_inst" class="table table-responsive table-sm" whith="100%" style="background-color: #deecf2" cellspacing="0" cellpadding="0" >
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">     
+                    <div class="form-group col-md-2" >  
+                        {{ form_label(form.montoSolicitado) }}
+                        {{ form_errors(form.montoSolicitado) }}
+                        <div class="input-group-prepend ">
+                            <span class="input-group-text" id="basic-addon1">$</span>
+                            {{ form_widget(form.montoSolicitado,{'attr': {'class': 'form-control','onkeypress':"return justNumbers(event);"}})  }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-10" >  
+                        {{ form_label(form.detallecomponenteIddetallecomponentesolicitado) }}
+                        {{ form_errors(form.detallecomponenteIddetallecomponentesolicitado) }}
+                        {{ form_widget(form.detallecomponenteIddetallecomponentesolicitado, {'attr': {'data-url': path('get_lista_componentes',{'idactoadministrativo':0}),'class': 'form-control',  'size':"8" }})  }}
+                    </div>
+                </div>
+                <div class="form-row">     
+                    <div class="form-group col-md-12" >  
+                        {{ form_label(form.observacion) }}
+                        {{ form_errors(form.observacion) }}
+                        {{ form_widget(form.observacion,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                </div>
+                <div id="div_montoAprobado">
+                    <div class="form-row" >
+
+                        <div class="form-group col-md-12" >
+
+                            <div class="card-body" style="background-color: #deecf2 ;  border-style: none; ">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12" style="text-align: right" >
+                                        <label> <span class="form input-text" id="basic-addon2"><h3>* Campos obligatorios para continuar con el tramite</h3></span> </label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-2" > 
+                                        <div class="input-group-prepend ">
+                                            {{ form_label(form.nroexpediente) }}
+                                            <span class="form input-text" id="basic-addon2"><h2>*</h2></span> 
+                                        </div>
+                                        {{ form_errors(form.nroexpediente) }}
+                                        {{ form_widget(form.nroexpediente,{'attr': {'class': 'form-control','data-url': path("ver_sie",{"nroexpediente":"0"})}})  }}
+                                    </div>
+
+                                    <div class="form-group col-md-4" >  
+                                        <div class="input-group-prepend ">
+                                            {{ form_label(form.fechaexpediente) }}
+                                            <span class="form input-text" id="basic-addon2"><h2>*</h2></span> 
+
+                                        </div>
+                                        {{ form_errors(form.fechaexpediente) }}
+                                         <input type='text' name="form_fechaexpediente" id="form_fechaexpediente" value='' class="form-control">
+                                        
+                                    </div>
+                                </div>
+                                <!--
+                                 <div class="form-row">
+                                     <div class="form-group col-md-8" >
+                                         <div class="input-group-prepend ">
+                                {{ form_label(form.caratula) }}
+                                
+                            </div>
+                                {{ form_errors(form.caratula) }}
+                                {{ form_widget(form.caratula,{'attr': {'class': 'form-control'}})  }}
+                            </div>
+                            <div class="form-group col-md-4" >  
+                                <div class="input-group-prepend ">
+                                {{ form_label(form.fechacaratula) }}
+                                
+                            </div>
+                                {{ form_errors(form.fechacaratula) }}
+                                {{ form_widget(form.fechacaratula,{'attr': {'class': 'form-control'}})  }}
+                            </div>
+                        </div>
+                                -->
+                                <div id="div_datosSie_error">
+                                    <div class="form-row" >
+                                        <div class="form-group col-md-12" >
+
+                                            <div class="card-header" style="background-color: #eae9e9;"><b>Último movimiento SIE</b></div>
+                                            <div class="card-body" style="background-color: #f8f7f7 ;  border-style: none;  "> 
+
+
+                                                <div class="form-row">
+
+                                                    <input type="text" id="error_sie" value=""  style="color:red; font-size: 12px;border-style: none; font-weight: bold; background-color:#f8f7f7 ;  "size="130" readonly="true">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>    
+                                <div id="div_datosSie">
+                                    <div class="form-row" >
+                                        <div class="form-group col-md-12" >
+
+                                            <div class="card-header" style="background-color: #eae9e9;"><b>Último movimiento SIE</b></div>
+                                            <div class="card-body" style="background-color: #f8f7f7 ;  border-style: none;  "> 
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-3">
+                                                        <label>Fecha inicio:</label>
+                                                        <input type='text' id='fechaini' name='fechaini'  style="font-size: 11px;border-style: none; font-weight: bold; background-color:#f8f7f7 ;  " size="10" readonly="true">
+                                                    </div>
+
+                                                    <div class="form-group col-md-4">
+                                                        <label>Iniciador:</label>
+                                                        <input type='text' id='iniciador' name='iniciador' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#f8f7f7 ;" size="35" readonly="true">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Tema:</label>
+                                                        <input type='text' id='tema' name='tema' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#f8f7f7 ;" size="35" readonly="true">
+                                                    </div>
+                                                </div>    
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <label>Concepto:</label>
+                                                        <input type='text' id='concepto' name='concepto' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#f8f7f7 ;" size="100" readonly="true">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <label>Remitente:</label>
+                                                        <input type='text' id='remitente' name='remitente' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#f8f7f7 ;" size="100" readonly="true">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Destino:</label>
+                                                        <input type='text' id='destino' name='destino' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#f8f7f7 ;" size="100" readonly="true">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-3">
+                                                        <label>Folios:</label>
+                                                        <input type='text' id='folios' name='folios' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#f8f7f7 ;" readonly="true">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Agregado a:</label>
+                                                        <input type='text' id='agregadoa' name='agregadoa' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#f8f7f7 ;" size="30" readonly="true">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Fecha último pase:</label>
+                                                        <input type='text' id='fechaultpase' name='fechaultpase' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#f8f7f7 ;" readonly="true">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-2" >  
+                                        <div class="input-group-prepend ">
+                                            {{ form_label(form.montoaprobado )}}
+
+                                        </div>
+                                        {{ form_errors(form.montoaprobado) }}
+                                        <div class="input-group-prepend ">
+                                            <span class="input-group-text" id="basic-addon1">$</span>
+                                            {{ form_widget(form.montoaprobado,{'attr': {'class': 'form-control','onkeypress':"return justNumbers(event);"}})  }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4" >
+                                        <div class="input-group-prepend ">
+                                            {{ form_label(form.fechamontoaprobado) }}
+
+                                        </div>
+                                        {{ form_errors(form.fechamontoaprobado) }}
+                                        {{ form_widget(form.fechamontoaprobado,{'attr': {'class': 'form-control'}})  }}
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4" >
+                                        <div class="input-group-prepend ">
+                                            {{ form_label(form.cbuinstitucion) }}
+                                            <span class="form input-text" id="basic-addon2"><h2>*</h2></span> 
+                                        </div> 
+                                        {{ form_errors(form.cbuinstitucion) }}
+                                        {{ form_widget(form.cbuinstitucion, {'attr': {'class': 'form-control'}})  }}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4" >  
+                                        <div class="input-group-prepend ">
+                                            {{ form_label(form.nrosipaf) }}
+                                            <span class="form input-text" id="basic-addon2"><h2>*</h2></span> 
+                                        </div> 
+                                        {{ form_errors(form.nrosipaf) }}
+                                        {{ form_widget(form.nrosipaf, {'attr': {'class': 'form-control'}})  }}
+                                    </div>
+                                </div>    
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        {{ form_label(form.detallerequisito) }}
+                                        {{ form_errors(form.detallerequisito) }}
+                                        {{ form_widget(form.detallerequisito, {'attr': {'checked': 'checked','data-url': path('get_check_requisitos',{'idactoadministrativo':0}),'class': 'form-control' }})  }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div> </div>  </div>
+
+                <div class="form-row">     
+                    <div class="form-group col-md-12" >  
+                        {{ form_label(form.referente) }}
+                        {{ form_errors(form.referente) }}
+                        {{ form_widget(form.referente,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                </div>
+
+                <div class="form-row">     
+                    <div class="form-group col-md-6" >  
+                        {{ form_label(form.referente2) }}
+                        {{ form_errors(form.referente2) }}
+                        {{ form_widget(form.referente2,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                    <div class="form-group col-md-3" >  
+                        {{ form_label(form.referente2codigoarea) }}
+                        {{ form_errors(form.referente2codigoarea) }}
+                        <div class="input-group-prepend ">
+                            <span class="input-group-text" id="basic-addon1">0</span>
+
+                            {{ form_widget(form.referente2codigoarea, {'attr': {'class': 'form-control', 'placeholder':'código de área sin cero'}})  }}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3" >  
+                        {{ form_label(form.referente2te) }}
+                        {{ form_errors(form.referente2te) }}
+                        {{ form_widget(form.referente2te, {'attr': {'class': 'form-control', 'placeholder':'número sin 15 si es celular'}})  }}
+
+                    </div>
+                </div>
+                <div class="form-row">     
+                    <div class="form-group col-md-12" >  
+                        {{ form_label(form.referente2mail) }}
+                        {{ form_errors(form.referente2mail) }}
+                        {{ form_widget(form.referente2mail,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                </div>
+                <div class="form-row">     
+                    <div class="form-group col-md-6" >  
+                        {{ form_label(form.contactoapenom) }}
+                        {{ form_errors(form.contactoapenom) }}
+                        {{ form_widget(form.contactoapenom,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                    <div class="form-group col-md-3" >  
+                        {{ form_label(form.contactocodigoarea) }}
+                        {{ form_errors(form.contactocodigoarea) }}
+                        <div class="input-group-prepend ">
+                            <span class="input-group-text" id="basic-addon1">0</span>
+
+                            {{ form_widget(form.contactocodigoarea, {'attr': {'class': 'form-control', 'placeholder':'código de área sin cero'}})  }}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3" >  
+                        {{ form_label(form.contactote) }}
+                        {{ form_errors(form.contactote) }}
+                        {{ form_widget(form.contactote, {'attr': {'class': 'form-control', 'placeholder':'número sin 15 si es celular'}})  }}
+
+                    </div>
+                </div>
+                <div class="form-row">     
+                    <div class="form-group col-md-12" >  
+                        {{ form_label(form.contactomail) }}
+                        {{ form_errors(form.contactomail) }}
+                        {{ form_widget(form.contactomail,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                </div>
+
+                <div class="form-row">     
+                    <div class="form-group col-md-6" >  
+                        {{ form_label(form.tramiteurgente) }}
+                        {{ form_errors(form.tramiteurgente) }}
+                        {{ form_widget(form.tramiteurgente,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                </div>
+
+
+                <div class="form-row">Adjuntar documento</div>
+                <div class="card card-body ">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            {{ form_errors(form.idtipodocumento) }}
+                            {{ form_row (form.idtipodocumento) }}
+                            {{ form_widget(form.idtipodocumento,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form_errors(form.brochure) }}
+                            {{ form_row (form.brochure) }}
+                        </div>
+                    </div>
+                    <div ><b>Documentos adjuntos</b></div>
+                    <table class="table table-striped">
+                        <thead>
+                            {% if array_adjuntos|length == 0 %}
+                                <tr>
+                                    <td class="text-left" colspan="8">No se adjuntaron documentos</td>
+                                </tr>
+                            {% else %}
+                                <!--<tr>
+        
+                                    <th scope="col" style="text-align: left;">Tipo documento </th>
+                                    <th scope="col" style="text-align: left;">Nombre archivo</th>
+                                    <th scope="col" style="text-align: left;">Fecha</th>
+                                </tr>-->
+                                {% for adjunto in array_adjuntos %}
+                                    <TR>
+                                        <td class="text-left"style="width: 22%;" >{{ adjunto.tipo }}</td>
+                                        <td class="text-left" style="width: 50%;" >{{ adjunto.nombrearchivo }} </td>
+                                        <td class="text-left" style="width: 15%;">{{ adjunto.fechaupload }} </td>
+                                        {% if (adjunto.path) %}
+                                            <td><a href= "{{ path('get_archivo_adjunto',{'id':adjunto.id}) }}" role="button"><img src="{{ asset('img/descarga.png') }}" alt="Descargar archivo" width="20" heigth="25" ></a> </td>
+                                            <td><a href= "{{ path('eliminar_archivo_adjunto',{'id':adjunto.id,'idactoadministrativo':idactoadministrativo}) }}" role="button"><img src="{{ asset('img/eliminar_reg.png') }}" alt="Eliminar" title="Eliminar archivo" width="20" heigth="25" ></a> </td>    
+                                                {% endif %}
+                                    </TR>     
+                                {% endfor %}
+                            {% endif %}
+                        </thead>
+                    </table>
+                </div>
+                <br>
+                <div class="form-row">Observaciones / Novedades</div>        
+                <div class="card card-body ">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+
+                            {{ form_errors(form.observacionbp) }}
+                            {{ form_widget(form.observacionbp,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div ><b>Observaciones/Novedades del proyecto ingresadas</b></div>  
+                    {%if array_observaciones|length != 0%}
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="text-align: left;">Observación </th>
+                                    <th scope="col" style="text-align: left;">Usuario</th>
+                                    <th scope="col" style="text-align: left;">Fecha</th>
+                                </tr>
+                                {% for observacion in array_observaciones %}
+                                    <TR>
+                                        <td class="text-left"style="width: 25%;" >{{ observacion.getObservacion() }}</td>
+                                        <td class="text-left" style="width: 10%;" >{{ observacion.getUsuario() }} </td>
+                                        <td class="text-left" style="width: 10%;">{{ observacion.getFechacarga().format("d-m-Y") }} </td>
+                                        <td style="width: 5%; text-align: center;"><a href= "{{ path('eliminar_obp',{'idobservacion': observacion.getIdobservacionactoadministrativo(),'idactoadministrativo':idactoadministrativo }) }}" class="btn btn-dark" role="button">Eliminar</a> </td>                                                    
+                                    </TR>     
+                                {% endfor %}
+                            </thead>
+                        </table>
+                    {% else %}
+                        <table class="table ">
+                            <tr>
+                                <td class="text-left" colspan="5">No se ingresaron novedades</td>
+                            </tr> </table>
+                        {% endif %}                    
+                </div>
+                <br>
+                <div class="form-row">
+                    <div class="col-md-8"></div>
+                    <div class="form-group col-md-2" style="alignment-adjust: right">
+                        {{ form_widget(form.guardar_datos, {'attr': {'class': 'btn btn-dark'}})  }}
+                    </div>    
+                    <div class="form-group col-md-2" style="alignment-adjust: right">
+                        <a href="{{ path('seguimiento_actoAdministrativo') }}" class="btn btn-dark" >Cancelar</a>
+                    </div>
+                </div>
+        </div>
+
+    </form>
+</div>
+
+{% block javascript %}
+    <script src="{{ asset('js/modificarActo.js') }}"></script>
+    <script src="{{ asset('js/buscarSIE.js') }}"></script>
+{% endblock %}
+{% endblock %}

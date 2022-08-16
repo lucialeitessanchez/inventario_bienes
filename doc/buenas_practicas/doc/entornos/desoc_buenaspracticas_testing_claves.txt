@@ -1,0 +1,13 @@
+srvtdbbalancer0e.santafe.gov.ar
+✔ Reporte de la creacion de entorno: TESTING EXTERNO
+----------------------------------------------------------------
+ >> Servidor    : srvtmysql3e.santafe.gob.ar - Puerto: 3306
+ >> Database    : desoc_buenaspracticas
+ >> Sectorial   : desoc
+ >> IP Srv App  : 10.30.28.11%
+ >> IP PhpMyadm : 10.20.40.11  (https://srvdadmindb3i.santafe.gob.ar/phpmyadmin/)
+ >> User App    : 'desoc_ubuenaspra'@'10.30.28.11%' / 812nnxs96
+ >> User Select : 'desoc_sbuenaspra'@'10.30.28.11%' / 537re*g02
+ >> User Adm    : 'desoc_adm'@'10.20.40.11' --> No se crea porque ya existe...
+ >> User Adm Loc: 'desoc_adm'@'localhost' --> No se crea porque ya existe...
+----------------------------------------------------------------

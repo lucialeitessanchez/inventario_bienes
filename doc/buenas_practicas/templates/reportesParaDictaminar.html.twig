@@ -1,0 +1,113 @@
+{# empty Twig template #}
+{% extends 'base_bs.html.twig' %}
+{% block title %}ReportesMovimientos{% endblock %}
+{% block body %}
+
+    {% for flashMessage in app.session.flashBag.get('aviso') %}
+        <div class="alert alert-success">                                
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger">
+
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    <div class="card" >   
+        <div class="card-header" style="background-color: #424242; color: white">REPORTE - Actos Administrativos para emitir Dictamen</div>
+        <div class="card-body">
+
+            <form action= "{{ path('reportes_para_dictaminar') }}"  method="post">  
+                <input type="hidden" id="area" name="area" value="{{ area }}">
+                <div class="card-header" style="background-color: #eae9e9;">Criterios de selección</div>
+                <div class="card-body" style="background-color: #eae9e9 ;">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                            {{ form_label(form.fechaDesde) }}
+                            {{ form_errors(form.fechaDesde) }}
+                            {{ form_widget(form.fechaDesde,{'attr': {'class': 'form-control'}})  }}
+                        </div>
+
+                        <div class="form-group col-md-6">  
+                            {{ form_label(form.fechaHasta) }}
+                            {{ form_errors(form.fechaHasta) }}
+                            {{ form_widget(form.fechaHasta,{'attr': {'class': 'form-control'}})  }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-10"></div>
+                        <div class="form-group col-md-2">
+                            {{ form_widget(form.filtrar, {'attr': {'class': 'btn btn-dark'}})  }}
+                            <a href="{{ path('reportes_para_dictaminar')}}" class="btn btn-dark"  >Limpiar</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                {% if array_result|length == 0 %}
+                    <div class="form-row">
+                        <div class="col-md-12" style="text-align: center">
+                            <h2>NO HAY ACTOS ADMINISTRATIVOS PARA DICTAMINAR </h2></div>
+                    </div>
+                {% else %}
+                    <div class="card-body p-0">
+                        <div class="card-header" style="background-color: #ccd8dd;"><b>Actos Administrativos Ingresados - Cantidad de trámites encontrados: {{totreg}}</b></div>
+                        <table class="table table-striped" >
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="text-align: center; width: 9%">Nro Acto </th>
+                                    <th scope="col" style="text-align: center;width: 11%">Expediente</th>
+                                    <th scope="col" style="text-align: left;width: 20%">Institución</th>
+                                    <th scope="col" style="text-align: left;width: 20%">Localidad </th>
+                                    <th scope="col" style="text-align: left;width: 15%">Departamento</th>
+                                    <th scope="col" style="text-align: left;width: 10%">Estado</th>
+                                    <th scope="col" style="text-align: left;width: 10%">F ingreso</th>
+                                    <th scope="col" style="text-align: left;width: 2%">Incluir</th>
+                                </tr>
+                                {% for dato in array_result %}
+                                    <TR>
+                                        <td  style="text-align: center;">{{ dato.nroacto }}</td>
+                                        <td  >{{ dato.nroexpediente }}</td>
+                                        <td  >{{ dato.institucion }} </td>
+                                        <td >{{ dato.localidad }}</td>
+                                        <td >{{ dato.departamento }}</td>
+                                        <td >{{ dato.estado_actual }}</td>
+                                        <td >{{ dato.fechacarga }}</td>
+                                        <td style="text-align: center; "><input type="checkbox" name="actos[]" class="case" value="{{dato.nroacto}}"style="display:block"></td>
+                                    </TR>     
+                                {% endfor %}
+                                <tr><td colspan="7" style="font-size: 10px;text-align: right"><i>Marcar / Desmarcar todos --></i></td> 
+                                    <td scope="col" style="text-align: left"><input type="checkbox" id="todos" name="todos" class="case" value="todos" style="display:block"></td></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <div class="form-row">
+                            <div class="form-group col-md-10"></div>
+                            <div class="form-group col-md-2">
+                                {% if (area == 2) %}
+                                    {{ form_widget(form.envio_para_dictaminar, {'attr': {'class': 'btn btn-dark'}})  }}
+
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+
+            </form>
+        </div>
+    </div>
+    {% block javascript %}
+        <script src="{{ asset('js/reportes.js') }}"></script>
+
+
+    {% endblock %}
+{% endblock %}

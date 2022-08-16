@@ -1,0 +1,27 @@
+CREAR RAMA
+
+- git flow feature start <nombre>
+
+
+PUBLICARLA
+
+- git flow feature publish <nombre>
+
+
+SUBIR CAMBIOS DE LA RAMA
+
+hacer el commit antes
+- git push origin feature/<nombre>
+
+
+BAJAR CAMBIOS
+
+- git pull origin feature/<nombre>
+
+
+CERRAR RAMA
+
+-git flow feature finish <nombre> (esto hace el merge con el develop, borra la rama y me pasa al develop)
+
+-git pull origin develop (para traer cambios si hubiera)
+-git push origin develop (para publicar mi develop)

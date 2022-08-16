@@ -1,0 +1,64 @@
+-- Pruebas --  Buenas Practicas
+
+* Ingreso de Nota
+
+-- Luego de guardar la nota, blanquear la página para volver a cargar una nueva nota. - OK
+
+* Movimiento Acto Administrativo
+-- En la búsqueda por número de expediente agregar la máscara de nro de expediente - OK
+-- En el combo de Área de origen se debe fijar el area del usuario logueado. - PENDIENTE
+-- En la vista de datos ajustar el tamaño de area de texto para que se vea completa las observaciones cargadas - OK
+
+ 
+
+* Seguimiento de Trámite
+
+-- Agregar un paginador cada 20 registros y una leyenda de cantidad de actos administrativos ingresados. - PENDIENTE
+-- Agregar un filtro por estado. -OK
+-- Agregar control al momento de realizar un guardar y no hacer ningun cambio. ahora da error de js - OK
+-- En los casos de los actos en estado INICIADO informar que datos son obligatorios cargar. -OK
+
+
+
+* Reportes
+
+-- El filtro por fecha de ingreso no esta funcionando.-OK
+
+
+* Generales
+
+-- Consultar si se debe dejar habilitada la opcion de adjuntar archivos en cualquier área independientemente del estado del acto administrativo.
+
+-- Informar si para un acto administrativo existen asociados el mismo número de expediente. Es posible??
+
+-- Permitir solo visualizar los datos del acto administrativo cuando el area actual sea distinta al del usuario logueado?? 
+
+-- Controlar que devuelve el servicio de sie para que no de un mensaje de error. Respuesta json cuando hay error: - OK
+
+{"sie":"01501-0071926-8","error":"Se encontro un error en [133]:\nCould not connect to host\n#0 [internal function]: SoapClient-\u003E__doRequest(\u0027\u003C?xml version=\u0022...\u0027, \u0027http:\/\/asw.sant...\u0027, \u0027urn:GEEX20A\u0027, 1, 0)\n#1 \/var\/www\/buenaspracticas\/src\/Service\/ConsultaSie.php(59): SoapClient-\u003E__call(\u0027GEEX20AOperatio...\u0027, Array)\n#2 \/var\/www\/buenaspracticas\/src\/Controller\/SeguimientoController.php(424): App\\Service\\ConsultaSie-\u003EconsultarSie(\u002701501-0071926-8\u0027)\n#3 \/var\/www\/buenaspracticas\/vendor\/symfony\/http-kernel\/HttpKernel.php(158): App\\Controller\\SeguimientoController-\u003EverSieAction(\u002701501-0071926-8\u0027)\n#4 \/var\/www\/buenaspracticas\/vendor\/symfony\/http-kernel\/HttpKernel.php(80): Symfony\\Component\\HttpKernel\\HttpKernel-\u003EhandleRaw(Object(Symfony\\Component\\HttpFoundation\\Request), 1)\n#5 \/var\/www\/buenaspracticas\/vendor\/symfony\/http-kernel\/Kernel.php(201): Symfony\\Component\\HttpKernel\\HttpKernel-\u003Ehandle(Object(Symfony\\Component\\HttpFoundation\\Request), 1, true)\n#6 \/var\/www\/buenaspracticas\/buenaspracticas\/index.php(25): Symfony\\Component\\HttpKernel\\Kernel-\u003Ehandle(Object(Symfony\\Component\\HttpFoundation\\Request))\n#7 {main}\n"}
+
+
+-- En la vista de los datos de sie poner no editable los datos para evitar que tipeen en los campos. -OK
+
+
+
+--------
+* Movimiento de acto administrativo
+
+-- Cuando busca por nro de expediente, modificiar aviso en el que al guardar dice que ingrese acto adminstrativo - OK
+
+
+* Edición / Vista de datos
+
+-- Agregar img boton eliminar_reg.png para eliminar archivos adjuntos - OK
+
+* Ingreso Nota y Edición
+-- Agregar control para CBU (agrego máscara con 22 nros) - OK
+-- Agregar control para mail (paso el campo a tipo EmailType) - OK
+
+*Edición de datos
+
+-- Cambio ícono para descargos de archivos y agrando los campos - OK
+
+-- Permitir que la DPCyRI cargue los datos del dictamen -OK
+

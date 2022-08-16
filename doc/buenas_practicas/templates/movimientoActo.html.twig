@@ -1,0 +1,285 @@
+{# empty Twig template #}
+{% extends 'base_bs.html.twig' %}
+{% block title %}MovimientoActoAdministrativo{% endblock %}
+{% block body %}
+
+    {% for flashMessage in app.session.flashBag.get('aviso') %}
+        <div class="alert alert-success">                                
+            {{ flashMessage|nl2br }}
+
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger">
+
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    <div class="card" >   
+        <div class="card-header" style="background-color: #424242; color: white">MOVIMIENTO DE ACTO ADMINISTRATIVO</div>
+
+        <div class="card-body">
+            <form action= "{{ path('movimiento_actoAdministrativo',{'area':0}) }}"  method="post">  
+
+                <div class="card-header" style="background-color: #eae9e9;">Criterios de seleccion</div>
+                <div class="card-body" style="background-color: #eae9e9 ;">
+                    <div class="form-row" >
+
+                        <div class="form-group col-md-6">  
+                            <label>Nro Expediente</label>
+                            <input class="form-control" type="text" id="nroexpediente" name="nroexpediente" value="">
+                        </div>
+                        <div class="form-group col-md-6">  
+                            <label>Nro Acto Administrativo</label>
+                            <input class="form-control" type="text" id="idActoAdministrativo" name="idActoAdministrativo" value="">
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">  </div>
+                        <div class="form-group col-md-4" style="text-align: center">  
+
+                            {{ form_widget(form.buscarActo, {'attr': {'class': 'btn btn-dark','data-url': path('buscarActoAdministrativo',{'nroexpediente':0,'idActoAdministrativo':0})}})  }}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div id="div_datosencontrados">
+                    <div class="card-header" style="background-color: #ccd8dd;"><b>Datos encontrados </b></div>
+                    <div class="card-body" style="background-color: #deecf2 ;  border-style: none; ">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Nro Nota:</label>
+                                <input type='text' id='nota' name='nota' style="border-style: none; font-weight: bold; background-color:#deecf2 ;  " size="10">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Fecha Nota:</label>
+                                <input type='text' id='fnota' name='fnota' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Área ingreso:</label>
+                                <input type='text' id='areacarga' name='areacarga' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Nro Expediente:</label>
+                                <input type='text' id='form_nroexpediente' name='form_nroexpediente' data-url="{{path("ver_sie",{"nroexpediente":"0"})}}" style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Fecha Expediente:</label>
+                                <input type='text' id='fexpediente' name='fexpediente' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                        </div>
+                       <!-- <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Carátula:</label>
+                                <input type='text' id='caratula' name='caratula' style="border-style: none;font-weight: bold;background-color:#deecf2 ;" size="40">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Fecha Carátula:</label>
+                                <input type='text' id='fcaratula' name='fcaratula' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                        </div>-->
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>Institución:</label>
+                                <input type='text' id='institucion' name='institucion' style="border-style: none;font-weight: bold; background-color:#deecf2 ;" size="52">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>Componente:</label>
+                                <!--  <input type='text' id='componentesolicitado' name='componentesolicitado' style="border-style: none;font-weight: bold; background-color:#deecf2 ;" size='100'>!-->
+                                <table id="tabla_componente" class="table table-responsive table-sm" whith="100%" style="background-color: #deecf2" cellspacing="0" cellpadding="0" >
+                                </table>
+                            </div>    
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">     
+                                <label>Monto solicitado:$</label>
+
+                                <input type='text' id='montosolicitado' name='montosolicitado' style="border-style: none;font-weight: bold; background-color:#deecf2;" size="6px">
+                            </div>
+                            <div class="form-group col-md-4">     
+                                <label>Monto aprobado:$</label>
+                                <input type='text' id='montoaprobado' name='montoaprobado' style="border-style: none;font-weight: bold; background-color:#deecf2 ; " size="6px">
+                            </div>
+
+                            <div class="form-group col-md-4">     
+                                <label>Fecha Aprobación:</label>
+
+                                <input type='text' id='fechamontoaprobado' name='fechamontoaprobado' style="border-style: none;font-weight: bold; background-color:#deecf2 ;" size="6px">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">     
+                                <label>Fecha Dictamen:</label>
+                                <input type='text' id='fechadictamen' name='fechadictamen' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                            <div class="form-group col-md-8">     
+                                <label>Observacion Dictamen:</label>
+                                <input type='text' id='observaciondictamen' name='observaciondictamen' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">     
+
+                                <label id="div_estado" class="label label-info"><b>Estado Actual: {{ estado }}</b></label>
+                                <input type='text' id='estadotramite' name='estadotramite' style="border-style: none;font-weight: bold;" class="label label-info" size="40">
+                            </div>
+
+                        </div>   
+                    </div>
+                </div>
+                <br>
+                <div id="div_datosSie_error">
+                    <div class="form-row" >
+                        <div class="form-group col-md-12" >
+
+                            <div class="card-header" style="background-color: #eae9e9;"><b>Último movimiento SIE</b></div>
+                            <div class="card-body" style="background-color: #f8f7f7 ;  border-style: none;  "> 
+
+
+                                <div class="form-row">
+
+                                    <input type="text" id="error_sie" value=""  style="color:red; font-size: 12px;border-style: none; font-weight: bold; background-color:#f8f7f7 ;  "size="130" readonly="true">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div id="div_datosSie">
+                    <div class="form-row" >
+
+                        <div class="form-group col-md-12" >
+
+                            <div class="card-header" style="background-color: #eae9e9;"><b>Último movimiento SIE</b></div>
+                            <div class="card-body" style="background-color: #deecf2 ;  border-style: none;  ">
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>Fecha inicio:</label>
+                                        <input type='text' id='fechaini' name='fechaini'  style="font-size: 11px;border-style: none; font-weight: bold; background-color:#deecf2 ;  " size="10" readonly="true">
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <label>Iniciador:</label>
+                                        <input type='text' id='iniciador' name='iniciador' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" size='35' readonly="true">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Tema:</label>
+                                        <input type='text' id='tema' name='tema' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" size='35' readonly="true">
+                                    </div>
+                                </div>    
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label>Concepto:</label>
+                                        <input type='text' id='concepto' name='concepto' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" size='100' readonly="true">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label>Remitente:</label>
+                                        <input type='text' id='remitente' name='remitente' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" size="100" readonly="true" >
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label>Destino:</label>
+                                        <input type='text' id='destino' name='destino' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" size="100" readonly="true">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>Folios:</label>
+                                        <input type='text' id='folios' name='folios' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" readonly="true">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Agregado a:</label>
+                                        <input type='text' id='agregadoa' name='agregadoa' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" size="30" readonly="true">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>Fecha último pase:</label>
+                                        <input type='text' id='fechaultpase' name='fechaultpase' style="font-size: 11px;border-style: none;font-weight: bold; background-color:#deecf2 ;" readonly="true">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>               
+                <br>
+                <div class="card-header" style="background-color: #FFFFFF;"><b><i>INGRESE MOVIMIENTO</i></b></div>
+                <div class="card-body" >
+                    <div class="form-row">
+                        <div class="form-group col-md-6" >  
+                            {{ form_label(form.fechamovimiento) }}
+                            {{ form_errors(form.fechamovimiento) }}
+                            {{ form_widget(form.fechamovimiento,{'attr': {'class': 'form-control'}})  }}
+                        </div>
+                    </div>   
+                    <div class="form-row"> 
+                        <div class="form-group col-md-6" >  
+                            {{ form_label(form.areaIdareaorigen) }}
+                            {{ form_errors(form.areaIdareaorigen) }}
+                            {{ form_widget(form.areaIdareaorigen,{'attr': {'class': 'form-control'}})  }}
+                        </div>
+                        <div class="form-group col-md-6" >  
+                            {{ form_label(form.areaIdareadestino) }}
+                            {{ form_errors(form.areaIdareadestino) }}
+                            {{ form_widget(form.areaIdareadestino,{'attr': {'class': 'form-control'}})  }}
+                        </div>
+                    </div>
+
+                    <div class="form-row">     
+                        <div class="form-group col-md-12" >  
+                            {{ form_label(form.motivomovimiento) }}
+                            {{ form_errors(form.motivomovimiento) }}
+                            {{ form_widget(form.motivomovimiento, {'attr': {'class': 'form-control'}})  }}
+                        </div>
+                    </div>
+
+                    <div class="form-row">     
+                        <div class="form-group col-md-4" >  
+                            {{ form_label(form.folios) }}
+                            {{ form_errors(form.folios) }}
+                            {{ form_widget(form.folios,{'attr': {'class': 'form-control'}})  }}
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">     
+                        <div class="form-group col-md-12" >  
+                            {{ form_label(form.observacion) }}
+                            {{ form_errors(form.observacion) }}
+                            {{ form_widget(form.observacion,{'attr': {'class': 'form-control'}})  }}
+                        </div>
+                    </div>
+                    <div class="form-row">     
+                        <div class="form-group col-md-4" >  
+                            {{ form_label(form.tipomovimiento) }}
+                            {{ form_errors(form.tipomovimiento) }}
+                            {{ form_widget(form.tipomovimiento,{'attr': {'class': 'form-control'}})  }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-8"></div>
+                        <div class="form-group col-md-2" style="alignment-adjust: right">
+                            {{ form_widget(form.guardar_datos, {'attr': {'class': 'btn btn-dark'}})  }}
+                        </div>    
+                        <div class="form-group col-md-2" style="alignment-adjust: right">
+                            <a href="{{path('movimiento_actoAdministrativo',{'area':0})}}" class="btn btn-dark"  >Cancelar</a>
+                        </div>  
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+    {% block javascript %}
+        <script src="{{ asset('js/movimientosActo.js') }}"></script>
+        <script src="{{ asset('js/buscarSIE.js') }}"></script>
+    {% endblock %}
+{% endblock %}

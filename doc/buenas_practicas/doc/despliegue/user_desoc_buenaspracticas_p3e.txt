@@ -1,0 +1,9 @@
+✔ Reporte de la creacion de entorno: PRODUCCION EXTERNO
+----------------------------------------------------------------
+ >> Servidor    : srvpmysql3e.santafe.gob.ar - Puerto: 3306
+ >> Database    : desoc_buenaspracticas
+ >> IP Srv App  : 10.30.0.%
+ >> IP PhpMyadm : https://srvpadmindb3i.santafe.gob.ar/phpmyadmin/ - [10.20.40.10]
+ >> User App    : 'desoc_ubuenaspra'@'10.30.0.%' / NGN__GNi
+ >> User Select : 'desoc_sbuenaspra'@'10.30.0.%' / NDRiMDVi                     .
+----------------------------------------------------------------

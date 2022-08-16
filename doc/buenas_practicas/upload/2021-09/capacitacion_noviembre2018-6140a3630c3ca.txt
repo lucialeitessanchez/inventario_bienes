@@ -1,0 +1,22 @@
+"01 - Marianela Abate, DNI 26.977.321",26977321
+"02 - Candioti Soledad, DNI 24.995.423",24995423
+"03 - Gutierrez Lorena, DNI 25.497.590",25497590
+"04 - Alonzo Fabian, DNI 23.228.373",23228373
+"05 - De Fazio, Liliana, DNI 13.676.579",13676579
+"06 - Baloni, Rosa, DNI 16.539.225",16539225
+"07 - Vera Graciela, DNI 13.925.986",13925986
+"08 - Baez Leandro, DNI 30.292.249",30292249
+"09 - Nicolau Bibiana, DNI 14.906.549",14906549
+"10 - Naveiro Jimena, DNI 32.895.249",32895249
+"11 - Lisa Daniela,  DNI 18.549.604",18549604
+"12 - Questa Luis, DNI 13.708.823",13708823
+"13 - Gentile Florencia, DNI 34.731.583",34731583
+"14 - Lebrand Lucas, DNI 31.628.961",31628961
+"15 - Galetto, Lucia Maria, DNI 35.127.813 (AP)",35127813
+"16 - Cattaneo Tamara, DNI 34.745.478 (AP)",34745478
+"17 - Rubinzal Natalia, DNI 28.764.715 (AP)",28764715
+"18 - Sanchez Melina, DNI  (AP)",
+"19 - Medina Alejandro, DNI 22.732.587",22732587
+"20 - Busaniche Agustina, DNI 32.370.632",32370632
+"21 -  Galuzzi, Leonardo DNI 26.977.967",26977967
+"22 - Rodriguez Mirian DNI 29.011.290",29011290

@@ -1,0 +1,30 @@
+Instructivo despliegue de aplicativo "buenaspracticas"
+
+
+El aplicativo a desplegar se encuentra en: srvtphp7e.santafe.gov.ar ( Servidor Testing Externo - 10.30.8.63), carpeta: "buenaspracticas"
+Descripcion de Pasos:
+
+
+1 - Usuario para testing
+2 - Actualización del archivo de Configuracion del Aplicativo.
+
+--------------------------------------------------------------------------
+
+1 - Usuario para prueba en entorno de testing 
+
+Para acceder a la aplicación para su testeo es necesario acceder a través de la dirección twww.santafe.gob.ar/mds/portalmds
+con los datos de usuario provisto y seleccionar "Buenas Prácticas Sociales"
+
+Usuario: testing
+Contraseña: testing
+
+ 
+2 - Actualizacion del archivos de Configuracion del Aplicativo.
+
+*se deberá reemplazar el archivo .env por el archivo .env_productivo que se encuentra en  /buenaspracticas/doc/despliegue/configuracion/.env_productivo
+
+*se debera reemplazar el archivo /buenaspractica/config/services.yaml por el archivo /buenaspracticas/doc/despliegue/configuracion/services_productivo.yaml
+
+*se deberá reemplazar el archivo /buenaspracticas/src/Security/User/ServiceUserProvider.php por el archivo   /buenaspracticas/doc/despliegue/configuracion/ServiceUserProvider.php
+
+- Aclaración: una vez que desde base de datos nos envien el usuario de aplicación actualizamos los datos de conexión en el archivo .env_prod. 

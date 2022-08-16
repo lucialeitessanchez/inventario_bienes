@@ -1,0 +1,3 @@
+ruinstituciones_homepage:
+    path:     /
+    defaults: { _controller: RuinstitucionesBundle:Default:index }

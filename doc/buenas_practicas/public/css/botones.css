@@ -1,0 +1,170 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08/02/2021, 12:22:54
+    Author     : Alejandro
+*/
+
+.botones-formulario{
+    background: #428bca;;
+    color: #FFFFFF;
+    margin: 2px;
+    padding: 0.5rem 1rem;
+}
+
+.botones-formulario:hover {
+    background: rgba(0,0,0,0);
+    color: #428bca;;
+    box-shadow: inset 0 0 0 3px #428bca;;
+}
+
+.botones-formulario2{
+    background: #090A85;
+    color: #FFFFOO;
+    margin: 1px;
+}
+
+.fondo-registro{
+    color: white;
+    background-color: #B3B4B9;
+}
+
+fieldset {
+    padding: 2em;
+    border-color: #d4d4d4;
+    border-style: solid;
+    border-width: 2px;
+    background: #fff;
+}
+
+legend {
+    color: #bfbfbf;
+    padding: 0.3em 0.6em;
+    border: 2px solid #d4d4d4;
+    background: #fff;
+    font-size: 1.3em;
+}
+legend.radio {
+    border-radius: 50px;
+}
+
+
+/*** Styling Radio & Checkbox Input Fields (start here) ***/
+label_check {
+    font-weight: 600;
+    color: #777777;
+    margin-bottom: 8px;
+    width: 100%;
+    float: left;
+    cursor: pointer;
+    padding: 0 0.1em;
+    box-sizing: border-box;
+    background: #e6e6e6;
+    transition: all 0.5s ease 0s;
+}
+
+input[type="checkbox"] {
+    display: none;
+    width: 100%;
+    margin-bottom: .2rem;
+    
+}
+
+
+input[type="checkbox"] + label {
+    display: block;
+    line-height: 3em;
+    width: 100%;
+    margin-bottom: .2rem;
+}
+
+input[type="radio"] + label {
+    border-radius: 50px;
+}
+
+input[type="radio"]:disabled + label,
+input[type="checkbox"]:disabled + label {
+    color: #ccc !important;
+    cursor: not-allowed;
+}
+input[type="radio"]:checked:disabled + label:after,
+input[type="checkbox"]:checked:disabled + label:after {
+    border-color: #ccc;
+}
+
+
+input[type="checkbox"] + label:before {
+    content: "";
+    width: 26px;
+    height: 20px;
+    float: left;
+    margin-right: 0.5em;
+    border: 2px solid #ccc;
+    background: #fff;
+    margin-top: 0.5em;
+}
+
+
+
+
+input[type="checkbox"]:checked + label {
+    background: #c1eec2;
+    width: 100%;
+
+}
+
+input[type="checkbox"]:checked + label:after {
+    content: "";
+    width: 12px;
+    height: 6px;
+    border: 4px solid #0fbf12;
+    float: left;
+    margin-left: -1.95em;
+    border-right: 0;
+    border-top: 0;
+    margin-top: 1em;
+    transform: rotate(-55deg);
+}
+
+input[type="checkbox"]:checked + label:before {
+    border-color: #0fbf12;
+}
+
+input[type="checkbox"]:checked:disabled + label {
+    background: #ccc;
+    color: #fff !important;
+}
+
+
+input[type="checkbox"]:checked:disabled + label:before {
+    border-color: #bdbdbd;
+}
+
+@media (max-width: 650px) {
+    .content {
+        width: 100%;
+    }
+}
+
+.page-link{
+    color:#428bca;
+    font-size: 12px;
+}
+
+#padre{
+    position:relative;
+    background-color: green;
+}
+
+#uno {
+    position: absolute;
+    background-color: red;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 20px;
+}

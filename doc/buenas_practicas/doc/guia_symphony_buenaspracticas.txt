@@ -1,0 +1,97 @@
+1 - Creamos el repositorio logueandonos al server 10..6.7 a traves del usuario root@10.1.6.7 en /home/git vamos a probar utilizar el método de git-flow
+ 
+	* git init --bare buenaspracticas.git
+
+-->aca ver guia_symphony_para_empezar_proyecto.txt
+
+2 - Nos creamos la copia de trabajo en nuestro home - /fernanda/html
+
+	* git clone http://10.1.6.7/git/buenaspracticas.git  buenaspracticas
+         
+
+        * git flow init para nombrar los distintos branches
+
+3- Creamos el proyecto symphony 4.4
+
+-- como tiene requerimiento de php 7 en adelante debemos agregar  php72 /usr/bin/composer
+
+     * php72 composer.phar create-project symfony/website-skeleton:^4.4 buenaspracticas
+
+
+-- agregamos este bundle -- no funciona
+
+     * php72 /usr/bin/composer require kevinpapst/adminlte-bundle ^3.0
+
+
+-- generar entidades desde la DB
+	* php72 bin/console doctrine:mapping:import "App\Entity" annotation --path=src/Entity
+
+-- generar getter/setter
+    * php72 bin/console make:entity --regenerate App
+
+-- instalar js
+php72 bin/console assets:install --symlink
+
+-- clear cache
+php72 bin/console cache:clear
+
+PARA DAR PERMISO PARA BORRAR LA CACHE--> sudo chmod 777 -R var/cache/*
+
+
+COMANDOS GIT
+-- borrar branch
+ * git branch -d hotfix
+
+--limpiar cache
+  * php bin/console cache:clear
+
+
+ACTUALIZAR Y PUBLICAR CAMBIOS:
+
+1-commit --> el develop queda actualizado con los cambios: git commit -a -m "obs"
+
+2-pasar el develop actualizado al master -> parado en el master: git merge develop
+
+3-publicar mi master -> git push origin master
+
+4-publicar otro branch en el origin -> git push origin login_portal 
+                                    -> git push origin develop
+                                    -> git push origin master --tags
+
+5-asignar tag a una version -> git tag v1.0.0 -m "Primera versión en productivo"
+
+
+ 
+BAJAR CAMBIOS DESDE EL SERVIDOR REMOTO: tienen que estar los commits locales
+
+1-sicronizar los punteros:git fetch origin
+1.1-git merge origin/master
+
+2-parado en el master: git pull origin 
+
+3-parado en develop: git merge master
+
+(si abre vi->esc / :wq enter
+
+EXCEL BUNDLE
+---------------------------------------------------------------------------------------------
+-- para descargar libreria PhpOffice/PhpSpreadsheet
+ composer require phpoffice/phpspreadsheet
+  (en la ofi) php72 /usr/bin/composer require phpoffice/phpspreadsheet
+NOTA!! Package phpoffice/phpexcel is abandoned, you should avoid using it. Use phpoffice/phpspreadsheet instead.
+
+link a documentacion Symfony
+https://symfony.com/doc/current/reference/forms/types.html
+
+
+instalar libreria de excel
+-- php7.2 /usr/bin/composer require phpoffice/phpspreadsheet(
+
+-- para probar en el nuevo portal mds
+
+10.1.6.7/~fernanda/infobeneficios_v2/public
+
+http://10.1.6.7/~fernanda/infobeneficios_v2/public
+
+http://localhost/infobeneficios_v4/public/
+

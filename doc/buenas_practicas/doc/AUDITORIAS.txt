@@ -1,0 +1,33 @@
+CREAR AUDITORIAS
+
+1) Link para generar los .sql:
+
+    http://10.1.6.7/~gabriel/gencode_3/tmp/usuario/project_name/ (admin / admin)
+
+    Administracion de Permisos/Tools/Gestion trigger auditoria
+
+    --> completar los datos
+     1-CREAR TABLAS AUDI
+       Copiar y guardar el script
+       Ejecutar en la base
+
+     2- CREAR TRIGGERS
+       Copiar y guardar el script
+       Ejecutar en la base
+
+2) Agregar el servicio MysqlRegisterUser.php -> para que tome datos de usuario e ip al guardar la auditoria
+   Para que reconozca esa clase hay que:
+   
+   agregar en el service.yaml:
+                    mysql_register_user:
+                        class: '%mysql_register_user.class%'
+                        arguments: 
+                            $context: '@security.token_storage'
+                            $request_stack: '@request_stack'
+                        tags:
+                            - { name: doctrine.event_listener, event: onFlush }  
+
+   definir la variable:
+                    mysql_register_user.class: 'App\Service\MysqlRegisterUser'
+
+

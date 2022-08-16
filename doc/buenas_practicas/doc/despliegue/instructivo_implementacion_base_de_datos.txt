@@ -1,0 +1,31 @@
+Instructivo de implementación de base de datos desoc_buenaspracticas
+
+Los archivo mencionados se encuentran en srvtphp7e.santafe.gov.ar ( Servidor Testing Externo - 10.30.8.63), carpeta: "buenaspracticas/despliegue".
+Igualmente los adjuntamos en el correo de solicitud los archivos.
+
+1 - Creación de base de datos,tablas, tablas de auditoria y triggers
+
+Crear en el entorno productivo la base de datos desoc_buenaspracticas y ejecutar los archivos de creación de tablas y triggers
+
+* Archivo de creación de tablas: 
+
+    buenaspracticas/doc/despliegue/desoc_buenaspracticas_estructura_prod.sql
+    buenaspracticas/doc/despliegue/desoc_buenaspracticas_insert_tablas_tipo.sql
+    buenaspracticas/doc/despliegue/desoc_buenaspracticas_estructura_audi.sql
+    
+
+* Archivo para crear triggers
+   buenaspracticas/doc/despliegue/desoc_buenaspracticas_create_triggers.sql
+
+
+
+Una vez creada la base de datos necesitaríamos nos envien el usuario de aplicación y el usuario de select para configurar los archivos 
+del aplicativo. 
+
+El usuario de aplicación debe tener acceso a las siguentes bases de datos:
+
+* En el servidor productivo srvpmysql3e.santafe.gov.ar 
+
+     - desoc_buenaspracticas
+     - desoc_tablascomunes
+

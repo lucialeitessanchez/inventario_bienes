@@ -1,0 +1,152 @@
+{# empty Twig template #}
+{% extends 'base_bs.html.twig' %}
+{% block title %}SeguimientoActoAdministrativo{% endblock %}
+{% block body %}
+
+    {% for flashMessage in app.session.flashBag.get('aviso') %}
+        <div class="alert alert-success">                                
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger">
+
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    <div class="card" >   
+        <div class="card-header" style="background-color: #424242; color: white">SEGUIMIENTO DE TRAMITE</div>
+        <div class="card-body">
+
+            <form action= "{{ path('seguimiento_1') }}"  method="post">  
+                <div class="card-header" style="background-color: #eae9e9;">Criterios de seleccion</div>
+                <div class="card-body" style="background-color: #eae9e9 ;">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">  
+                            <label>Nro Nota</label>
+                            <input class="form-control" type="text" id="nroNota" name="nroNota" value="">
+                        </div>
+                        <div class="form-group col-md-4">  
+                            <label>Nro Expediente</label>
+                            <input class="form-control" type="text" id="nroexpediente" name="nroexpediente" value="">
+                        </div>
+                        <div class="form-group col-md-4">  
+                            <label>Nro Acto Administrativo</label>
+                            <input class="form-control" type="text" id="idActoAdministrativo" name="idActoAdministrativo" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-10"> </div>
+                        <div class="form-group col-md-2">  
+                            {{ form_widget(form.buscarActo, {'attr': {'class': 'btn btn-dark'}})  }}
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="form-row" >
+                    
+                    <div class="form-group col-md-12" >
+                        <div class="card-header" style="background-color: #ccd8dd;"><b>Datos encontrados (se van a mostrar segun el estado del exp)</b></div>
+                        <div class="card-body" style="background-color: #deecf2 ;  border-style: none; ">
+
+                            <div class="form-row">
+                                <div class="form col-md-4">
+                                    <p>Nro Nota:</p>
+                                    <p>Fecha Nota:</p>
+                                </div>
+                                <div class="form col-md-4">
+                                    <p>Nro Expediente:</p>
+                                    <p>Fecha Expediente:</p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form col-md-4">
+                                    <p>Caratula:</p>
+                                </div>
+                                <div class="form col-md-4">
+                                    <p>Fecha Caratula:</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form col-md-8">
+                                    <p>Institucion:</p>
+                                    <p>Componente Solicitado:</p>
+                                    <p>Monto Solicitado:</p>
+                                    <p>Estado: <b>INICIADO</b></p>
+                                </div>
+
+                            </div>   
+                        </div>
+                    </div>   
+
+                </div>
+        </div>
+        <div class="card-header" style="background-color: #FFFFFF;"><b><i>COMPLETAR DATOS (estos datos van a ir cambiando segun el estado del exp)</i></b></div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-4" >  
+                    {{ form_label(form.montoaprobado) }}
+                    {{ form_errors(form.montoaprobado) }}
+                    {{ form_widget(form.montoaprobado,{'attr': {'class': 'form-control'}})  }}
+                </div>
+
+                <div class="form-group col-md-4" >  
+                    {{ form_label(form.fechamontoaprobado) }}
+                    {{ form_errors(form.fechamontoaprobado) }}
+                    {{ form_widget(form.fechamontoaprobado,{'attr': {'class': 'form-control'}})  }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6" >  
+                    {{ form_label(form.nroexpediente) }}
+                    {{ form_errors(form.nroexpediente) }}
+                    {{ form_widget(form.nroexpediente,{'attr': {'class': 'form-control'}})  }}
+                </div>
+
+                <div class="form-group col-md-4" >  
+                    {{ form_label(form.fechaexpediente) }}
+                    {{ form_errors(form.fechaexpediente) }}
+                    {{ form_widget(form.fechaexpediente,{'attr': {'class': 'form-control'}})  }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6" >  
+                    {{ form_label(form.caratula) }}
+                    {{ form_errors(form.caratula) }}
+                    {{ form_widget(form.caratula,{'attr': {'class': 'form-control'}})  }}
+                </div>
+
+                <div class="form-group col-md-4" >  
+                    {{ form_label(form.fechacaratula) }}
+                    {{ form_errors(form.fechacaratula) }}
+                    {{ form_widget(form.fechacaratula,{'attr': {'class': 'form-control'}})  }}
+                </div>
+            </div>
+            <div class="form-row">     
+                <div class="form-group col-md-12" >  
+                    {{ form_label(form.observacion) }}
+                    {{ form_errors(form.observacion) }}
+                    {{ form_widget(form.observacion,{'attr': {'class': 'form-control'}})  }}
+                </div>
+            </div>
+            <div class="form-row">     
+                <label>Estado</label>
+                <input type="text" id="estado" value="APROBADO - En curso" class="form-control">
+            </div>
+            <div class="form-row"    >
+                <div class="col-md-10"></div>
+                <div class="form-group col-md-2" style="alignment-adjust: right">
+                    {{ form_widget(form.guardar_datos, {'attr': {'class': 'btn btn-dark'}})  }}
+                </div>    
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+</div>
+{% endblock %}

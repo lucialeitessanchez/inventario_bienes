@@ -1,0 +1,314 @@
+{# empty Twig template #}
+{% extends 'base_bs.html.twig' %}
+{% block title %}IngresoActoAdministrativo{% endblock %}
+{% block body %}
+
+    {% for flashMessage in app.session.flashBag.get('aviso') %}
+        <div class="alert alert-success">                                
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger">
+
+            {{ flashMessage|nl2br }}
+        </div>
+    {% endfor %}
+
+    <div class="card" >   
+        <div class="card-header" style="background-color: #424242; color: white">INGRESO DE NOTA  
+        </div>
+
+        <div class="card-body">
+            <form action= "{{ path('ingreso_actoAdministrativo') }}"  method="post" enctype="multipart/form-data">  
+                <input type="hidden" id="idactoadministrativo" name="idactoadministrativo" value="" >
+                <div class="form-row">
+                    <div class="form-group col-md-2" >  
+                        {{ form_label(form.nroNota) }}
+                        {{ form_errors(form.nroNota) }}
+                        {{ form_widget(form.nroNota,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                    <div class="form-group col-md-4" >  
+                        {{ form_label(form.fechaNota) }}
+                        {{ form_errors(form.fechaNota) }}
+                        {{ form_widget(form.fechaNota,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+
+                    <div id="div_estado_nvo" class="form-group col-md-5" >
+
+                        {{ form_label(form.idestado) }}
+                        {{ form_errors(form.idestado) }}
+                        {{ form_widget(form.idestado,{'attr': {'class': 'form-control'}}) }}
+
+                    </div>
+                </div>   
+                <div class="form-row"> 
+                    <div class="form-group col-md-4" >  
+                        {{ form_label(form.tiposolicitanteIdtiposolicitante) }}
+                        {{ form_errors(form.tiposolicitanteIdtiposolicitante) }}
+                        {{ form_widget(form.tiposolicitanteIdtiposolicitante,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                    <div class="form-group col-md-6" >  
+                        {{ form_label(form.localidad) }}
+                        {{ form_errors(form.localidad) }}
+
+                        {{ form_widget(form.localidad,{'attr': {'class': 'form-control','data-url': path('getInstitucionPorLoc',{'locId':'0'})}})  }}
+                    </div>
+                </div>
+
+                <div class="form-row">     
+                    <div class="form-group col-md-12" >  
+                        {{ form_label(form.instId) }}
+                        {{ form_errors(form.instId) }}
+
+                        {{ form_widget(form.instId,{'attr': {'class': 'form-control','data-url': path('getDatosInstitucion',{'idInstitucion':0})}})  }}
+                    </div>
+                </div>
+                <div id="div_datosInstitucion">
+                    <div class="card-header" style="background-color: #eae9e9;"><b>Datos encontrados</b></div>
+                    <div class="card-body" style="background-color: #deecf2 ;  border-style: none; ">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Nro Rong:</label>
+                                <input type='text' id='nrorong' name='nrorong' style="border-style: none; font-weight: bold; background-color:#deecf2 ;  " size="10">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Nro Sipaf:</label>
+                                <input type='text' id='nroSipaf' name='nroSipaf' style="border-style: none; font-weight: bold; background-color:#deecf2 ;  " size="10">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label>Domicilio:</label>
+                                <input type='text' id='domicilio' name='domicilio' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Teléfono:</label>
+                                <input type='text' id='instTelefono' name='instTelefono' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                        </div>    
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>COMISIÓN DIRECTIVA</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Fecha inicio:</label>
+                                <input type='text' id='comdirFecIni' name='comdirFecIni' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Fecha fin:</label>
+                                <input type='text' id='comdirFecFin' name='comdirFecFin' style="border-style: none;font-weight: bold; background-color:#deecf2 ;">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>AUTORIDADES</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <table id="tabla_inst" class="table table-responsive table-sm" whith="100%" style="background-color: #deecf2" cellspacing="0" cellpadding="0" >
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">     
+                    <div class="form-group col-md-2" >  
+                        {{ form_label(form.montoSolicitado) }}
+                        {{ form_errors(form.montoSolicitado) }}
+                        <div class="input-group-prepend ">
+                            <span class="input-group-text" id="basic-addon1">$</span>
+                            {{ form_widget(form.montoSolicitado,{'attr': {'class': 'form-control','onkeypress':"return justNumbers(event);"}})  }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-10" >  
+                        {{ form_label(form.detallecomponenteIddetallecomponentesolicitado) }}
+                        {{ form_errors(form.detallecomponenteIddetallecomponentesolicitado) }}
+                        {{ form_widget(form.detallecomponenteIddetallecomponentesolicitado, {'attr': {'data-url': path('get_lista_componentes',{'idactoadministrativo':0}),'class': 'form-control',  'size':"8" }})  }}
+
+                    </div>
+                </div>                      
+                <div class="form-row">     
+                    <div class="form-group col-md-12" >  
+                        {{ form_label(form.observacion) }}
+                        {{ form_errors(form.observacion) }}
+                        {{ form_widget(form.observacion,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                </div>
+                <div id="div_montoAprobado">
+                    <div class="form-row" >
+
+                        <div class="form-group col-md-12" >
+
+                            <div class="card-body" style="background-color: #deecf2 ;  border-style: none; ">
+                                <div class="form-row">
+                                    <div class="form-group col-md-2" >  
+                                        {{ form_label(form.nroexpediente) }}
+                                        {{ form_errors(form.nroexpediente) }}
+                                        {{ form_widget(form.nroexpediente,{'attr': {'class': 'form-control'}})  }}
+                                    </div>
+
+                                    <div class="form-group col-md-4" >  
+                                        {{ form_label(form.fechaexpediente) }}
+                                        {{ form_errors(form.fechaexpediente) }}
+                                        {{ form_widget(form.fechaexpediente,{'attr': {'class': 'form-control'}})  }}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-8" >  
+                                        {{ form_label(form.caratula) }}
+                                        {{ form_errors(form.caratula) }}
+                                        {{ form_widget(form.caratula,{'attr': {'class': 'form-control'}})  }}
+                                    </div>
+                                    <div class="form-group col-md-4" >  
+                                        {{ form_label(form.fechacaratula) }}
+                                        {{ form_errors(form.fechacaratula) }}
+                                        {{ form_widget(form.fechacaratula,{'attr': {'class': 'form-control'}})  }}
+                                    </div>
+                                </div>    
+                                <div class="form-row">
+                                    <div class="form-group col-md-2" >  
+                                        {{ form_label(form.montoaprobado) }}
+                                        {{ form_errors(form.montoaprobado) }}
+                                        <div class="input-group-prepend ">
+                                            <span class="input-group-text" id="basic-addon1">$</span>
+                                            {{ form_widget(form.montoaprobado,{'attr': {'class': 'form-control','onkeypress':"return justNumbers(event);"}})  }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4" >  
+                                        {{ form_label(form.fechamontoaprobado) }}
+                                        {{ form_errors(form.fechamontoaprobado) }}
+                                        {{ form_widget(form.fechamontoaprobado,{'attr': {'class': 'form-control'}})  }}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+
+                    </div>
+                </div>
+                <div class="form-row">     
+                    <div class="form-group col-md-12" >  
+                        {{ form_label(form.referente) }}
+                        {{ form_errors(form.referente) }}
+                        {{ form_widget(form.referente,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                </div>
+
+                <div class="form-row">     
+                    <div class="form-group col-md-6" >  
+                        {{ form_label(form.referente2) }}
+                        {{ form_errors(form.referente2) }}
+                        {{ form_widget(form.referente2,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                    <div class="form-group col-md-3" >  
+                        {{ form_label(form.referente2codigoarea) }}
+                        {{ form_errors(form.referente2codigoarea) }}
+                        <div class="input-group-prepend ">
+                            <span class="input-group-text" id="basic-addon1">0</span>
+
+                            {{ form_widget(form.referente2codigoarea, {'attr': {'class': 'form-control', 'placeholder':'código de área sin cero'}})  }}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3" >  
+                        {{ form_label(form.referente2te) }}
+                        {{ form_errors(form.referente2te) }}
+                        {{ form_widget(form.referente2te, {'attr': {'class': 'form-control', 'placeholder':'número sin 15 si es celular'}})  }}
+
+                    </div>
+                </div>
+                <div class="form-row">     
+                    <div class="form-group col-md-12" >  
+                        {{ form_label(form.referente2mail) }}
+                        {{ form_errors(form.referente2mail) }}
+                        {{ form_widget(form.referente2mail,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                </div>
+                <div class="form-row">     
+                    <div class="form-group col-md-6" >  
+                        {{ form_label(form.contactoapenom) }}
+                        {{ form_errors(form.contactoapenom) }}
+                        {{ form_widget(form.contactoapenom,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                    <div class="form-group col-md-3" >  
+                        {{ form_label(form.contactocodigoarea) }}
+                        {{ form_errors(form.contactocodigoarea) }}
+                        <div class="input-group-prepend ">
+                            <span class="input-group-text" id="basic-addon1">0</span>
+
+                            {{ form_widget(form.contactocodigoarea, {'attr': {'class': 'form-control', 'placeholder':'código de área sin cero'}})  }}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3" >  
+                        {{ form_label(form.contactote) }}
+                        {{ form_errors(form.contactote) }}
+                        {{ form_widget(form.contactote, {'attr': {'class': 'form-control', 'placeholder':'número sin 15 si es celular'}})  }}
+
+                    </div>
+                </div>
+                <div class="form-row">     
+                    <div class="form-group col-md-12" >  
+                        {{ form_label(form.contactomail) }}
+                        {{ form_errors(form.contactomail) }}
+                        {{ form_widget(form.contactomail,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                </div>
+
+                <div class="form-row">     
+                    <div class="form-group col-md-6" >  
+                        {{ form_label(form.tramiteurgente) }}
+                        {{ form_errors(form.tramiteurgente) }}
+                        {{ form_widget(form.tramiteurgente,{'attr': {'class': 'form-control'}})  }}
+                    </div>
+                </div>
+
+                <div class="form-row">Adjuntar documento</div>
+                <div class="card card-body ">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            {{ form_errors(form.idtipodocumento) }}
+                            {{ form_row (form.idtipodocumento) }}
+                            {{ form_widget(form.idtipodocumento,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form_errors(form.brochure) }}
+                            {{ form_row (form.brochure) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        {{ form_label(form.observacionbp) }}
+                        {{ form_errors(form.observacionbp) }}
+                        {{ form_widget(form.observacionbp,{'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>   
+
+                <div class="form-row">
+                    <div class="col-md-8"></div>
+                    <div class="form-group col-md-2" style="alignment-adjust: right">
+                        {{ form_widget(form.guardar_datos, {'attr': {'class': 'btn btn-dark'}})  }}
+                    </div>    
+                    <div class="form-group col-md-2" style="alignment-adjust: right">
+                        <a href="{{ path('ingreso_actoAdministrativo',{'idactoadministrativo':0}) }}" class="btn btn-dark"  >Cancelar</a>
+                    </div>   
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+    {% block javascript %}
+        <script src="{{ asset('js/ingresoActo.js') }}"></script>
+
+    {% endblock %}
+{% endblock %}

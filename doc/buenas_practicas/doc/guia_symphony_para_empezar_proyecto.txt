@@ -1,0 +1,207 @@
+1-
+Creamos el proyecto symphony 4.4
+
+-- como tiene requerimiento de php 7 en adelante debemos agregar  php72 /usr/bin/composer
+
+     * php72 composer.phar create-project symfony/website-skeleton:^4.4 buenaspracticas
+
+2-
+En public copiar el htaccess
+
+
+3-
+editar el .env con los datos de nuestra coneccion y la base.
+Es buena practica tener un .env.local. Primero lee el .env y lo sobreescribe con lo que este en .env.local
+
+
+4-
+en el DefaultController, en el medoto index -> que renderice el base (html.twing) que queremos
+
+5-
+PARA REEMPLAZAR EL ROTING LO QUE SE HACE ES PONER EN CADA CONTROLLER EL PATH QUE LLAMA
+
+SE DEFINE UNO GENERAL->INDICA EN QUE CONTROLLER ESTA LA ACCION
+Y EN CADA METODO SE DEFINE EL PATH DE LA ACCION
+
+
+6-
+Creamos el repositorio logueandonos al server 10..6.7 a traves del usuario root@10.1.6.7 en /home/git vamos a probar utilizar el método de git-flow
+ 
+cd..
+cd home
+cd git
+
+	* git init --bare buenaspracticas.git -> crea el repositorio vacio
+
+        * git flow init  -> para crear las ramas
+
+CAMBIAR EL PROPIETARIO DEL buenaspracticas.git-->sudo chown -R apache.apache buenaspracticas.git (para que ande el push)
+
+
+7-
+Nos creamos la copia de trabajo en nuestro home - /fernanda/html
+
+	* git clone http://10.1.6.7/git/buenaspracticas.git  buenaspracticas
+         
+
+        * git flow init para nombrar los distintos branches -> en la copia
+
+--> ya /html/buenaspracticas/.gitignore ya define que carpetas no se versionan
+en el desarrollo del proyecto pueden agregarse otras
+
+AHORA SE VERSIONA EL PROYECTO
+-git checkout master
+-hacer los add de las carpetas a versionar: git add .....
+-git commit -a -m "obs" (estando en el master)
+-git push origin master
+-git checkout develop 
+-git merge master
+
+esto 2 ultimo para pasarlo a mi develop
+
+
+SE PUEDEN CREAR RAMAS QUE DERIVAN DEL DEVELOP PARA TRABAJAR FUNCIONES ESPECIFICAS (parado en el develop)
+
+-git flow feature start generacionmodelo_2021-06-16
+
+- para publicar los cambios al git remoto (colaboracion)
+
+-git flow feature publish generacionmodelo_2021-06-16
+
+
+----------------------------------------------------------------------------------------------
+UNA VEZ TERMINADO EL MODELO:
+1) CREAR BASE DE DATOS
+2) IMPORTAR EL ESQUEMA GENERADO DESDE EL WORKBENCH->PARA GENERAR LAS TABLAS
+
+----------------------------------------------------------------------------------------------
+UNA VEZ CREADA LA BASE SE CREAN LAS ENTIDADES
+-- generar entidades desde la DB
+	* php72 bin/console doctrine:mapping:import "App\Entity" annotation --path=src/Entity
+
+-- generar getter/setter
+    * php72 bin/console make:entity --regenerate App
+----------------------------------------------------------------------------------------------
+
+BAJAR CAMBIOS AL FEATURE 
+
+git pull origin feature/pantallasinicio
+
+
+PUBLICAR CAMBIOS DEL FEATURE
+
+git push origin feature/pantallasinicio
+
+----------------------------------------------------------------------------------------------
+DOY POR TERMINADO EL FEATURE CREADO PARA ESTA INSTANCIA
+
+-git flow feature finish generacionmodelo_2021-06-16
+
+-- instalar js
+php72 bin/console assets:install --symlink
+
+-- clear cache
+php72 bin/console cache:clear
+
+PARA DAR PERMISO PARA BORRAR LA CACHE--> sudo chmod 777 -R var/cache/*
+
+
+COMANDOS GIT
+-- borrar branch
+ * git branch -d hotfix
+
+--limpiar cache
+  * php72 bin/console cache:clear
+
+
+ACTUALIZAR Y PUBLICAR CAMBIOS:
+
+1-commit --> el develop queda actualizado con los cambios: git commit -a -m "obs"
+
+2-pasar el develop actualizado al master -> parado en el master: git merge develop
+
+3-publicar mi master -> git push origin master
+
+4-publicar otro branch en el origin -> git push origin login_portal 
+                                    -> git push origin develop
+                                    -> git push origin master --tags
+
+5-asignar tag a una version -> git tag v1.0.0 -m "Primera versión en productivo"
+
+
+ 
+BAJAR CAMBIOS DESDE EL SERVIDOR REMOTO: tienen que estar los commits locales
+
+1-sicronizar los punteros:git fetch origin
+1.1-git merge origin/master
+
+2-parado en el master: git pull origin 
+
+3-parado en develop: git merge master
+
+(si abre vi->esc / :wq enter
+
+EXCEL BUNDLE
+---------------------------------------------------------------------------------------------
+-- para descargar libreria PhpOffice/PhpSpreadsheet
+ composer require phpoffice/phpspreadsheet
+  (en la ofi) php72 /usr/bin/composer require phpoffice/phpspreadsheet
+NOTA!! Package phpoffice/phpexcel is abandoned, you should avoid using it. Use phpoffice/phpspreadsheet instead.
+
+link a documentacion Symfony
+https://symfony.com/doc/current/reference/forms/types.html
+
+
+instalar libreria de excel
+-- php7.2 /usr/local/bin/composer require phpoffice/phpspreadsheet
+-- para probar en el nuevo portal mds
+
+10.1.6.7/~fernanda/infobeneficios_v2/public
+
+http://10.1.6.7/~fernanda/infobeneficios_v2/public
+
+http://localhost/infobeneficios_v4/public/
+
+
+instalar mascara js => en el caso de los js no es necesario instalar con el composer, alcanza con descargarlas y copiarlas en el public (con composer no anda)
+php72 /usr/local/bin/composer require etdsolutions/jquery.maskedinput
+
+
+INSTALAR PDF BUNDLE WHITEOCTOBER
+---------------------------------------------------------------------------------------------
+php72 /usr/local/bin/composer require whiteoctober/tcpdf-bundle
+
+
+INSTALAR PAGINADOR
+---------------------------------------------------------------------------------------------
+php72 /usr/local/bin/composer require knplabs/knp-paginator-bundle
+
+Agregar:
+# config/packages/paginator.yaml
+knp_paginator:
+    page_range: 5                       # number of links showed in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links to page 4, 5, 6)
+    default_options:
+        page_name: page                 # page query parameter name
+        sort_field_name: sort           # sort field query parameter name
+        sort_direction_name: direction  # sort direction query parameter name
+        distinct: true                  # ensure distinct results, useful when ORM queries are using GROUP BY statements
+        filter_field_name: filterField  # filter field query parameter name
+        filter_value_name: filterValue  # filter value query paameter name
+    template:
+        pagination: '@KnpPaginator/Pagination/sliding.html.twig'     # sliding pagination controls template
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
+        filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
+
+
+
+
+COMANDOS VS 
+---------------------------------------------------------------------------------------------
+* para cambiar permisos (solo en mi home)
+
+ sudo chmod 777 -R <nombrecarpeta>
+
+* para cambiar propietario archivo
+
+ sudo chown verov:<nombre archivo>
+

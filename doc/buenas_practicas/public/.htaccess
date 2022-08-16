@@ -1,0 +1,36 @@
+#<FilesMatch \.php$>
+    #SetHandler proxy:fcgi://127.0.0.1:9072
+    # for Unix sockets, Apache 2.4.10 or higher
+    # SetHandler proxy:unix:/path/to/fpm.sock|fcgi://dummy
+#</FilesMatch>
+#SetHandler proxy:fcgi://127.0.0.1:9072
+AddHandler php72-fcgi .php 
+DirectoryIndex index.php
+
+<IfModule mod_negotiation.c>
+   Options -MultiViews
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+    RewriteRule ^(.*) - [E=BASE:%1]
+
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteRule ^index\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=301,L]
+
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+     RewriteRule ^ %{ENV:BASE}/index.php [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        RedirectMatch 307 ^/$ /index.php/
+    </IfModule>
+</IfModule>

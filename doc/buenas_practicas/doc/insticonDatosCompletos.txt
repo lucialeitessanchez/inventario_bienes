@@ -1,0 +1,1 @@
+SELECT * FROM `Institucion` inner join Comision_Directiva on inst_id=institucion inner join Autoridad on com_dir_id=comision_directiva WHERE 1 
