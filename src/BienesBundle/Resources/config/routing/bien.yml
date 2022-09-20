@@ -58,6 +58,11 @@ pdf_bien:
   defaults: { _controller: "BienesBundle:Bien:returnPDFResponseFromHTML" }
   methods: [GET, POST]
 
+csv_bien:
+  path: /csv_bien/{filtro}/{campo}
+  defaults: { _controller: "BienesBundle:Bien:returnCSVResponseFromHTML" }
+  methods: [GET, POST] 
+
 consumible_new:
   path: /consumiblenew
   defaults: { _controller: "BienesBundle:Bien:newconsumible" }

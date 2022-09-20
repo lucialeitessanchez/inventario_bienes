@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new BienesBundle\BienesBundle(),
             new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),
+            new Egyg33k\CsvBundle\Egyg33kCsvBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

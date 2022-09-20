@@ -22,6 +22,9 @@
         <a id="generarPdf" class="btn btn-outline-primary text-info">
             Generar PDF
         </a>
+           <a id="generarCsv" class="btn btn-outline-primary text-info">
+            Generar Tabla
+        </a>
     </div>
 
     <script>
@@ -42,6 +45,17 @@
         gpdf.addEventListener("click", () => { 
            if (inputVal == '') inputVal = '*'
             window.open(`${window.location.href}pdf_bien/${inputVal}/${radioCheck}`);
+        });
+        
+         // ------------------------- 
+        // -------- generar csv ----------------- 
+        let inputVal = '*'; 
+        let radioCheck = "*";
+        let gcsv = document.getElementById('generarCsv');
+  
+        gcsv.addEventListener("click", () => { 
+           if (inputVal == '') inputVal = '*'
+            window.open(`${window.location.href}csv_bien/${inputVal}/${radioCheck}`);
         });
         
        

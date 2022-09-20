@@ -17,6 +17,7 @@
         "php": ">=5.5.9",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
+        "egyg33k/csv-bundle": "^1.0",
         "incenteev/composer-parameter-handler": "^2.0",
         "knplabs/knp-snappy-bundle": "^1.4",
         "sensio/distribution-bundle": "^5.0.19",

@@ -496,6 +496,58 @@ class BienController extends Controller
        
     }
 
+    public function returnCSVResponseFromHTMLAction($filtro, $campo){
+
+        $writer = $this->container->get('egyg33k.csv.writer');
+        $csv = $writer::createFromFileObject(new \SplTempFileObject());
+        $csv->insertOne(['Id bien', 'Codigo','Usuario', 'Descripcion',' Ubicacion', ' Tipo', ' Estado',' Fecha de
+        alta']);
+        
+
+        $filename = 'bienes'.$filtro; 
+        $em = $this->getDoctrine()->getManager();
+        $biens = $em->getRepository('BienesBundle:Bien')->findAll();
+        
+
+        if($filtro != "*"  ){ //si tiene un filtro
+            $matcher = "/{$filtro}/i"; //con lo que va a machear
+             $newBiens = [];
+            foreach($biens as $bien){
+                if(preg_match($matcher, $bien->$campo()) == 1){ //comparativo de php
+
+                    $csv->insertOne([$bien->getId(),$bien->getCodigo(),$bien->getResponsable(),$bien->getDescripcion(),$bien->getUbicacion(),$bien->getTipo(),$bien->getEstado(),$bien->getFechaAlta()]);
+                 
+                }
+             }      
+        
+         
+        }else{
+           
+           foreach($biens as $bien){ // si no que recorra todos los bienes y los agregue al excel
+                $csv->insertOne([$bien->getId(),$bien->getCodigo(),$bien->getResponsable(),$bien->getDescripcion()]);
+                
+            
+         }  
+        }
+        
+     
+        $cache_dir = $this->getParameter('kernel.cache_dir');
+        //$file = $cache_dir. DIRECTORY_SEPARATOR .$filename;
+        $file = tempnam($cache_dir,'reporte_bien');
+
+        $csv->output('$filename.csv');
+         exit;
+        // genero una respuesta para la descarga del archivo
+        $response = new BinaryFileResponse($file);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $filename
+        );
+        $response->deleteFileAfterSend(true);
+
+        return $response;
+       
+    }
 
     public function pdfBaja(Request $request,int $id) {
         $em = $this->getDoctrine()->getManager();

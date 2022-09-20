@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3876124e4584e21d5b58de5d681a2cdb",
+    "content-hash": "256b37df2a6350fded3537fe935a08c6",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -906,6 +906,55 @@
             "time": "2017-12-17T02:57:51+00:00"
         },
         {
+            "name": "egyg33k/csv-bundle",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EGYG33K/CsvBundle.git",
+                "reference": "8ccb7883b20723510d7f29739898f64f4edf77bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EGYG33K/CsvBundle/zipball/8ccb7883b20723510d7f29739898f64f4edf77bc",
+                "reference": "8ccb7883b20723510d7f29739898f64f4edf77bc",
+                "shasum": ""
+            },
+            "require": {
+                "league/csv": ">=5.0.0-stable",
+                "php": ">=5.5.9",
+                "symfony/framework-bundle": ">=2.0.0-stable"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Egyg33k\\CsvBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Amr Samy",
+                    "email": "me@amrsamy.com"
+                }
+            ],
+            "description": "Integration of League CSV into Symfony",
+            "homepage": "https://github.com/EGYG33K/CsvBundle",
+            "keywords": [
+                "csv"
+            ],
+            "support": {
+                "issues": "https://github.com/EGYG33K/CsvBundle/issues",
+                "source": "https://github.com/EGYG33K/CsvBundle/tree/1.0.1"
+            },
+            "time": "2016-02-05T03:06:55+00:00"
+        },
+        {
             "name": "fig/link-util",
             "version": "1.1.2",
             "source": {
@@ -1204,6 +1253,68 @@
                 "source": "https://github.com/KnpLabs/KnpSnappyBundle/tree/master"
             },
             "time": "2015-11-11T17:40:14+00:00"
+        },
+        {
+            "name": "league/csv",
+            "version": "8.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/csv.git",
+                "reference": "d2aab1e7bde802582c3879acf03d92716577c76d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/csv/zipball/d2aab1e7bde802582c3879acf03d92716577c76d",
+                "reference": "d2aab1e7bde802582c3879acf03d92716577c76d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.9",
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "8.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Csv\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ignace Nyamagana Butera",
+                    "email": "nyamsprod@gmail.com",
+                    "homepage": "https://github.com/nyamsprod/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Csv data manipulation made easy in PHP",
+            "homepage": "http://csv.thephpleague.com",
+            "keywords": [
+                "csv",
+                "export",
+                "filter",
+                "import",
+                "read",
+                "write"
+            ],
+            "support": {
+                "forum": "https://groups.google.com/forum/#!forum/thephpleague",
+                "issues": "https://github.com/thephpleague/csv/issues",
+                "source": "https://github.com/thephpleague/csv/tree/8.x"
+            },
+            "time": "2018-02-06T08:27:03+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3115,5 +3226,5 @@
     "platform-overrides": {
         "php": "5.5.9"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
