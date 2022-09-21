@@ -500,8 +500,7 @@ class BienController extends Controller
 
         $writer = $this->container->get('egyg33k.csv.writer');
         $csv = $writer::createFromFileObject(new \SplTempFileObject());
-        $csv->insertOne(['Id bien', 'Codigo','Usuario', 'Descripcion',' Ubicacion', ' Tipo', ' Estado',' Fecha de
-        alta']);
+        $csv->insertOne(['Id bien', 'Codigo','Usuario', 'Descripcion',' Ubicacion', ' Tipo','Rama', ' Estado',' Fecha de alta']);
         
 
         $filename = 'bienes'.$filtro; 
@@ -511,11 +510,10 @@ class BienController extends Controller
 
         if($filtro != "*"  ){ //si tiene un filtro
             $matcher = "/{$filtro}/i"; //con lo que va a machear
-             $newBiens = [];
             foreach($biens as $bien){
                 if(preg_match($matcher, $bien->$campo()) == 1){ //comparativo de php
-
-                    $csv->insertOne([$bien->getId(),$bien->getCodigo(),$bien->getResponsable(),$bien->getDescripcion(),$bien->getUbicacion(),$bien->getTipo(),$bien->getEstado(),$bien->getFechaAlta()]);
+                    $fecha=date_format($bien->getFechaAlta(),"d/m/Y");    //convierto la fecha en string porque me tira error sino
+                    $csv->insertOne([$bien->getId(),$bien->getCodigo(),$bien->getResponsable(),$bien->getDescripcion(),$bien->getUbicacion(),$bien->getTipo(),$bien->getRama(),$bien->getEstado(),$fecha]);
                  
                 }
              }      
@@ -535,7 +533,7 @@ class BienController extends Controller
         //$file = $cache_dir. DIRECTORY_SEPARATOR .$filename;
         $file = tempnam($cache_dir,'reporte_bien');
 
-        $csv->output('$filename.csv');
+        $csv->output($filename.'.csv');
          exit;
         // genero una respuesta para la descarga del archivo
         $response = new BinaryFileResponse($file);
