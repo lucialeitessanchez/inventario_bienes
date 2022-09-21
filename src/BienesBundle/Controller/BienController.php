@@ -522,7 +522,8 @@ class BienController extends Controller
         }else{
            
            foreach($biens as $bien){ // si no que recorra todos los bienes y los agregue al excel
-                $csv->insertOne([$bien->getId(),$bien->getCodigo(),$bien->getResponsable(),$bien->getDescripcion()]);
+            $fecha=date_format($bien->getFechaAlta(),"d/m/Y");     
+            $csv->insertOne([$bien->getId(),$bien->getCodigo(),$bien->getResponsable(),$bien->getDescripcion(),$bien->getUbicacion(),$bien->getTipo(),$bien->getRama(),$bien->getEstado(),$fecha]);
                 
             
          }  
