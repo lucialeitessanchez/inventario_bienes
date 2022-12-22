@@ -24,7 +24,8 @@
 			<tbody id="tableData">
 
 				{% for bien in biens %}
-					{% if not bien.consumible %}	
+					{% if not bien.consumible %}
+					 {% if bien.tipo.idClasificacion == "BU" or  (bien.tipo.idClasificacion == "BI" and is_granted('ROLE_ADMIN'))  %}	
 					<tr id="data{{loop.index}}">
 						<td>
 
@@ -83,6 +84,7 @@
 								</div>
 							</td>
 						</tr>
+					{% endif %}
 					{% endif %}
 					{% endif %}
 				{% endfor %}
